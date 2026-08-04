@@ -8,12 +8,12 @@ const results = [];
 
 const scenarios = [
   {
-    id: 'reflection-law', output: 'angle',
+    id: 'reflection-law', output: 'angle', mechanismMustChange: true,
     start: { x: 570 - 285 * Math.sin(38 * Math.PI / 180), y: 420 - 285 * Math.cos(38 * Math.PI / 180) },
     end: { x: 570 - 285 * Math.sin(55 * Math.PI / 180), y: 420 - 285 * Math.cos(55 * Math.PI / 180) }
   },
-  { id: 'plane-mirror', output: 'distance', start: { x: 330, y: 395 }, end: { x: 280, y: 355 } },
-  { id: 'spherical-mirror', output: 'do', start: { x: 570, y: 240 }, end: { x: 520, y: 205 } }
+  { id: 'plane-mirror', output: 'distance', mechanismMustChange: true, start: { x: 330, y: 395 }, end: { x: 280, y: 355 } },
+  { id: 'spherical-mirror', output: 'do', mechanismMustChange: false, start: { x: 570, y: 240 }, end: { x: 520, y: 205 } }
 ];
 
 function visibleFraction(box, width, height) {
@@ -78,16 +78,22 @@ async function auditScenario(scenario, width, height) {
 
   const mainCanvas = page.locator('#rfwMainCanvas');
   const beforeValue = await page.locator(`[data-rfw-output="${scenario.output}"]`).textContent();
+  const beforeMechanism = await page.locator('[data-module-id="mechanism"] canvas').evaluate(canvas => canvas.toDataURL());
   const beforeObservable = await page.locator('[data-module-id="observable"] canvas').evaluate(canvas => canvas.toDataURL());
   const beforeRevision = Number(await page.locator('.rfw-page').getAttribute('data-render-revision'));
   await dragLogical(page, mainCanvas, scenario.start, scenario.end);
   await page.waitForTimeout(500);
   const afterValue = await page.locator(`[data-rfw-output="${scenario.output}"]`).textContent();
+  const afterMechanism = await page.locator('[data-module-id="mechanism"] canvas').evaluate(canvas => canvas.toDataURL());
   const afterObservable = await page.locator('[data-module-id="observable"] canvas').evaluate(canvas => canvas.toDataURL());
   const afterRevision = Number(await page.locator('.rfw-page').getAttribute('data-render-revision'));
   if (afterValue === beforeValue) assertions.push(`${scenario.id}: direct drag did not change ${scenario.output}`);
   if (afterRevision <= beforeRevision) assertions.push(`${scenario.id}: render revision did not advance after direct drag`);
   if (afterObservable === beforeObservable) assertions.push(`${scenario.id}: selected observable module did not redraw after direct drag`);
+  if (scenario.mechanismMustChange && afterMechanism === beforeMechanism) assertions.push(`${scenario.id}: related mechanism module did not redraw from the changed state`);
+
+  // Capture the clean task state before opening either overlay drawer.
+  await page.screenshot({ path: `${outDir}/${scenario.id}-${width}x${height}.png`, fullPage: false });
 
   await page.locator('.rfw-left-handle').click();
   await page.waitForSelector('.rfw-left-drawer.is-open');
@@ -96,7 +102,7 @@ async function auditScenario(scenario, width, height) {
   const selectableCount = await page.locator('.rfw-module-selector input[type="checkbox"]').count();
   if (selectableCount < 5) assertions.push(`${scenario.id}: insufficient analysis modules ${selectableCount}`);
   await page.locator('.rfw-left-drawer [data-rfw-close]').click();
-  await page.waitForTimeout(220);
+  await page.waitForTimeout(240);
 
   await page.locator('.rfw-right-handle').click();
   await page.waitForSelector('.rfw-right-drawer.is-open');
@@ -105,15 +111,18 @@ async function auditScenario(scenario, width, height) {
   const controlCount = await page.locator('.rfw-right-drawer [data-rfw-param]').count();
   if (controlCount < 4) assertions.push(`${scenario.id}: too few unified controls ${controlCount}`);
   await page.locator('.rfw-right-drawer [data-rfw-close]').click();
+  await page.waitForTimeout(240);
 
-  await page.screenshot({ path: `${outDir}/${scenario.id}-${width}x${height}.png`, fullPage: false });
-  results.push({ scenario: scenario.id, width, height, primary, mechanism, observable, mechanismCanvas, observableCanvas, boardCount, overflow, beforeValue, afterValue, beforeRevision, afterRevision, errors, assertions });
+  results.push({
+    scenario: scenario.id, width, height, primary, mechanism, observable, mechanismCanvas, observableCanvas,
+    boardCount, overflow, beforeValue, afterValue, beforeRevision, afterRevision,
+    mechanismChanged: beforeMechanism !== afterMechanism, observableChanged: beforeObservable !== afterObservable,
+    errors, assertions
+  });
   await page.close();
 }
 
-for (const scenario of scenarios) {
-  await auditScenario(scenario, 1735, 865);
-}
+for (const scenario of scenarios) await auditScenario(scenario, 1735, 865);
 await auditScenario(scenarios[2], 1920, 1080);
 
 await fs.writeFile(`${outDir}/metrics.json`, JSON.stringify(results, null, 2));
