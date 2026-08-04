@@ -10,9 +10,9 @@ permissions:
   contents: read
 
 jobs:
-  thin-film-v012:
+  optics-workbenches:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 7
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -28,6 +28,8 @@ jobs:
           node --check assets/js/thin-film-workbench-v010.js
           node --check assets/js/adaptive-edge-rails-v011.js
           node --check assets/js/simultaneous-viewport-v012.js
+          node --check assets/js/reflection-foundations-v013-patch.js
+          node --check assets/js/reflection-foundations-v013.js
       - name: Thin-film physical invariants
         run: node tests/thin-film-v08-physics.test.js
       - name: Model-page structure contract
@@ -40,3 +42,5 @@ jobs:
         run: node tests/adaptive-edge-rails-v011.test.js
       - name: Simultaneous viewport contract
         run: node tests/simultaneous-viewport-v012.test.js
+      - name: Reflection foundations contract
+        run: node tests/reflection-foundations-v013.test.js
