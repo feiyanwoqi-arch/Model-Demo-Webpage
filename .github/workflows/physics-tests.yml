@@ -10,7 +10,7 @@ permissions:
   contents: read
 
 jobs:
-  thin-film-v092:
+  thin-film-v010:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
@@ -25,9 +25,12 @@ jobs:
           node --check assets/js/thin-film-v08-ui.js
           node --check assets/js/model-page-guide-v09.js
           node --check assets/js/canvas-hidpi-v092.js
+          node --check assets/js/thin-film-workbench-v010.js
       - name: Thin-film physical invariants
         run: node tests/thin-film-v08-physics.test.js
       - name: Model-page structure contract
         run: node tests/model-page-guide-v09.test.js
       - name: High-DPI canvas and plot overlay contract
         run: node tests/canvas-hidpi-v092.test.js
+      - name: Synchronized workbench contract
+        run: node tests/thin-film-workbench-v010.test.js
