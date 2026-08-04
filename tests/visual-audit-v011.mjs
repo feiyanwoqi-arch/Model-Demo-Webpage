@@ -32,6 +32,7 @@ async function audit(width, height, name) {
 
   await page.locator('.tfr-left-handle').click();
   await page.waitForSelector('.tfr-left-drawer.is-open');
+  await page.waitForTimeout(300);
   await page.locator('[data-preset="spectrum"]').click();
   await page.waitForTimeout(500);
   await page.locator('[data-tfr-close="left"]').click();
@@ -40,11 +41,14 @@ async function audit(width, height, name) {
 
   await page.locator('.tfr-left-handle').click();
   await page.waitForSelector('.tfr-left-drawer.is-open');
+  await page.waitForTimeout(300);
   await page.screenshot({ path: `${outDir}/${name}-left-open.png`, fullPage: false });
   await page.locator('[data-tfr-close="left"]').click();
+  await page.waitForTimeout(260);
 
   await page.locator('.tfr-right-handle').click();
   await page.waitForSelector('.tfr-right-drawer.is-open');
+  await page.waitForTimeout(300);
   await page.screenshot({ path: `${outDir}/${name}-right-open.png`, fullPage: false });
 
   results.push({ name, width, height, hero, core, analysis, errors, assertions });
