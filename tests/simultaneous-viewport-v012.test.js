@@ -19,7 +19,7 @@ assert.ok(
 for (const id of ['apparatus','phase','phasor','spectrum','heatmap','measurement','validation']) {
   assert.match(script, new RegExp(`${id}: \\{`), `missing compact viewport profile for ${id}`);
 }
-assert.match(script, /data\.simultaneousMode = count === 2 \? 'triple'/, 'exactly two analysis modules must activate triple-view mode');
+assert.match(script, /root\.dataset\.simultaneousMode = count === 2 \? 'triple'/, 'exactly two analysis modules must activate triple-view mode');
 assert.match(script, /MutationObserver/, 'viewport mode must follow live module selection');
 assert.match(script, /CanvasHiDPIV092/, 'cropped windows must resynchronize high-DPI canvas output');
 assert.match(css, /data-simultaneous-mode="triple"/, 'triple-view styling must be state-specific');
