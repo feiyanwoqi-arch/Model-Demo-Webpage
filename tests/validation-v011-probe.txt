@@ -1,0 +1,1 @@
+Temporary pull-request probe for left-drawer visual regression coverage.
