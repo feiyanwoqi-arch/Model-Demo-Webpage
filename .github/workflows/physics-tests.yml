@@ -10,7 +10,7 @@ permissions:
   contents: read
 
 jobs:
-  thin-film-v010:
+  thin-film-v011:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
@@ -26,6 +26,7 @@ jobs:
           node --check assets/js/model-page-guide-v09.js
           node --check assets/js/canvas-hidpi-v092.js
           node --check assets/js/thin-film-workbench-v010.js
+          node --check assets/js/adaptive-edge-rails-v011.js
       - name: Thin-film physical invariants
         run: node tests/thin-film-v08-physics.test.js
       - name: Model-page structure contract
@@ -34,3 +35,5 @@ jobs:
         run: node tests/canvas-hidpi-v092.test.js
       - name: Synchronized workbench contract
         run: node tests/thin-film-workbench-v010.test.js
+      - name: Adaptive edge rail contract
+        run: node tests/adaptive-edge-rails-v011.test.js
