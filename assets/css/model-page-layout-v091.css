@@ -25,7 +25,7 @@
   margin-bottom:22px;
 }
 .mp-mounted .tf-command::after{display:none}
-.mp-mounted .tf-command,.mp-mounted .tf-guided-section{scroll-margin-top:24px}
+.mp-mounted .tf-command,.mp-mounted .mp-guided-section{scroll-margin-top:24px}
 
 /* Main text scale. The previous 9–11 px labels became unreadable at reduced browser zoom. */
 .mp-mounted{font-size:17px}
@@ -84,9 +84,7 @@
 .mp-mounted .mp-back{font-size:12px;padding:10px 11px}
 .mp-mounted .mp-progress{top:88px;bottom:132px}
 
-/* Give graphs and experiment diagrams more visual weight. */
-.mp-mounted .tf-section canvas{min-height:300px}
-.mp-mounted .tf-section .model-canvas{min-height:420px}
+/* Graphs and experiment diagrams grow naturally with the wider content column. */
 .mp-mounted .tf-lab-grid{grid-template-columns:minmax(0,1fr) clamp(300px,19vw,350px);gap:20px;padding:16px}
 .mp-mounted .tf-validation{grid-template-columns:minmax(0,1fr) minmax(390px,.82fr);gap:22px;padding:16px}
 .mp-mounted .tf-formula-map{gap:18px;padding:19px}
@@ -117,7 +115,5 @@
   .mp-mounted{font-size:16px}
   .mp-mounted .mp-purpose p{font-size:13px}
   .mp-mounted .tf-side{grid-template-columns:1fr}
-  .mp-mounted .tf-section canvas,
-  .mp-mounted .tf-section .model-canvas{min-height:0}
   .mp-mounted .tf-hero p{font-size:16px}
 }
