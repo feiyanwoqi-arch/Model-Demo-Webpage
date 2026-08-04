@@ -1,0 +1,123 @@
+/* Wide-screen and readability correction for model pages v0.9.1 */
+
+/* The home/category pages keep a readable editorial width, while model pages may use the screen. */
+.app{max-width:none;width:100%;padding-inline:clamp(16px,1.7vw,34px)}
+#view:not(.mp-mounted){max-width:1540px;margin-inline:auto}
+#view.mp-mounted{width:100%;max-width:none}
+
+/* Use the horizontal space for the experiment rather than preserving large empty margins. */
+.mp-page-shell{grid-template-columns:clamp(250px,14vw,292px) minmax(0,1fr);gap:clamp(18px,1.35vw,28px)}
+.mp-page-content{width:100%;max-width:none}
+.mp-mounted .tf-layout{grid-template-columns:minmax(0,1fr) clamp(370px,20vw,430px);gap:clamp(18px,1.25vw,26px)}
+.mp-mounted .tf-main{gap:22px}
+.mp-mounted .tf-evidence-grid{gap:22px}
+.mp-mounted .tf-section{border-radius:18px}
+
+/* The command strip is part of the document, not a translucent layer floating over later sections. */
+.mp-mounted .tf-command{
+  position:static;
+  top:auto;
+  z-index:auto;
+  background:#fff;
+  backdrop-filter:none;
+  -webkit-backdrop-filter:none;
+  box-shadow:var(--shadow);
+  margin-bottom:22px;
+}
+.mp-mounted .tf-command::after{display:none}
+.mp-mounted .tf-command,.mp-mounted .tf-guided-section{scroll-margin-top:24px}
+
+/* Main text scale. The previous 9–11 px labels became unreadable at reduced browser zoom. */
+.mp-mounted{font-size:17px}
+.mp-mounted .tf-hero p{font-size:17px;line-height:1.78}
+.mp-mounted .tf-command select,
+.mp-mounted .tf-mode-group button,
+.mp-mounted .tf-lab-actions button,
+.mp-mounted .tf-section>button,
+.mp-mounted .tf-section .card-head button,
+.mp-mounted .tf-side .preset-row button{font-size:14px;padding:9px 12px}
+.mp-mounted .tf-mode-group>b,
+.mp-mounted .tf-phase-read span,
+.mp-mounted .tf-phase-read output{font-size:14px}
+.mp-mounted .tf-badges span{font-size:12px;padding:6px 9px}
+.mp-mounted .tf-control>span{font-size:14px;line-height:1.45}
+.mp-mounted .tf-control output{font-size:14px}
+.mp-mounted .tf-side .control-top label,
+.mp-mounted .tf-side .control-top output{font-size:14px}
+.mp-mounted .tf-side .metric .k{font-size:12px;line-height:1.4}
+.mp-mounted .tf-side .metric .v{font-size:17px}
+.mp-mounted .tf-side .status{font-size:14px;line-height:1.65}
+.mp-mounted .tf-side .boundary{font-size:13px;line-height:1.65}
+.mp-mounted .tf-section .evidence-caption,
+.mp-mounted .tf-section .canvas-foot,
+.mp-mounted .tf-section .source-note{font-size:13px;line-height:1.65}
+.mp-mounted .tf-lab-report dl{font-size:14px;line-height:1.55}
+.mp-mounted .tf-lab-report h3{font-size:21px}
+.mp-mounted .tf-check b{font-size:14px}
+.mp-mounted .tf-check span{font-size:12px;line-height:1.45}
+.mp-mounted .tf-formula-map h4{font-size:17px}
+.mp-mounted .tf-math-link{font-size:14px;padding:11px 12px}
+.mp-mounted .tf-math-link small{font-size:12px}
+.mp-mounted .reference-strip{font-size:13px}
+.mp-mounted .card-head{padding:16px 18px}
+.mp-mounted .card-head b,
+.mp-mounted .mp-section-title{font-size:17px}
+.mp-mounted .card-head small{font-size:13px;line-height:1.45}
+
+/* Section-purpose statements should read as explanations, not micro-labels. */
+.mp-mounted .mp-purpose span{font-size:11px}
+.mp-mounted .mp-purpose p{font-size:13px;line-height:1.62}
+.mp-mounted .mp-purpose>div{padding:13px 16px}
+
+/* Larger, calmer project navigation. */
+.mp-mounted .mp-toc{padding:17px 16px}
+.mp-mounted .mp-toc-head h2{font-size:26px}
+.mp-mounted .mp-toc-head span{font-size:11px}
+.mp-mounted .mp-toc-count{font-size:12px}
+.mp-mounted .mp-toc ol{gap:5px;margin-top:12px}
+.mp-mounted .mp-toc [data-mp-target]{grid-template-columns:32px minmax(0,1fr);gap:10px;padding:10px 9px}
+.mp-mounted .mp-toc [data-mp-target]>i{width:30px;height:30px;font-size:11px}
+.mp-mounted .mp-toc [data-mp-target] b{font-size:14px;line-height:1.4}
+.mp-mounted .mp-toc [data-mp-target] small{font-size:11px;line-height:1.45}
+.mp-mounted .mp-toc-scope b{font-size:12px}
+.mp-mounted .mp-toc-scope span{font-size:11px;line-height:1.55}
+.mp-mounted .mp-back{font-size:12px;padding:10px 11px}
+.mp-mounted .mp-progress{top:88px;bottom:132px}
+
+/* Give graphs and experiment diagrams more visual weight. */
+.mp-mounted .tf-section canvas{min-height:300px}
+.mp-mounted .tf-section .model-canvas{min-height:420px}
+.mp-mounted .tf-lab-grid{grid-template-columns:minmax(0,1fr) clamp(300px,19vw,350px);gap:20px;padding:16px}
+.mp-mounted .tf-validation{grid-template-columns:minmax(0,1fr) minmax(390px,.82fr);gap:22px;padding:16px}
+.mp-mounted .tf-formula-map{gap:18px;padding:19px}
+.mp-mounted .tf-formula-map>div{padding:16px}
+
+/* Keep the parameter rail useful while preventing another overlay effect. */
+.mp-mounted .tf-side{top:18px;max-height:calc(100vh - 36px);padding-right:7px}
+.mp-mounted .tf-side .panel-body{padding:16px}
+.mp-mounted .tf-control{gap:9px}
+
+@media(min-width:1900px){
+  .mp-page-shell{grid-template-columns:300px minmax(0,1fr)}
+  .mp-mounted .tf-layout{grid-template-columns:minmax(0,1fr) 440px}
+  .mp-mounted{font-size:18px}
+}
+
+@media(max-width:1320px){
+  .app{padding-inline:clamp(12px,2vw,24px)}
+  .mp-page-shell{grid-template-columns:1fr}
+  .mp-mounted .mp-toc [data-mp-target] b{font-size:13px}
+  .mp-mounted .mp-toc [data-mp-target] small{font-size:11px}
+  .mp-mounted .tf-layout{grid-template-columns:1fr}
+  .mp-mounted .tf-side{position:static;max-height:none;grid-template-columns:repeat(2,minmax(0,1fr))}
+  .mp-mounted .tf-lab-grid,.mp-mounted .tf-validation{grid-template-columns:1fr}
+}
+
+@media(max-width:760px){
+  .mp-mounted{font-size:16px}
+  .mp-mounted .mp-purpose p{font-size:13px}
+  .mp-mounted .tf-side{grid-template-columns:1fr}
+  .mp-mounted .tf-section canvas,
+  .mp-mounted .tf-section .model-canvas{min-height:0}
+  .mp-mounted .tf-hero p{font-size:16px}
+}
