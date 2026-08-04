@@ -20,12 +20,15 @@ async function audit(width, height, name) {
   const analysis = await page.locator('.tfw-analysis-column').boundingBox();
   const leftHandle = await page.locator('.tfr-left-handle').boundingBox();
   const rightHandle = await page.locator('.tfr-right-handle').boundingBox();
-  if (!hero || !core || !analysis || !leftHandle || !rightHandle) throw new Error(`missing layout boxes at ${name}`);
-  if (hero.height > 190) throw new Error(`hero too tall at ${name}: ${hero.height}`);
-  if (width >= 2000 && core.width < 700) throw new Error(`core too narrow at ${name}: ${core.width}`);
-  if (width >= 2000 && analysis.width < 560) throw new Error(`analysis too narrow at ${name}: ${analysis.width}`);
-  if (await page.locator('.tfr-left-drawer').evaluate(el => el.classList.contains('is-open'))) throw new Error('left drawer should start collapsed');
-  if (await page.locator('.tfr-right-drawer').evaluate(el => el.classList.contains('is-open'))) throw new Error('right drawer should start collapsed');
+  await page.screenshot({ path: `${outDir}/${name}-initial.png`, fullPage: false });
+
+  const assertions = [];
+  if (!hero || !core || !analysis || !leftHandle || !rightHandle) assertions.push(`missing layout boxes at ${name}`);
+  if (hero && hero.height > 180) assertions.push(`hero too tall at ${name}: ${hero.height}`);
+  if (width >= 2000 && core && core.width < 700) assertions.push(`core too narrow at ${name}: ${core.width}`);
+  if (width >= 2000 && analysis && analysis.width < 560) assertions.push(`analysis too narrow at ${name}: ${analysis.width}`);
+  if (await page.locator('.tfr-left-drawer').evaluate(el => el.classList.contains('is-open'))) assertions.push('left drawer should start collapsed');
+  if (await page.locator('.tfr-right-drawer').evaluate(el => el.classList.contains('is-open'))) assertions.push('right drawer should start collapsed');
 
   await page.locator('.tfr-left-handle').click();
   await page.waitForSelector('.tfr-left-drawer.is-open');
@@ -44,7 +47,7 @@ async function audit(width, height, name) {
   await page.waitForSelector('.tfr-right-drawer.is-open');
   await page.screenshot({ path: `${outDir}/${name}-right-open.png`, fullPage: false });
 
-  results.push({ name, width, height, hero, core, analysis, errors });
+  results.push({ name, width, height, hero, core, analysis, errors, assertions });
   await page.close();
 }
 
@@ -52,8 +55,5 @@ await audit(2560, 1440, 'wide');
 await audit(1920, 1080, 'desktop');
 await fs.writeFile(`${outDir}/metrics.json`, JSON.stringify(results, null, 2));
 await browser.close();
-if (results.some(result => result.errors.length)) {
-  console.error(results);
-  process.exit(1);
-}
 console.log(JSON.stringify(results, null, 2));
+if (results.some(result => result.errors.length || result.assertions.length)) process.exit(1);
