@@ -33,7 +33,7 @@
     const f23=interfaceCoefficients(pol,s.n2,s.n3,a.t2,a.t3);
     const f21=interfaceCoefficients(pol,s.n2,s.n1,a.t2,a.t1);
     const beta=TAU*s.n2*dOverride*Math.cos(a.t2)/lambda;
-    const e2=expi(beta), eb=expi(beta/2);
+    const e2=expi(2*beta), eb=expi(beta);
     const den=add(C(1),scale(e2,f12.r*f23.r));
     const r=div(add(C(f12.r),scale(e2,f23.r)),den);
     const t=div(scale(eb,f12.t*f23.t),den);
