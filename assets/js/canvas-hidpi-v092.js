@@ -4,6 +4,8 @@
   const widthDescriptor = Object.getOwnPropertyDescriptor(HTMLCanvasElement.prototype, 'width');
   const heightDescriptor = Object.getOwnPropertyDescriptor(HTMLCanvasElement.prototype, 'height');
   const states = new WeakMap();
+  const liveCanvases = new Set();
+  const redrawFrames = new WeakMap();
 
   function finitePositive(value, fallback) {
     const number = Number(value);
@@ -22,7 +24,8 @@
       pixelHeight: 0,
       dpr: 1,
       cssWidth: 0,
-      cssHeight: 0
+      cssHeight: 0,
+      observer: null
     };
 
     canvas.dataset.logicalWidth = String(logicalWidth);
@@ -59,6 +62,7 @@
     }
 
     states.set(canvas, state);
+    liveCanvases.add(canvas);
     return state;
   }
 
@@ -93,6 +97,40 @@
     ctx.imageSmoothingEnabled = true;
     if ('imageSmoothingQuality' in ctx) ctx.imageSmoothingQuality = 'high';
     return { scaleX, scaleY, cssWidth, cssHeight, dpr };
+  }
+
+  function scheduleModelRedraw(canvas) {
+    const root = canvas.closest('#view') || document.getElementById('view');
+    if (!root || redrawFrames.has(root)) return;
+    const frame = requestAnimationFrame(() => {
+      redrawFrames.delete(root);
+      if (!canvas.isConnected) return;
+      /*
+       * Existing models already expose one unified update path through their
+       * controls. Re-dispatching the current value redraws every coordinated
+       * view without changing the physics state.
+       */
+      const control = root.querySelector('input[data-key], input[data-param], select[data-key], select[data-param]');
+      if (control) {
+        control.dispatchEvent(new Event(control.tagName === 'SELECT' ? 'change' : 'input', { bubbles: true }));
+      } else {
+        canvas.dispatchEvent(new CustomEvent('canvasresolutionchange', { bubbles: true }));
+      }
+    });
+    redrawFrames.set(root, frame);
+  }
+
+  function observeCanvas(canvas, state) {
+    if (state.observer || typeof ResizeObserver === 'undefined') return;
+    state.observer = new ResizeObserver(entries => {
+      const entry = entries[entries.length - 1];
+      const width = entry.contentRect.width;
+      const height = entry.contentRect.height;
+      if (Math.abs(width - state.cssWidth) > .5 || Math.abs(height - state.cssHeight) > .5) {
+        scheduleModelRedraw(canvas);
+      }
+    });
+    state.observer.observe(canvas);
   }
 
   function highDpiCanvasAPI(canvas) {
@@ -196,6 +234,7 @@
     };
 
     api.sync();
+    observeCanvas(canvas, state);
     return api;
   }
 
@@ -209,6 +248,13 @@
       y: (event.clientY - rect.top) / Math.max(1, rect.height) * logicalHeight
     };
   }
+
+  window.addEventListener('resize', () => {
+    for (const canvas of [...liveCanvases]) {
+      if (!canvas.isConnected) { liveCanvases.delete(canvas); continue; }
+      scheduleModelRedraw(canvas);
+    }
+  }, { passive: true });
 
   globalThis.canvasAPI = highDpiCanvasAPI;
   globalThis.getPointer = logicalPointer;
