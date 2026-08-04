@@ -1,0 +1,1 @@
+Trigger pull-request validation for the v0.12 simultaneous viewport task contract retry.
