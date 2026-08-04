@@ -18,7 +18,7 @@ function visibleFraction(box, width, height) {
 function rayPoint(angle, radius, outward = false) {
   const theta = angle * Math.PI / 180;
   const sign = outward ? 1 : -1;
-  return { x: 570 + sign * radius * Math.sin(theta), y: 420 - sign * radius * Math.cos(theta) };
+  return { x: 570 + sign * radius * Math.sin(theta), y: 420 - radius * Math.cos(theta) };
 }
 
 async function dragLogical(page, canvas, start, end) {
