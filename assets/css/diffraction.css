@@ -1,0 +1,4 @@
+@media (min-width:1101px){.home-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.domain-card{padding:20px}.domain-card h2{font-size:32px}.model-preview{grid-template-columns:repeat(2,minmax(0,1fr))}.mini{min-height:76px}}
+@media (min-width:1400px){.model-shell{grid-template-columns:minmax(0,1fr) 410px}}
+.domain-card[data-route="category:diffraction"] .domain-index{border-color:#bfd1ee;color:#416f9b}.domain-card[data-route="category:diffraction"] .domain-foot{color:#416f9b}
+.model-card[data-model^="huygens"],.model-card[data-model*="diffraction"],.model-card[data-model="airy-resolution"],.model-card[data-model="poisson-spot"],.model-card[data-model="zone-plate"],.model-card[data-model="talbot-effect"]{background:linear-gradient(180deg,#fff,#fbfdff)}
