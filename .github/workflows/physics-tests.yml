@@ -10,7 +10,7 @@ permissions:
   contents: read
 
 jobs:
-  thin-film-v08:
+  thin-film-v09:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
@@ -23,5 +23,8 @@ jobs:
           node --check assets/js/thin-film-v08-physics.js
           node --check assets/js/thin-film-v08-patch.js
           node --check assets/js/thin-film-v08-ui.js
+          node --check assets/js/model-page-guide-v09.js
       - name: Thin-film physical invariants
         run: node tests/thin-film-v08-physics.test.js
+      - name: Model-page structure contract
+        run: node tests/model-page-guide-v09.test.js
