@@ -29,7 +29,7 @@ assert.match(script, /data-focus/, 'panels must support focus mode');
 assert.match(script, /data-remove/, 'panels must support direct removal');
 
 for (const preset of ['phase','spectrum','experiment','panorama']) {
-  assert.match(script, new RegExp(`${preset}:\[`), `missing ${preset} analysis preset`);
+  assert.ok(script.includes(`${preset}:[`), `missing ${preset} analysis preset`);
 }
 
 assert.match(css, /grid-template-columns:270px minmax\(650px,1\.15fr\) minmax\(590px,1fr\) 390px/, 'wide screen must show dock, core, analysis and controls together');
