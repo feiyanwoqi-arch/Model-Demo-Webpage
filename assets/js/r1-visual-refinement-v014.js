@@ -38,7 +38,7 @@
   model.draw = (api, state) => {
     api.clear();
     const { ctx, W, H } = api;
-    const x0 = 570, y0 = 430;
+    const x0 = 570, y0 = 420;
     const angle = rad(state.angle);
     const observerAngle = rad(Number.isFinite(state.observerAngle) ? state.observerAngle : state.angle);
     const acceptance = rad(Number.isFinite(state.acceptance) ? state.acceptance : 4);
@@ -136,25 +136,22 @@
     api.text('拖动观察方向', observerX, observerY - 31, C.orange, 13, 'center', 700);
     api.text(`接受角 ±${(acceptance * 180 / Math.PI).toFixed(1)}°`, observerX, observerY + 31, C.muted, 11, 'center', 700);
 
-    textChip(api, 88, 520, 264, '微观：每个点都满足 θᵢ = θᵣ', C.green);
-    textChip(api, 404, 520, 278, `宏观：反射峰宽 σ ≈ ${info.sigma.toFixed(1)}°`, C.teal);
-    textChip(api, 734, 520, 258, `观测：接收信号 ${(info.signal * 100).toFixed(1)}%`, C.orange);
-    api.text('粗糙度在本模型中表示“局部法线离散度”的几何示意，不等同于真实材料 BRDF。', W / 2, 595, C.muted, 12, 'center', 600);
-    api.text('上方：光在空气中的真实传播　｜　下方：表面材料区域与因果判据', W / 2, 628, C.muted, 11, 'center', 600);
+    textChip(api, 88, 500, 264, '微观：每个点都满足 θᵢ = θᵣ', C.green);
+    textChip(api, 404, 500, 278, `宏观：反射峰宽 σ ≈ ${info.sigma.toFixed(1)}°`, C.teal);
+    textChip(api, 734, 500, 258, `观测：接收信号 ${(info.signal * 100).toFixed(1)}%`, C.orange);
+    api.text('粗糙度在本模型中表示“局部法线离散度”的几何示意，不等同于真实材料 BRDF。', W / 2, 575, C.muted, 12, 'center', 600);
+    api.text('上方：光在空气中的真实传播　｜　下方：表面材料区域与因果判据', W / 2, 608, C.muted, 11, 'center', 600);
   };
 
   function drawMechanism(root, api) {
-    const state = {
-      angle: value(root, 'angle', 38),
-      roughness: value(root, 'roughness', 0)
-    };
+    const state = { angle: value(root, 'angle', 38), roughness: value(root, 'roughness', 0) };
     api.clear();
     api.text('同一全局入射方向', 48, 24, C.greenDark, 12, 'left', 700);
     api.text('局部法线不同 → 出射方向不同', 672, 24, C.teal, 12, 'right', 700);
     const incoming = { x: Math.sin(rad(state.angle)), y: Math.cos(rad(state.angle)) };
     [135, 360, 585].forEach((x, index) => {
       const tilt = state.roughness * (.35 * Math.sin(x * .041) + .18 * Math.cos(x * .079));
-      const y = 142 + 10 * state.roughness * Math.sin(x * .055);
+      const y = 138 + 10 * state.roughness * Math.sin(x * .055);
       const tangent = { x: Math.cos(tilt), y: Math.sin(tilt) };
       const normal = { x: Math.sin(tilt), y: -Math.cos(tilt) };
       const reflected = reflect(incoming, normal);
@@ -163,21 +160,19 @@
       api.arrow(x - 88 * incoming.x, y - 88 * incoming.y, x, y, C.green, 3.2);
       api.arrow(x, y, x + 88 * reflected.x, y + 88 * reflected.y, C.teal, 3.2);
       api.circle(x, y, 4, '#fff', C.ink, 1.5);
-      api.text(`面元 ${index + 1}`, x, 216, C.ink, 12, 'center', 700);
+      api.text(`面元 ${index + 1}`, x, 209, C.ink, 12, 'center', 700);
     });
-    api.text(`共享入射角 θᵢ = ${state.angle.toFixed(1)}°`, 360, 243, C.muted, 11, 'center', 700);
+    api.text(`共享入射角 θᵢ = ${state.angle.toFixed(1)}°`, 360, 235, C.muted, 11, 'center', 700);
   }
 
   function drawObservable(root, api) {
     const state = {
-      angle: value(root, 'angle', 38),
-      roughness: value(root, 'roughness', 0),
-      observerAngle: value(root, 'observerAngle', 38),
-      acceptance: value(root, 'acceptance', 4)
+      angle: value(root, 'angle', 38), roughness: value(root, 'roughness', 0),
+      observerAngle: value(root, 'observerAngle', 38), acceptance: value(root, 'acceptance', 4)
     };
     const info = observerInfo(state);
     api.clear();
-    const x0 = 62, y0 = 34, width = 596, height = 150;
+    const x0 = 62, y0 = 32, width = 596, height = 146;
     const toX = angle => x0 + angle / 80 * width;
     const left = toX(Math.max(0, state.observerAngle - state.acceptance));
     const right = toX(Math.min(80, state.observerAngle + state.acceptance));
@@ -208,24 +203,22 @@
     const observerX = toX(state.observerAngle);
     api.line(idealX, y0, idealX, y0 + height, C.green, 2, [6, 5]);
     api.line(observerX, y0, observerX, y0 + height, C.orange, 3);
-    api.text(`接收信号 ${(info.signal * 100).toFixed(1)}%`, 650, 20, info.visible ? C.teal : C.red, 13, 'right', 700);
-    api.text(`峰宽 σ ${info.sigma.toFixed(1)}°`, 64, 20, C.muted, 11, 'left', 700);
-    api.text('0°', x0, 204, C.muted, 10, 'center');
-    api.text('40°', toX(40), 204, C.muted, 10, 'center');
-    api.text('80°', x0 + width, 204, C.muted, 10, 'center');
-    api.line(166, 229, 188, 229, C.green, 3, [5, 4]);
-    api.text('理想反射方向', 196, 229, C.greenDark, 11, 'left', 700);
-    api.line(380, 229, 402, 229, C.orange, 3);
-    api.text('观察方向与接受窗口', 410, 229, C.orange, 11, 'left', 700);
-    api.text('相对法线的出射角', 360, 249, C.muted, 10, 'center', 600);
+    api.text(`接收信号 ${(info.signal * 100).toFixed(1)}%`, 650, 18, info.visible ? C.teal : C.red, 13, 'right', 700);
+    api.text(`峰宽 σ ${info.sigma.toFixed(1)}°`, 64, 18, C.muted, 11, 'left', 700);
+    api.text('0°', x0, 195, C.muted, 10, 'center');
+    api.text('40°', toX(40), 195, C.muted, 10, 'center');
+    api.text('80°', x0 + width, 195, C.muted, 10, 'center');
+    api.line(150, 217, 172, 217, C.green, 3, [5, 4]);
+    api.text('理想反射方向', 180, 217, C.greenDark, 11, 'left', 700);
+    api.line(374, 217, 396, 217, C.orange, 3);
+    api.text('观察方向与接受窗口', 404, 217, C.orange, 11, 'left', 700);
+    api.text('相对法线的出射角', 360, 238, C.muted, 10, 'center', 600);
   }
 
   function updateLiveStrip(root) {
     const state = {
-      angle: value(root, 'angle', 38),
-      roughness: value(root, 'roughness', 0),
-      observerAngle: value(root, 'observerAngle', 38),
-      acceptance: value(root, 'acceptance', 4)
+      angle: value(root, 'angle', 38), roughness: value(root, 'roughness', 0),
+      observerAngle: value(root, 'observerAngle', 38), acceptance: value(root, 'acceptance', 4)
     };
     const info = observerInfo(state);
     const cards = root.querySelectorAll('.rfw-live-strip article');
@@ -236,13 +229,62 @@
     }
   }
 
+  function installDirectSourceDrag(root, canvas) {
+    let active = false;
+    const logical = event => {
+      const rect = canvas.getBoundingClientRect();
+      return {
+        x: (event.clientX - rect.left) / Math.max(1, rect.width) * 1080,
+        y: (event.clientY - rect.top) / Math.max(1, rect.height) * 675
+      };
+    };
+    const source = () => {
+      const angle = rad(value(root, 'angle', 38));
+      return { x: 570 - 285 * Math.sin(angle), y: 420 - 285 * Math.cos(angle) };
+    };
+    const onDown = event => {
+      const point = logical(event);
+      const target = source();
+      if (Math.hypot(point.x - target.x, point.y - target.y) > 48) return;
+      active = true;
+      canvas.setPointerCapture?.(event.pointerId);
+      event.preventDefault();
+    };
+    const onMove = event => {
+      if (!active) return;
+      const point = logical(event);
+      const dx = 570 - point.x;
+      const dy = 420 - point.y;
+      if (dy <= 15) return;
+      const angle = clamp(deg(Math.atan2(Math.max(0, dx), dy)), 0, 80);
+      const control = root.querySelector('[data-rfw-param="angle"]');
+      if (!control) return;
+      control.value = String(Math.round(angle * 2) / 2);
+      control.dispatchEvent(new Event('input', { bubbles: true }));
+      event.preventDefault();
+    };
+    const stop = () => { active = false; };
+    canvas.addEventListener('pointerdown', onDown);
+    canvas.addEventListener('pointermove', onMove);
+    canvas.addEventListener('pointerup', stop);
+    canvas.addEventListener('pointercancel', stop);
+    return () => {
+      canvas.removeEventListener('pointerdown', onDown);
+      canvas.removeEventListener('pointermove', onMove);
+      canvas.removeEventListener('pointerup', stop);
+      canvas.removeEventListener('pointercancel', stop);
+    };
+  }
+
   function install() {
     const root = document.querySelector('.rfw-page[data-model-id="reflection-law"]');
+    const mainCanvas = root?.querySelector('#rfwMainCanvas');
     const mechanismCanvas = root?.querySelector('[data-module-id="mechanism"] canvas');
     const observableCanvas = root?.querySelector('[data-module-id="observable"] canvas');
-    if (!root || !mechanismCanvas || !observableCanvas) return null;
+    if (!root || !mainCanvas || !mechanismCanvas || !observableCanvas) return null;
     const mechanismApi = canvasAPI(mechanismCanvas);
     const observableApi = canvasAPI(observableCanvas);
+    const removeDirectDrag = installDirectSourceDrag(root, mainCanvas);
     let frame = 0;
 
     const draw = () => {
@@ -261,6 +303,7 @@
     return () => {
       cancelAnimationFrame(frame);
       observer.disconnect();
+      removeDirectDrag();
       window.removeEventListener('resize', schedule);
     };
   }
@@ -277,6 +320,7 @@
   renderModel = function renderR1VisualRefinement(id) {
     cleanup();
     cleanup = () => {};
+    document.querySelector('.app')?.classList.toggle('r1-v014-active', id === 'reflection-law');
     const result = previousRender(id);
     if (id === 'reflection-law') requestAnimationFrame(() => wait());
     return result;
