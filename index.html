@@ -3,9 +3,19 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="面向大学基础光学教学的交互式反射、干涉与衍射模型图谱。">
 <title>交互式光学模型图谱｜反射、干涉与衍射</title>
 <link rel="stylesheet" href="assets/css/style.css">
 <link rel="stylesheet" href="assets/css/diffraction.css">
+<link rel="stylesheet" href="assets/css/upgrade-v07.css">
+<script>
+window.MathJax={
+  tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']],processEscapes:true},
+  chtml:{scale:0.98},
+  options:{skipHtmlTags:['script','noscript','style','textarea','pre','code']}
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-chtml.js"></script>
 </head>
 <body>
 <div class="app">
@@ -13,6 +23,7 @@
   <div class="brand"><div class="brand-mark">Φ</div><div><strong>交互式光学模型图谱</strong><small>从本质结构进入具体模型</small></div></div>
   <div class="top-actions"><button class="ghost" data-route="home">主页</button><button class="ghost" data-route="category:reflection">反射</button><button class="ghost" data-route="category:interference">干涉</button><button class="ghost" data-route="category:diffraction">衍射</button></div>
 </header>
+<noscript>本网站需要启用 JavaScript 才能运行交互式物理模型。</noscript>
 <div id="view"></div>
 </div>
 <script src="assets/js/core.js"></script>
@@ -30,6 +41,9 @@
 <script src="assets/js/diffraction-periodic.js"></script>
 <script src="assets/js/diffraction-imaging.js"></script>
 <script src="assets/js/diffraction-advanced.js"></script>
+<script src="assets/js/upgrade-v07-core.js"></script>
+<script src="assets/js/upgrade-v07-reflection.js"></script>
+<script src="assets/js/upgrade-v07-interference.js"></script>
 <script src="assets/js/bootstrap.js"></script>
 </body>
 </html>
