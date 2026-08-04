@@ -11,7 +11,7 @@ permissions:
 jobs:
   optics-workbenches:
     runs-on: ubuntu-latest
-    timeout-minutes: 16
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -34,13 +34,16 @@ jobs:
         run: node tests/visual-audit-v012.mjs
       - name: Reflection foundations task scenarios
         run: node tests/visual-audit-reflection-v013.mjs
+      - name: R1 strict runtime visual audit
+        run: node tests/visual-audit-r1-v014.mjs
       - name: Upload visual audit
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: optics-visual-audit-v013
+          name: optics-visual-audit-v014
           path: |
             visual-audit-v012/
             visual-audit-reflection-v013/
+            visual-audit-r1-v014/
           if-no-files-found: error
           retention-days: 14
