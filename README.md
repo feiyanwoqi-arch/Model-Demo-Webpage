@@ -12,9 +12,24 @@ GitHub Pages 已配置为从 `main` 分支根目录自动发布：
 
 `https://feiyanwoqi-arch.github.io/Model-Demo-Webpage/#model:thin-film`
 
-## 当前版本：v0.8
+## 当前版本：v0.9
 
-### I4 单层薄膜干涉旗舰虚拟实验
+### 模型页项目栏、目的声明与学院士式审查
+
+v0.9 首先应用于 I4 单层薄膜旗舰，并建立可供全部模型注册的通用页面结构层：
+
+- 宽屏左侧吸附式“本页项目栏”；
+- 点击项目直接跳转到对应板块；
+- 滚动时自动高亮当前板块并显示进度；
+- 中小屏自动转换为横向目录；
+- 每个板块顶部明确写出“本节目的、它的作用、建议操作”；
+- 主标题使用 `h1`，主要板块使用真实 `h2` 和区域标签；
+- 模型边界在目录中持续可见；
+- 新结构由 `model-page-guide-v09.js` 数据驱动，后续逐个迁移到全部反射、干涉与衍射模型。
+
+完整页面标准和薄膜学院士式审查见 [`docs/MODEL_PAGE_ARCHITECTURE_V09.md`](docs/MODEL_PAGE_ARCHITECTURE_V09.md)。
+
+### v0.8：I4 单层薄膜干涉旗舰虚拟实验
 
 v0.8 选择“单层薄膜干涉”作为第一个满规格标杆模型。新增：
 
@@ -35,7 +50,7 @@ v0.8 选择“单层薄膜干涉”作为第一个满规格标杆模型。新增
 
 完整说明见 [`docs/THIN_FILM_FLAGSHIP_V08.md`](docs/THIN_FILM_FLAGSHIP_V08.md)。
 
-### v0.7 反射与干涉多视图升级
+### v0.7：反射与干涉多视图升级
 
 - 每个模型保留一张可直接拖动的主交互图；
 - 按物理需要新增实验装置图、局部机制放大图和观测结果图；
@@ -62,7 +77,7 @@ v0.8 选择“单层薄膜干涉”作为第一个满规格标杆模型。新增
 - I1 两列波的相干叠加
 - I2 杨氏双缝干涉
 - I3 N 个相干源的离散叠加
-- **I4 单层薄膜干涉（v0.8 旗舰实验）**
+- **I4 单层薄膜干涉（v0.9 旗舰实验）**
 - I5 牛顿环
 - I6 迈克耳孙干涉仪
 - I7 法布里–珀罗多光束干涉
@@ -100,8 +115,18 @@ v0.8 选择“单层薄膜干涉”作为第一个满规格标杆模型。新增
 旗舰模型进一步形成：
 
 ```text
-真实装置 → 直接操作 → 局部边界机制 → 多表征联动
-→ 可测光谱 → 现实误差 → 参数反演 → 自洽性测试
+本页项目栏 → 板块目的与作用 → 真实装置 → 直接操作
+→ 局部边界机制 → 多表征联动 → 可测光谱
+→ 现实误差 → 参数反演 → 自洽性测试
+```
+
+所有新模型板块必须能够回答：
+
+```text
+为什么存在？
+在总推理链中起什么作用？
+用户应该怎样操作？
+输入、输出和适用边界是什么？
 ```
 
 ## 本地运行
@@ -132,7 +157,8 @@ node tests/thin-film-v08-physics.test.js
 │   │   ├── style.css
 │   │   ├── diffraction.css
 │   │   ├── upgrade-v07.css
-│   │   └── thin-film-v08.css
+│   │   ├── thin-film-v08.css
+│   │   └── model-page-guide-v09.css
 │   └── js/
 │       ├── core.js
 │       ├── site-v06.js
@@ -143,10 +169,13 @@ node tests/thin-film-v08-physics.test.js
 │       ├── thin-film-v08-physics.js
 │       ├── thin-film-v08-patch.js
 │       ├── thin-film-v08-ui.js
+│       ├── model-page-guide-v09.js
 │       └── bootstrap.js
 ├── tests/thin-film-v08-physics.test.js
 └── docs/
+    ├── MODEL_PAGE_ARCHITECTURE_V09.md
     ├── THIN_FILM_FLAGSHIP_V08.md
+    ├── THIN_FILM_V08_VALIDATION.md
     ├── REFLECTION_INTERFERENCE_AUDIT_V07.md
     ├── REFLECTION_MODELS.md
     ├── INTERFERENCE_MODELS.md
@@ -157,7 +186,9 @@ node tests/thin-film-v08-physics.test.js
 
 - GitHub 是项目主代码源；Google Drive 只保留历史归档。
 - 新模型先归入概念域，再实现统一模型接口与页面结构。
+- 新增板块前必须先写出 `purpose / role / action`；写不出来则不得新增。
 - 修改交互方向、角度定义或坐标映射后必须实际拖动验收。
 - 物理公式、装置图、局部机制、数值和文字解释必须同步修改。
 - 任何近场/远场、标量/矢量、近轴/大角度等近似都必须明确标注。
 - 旗舰模型的修改必须通过物理不变量回归测试。
+- 页面导航配置和板块标题必须来自同一注册数据，避免名称漂移。
