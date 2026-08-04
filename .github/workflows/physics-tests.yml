@@ -30,6 +30,7 @@ jobs:
           node --check assets/js/simultaneous-viewport-v012.js
           node --check assets/js/reflection-foundations-v013-patch.js
           node --check assets/js/reflection-foundations-v013.js
+          node --check assets/js/reflection-foundations-v013-sync-patch.js
       - name: Thin-film physical invariants
         run: node tests/thin-film-v08-physics.test.js
       - name: Model-page structure contract
