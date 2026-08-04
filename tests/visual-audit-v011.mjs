@@ -33,6 +33,15 @@ async function audit(width, height, name) {
   await page.locator('.tfr-left-handle').click();
   await page.waitForSelector('.tfr-left-drawer.is-open');
   await page.waitForTimeout(300);
+  const leftDrawer = await page.locator('.tfr-left-drawer').boundingBox();
+  const leftTitle = await page.locator('.tfr-left-drawer .tfw-dock-head h2').boundingBox();
+  const leftTitleStyle = await page.locator('.tfr-left-drawer .tfw-dock-head h2').evaluate(el => ({
+    writingMode: getComputedStyle(el).writingMode,
+    display: getComputedStyle(el).display
+  }));
+  if (!leftDrawer || leftDrawer.width < 330) assertions.push(`left drawer too narrow at ${name}: ${leftDrawer?.width}`);
+  if (!leftTitle || leftTitle.width < 180 || leftTitle.height > 70) assertions.push(`left drawer title collapsed at ${name}: ${JSON.stringify(leftTitle)}`);
+  if (leftTitleStyle.writingMode !== 'horizontal-tb') assertions.push(`left drawer title writing mode is ${leftTitleStyle.writingMode}`);
   await page.locator('[data-preset="spectrum"]').click();
   await page.waitForTimeout(500);
   await page.locator('[data-tfr-close="left"]').click();
@@ -51,7 +60,7 @@ async function audit(width, height, name) {
   await page.waitForTimeout(300);
   await page.screenshot({ path: `${outDir}/${name}-right-open.png`, fullPage: false });
 
-  results.push({ name, width, height, hero, core, analysis, errors, assertions });
+  results.push({ name, width, height, hero, core, analysis, leftDrawer, leftTitle, leftTitleStyle, errors, assertions });
   await page.close();
 }
 
