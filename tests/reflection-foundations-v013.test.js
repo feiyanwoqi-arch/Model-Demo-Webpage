@@ -6,15 +6,18 @@ const path = require('node:path');
 const root = path.resolve(__dirname, '..');
 const index = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
 const script = fs.readFileSync(path.join(root, 'assets/js/reflection-foundations-v013.js'), 'utf8');
+const syncPatch = fs.readFileSync(path.join(root, 'assets/js/reflection-foundations-v013-sync-patch.js'), 'utf8');
 const css = fs.readFileSync(path.join(root, 'assets/css/reflection-foundations-v013.css'), 'utf8');
 const standard = fs.readFileSync(path.join(root, 'docs/INTERACTIVE_MODEL_CONSTRUCTION_STANDARD_V1.md'), 'utf8');
 
 assert.match(index, /reflection-foundations-v013\.css/, 'v0.13 stylesheet must be loaded');
 assert.match(index, /reflection-foundations-v013\.js/, 'v0.13 controller must be loaded');
+assert.match(index, /reflection-foundations-v013-sync-patch\.js/, 'full-state synchronization patch must be loaded');
 assert.ok(
   index.indexOf('simultaneous-viewport-v012.js') < index.indexOf('reflection-foundations-v013.js') &&
-  index.indexOf('reflection-foundations-v013.js') < index.indexOf('bootstrap.js'),
-  'reflection foundations controller must be the final model wrapper before bootstrap'
+  index.indexOf('reflection-foundations-v013.js') < index.indexOf('reflection-foundations-v013-sync-patch.js') &&
+  index.indexOf('reflection-foundations-v013-sync-patch.js') < index.indexOf('bootstrap.js'),
+  'state synchronization must be the final model wrapper before bootstrap'
 );
 
 for (const id of ['reflection-law', 'plane-mirror', 'spherical-mirror']) {
@@ -38,6 +41,12 @@ assert.match(script, /局部法线离散度（几何示意）/, 'R1 roughness co
 assert.match(script, /mirrorHeight/, 'R2 must include finite-mirror visibility');
 assert.match(script, /aperture/, 'R3 must expose the paraxial-validity control');
 assert.match(script, /screenShift/, 'R3 must connect image distance to a movable screen');
+
+assert.match(syncPatch, /drawReflectionMechanism/, 'R1 mechanism must be redrawn from live state');
+assert.match(syncPatch, /value\(root, 'angle'/, 'R1 mechanism must read the shared incident angle');
+assert.match(syncPatch, /drawPlaneMechanism/, 'R2 mechanism must be redrawn from live state');
+assert.match(syncPatch, /value\(root, 'observerY'/, 'R2 mechanism must read the shared eye position');
+assert.match(syncPatch, /data-render-revision/, 'mechanism redraw must follow every unified render revision');
 
 assert.match(css, /grid-template-columns:minmax\(650px,1\.12fr\) minmax\(620px,1fr\)/, 'desktop workspace must prioritize primary and analysis columns');
 assert.match(css, /\.rfw-board\[data-count="2"\]/, 'two selected modules need a dedicated same-viewport layout');
