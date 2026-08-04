@@ -1,1 +1,0 @@
-This inert file will be used only on a validation branch.
