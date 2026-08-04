@@ -3,6 +3,7 @@ import fs from 'node:fs/promises';
 
 const outDir = 'visual-audit-r1-v014';
 const viewports = [[2560, 1440], [1920, 1080], [1735, 865], [1440, 900], [1366, 768]];
+const moduleAspect = 720 / 260;
 await fs.mkdir(outDir, { recursive: true });
 const browser = await chromium.launch({ headless: true });
 const results = [];
@@ -31,12 +32,12 @@ async function dragLogical(page, canvas, start, end) {
   await page.mouse.up();
 }
 
-async function setRange(page, selector, value) {
-  await page.locator(selector).evaluate((element, next) => {
-    element.value = String(next);
+async function setRange(page, selector, nextValue) {
+  await page.locator(selector).evaluate((element, value) => {
+    element.value = String(value);
     element.dispatchEvent(new Event('input', { bubbles: true }));
     element.dispatchEvent(new Event('change', { bubbles: true }));
-  }, value);
+  }, nextValue);
 }
 
 async function focusWorkspace(page) {
@@ -74,70 +75,106 @@ async function layoutSnapshot(page, width, height) {
       primaryTitle: inspect('.rfw-primary-head h2'), moduleTitle: inspect('.rfw-module-head h3'),
       liveValue: inspect('.rfw-live-strip b'), mainFoot: inspect('.rfw-primary-foot'),
       leftHandle: inspect('.rfw-left-handle'), rightHandle: inspect('.rfw-right-handle'),
-      documentOverflow: document.documentElement.scrollWidth - document.documentElement.clientWidth
+      documentOverflow: document.documentElement.scrollWidth - document.documentElement.clientWidth,
+      appClass: document.querySelector('.app')?.className || ''
     };
   });
   const fractions = Object.fromEntries(Object.entries(boxes).map(([key, box]) => [key, visibleFraction(box, width, height)]));
   return { boxes, fractions, css };
 }
 
-async function audit(width, height) {
-  const page = await browser.newPage({ viewport: { width, height }, deviceScaleFactor: 1 });
-  const errors = [], assertions = [];
-  page.on('console', message => { if (message.type() === 'error') errors.push(`console: ${message.text()}`); });
-  page.on('pageerror', error => errors.push(`page: ${error.message}`));
-
-  await page.goto('http://127.0.0.1:8000/#model:reflection-law', { waitUntil: 'networkidle' });
-  await page.waitForSelector('.rfw-page[data-model-id="reflection-law"] .rfw-primary-card', { timeout: 20000 });
-  await page.waitForTimeout(900);
-  await focusWorkspace(page);
-
-  const initial = await layoutSnapshot(page, width, height);
+function validateLayout(record, snapshot) {
+  const { width, assertions } = record;
   for (const key of ['primary', 'mechanism', 'observable']) {
-    if (initial.fractions[key] < .90) assertions.push(`${key} visible fraction ${initial.fractions[key].toFixed(3)}`);
+    if (snapshot.fractions[key] < .90) assertions.push(`${key} visible fraction ${snapshot.fractions[key].toFixed(3)}`);
   }
-  if (initial.css.documentOverflow > 2) assertions.push(`horizontal overflow ${initial.css.documentOverflow}px`);
-  if ((initial.boxes.mechanismCanvas?.width || 0) < 430) assertions.push(`mechanism canvas too narrow ${initial.boxes.mechanismCanvas?.width || 0}`);
-  if ((initial.boxes.observableCanvas?.width || 0) < 430) assertions.push(`observable canvas too narrow ${initial.boxes.observableCanvas?.width || 0}`);
-  if ((initial.css.moduleTitle?.fontSize || 0) < 13) assertions.push(`module title too small ${initial.css.moduleTitle?.fontSize || 0}px`);
-  if ((initial.css.liveValue?.fontSize || 0) < 12) assertions.push(`live value too small ${initial.css.liveValue?.fontSize || 0}px`);
-  await page.screenshot({ path: `${outDir}/r1-${width}x${height}-01-initial.png`, fullPage: false });
+  if (snapshot.css.documentOverflow > 2) assertions.push(`horizontal overflow ${snapshot.css.documentOverflow}px`);
+  if (!snapshot.css.appClass.includes('r1-v014-active')) assertions.push('R1 wide-layout runtime class is missing');
+  if ((snapshot.boxes.mechanismCanvas?.width || 0) < 430) assertions.push(`mechanism canvas too narrow ${snapshot.boxes.mechanismCanvas?.width || 0}`);
+  if ((snapshot.boxes.observableCanvas?.width || 0) < 430) assertions.push(`observable canvas too narrow ${snapshot.boxes.observableCanvas?.width || 0}`);
+  for (const key of ['mechanismCanvas', 'observableCanvas']) {
+    const box = snapshot.boxes[key];
+    if (!box) continue;
+    const ratio = box.width / box.height;
+    if (Math.abs(ratio - moduleAspect) > .08) assertions.push(`${key} distorted aspect ${ratio.toFixed(3)} (expected ${moduleAspect.toFixed(3)})`);
+  }
+  if ((snapshot.css.moduleTitle?.fontSize || 0) < 13) assertions.push(`module title too small ${snapshot.css.moduleTitle?.fontSize || 0}px`);
+  if ((snapshot.css.liveValue?.fontSize || 0) < 12) assertions.push(`live value too small ${snapshot.css.liveValue?.fontSize || 0}px`);
+  for (const key of ['leftHandle', 'rightHandle']) {
+    const box = snapshot.boxes[key];
+    const style = snapshot.css[key];
+    if (box && visibleFraction(box, record.width, record.height) < .99) assertions.push(`${key} is clipped`);
+    if (style && (style.scrollWidth > style.clientWidth + 1 || style.scrollHeight > style.clientHeight + 1)) assertions.push(`${key} text overflows`);
+  }
+  const primary = snapshot.boxes.primary;
+  const analysis = snapshot.boxes.analysis;
+  if (primary && analysis && width >= 1920) {
+    const used = (analysis.x + analysis.width - primary.x) / width;
+    if (used < .82) assertions.push(`wide viewport underused ${(used * 100).toFixed(1)}%`);
+  }
+}
 
-  const mainCanvas = page.locator('#rfwMainCanvas');
-  const beforeAngle = await page.locator('[data-rfw-output="angle"]').textContent();
-  await dragLogical(page, mainCanvas, rayPoint(38, 285), rayPoint(55, 285));
-  await page.waitForTimeout(420);
-  const afterAngle = await page.locator('[data-rfw-output="angle"]').textContent();
-  if (beforeAngle === afterAngle) assertions.push('source drag did not change angle');
+async function audit(width, height) {
+  const record = {
+    width, height, beforeAngle: null, afterAngle: null, signal: null,
+    initial: null, final: null, errors: [], assertions: []
+  };
+  const page = await browser.newPage({ viewport: { width, height }, deviceScaleFactor: 1 });
+  page.on('console', message => { if (message.type() === 'error') record.errors.push(`console: ${message.text()}`); });
+  page.on('pageerror', error => record.errors.push(`page: ${error.message}`));
 
-  await page.locator('.rfw-right-handle').click();
-  await page.waitForSelector('.rfw-right-drawer.is-open');
-  await page.waitForTimeout(220);
-  const rightDrawer = await page.locator('.rfw-right-drawer').boundingBox();
-  if (!rightDrawer || visibleFraction(rightDrawer, width, height) < .98) assertions.push('right drawer is clipped');
-  await page.screenshot({ path: `${outDir}/r1-${width}x${height}-02-parameters-open.png`, fullPage: false });
-  await setRange(page, '.rfw-right-drawer [data-rfw-param="roughness"]', 0.62);
-  await page.waitForTimeout(420);
-  await page.locator('.rfw-right-drawer [data-rfw-close]').click();
-  await page.waitForTimeout(260);
+  try {
+    await page.goto('http://127.0.0.1:8000/#model:reflection-law', { waitUntil: 'networkidle' });
+    await page.waitForSelector('.rfw-page[data-model-id="reflection-law"] .rfw-primary-card', { timeout: 20000 });
+    await page.waitForTimeout(900);
+    await focusWorkspace(page);
 
-  await dragLogical(page, mainCanvas, rayPoint(38, 220, true), rayPoint(55, 220, true));
-  await page.waitForTimeout(420);
-  const signal = await page.locator('.rfw-live-strip article').filter({ hasText: '相对接收信号' }).locator('b').textContent();
-  await page.screenshot({ path: `${outDir}/r1-${width}x${height}-03-rough-aligned.png`, fullPage: false });
+    record.initial = await layoutSnapshot(page, width, height);
+    validateLayout(record, record.initial);
+    await page.screenshot({ path: `${outDir}/r1-${width}x${height}-01-initial.png`, fullPage: false });
 
-  await page.locator('.rfw-left-handle').click();
-  await page.waitForSelector('.rfw-left-drawer.is-open');
-  await page.waitForTimeout(220);
-  const leftDrawer = await page.locator('.rfw-left-drawer').boundingBox();
-  if (!leftDrawer || visibleFraction(leftDrawer, width, height) < .98) assertions.push('left drawer is clipped');
-  await page.screenshot({ path: `${outDir}/r1-${width}x${height}-04-modules-open.png`, fullPage: false });
-  await page.locator('.rfw-left-drawer [data-rfw-close]').click();
-  await page.waitForTimeout(220);
+    const mainCanvas = page.locator('#rfwMainCanvas');
+    record.beforeAngle = await page.locator('[data-rfw-output="angle"]').textContent();
+    await dragLogical(page, mainCanvas, rayPoint(38, 285), rayPoint(55, 285));
+    await page.waitForTimeout(450);
+    record.afterAngle = await page.locator('[data-rfw-output="angle"]').textContent();
+    if (Math.abs(parseFloat(record.afterAngle) - 55) > 1) record.assertions.push(`source drag ended at ${record.afterAngle}, expected about 55°`);
 
-  const final = await layoutSnapshot(page, width, height);
-  results.push({ width, height, beforeAngle, afterAngle, signal, initial, final, errors, assertions });
-  await page.close();
+    await page.locator('.rfw-right-handle').click();
+    await page.waitForSelector('.rfw-right-drawer.is-open');
+    await page.waitForTimeout(220);
+    const rightDrawer = await page.locator('.rfw-right-drawer').boundingBox();
+    if (!rightDrawer || visibleFraction(rightDrawer, width, height) < .98) record.assertions.push('right drawer is clipped');
+    await page.screenshot({ path: `${outDir}/r1-${width}x${height}-02-parameters-open.png`, fullPage: false });
+    await setRange(page, '.rfw-right-drawer [data-rfw-param="roughness"]', 0.62);
+    await page.waitForTimeout(420);
+    await page.locator('.rfw-right-drawer [data-rfw-close]').click();
+    await page.waitForTimeout(260);
+
+    await dragLogical(page, mainCanvas, rayPoint(38, 220, true), rayPoint(55, 220, true));
+    await page.waitForTimeout(450);
+    record.signal = await page.locator('.rfw-live-strip article').filter({ hasText: '相对接收信号' }).locator('b').textContent({ timeout: 3000 });
+    if (parseFloat(record.signal) < 90) record.assertions.push(`aligned receiver signal too low ${record.signal}`);
+    await page.screenshot({ path: `${outDir}/r1-${width}x${height}-03-rough-aligned.png`, fullPage: false });
+
+    await page.locator('.rfw-left-handle').click();
+    await page.waitForSelector('.rfw-left-drawer.is-open');
+    await page.waitForTimeout(220);
+    const leftDrawer = await page.locator('.rfw-left-drawer').boundingBox();
+    if (!leftDrawer || visibleFraction(leftDrawer, width, height) < .98) record.assertions.push('left drawer is clipped');
+    await page.screenshot({ path: `${outDir}/r1-${width}x${height}-04-modules-open.png`, fullPage: false });
+    await page.locator('.rfw-left-drawer [data-rfw-close]').click();
+    await page.waitForTimeout(220);
+
+    record.final = await layoutSnapshot(page, width, height);
+    validateLayout(record, record.final);
+  } catch (error) {
+    record.errors.push(`audit: ${error?.stack || error}`);
+    await page.screenshot({ path: `${outDir}/r1-${width}x${height}-99-failure.png`, fullPage: false }).catch(() => {});
+  } finally {
+    results.push(record);
+    await page.close();
+  }
 }
 
 for (const [width, height] of viewports) await audit(width, height);
