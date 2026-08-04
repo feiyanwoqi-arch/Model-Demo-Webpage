@@ -1,14 +1,27 @@
 # 交互式光学模型图谱
 
-一个面向大学基础光学教学的交互式网页模型库。项目按**概念域 → 学习路径 → 具体模型**组织，不把实验模型孤立堆放。
+一个面向大学基础光学教学的交互式网页模型库。项目按**概念域 → 学习路径 → 具体模型**组织，而不是堆放彼此孤立的动画。
 
 ## 在线网站
 
 GitHub Pages 已配置为从 `main` 分支根目录自动发布：
 
-**https://feiyanwoqi-arch.github.io/Model-Demo-Webpage/**
+`https://feiyanwoqi-arch.github.io/Model-Demo-Webpage/`
 
-每次向 `main` 推送代码后，GitHub Pages 会自动重新部署。
+向 `main` 推送后，Pages 会自动重新构建公开网站。
+
+## 当前版本：v0.7
+
+本次重点重构了**反射**和**干涉**两个版块：
+
+- 每个模型保留一张可直接拖动的主交互图；
+- 按物理需要新增实验装置图、局部机制放大图和观测结果图；
+- 所有补充视图与参数、主模型同步更新；
+- 核心关系、推导链和公式列表改用 MathJax/LaTeX；
+- 每页新增因果链、推荐操作顺序、常见误区和模型边界；
+- 离开模型页面后停止旧动画循环，避免多个动画同时占用资源。
+
+完整审计见 [`docs/REFLECTION_INTERFERENCE_AUDIT_V07.md`](docs/REFLECTION_INTERFERENCE_AUDIT_V07.md)。
 
 ## 当前内容
 
@@ -46,17 +59,38 @@ GitHub Pages 已配置为从 `main` 分支根目录自动发布：
 - D11 泰伯自成像与泰伯毯
 - D12 布拉格衍射与晶格测量
 
-## 运行
+## 页面统一结构
 
-项目是纯静态网页，无需安装依赖。
+反射与干涉模型页目前按以下结构组织：
+
+```text
+主交互模型
+├── 实验装置图
+├── 局部机制图
+├── 观测结果图
+├── 实时参数与物理判据
+├── LaTeX 推导链
+├── 常见误区校正
+└── 模型近似与适用边界
+```
+
+统一建模闭环：
+
+```text
+直接操作 → 局部物理机制 → 状态量变化 → 数学关系 → 可观测结果 → 近似边界
+```
+
+## 本地运行
+
+项目是纯静态网页，无需安装依赖：
 
 ```bash
 python -m http.server 8000
 ```
 
-然后访问 `http://localhost:8000`。也可以直接打开 `index.html`。
+然后访问 `http://localhost:8000`。也可以直接打开 `index.html`；但 MathJax 当前从 CDN 加载，完全离线时公式不会完成排版。
 
-## 目录
+## 代码结构
 
 ```text
 .
@@ -65,44 +99,29 @@ python -m http.server 8000
 ├── assets/
 │   ├── css/
 │   │   ├── style.css
-│   │   └── diffraction.css
+│   │   ├── diffraction.css
+│   │   └── upgrade-v07.css
 │   └── js/
 │       ├── core.js
 │       ├── site-v06.js
 │       ├── reflection-models.js
 │       ├── interference-*.js
-│       ├── diffraction-foundations.js
-│       ├── diffraction-periodic.js
-│       ├── diffraction-imaging.js
-│       ├── diffraction-advanced.js
+│       ├── diffraction-*.js
+│       ├── upgrade-v07-core.js
+│       ├── upgrade-v07-reflection.js
+│       ├── upgrade-v07-interference.js
 │       └── bootstrap.js
 └── docs/
-    ├── RESEARCH_NOTES.md
+    ├── REFLECTION_INTERFERENCE_AUDIT_V07.md
     ├── REFLECTION_MODELS.md
     ├── INTERFERENCE_MODELS.md
     └── DIFFRACTION_MODELS.md
 ```
 
-## 统一建模规范
-
-```text
-直接操作 → 局部物理机制 → 状态量变化 → 数学关系 → 可观测结果 → 近似边界
-```
-
-视觉语义统一为：绿色表示入射或主动光路，青色表示反射、传播或主结果，橙色表示检测点、透射或第二通道，紫色表示相位、倏逝场或辅助波动量。
-
-## 概念边界
-
-- **干涉**侧重少数离散相干振幅的叠加。
-- **衍射**侧重连续孔径或周期结构中大量波前贡献的传播与叠加。
-- 两者不存在绝对物理分界；这种分类主要服务于学习路径和模型组织。
-
 ## 维护约定
 
-- GitHub 是项目主代码源；Google Drive 仅保留历史归档。
+- GitHub 是项目主代码源；Google Drive 只保留历史归档。
 - 新模型先归入概念域，再实现统一模型接口与页面结构。
 - 修改交互方向、角度定义或坐标映射后必须实际拖动验收。
-- 物理公式、图形、数值与文字解释必须同步修改。
-- 任何近场/远场、标量/矢量、近轴/大角度等近似都必须在模型页明确标注。
-
-衍射域设计说明见 [`docs/DIFFRACTION_MODELS.md`](docs/DIFFRACTION_MODELS.md)。
+- 物理公式、装置图、局部机制、数值和文字解释必须同步修改。
+- 任何近场/远场、标量/矢量、近轴/大角度等近似都必须明确标注。
