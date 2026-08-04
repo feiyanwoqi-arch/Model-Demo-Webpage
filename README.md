@@ -8,11 +8,34 @@ GitHub Pages 已配置为从 `main` 分支根目录自动发布：
 
 `https://feiyanwoqi-arch.github.io/Model-Demo-Webpage/`
 
-向 `main` 推送后，Pages 会自动重新构建公开网站。
+向 `main` 推送后，Pages 会自动重新构建公开网站。薄膜旗舰实验可直接通过：
 
-## 当前版本：v0.7
+`https://feiyanwoqi-arch.github.io/Model-Demo-Webpage/#model:thin-film`
 
-本次重点重构了**反射**和**干涉**两个版块：
+## 当前版本：v0.8
+
+### I4 单层薄膜干涉旗舰虚拟实验
+
+v0.8 选择“单层薄膜干涉”作为第一个满规格标杆模型。新增：
+
+- 完整反射光谱实验装置；
+- 可拖动三层介质几何、波前和传播动画；
+- 上下界面 Fresnel 反射相位独立记账；
+- 第一束、第二束、后续多束与精确几何级数相量；
+- 播放、暂停、逐步、速度和公共相位时间轴；
+- s、p 和非偏振光；
+- 理想理论与现实实验两种模式；
+- 膜厚分布、角度分布和粗糙度退相干近似；
+- 精确 R/T、两束近似误差和能量守恒检查；
+- 反射/透射可见光谱与综合色预测；
+- 膜厚—入射角二维相图；
+- 盲样反射光谱、膜厚拟合、误差比较和 CSV 导出；
+- 公式项与图形对象的双向高亮；
+- JavaScript 语法和物理不变量 GitHub Actions 回归测试。
+
+完整说明见 [`docs/THIN_FILM_FLAGSHIP_V08.md`](docs/THIN_FILM_FLAGSHIP_V08.md)。
+
+### v0.7 反射与干涉多视图升级
 
 - 每个模型保留一张可直接拖动的主交互图；
 - 按物理需要新增实验装置图、局部机制放大图和观测结果图；
@@ -39,7 +62,7 @@ GitHub Pages 已配置为从 `main` 分支根目录自动发布：
 - I1 两列波的相干叠加
 - I2 杨氏双缝干涉
 - I3 N 个相干源的离散叠加
-- I4 单层薄膜干涉
+- **I4 单层薄膜干涉（v0.8 旗舰实验）**
 - I5 牛顿环
 - I6 迈克耳孙干涉仪
 - I7 法布里–珀罗多光束干涉
@@ -61,7 +84,7 @@ GitHub Pages 已配置为从 `main` 分支根目录自动发布：
 
 ## 页面统一结构
 
-反射与干涉模型页目前按以下结构组织：
+常规模型页按以下结构组织：
 
 ```text
 主交互模型
@@ -74,10 +97,11 @@ GitHub Pages 已配置为从 `main` 分支根目录自动发布：
 └── 模型近似与适用边界
 ```
 
-统一建模闭环：
+旗舰模型进一步形成：
 
 ```text
-直接操作 → 局部物理机制 → 状态量变化 → 数学关系 → 可观测结果 → 近似边界
+真实装置 → 直接操作 → 局部边界机制 → 多表征联动
+→ 可测光谱 → 现实误差 → 参数反演 → 自洽性测试
 ```
 
 ## 本地运行
@@ -90,28 +114,39 @@ python -m http.server 8000
 
 然后访问 `http://localhost:8000`。也可以直接打开 `index.html`；但 MathJax 当前从 CDN 加载，完全离线时公式不会完成排版。
 
+运行物理测试：
+
+```bash
+node tests/thin-film-v08-physics.test.js
+```
+
 ## 代码结构
 
 ```text
 .
 ├── index.html
 ├── .nojekyll
+├── .github/workflows/physics-tests.yml
 ├── assets/
 │   ├── css/
 │   │   ├── style.css
 │   │   ├── diffraction.css
-│   │   └── upgrade-v07.css
+│   │   ├── upgrade-v07.css
+│   │   └── thin-film-v08.css
 │   └── js/
 │       ├── core.js
 │       ├── site-v06.js
 │       ├── reflection-models.js
 │       ├── interference-*.js
 │       ├── diffraction-*.js
-│       ├── upgrade-v07-core.js
-│       ├── upgrade-v07-reflection.js
-│       ├── upgrade-v07-interference.js
+│       ├── upgrade-v07-*.js
+│       ├── thin-film-v08-physics.js
+│       ├── thin-film-v08-patch.js
+│       ├── thin-film-v08-ui.js
 │       └── bootstrap.js
+├── tests/thin-film-v08-physics.test.js
 └── docs/
+    ├── THIN_FILM_FLAGSHIP_V08.md
     ├── REFLECTION_INTERFERENCE_AUDIT_V07.md
     ├── REFLECTION_MODELS.md
     ├── INTERFERENCE_MODELS.md
@@ -125,3 +160,4 @@ python -m http.server 8000
 - 修改交互方向、角度定义或坐标映射后必须实际拖动验收。
 - 物理公式、装置图、局部机制、数值和文字解释必须同步修改。
 - 任何近场/远场、标量/矢量、近轴/大角度等近似都必须明确标注。
+- 旗舰模型的修改必须通过物理不变量回归测试。
