@@ -1,0 +1,1 @@
+Trigger validation for v0.9.2 high-DPI Canvas rendering.
