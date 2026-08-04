@@ -5,7 +5,6 @@
   const rad=d=>d*PI/180, deg=r=>r*180/PI;
   const C=(re=0,im=0)=>({re,im});
   const add=(a,b)=>C(a.re+b.re,a.im+b.im);
-  const sub=(a,b)=>C(a.re-b.re,a.im-b.im);
   const mul=(a,b)=>C(a.re*b.re-a.im*b.im,a.re*b.im+a.im*b.re);
   const scale=(a,s)=>C(a.re*s,a.im*s);
   const div=(a,b)=>{const q=b.re*b.re+b.im*b.im||1e-30;return C((a.re*b.re+a.im*b.im)/q,(a.im*b.re-a.re*b.im)/q)};
@@ -13,7 +12,6 @@
   const abs2=z=>z.re*z.re+z.im*z.im;
   const abs=z=>Math.hypot(z.re,z.im);
   const arg=z=>Math.atan2(z.im,z.re);
-
   function angles(s){
     const t1=rad(s.angle),q2=s.n1/s.n2*Math.sin(t1),q3=s.n1/s.n3*Math.sin(t1);
     if(Math.abs(q2)>1||Math.abs(q3)>1)return{tir:true,t1};
@@ -105,11 +103,11 @@
     return{r:c(r),g:c(g),b:c(b),css:`rgb(${c(r)},${c(g)},${c(b)})`};
   }
   function spectrum(s,step=5){
-    const rows=[];let X=0,Y=0,Z=0,Xw=0,Yw=0,Zw=0,maxSPD=0;
+    const rows=[];let X=0,Y=0,Z=0,Yw=0,maxSPD=0;
     for(let w=380;w<=780;w+=step)maxSPD=Math.max(maxSPD,sourceSPD(s,w));
     for(let w=380;w<=780;w+=step){
       const q=solve(s,w),spd=sourceSPD(s,w)/maxSPD,c=cmf(w),p=spd*q.R;
-      X+=p*c.x;Y+=p*c.y;Z+=p*c.z;Xw+=spd*c.x;Yw+=spd*c.y;Zw+=spd*c.z;
+      X+=p*c.x;Y+=p*c.y;Z+=p*c.z;Yw+=spd*c.y;
       rows.push({w,R:q.R,T:q.T,A:q.A,Rs:solve({...s,pol:'s'},w).R,Rp:solve({...s,pol:'p'},w).R,spd});
     }
     const norm=Math.max(Yw,1e-12);return{rows,xyz:{X:X/norm,Y:Y/norm,Z:Z/norm},rgb:xyzToSrgb(X/norm,Y/norm,Z/norm)};
@@ -122,7 +120,7 @@
   function seeded(seed){let x=seed|0;return()=>{x=(1664525*x+1013904223)|0;return((x>>>0)/4294967296)}}
   function generateMeasurement(s,trueD,noise=0.01,seed=12345){
     const rand=seeded(seed),rows=[];
-    for(let w=420;w<=720;w+=5){const clean=solve(s={...s,d:trueD,mode:'real'},w).R;const u=Math.max(1e-12,rand()),v=Math.max(1e-12,rand());const z=Math.sqrt(-2*Math.log(u))*Math.cos(TAU*v);rows.push({w,clean,measured:clamp(clean+noise*z,0,1)})}
+    for(let w=420;w<=720;w+=5){const clean=solve({...s,d:trueD,mode:'real'},w).R;const u=Math.max(1e-12,rand()),v=Math.max(1e-12,rand());const z=Math.sqrt(-2*Math.log(u))*Math.cos(TAU*v);rows.push({w,clean,measured:clamp(clean+noise*z,0,1)})}
     return rows;
   }
   function fitThickness(s,rows,min=0,max=1500){
