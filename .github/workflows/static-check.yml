@@ -1,0 +1,33 @@
+name: Static checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check JavaScript syntax
+        run: |
+          find assets/js tools -type f \( -name '*.js' -o -name '*.cjs' \) -print0 | xargs -0 -n1 node --check
+      - name: Validate all model registrations and default computations
+        run: node tools/validate-models.cjs
+      - name: Verify entry files
+        run: |
+          test -f index.html
+          test -f assets/css/style.css
+          test -f assets/css/diffraction.css
+          grep -q 'category:diffraction' index.html
+          grep -q 'diffraction-advanced.js' index.html
