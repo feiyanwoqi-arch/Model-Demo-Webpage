@@ -30,13 +30,13 @@ jobs:
           done
           cat /tmp/model-demo-webpage.log
           exit 1
-      - name: Capture and assert responsive layouts
-        run: node tests/visual-audit-v011.mjs
+      - name: Capture and assert task scenarios
+        run: node tests/visual-audit-v012.mjs
       - name: Upload visual audit
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: thin-film-visual-audit-v011
-          path: visual-audit/
+          name: thin-film-visual-audit-v012
+          path: visual-audit-v012/
           if-no-files-found: error
           retention-days: 14
