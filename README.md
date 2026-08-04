@@ -1,103 +1,97 @@
 # 交互式光学模型图谱
 
-一个面向大学基础光学教学的交互式网页模型库。项目按**概念域 → 学习路径 → 具体模型**组织，而不是堆放彼此孤立的动画。
+一个面向大学基础光学教学的交互式网页模型库。项目按**概念域 → 学习路径 → 具体模型**组织，不把彼此孤立的动画堆在同一页面。
 
 ## 在线网站
 
-GitHub Pages 已配置为从 `main` 分支根目录自动发布：
+GitHub Pages 从 `main` 分支根目录自动发布：
 
 `https://feiyanwoqi-arch.github.io/Model-Demo-Webpage/`
 
-薄膜旗舰实验直达地址：
-
-`https://feiyanwoqi-arch.github.io/Model-Demo-Webpage/#model:thin-film`
-
-## 当前版本：v0.12
-
-### 三视图同屏因果闭环
-
-v0.12 修复了一个比“状态是否同步”更深的缺陷：用户选择两个分析模块后，主实验台、分析模块 A 和分析模块 B 必须能在同一个视觉瞬间被看见，否则拖动主光线仍然无法完成即时比较。
-
-当恰好选择两个分析模块时，页面进入 `triple` 模式：
+模型直达示例：
 
 ```text
-主实验台（左） | 分析模块 A（右上）
-                 | 分析模块 B（右下）
+#model:reflection-law
+#model:plane-mirror
+#model:spherical-mirror
+#model:thin-film
 ```
 
-- 两个分析模块继续占据完整分析列宽，避免被压成不可读缩略图；
-- 模块采用语义裁剪，只移除 Canvas 内重复标题、大块无信息留白和重复图注；
-- 不通过非等比压扁图形来换高度；
-- 已为装置、界面相位、相量、光谱、相图、测量和验证注册紧凑观察窗口；
-- 裁剪窗口建立后重新同步高清 Canvas backing store；
-- 选择 0、1、2、3–4 个模块时分别进入单视图、双视图、三视图和总览状态。
+## 当前版本：v0.13
 
-浏览器视觉审计现在不再只测父容器宽度，而是执行真实任务：选择“真实实验装置＋界面反射相位”，收起侧栏，定位到主实验区，并要求三张卡片在 2560×1440、1920×1080 以及用户反馈对应的 1735×865 视口中均至少 96% 可见。
+### 反射前三个基础模型工作台
 
-完整根因、调研依据和任务级验收标准见 [`docs/SIMULTANEOUS_VIEWPORT_V012.md`](docs/SIMULTANEOUS_VIEWPORT_V012.md)。
+v0.13 首次把薄膜旗舰多轮升级后形成的核心标准批量应用到：
+
+- **R1 反射定律与表面粗糙度**；
+- **R2 平面镜虚像**；
+- **R3 球面镜成像**。
+
+统一结构：
+
+```text
+紧凑研究问题与因果链
+
+主实验台                    同步分析区
+├── 直接拖动物理对象        ├── 分析模块 A
+├── 核心实时量              └── 分析模块 B
+└── 当前判据
+
+左侧边缘轨：模块选择
+右侧边缘轨：参数、预设和完整验证
+```
+
+核心变化：
+
+- 主实验台与两个已选模块必须在同一视口完成比较；
+- 同屏预算固定为两个分析模块，避免把几何图压成不可读缩略图；
+- 每个模型默认显示“局部机制＋可观测量”；
+- 模块可切换为“装置＋观测”或“公式＋验证”；
+- 左右间歇性控件改为可固定、可关闭、支持触屏的边缘抽屉；
+- 所有 Canvas 保持高 DPI 重绘和统一逻辑坐标；
+- 每个模块明确目的、作用与建议操作；
+- 每个模型加入随状态变化的验证与边界提示。
+
+物理升级：
+
+- R1 将“粗糙度”严格定性为**局部法线离散度的几何示意**，并增加观察方向、角分布和接收信号；
+- R2 修复旧版同一点眼睛连接任意两个镜面命中点的光路缺陷，改用有限瞳孔和镜像法严格构造反射路径，并加入有限镜面完整可见性；
+- R3 增加有效口径、精确球面法线反射束、球差焦散宽度、屏幕偏移和 F/2F 成像区域图。
+
+项目级核心标准见 [`docs/INTERACTIVE_MODEL_CONSTRUCTION_STANDARD_V1.md`](docs/INTERACTIVE_MODEL_CONSTRUCTION_STANDARD_V1.md)。
+
+本轮实现与验收说明见 [`docs/REFLECTION_FOUNDATIONS_V013.md`](docs/REFLECTION_FOUNDATIONS_V013.md)。
+
+### v0.12：薄膜三视图同屏因果闭环
+
+v0.12 修复“状态同步但观察不同步”的缺陷。当用户选择两个分析模块时，主实验台、模块 A 和模块 B 在同一个视觉瞬间可见，并在 2560×1440、1920×1080 和用户反馈对应的 1735×865 视口中执行任务级验收。
+
+完整说明见 [`docs/SIMULTANEOUS_VIEWPORT_V012.md`](docs/SIMULTANEOUS_VIEWPORT_V012.md)。
 
 ### v0.11：自适应可见性与边缘轨道
 
-v0.11 解决固定左右栏长期挤压主实验台的问题。页面元素不再按“位于左边还是右边”决定显示方式，而是按它是否参与当前物理分析闭环分类：
+将模块选择和完整参数栏改为可悬停、点击、固定、关闭并支持触屏的边缘抽屉。显示策略由任务性质决定，而不是由页面左右位置决定。
 
-```text
-常驻核心
-├── 主光路、波前、拖动把手
-├── 已选同步分析窗口
-├── 核心实时判据
-└── 紧凑的模式与时间控制
+完整规则见 [`docs/ADAPTIVE_VISIBILITY_POLICY_V011.md`](docs/ADAPTIVE_VISIBILITY_POLICY_V011.md)。
 
-边缘轨道
-├── 左侧分析模块选择器
-└── 右侧完整参数检查器
+### v0.10：可组合同步实验工作台
 
-按需展开
-├── 板块目的、作用和建议操作
-├── 公式解释
-└── 模型边界
-```
-
-- 左右完整侧栏默认收起，只保留可发现的窄轨；
-- 桌面细指针可悬停、聚焦或点击打开；
-- 打开延迟 140 ms，离开延迟 560 ms；
-- 操作滑块期间抽屉保持打开；
-- 两侧均可用图钉固定，固定状态保存到浏览器本地；
-- Escape、关闭按钮和移动端遮罩均可关闭抽屉；
-- 触屏不依赖 hover，而采用显式按钮和模态抽屉。
-
-完整判定规则见 [`docs/ADAPTIVE_VISIBILITY_POLICY_V011.md`](docs/ADAPTIVE_VISIBILITY_POLICY_V011.md)。
-
-### v0.10：可组合的同步实验工作台
-
-v0.10 建立可挂载同步分析模块：
-
-- 主光路、拖动把手和必要实时量始终保留；
-- 装置、相位、相量、光谱、相图、反演、公式和验证按需挂载；
-- 已选模块与主光路共享同一状态和时刻；
-- 推荐同时开启 1–2 个，最多开启 4 个；
-- 提供分析预设、放大和关闭能力。
+建立“主实验台常驻＋分析模块按需挂载＋统一状态同步”的基本结构。
 
 详细设计见 [`docs/SYNCHRONIZED_WORKBENCH_V010.md`](docs/SYNCHRONIZED_WORKBENCH_V010.md)。
 
-### v0.9：页面结构与学院士式审查
+### v0.9 / v0.8
 
-v0.9 建立模型页语义结构：板块目的、作用、建议操作、真实标题层级和模型边界。
-
-完整标准见 [`docs/MODEL_PAGE_ARCHITECTURE_V09.md`](docs/MODEL_PAGE_ARCHITECTURE_V09.md)。
-
-### v0.8：I4 单层薄膜干涉旗舰虚拟实验
-
-v0.8 建立完整薄膜实验物理内核：真实装置、可拖动几何、界面相位、多束相量、理想/现实模式、色度学、盲样测量、参数反演和物理回归测试。
-
-完整说明见 [`docs/THIN_FILM_FLAGSHIP_V08.md`](docs/THIN_FILM_FLAGSHIP_V08.md)。
+- v0.9：板块目的、作用、建议操作、语义标题和模型边界；
+- v0.8：单层薄膜精确多束、装置、光谱、反演和物理回归测试。
 
 ## 当前内容
 
 ### 01 反射
 
-- R1 反射定律与表面粗糙度
-- R2 平面镜虚像
-- R3 球面镜成像
+- **R1 反射定律与表面粗糙度（v0.13 同步工作台）**
+- **R2 平面镜虚像（v0.13 同步工作台）**
+- **R3 球面镜成像（v0.13 同步工作台）**
 - R4 菲涅耳反射与布儒斯特角
 - R5 全反射与倏逝场
 - R6 光导纤维中的全反射
@@ -130,12 +124,13 @@ v0.8 建立完整薄膜实验物理内核：真实装置、可拖动几何、界
 ## 当前统一建模逻辑
 
 ```text
-稳定的可操作物理对象
-→ 用户选择当前分析问题
-→ 挂载最相关的协调表示
-→ 连续直接操作
-→ 动作对象、原因和结果同屏
-→ 比较、归因与验证
+明确不可隐藏的物理本体
+→ 建立单一状态源
+→ 直接操控对象本身
+→ 按问题挂载互补表示
+→ 动作、原因和结果同屏
+→ 读取可观测量
+→ 检查公式、近似与边界
 ```
 
 ## 本地运行
@@ -157,49 +152,55 @@ node tests/canvas-hidpi-v092.test.js
 node tests/thin-film-workbench-v010.test.js
 node tests/adaptive-edge-rails-v011.test.js
 node tests/simultaneous-viewport-v012.test.js
+node tests/reflection-foundations-v013.test.js
 ```
 
-浏览器任务级视觉审计由 `.github/workflows/visual-audit.yml` 在 Pull Request 中自动运行。
+浏览器任务级视觉审计由 `.github/workflows/visual-audit.yml` 在 Pull Request 中自动运行：
+
+```text
+tests/visual-audit-v012.mjs
+tests/visual-audit-reflection-v013.mjs
+```
 
 ## 关键代码结构
 
 ```text
 assets/
 ├── css/
+│   ├── reflection-foundations-v013.css
 │   ├── thin-film-workbench-v010.css
 │   ├── adaptive-edge-rails-v011.css
-│   ├── visual-audit-fixes-v011.css
 │   └── simultaneous-viewport-v012.css
 └── js/
+    ├── reflection-foundations-v013.js
+    ├── reflection-foundations-v013-patch.js
     ├── canvas-hidpi-v092.js
     ├── thin-film-v08-physics.js
-    ├── thin-film-v08-ui.js
     ├── thin-film-workbench-v010.js
     ├── adaptive-edge-rails-v011.js
     └── simultaneous-viewport-v012.js
 
 tests/
+├── reflection-foundations-v013.test.js
+├── visual-audit-reflection-v013.mjs
 ├── thin-film-v08-physics.test.js
-├── canvas-hidpi-v092.test.js
-├── thin-film-workbench-v010.test.js
-├── adaptive-edge-rails-v011.test.js
 ├── simultaneous-viewport-v012.test.js
 └── visual-audit-v012.mjs
 
 docs/
+├── INTERACTIVE_MODEL_CONSTRUCTION_STANDARD_V1.md
+├── REFLECTION_FOUNDATIONS_V013.md
 ├── SIMULTANEOUS_VIEWPORT_V012.md
 ├── ADAPTIVE_VISIBILITY_POLICY_V011.md
-├── SYNCHRONIZED_WORKBENCH_V010.md
-├── MODEL_PAGE_ARCHITECTURE_V09.md
-└── THIN_FILM_FLAGSHIP_V08.md
+└── SYNCHRONIZED_WORKBENCH_V010.md
 ```
 
 ## 维护约定
 
-- GitHub 是项目主代码源；Google Drive 仅保留历史归档。
-- 新模型先定义不可隐藏的主实验台和“同屏因果集合”。
-- 侧栏显示策略必须由任务性质决定，禁止按页面位置机械套用。
-- 关键操作不得只藏在 hover 中。
-- 新模块必须说明目的、状态输入、可观测输出、协调关系和模型边界。
-- 修改交互方向、角度定义或坐标映射后必须实际拖动验收。
-- 旗舰模型修改必须通过物理不变量、页面结构、高清绘图、工作台合同和任务级浏览器视觉回归。
+- GitHub 是项目唯一主代码源；Google Drive 仅保留历史归档。
+- 新模型先完成模型合同，再写页面。
+- 新模块必须说明目的、作用、操作、输入、输出和边界。
+- 同屏数量必须由可读性预算决定。
+- 修改交互方向、坐标映射或布局后，必须执行真实指针和目标视口验收。
+- 物理公式、装置图、局部机制、可观测量和验证必须共享同一状态。
+- 任何近似必须同时拥有边界说明和至少一个运行时检查。
