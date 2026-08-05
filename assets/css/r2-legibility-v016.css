@@ -1,7 +1,8 @@
 /* R2 v0.16: legibility-first layout and typography */
 body:has(.rfw-page[data-model-id="plane-mirror"]){overflow-x:clip}
 .rfw-page[data-model-id="plane-mirror"]{
-  max-width:1880px;
+  width:100%;
+  max-width:2400px;
 }
 .rfw-page[data-model-id="plane-mirror"] .rfw-hero{
   grid-template-columns:minmax(0,1fr) minmax(390px,.52fr);
@@ -139,18 +140,31 @@ body:has(.rfw-page[data-model-id="plane-mirror"]){overflow-x:clip}
 
 @media(max-width:1500px){
   .app.r2-v015-active{padding-inline:28px!important}
+  .rfw-page[data-model-id="plane-mirror"] .rfw-board,
+  .rfw-page[data-model-id="plane-mirror"] .rfw-board[data-count="2"]{
+    grid-template-columns:minmax(0,1fr)!important;
+    gap:22px!important;
+  }
+  .rfw-page[data-model-id="plane-mirror"] .rfw-module{
+    min-height:520px!important;
+    grid-template-rows:auto auto minmax(390px,auto)!important;
+  }
+  .rfw-page[data-model-id="plane-mirror"] .rfw-module-canvas-wrap{min-height:390px!important}
+}
+@media(max-width:1500px) and (min-height:821px){
   .rfw-page[data-model-id="plane-mirror"] .rfw-primary-card{
     min-height:850px;
     grid-template-rows:auto auto minmax(680px,1fr) auto auto!important;
   }
   .rfw-page[data-model-id="plane-mirror"] .rfw-main-canvas-wrap{min-height:680px!important}
 }
-@media(max-width:1180px){
-  .rfw-page[data-model-id="plane-mirror"] .rfw-board,
-  .rfw-page[data-model-id="plane-mirror"] .rfw-board[data-count="2"]{
-    grid-template-columns:minmax(0,1fr)!important;
+@media(max-height:820px) and (min-width:761px){
+  .rfw-page[data-model-id="plane-mirror"] .rfw-primary-card{
+    min-height:790px;
+    grid-template-rows:auto auto minmax(635px,1fr) auto auto!important;
   }
-  .rfw-page[data-model-id="plane-mirror"] .rfw-module{min-height:470px!important}
+  .rfw-page[data-model-id="plane-mirror"] .rfw-main-canvas-wrap{min-height:635px!important;padding-block:6px}
+  .rfw-page[data-model-id="plane-mirror"] #rfwMainCanvas{width:min(100%,1040px)!important}
 }
 @media(max-width:760px){
   .app.r2-v015-active{padding-inline:9px!important}
