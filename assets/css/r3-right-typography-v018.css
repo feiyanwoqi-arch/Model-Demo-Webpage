@@ -1,0 +1,104 @@
+/* R3 v0.18.1: right analysis and parameter drawer readability repair */
+.rfw-page[data-model-id="spherical-mirror"] .rfw-analysis-head{min-height:76px;padding:9px 6px 11px}
+.rfw-page[data-model-id="spherical-mirror"] .rfw-analysis-head>div>span{font-size:12px;line-height:1.3;letter-spacing:.1em}
+.rfw-page[data-model-id="spherical-mirror"] .rfw-analysis-head h2{font-size:28px;line-height:1.18;margin:3px 0}
+.rfw-page[data-model-id="spherical-mirror"] .rfw-analysis-head p{font-size:15px;line-height:1.6;max-width:760px}
+.rfw-page[data-model-id="spherical-mirror"] .rfw-analysis-head output{font-size:13px;padding:7px 11px}
+
+.rfw-page[data-model-id="spherical-mirror"] .rfw-module-head{min-height:80px;padding:12px 15px;align-items:flex-start}
+.rfw-page[data-model-id="spherical-mirror"] .rfw-module-head>div>span{font-size:11px;line-height:1.3;letter-spacing:.1em}
+.rfw-page[data-model-id="spherical-mirror"] .rfw-module-head h3{font-size:22px;line-height:1.28;margin:3px 0 4px}
+.rfw-page[data-model-id="spherical-mirror"] .rfw-module-head p{font-size:14px;line-height:1.55;max-width:760px}
+.rfw-page[data-model-id="spherical-mirror"] .rfw-module-actions{gap:7px}
+.rfw-page[data-model-id="spherical-mirror"] .rfw-module-actions button{font-size:12px;padding:7px 10px}
+
+.rfw-page[data-model-id="spherical-mirror"] .rfw-module-guide summary{padding:9px 14px;font-size:14px;line-height:1.4}
+.rfw-page[data-model-id="spherical-mirror"] .rfw-module-guide>div{grid-template-columns:repeat(3,minmax(0,1fr))}
+.rfw-page[data-model-id="spherical-mirror"] .rfw-module-guide p{padding:10px 12px;font-size:13px;line-height:1.62}
+.rfw-page[data-model-id="spherical-mirror"] .rfw-module-guide b{font-size:12px;line-height:1.4;margin-bottom:4px}
+
+.rfw-page[data-model-id="spherical-mirror"] .rfw-module-html{padding:14px 15px 16px;background:#fbfdfc;overflow:auto}
+.rfw-page[data-model-id="spherical-mirror"] .rfw-derivation-list{gap:11px}
+.rfw-page[data-model-id="spherical-mirror"] .rfw-derivation-list article{
+  grid-template-columns:34px minmax(0,1fr);
+  gap:11px;
+  padding:12px 14px;
+  border-radius:12px;
+}
+.rfw-page[data-model-id="spherical-mirror"] .rfw-derivation-list article>i{
+  width:30px;
+  height:30px;
+  font-size:12px;
+}
+.rfw-page[data-model-id="spherical-mirror"] .rfw-derivation-list p{
+  margin:4px 0 0;
+  font-size:14px;
+  line-height:1.65;
+}
+.rfw-page[data-model-id="spherical-mirror"] .rfw-derivation-list mjx-container[display="true"]{
+  margin:.35em 0!important;
+  font-size:1.08em!important;
+}
+
+.rfw-page[data-model-id="spherical-mirror"] .rfw-checks{gap:10px}
+.rfw-page[data-model-id="spherical-mirror"] .rfw-checks article{padding:12px 13px;border-radius:12px}
+.rfw-page[data-model-id="spherical-mirror"] .rfw-checks span{font-size:13px;line-height:1.45}
+.rfw-page[data-model-id="spherical-mirror"] .rfw-checks b{font-size:17px;line-height:1.35;margin:5px 0}
+.rfw-page[data-model-id="spherical-mirror"] .rfw-checks p{font-size:14px;line-height:1.62}
+.rfw-page[data-model-id="spherical-mirror"] .rfw-boundary{margin-top:11px;padding:12px 13px;border-radius:12px}
+.rfw-page[data-model-id="spherical-mirror"] .rfw-boundary b{font-size:15px;line-height:1.4}
+.rfw-page[data-model-id="spherical-mirror"] .rfw-boundary p{margin-top:6px;font-size:14px;line-height:1.65}
+
+/* Right-side parameter/status drawer: every label, value and explanation must be readable. */
+.rfw-page[data-model-id="spherical-mirror"] .rfw-right-drawer{
+  width:min(420px,calc(100vw - 24px));
+  font-size:14px;
+}
+.rfw-page[data-model-id="spherical-mirror"] .rfw-right-drawer>header{padding:13px 14px}
+.rfw-page[data-model-id="spherical-mirror"] .rfw-right-drawer header span{font-size:12px;line-height:1.3}
+.rfw-page[data-model-id="spherical-mirror"] .rfw-right-drawer h2{font-size:27px;line-height:1.2;margin-top:4px}
+.rfw-page[data-model-id="spherical-mirror"] .rfw-right-drawer header button{font-size:12px;padding:7px 10px}
+.rfw-page[data-model-id="spherical-mirror"] .rfw-right-drawer .rfw-param-body{padding:14px 15px 16px}
+.rfw-page[data-model-id="spherical-mirror"] .rfw-right-drawer .rfw-reset{font-size:13px;padding:10px 12px;margin-bottom:13px}
+.rfw-page[data-model-id="spherical-mirror"] .rfw-right-drawer .rfw-controls{gap:14px}
+.rfw-page[data-model-id="spherical-mirror"] .rfw-right-drawer .rfw-control{gap:7px}
+.rfw-page[data-model-id="spherical-mirror"] .rfw-right-drawer .rfw-control>span{gap:14px;align-items:baseline}
+.rfw-page[data-model-id="spherical-mirror"] .rfw-right-drawer .rfw-control b{font-size:14px;line-height:1.45}
+.rfw-page[data-model-id="spherical-mirror"] .rfw-right-drawer .rfw-control output{font-size:13px;line-height:1.35}
+.rfw-page[data-model-id="spherical-mirror"] .rfw-right-drawer .rfw-control select{font-size:13px;line-height:1.4;padding:9px 10px}
+.rfw-page[data-model-id="spherical-mirror"] .rfw-right-drawer .rfw-control input{min-height:24px}
+.rfw-page[data-model-id="spherical-mirror"] .rfw-right-drawer .rfw-model-presets{gap:8px;margin:14px 0}
+.rfw-page[data-model-id="spherical-mirror"] .rfw-right-drawer .rfw-model-presets button{font-size:13px;line-height:1.35;padding:10px 9px}
+.rfw-page[data-model-id="spherical-mirror"] .rfw-right-drawer .rfw-full-metrics{gap:8px;padding-top:13px}
+.rfw-page[data-model-id="spherical-mirror"] .rfw-right-drawer .rfw-full-metrics article{padding:10px 11px;border-radius:11px}
+.rfw-page[data-model-id="spherical-mirror"] .rfw-right-drawer .rfw-full-metrics span{font-size:13px;line-height:1.45}
+.rfw-page[data-model-id="spherical-mirror"] .rfw-right-drawer .rfw-full-metrics b{font-size:16px;line-height:1.35;margin-top:5px}
+.rfw-page[data-model-id="spherical-mirror"] .rfw-right-drawer .rfw-status{font-size:14px;line-height:1.65;padding:11px 12px;margin-top:13px}
+
+@media(min-width:1100px) and (max-width:1879px){
+  .rfw-page[data-model-id="spherical-mirror"]:has(.rfw-right-drawer.is-open)>.rfw-hero,
+  .rfw-page[data-model-id="spherical-mirror"]:has(.rfw-right-drawer.is-open)>.rfw-workspace{margin-right:430px}
+}
+
+@media(min-width:1880px){
+  .rfw-page[data-model-id="spherical-mirror"] .rfw-workspace{
+    grid-template-columns:minmax(0,1fr) minmax(650px,.58fr)!important;
+    gap:18px!important;
+  }
+  .rfw-page[data-model-id="spherical-mirror"] .rfw-module-head{min-height:74px;padding:10px 13px}
+  .rfw-page[data-model-id="spherical-mirror"] .rfw-module-head h3{font-size:21px}
+  .rfw-page[data-model-id="spherical-mirror"] .rfw-module-head p{font-size:13px;line-height:1.5}
+  .rfw-page[data-model-id="spherical-mirror"] .rfw-module-guide summary{padding:7px 12px;font-size:13px}
+  .rfw-page[data-model-id="spherical-mirror"] .rfw-module-guide p{padding:8px 10px;font-size:12.5px}
+  .rfw-page[data-model-id="spherical-mirror"] .rfw-module-html{padding:10px 12px 12px}
+  .rfw-page[data-model-id="spherical-mirror"] .rfw-derivation-list{gap:8px}
+  .rfw-page[data-model-id="spherical-mirror"] .rfw-derivation-list article{padding:9px 11px}
+  .rfw-page[data-model-id="spherical-mirror"] .rfw-checks article{padding:10px 11px}
+  .rfw-page[data-model-id="spherical-mirror"] .rfw-boundary{margin-top:8px;padding:10px 11px}
+}
+
+@media(max-width:760px){
+  .rfw-page[data-model-id="spherical-mirror"] .rfw-checks{grid-template-columns:1fr}
+  .rfw-page[data-model-id="spherical-mirror"] .rfw-module-guide>div{grid-template-columns:1fr}
+  .rfw-page[data-model-id="spherical-mirror"] .rfw-module-guide p+p{border-left:0;border-top:1px solid #e2ecea}
+}
