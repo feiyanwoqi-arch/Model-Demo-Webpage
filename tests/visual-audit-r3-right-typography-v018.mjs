@@ -76,12 +76,12 @@ for(const [width,height] of viewports){
     await page.waitForSelector('.rfw-analysis-column',{timeout:10000});
     await page.waitForTimeout(900);
 
-    await page.locator('.rfw-left-handle').click({force:true});
+    await page.locator('.rfw-left-handle').evaluate(node=>node.click());
     await page.waitForSelector('.rfw-left-drawer.is-open',{timeout:10000});
-    await page.locator('.rfw-left-drawer [data-rfw-preset="proof"]').click({force:true});
+    await page.locator('.rfw-left-drawer [data-rfw-preset="proof"]').evaluate(node=>node.click());
     await page.waitForSelector('.rfw-derivation-list',{timeout:10000});
     await page.waitForSelector('.rfw-checks',{timeout:10000});
-    await page.locator('.rfw-left-drawer [data-rfw-close]').click({force:true});
+    await page.locator('.rfw-left-drawer [data-rfw-close]').evaluate(node=>node.click());
     await page.waitForTimeout(500);
 
     await page.locator('.rfw-analysis-column').evaluate(node=>node.scrollIntoView({block:'center',inline:'nearest',behavior:'instant'}));
@@ -95,7 +95,7 @@ for(const [width,height] of viewports){
     for(const item of record.analysisLeafFailures)record.failures.push(`analysis leaf ${item.size}px < 11.5px: ${item.text}`);
     await page.screenshot({path:`${outDir}/r3-${width}x${height}-06-analysis-typography.png`,fullPage:false});
 
-    await page.locator('.rfw-right-handle').click({force:true});
+    await page.locator('.rfw-right-handle').evaluate(node=>node.click());
     await page.waitForSelector('.rfw-right-drawer.is-open',{timeout:10000});
     await page.waitForTimeout(350);
     record.drawer=await auditRules(page,drawerRules);
