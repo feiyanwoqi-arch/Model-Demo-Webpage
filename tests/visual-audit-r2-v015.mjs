@@ -48,6 +48,29 @@ async function focusWorkspace(page) {
   await page.waitForTimeout(350);
 }
 
+async function canvasInkRatio(locator) {
+  return locator.evaluate(canvas => {
+    const ctx = canvas.getContext('2d');
+    if (!ctx || !canvas.width || !canvas.height) return 0;
+    const data = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+    const step = Math.max(6, Math.round(Math.min(canvas.width, canvas.height) / 70));
+    let ink = 0;
+    let total = 0;
+    for (let y = 0; y < canvas.height; y += step) {
+      for (let x = 0; x < canvas.width; x += step) {
+        const index = (y * canvas.width + x) * 4;
+        const r = data[index];
+        const g = data[index + 1];
+        const b = data[index + 2];
+        const a = data[index + 3];
+        total += 1;
+        if (a > 12 && !(r > 246 && g > 246 && b > 246)) ink += 1;
+      }
+    }
+    return total ? ink / total : 0;
+  });
+}
+
 async function layoutSnapshot(page, width, height) {
   const selectors = {
     page: '.rfw-page[data-model-id="plane-mirror"]',
@@ -77,14 +100,11 @@ async function layoutSnapshot(page, width, height) {
       };
     };
     return {
-      app: inspect('.app'),
-      view: inspect('#view'),
       moduleTitle: inspect('.rfw-module-head h3'),
       liveValue: inspect('.rfw-live-strip b'),
       leftHandle: inspect('.rfw-left-handle'),
       rightHandle: inspect('.rfw-right-handle'),
-      documentOverflow: document.documentElement.scrollWidth - document.documentElement.clientWidth,
-      bodyText: document.body.innerText
+      documentOverflow: document.documentElement.scrollWidth - document.documentElement.clientWidth
     };
   });
   const fractions = Object.fromEntries(Object.entries(boxes).map(([key, box]) => [key, visibleFraction(box, width, height)]));
@@ -122,9 +142,11 @@ function validateLayout(record, snapshot) {
 
 async function audit(width, height) {
   const record = {
-    width, height, widthUsage: null,
+    width, height, widthUsage: null, initialInkRatio: null,
     before: {}, afterObject: {}, afterEye: {},
     partialStatus: '', fullStatus: '',
+    rightDrawerBox: null, rightDrawerVisibleFraction: null,
+    leftDrawerBox: null, leftDrawerVisibleFraction: null,
     initial: null, final: null,
     errors: [], assertions: []
   };
@@ -135,21 +157,24 @@ async function audit(width, height) {
   try {
     await page.goto('http://127.0.0.1:8000/#model:plane-mirror', { waitUntil: 'networkidle' });
     await page.waitForSelector('.rfw-page[data-model-id="plane-mirror"] .rfw-primary-card', { timeout: 20000 });
-    await page.waitForTimeout(900);
+    await page.waitForTimeout(1300);
     await focusWorkspace(page);
+    await page.waitForTimeout(850);
 
+    const canvas = page.locator('#rfwMainCanvas');
+    record.initialInkRatio = await canvasInkRatio(canvas);
+    if (record.initialInkRatio < .002) record.assertions.push(`initial main canvas appears blank: ink ratio ${record.initialInkRatio.toFixed(5)}`);
     record.initial = await layoutSnapshot(page, width, height);
     validateLayout(record, record.initial);
     await page.screenshot({ path: `${outDir}/r2-${width}x${height}-01-initial.png`, fullPage: false });
 
-    const canvas = page.locator('#rfwMainCanvas');
     record.before = {
       distance: await page.locator('[data-rfw-output="distance"]').textContent(),
       height: await page.locator('[data-rfw-output="height"]').textContent(),
       observerY: await page.locator('[data-rfw-output="observerY"]').textContent()
     };
     await dragLogical(page, canvas, { x: 330, y: 395 }, { x: 280, y: 350 });
-    await page.waitForTimeout(450);
+    await page.waitForTimeout(500);
     record.afterObject = {
       distance: await page.locator('[data-rfw-output="distance"]').textContent(),
       height: await page.locator('[data-rfw-output="height"]').textContent(),
@@ -160,7 +185,7 @@ async function audit(width, height) {
     await page.screenshot({ path: `${outDir}/r2-${width}x${height}-02-object-dragged.png`, fullPage: false });
 
     await dragLogical(page, canvas, { x: 145, y: 430 }, { x: 145, y: 270 });
-    await page.waitForTimeout(450);
+    await page.waitForTimeout(500);
     record.afterEye = {
       distance: await page.locator('[data-rfw-output="distance"]').textContent(),
       height: await page.locator('[data-rfw-output="height"]').textContent(),
@@ -172,27 +197,33 @@ async function audit(width, height) {
 
     await page.locator('.rfw-right-handle').click();
     await page.waitForSelector('.rfw-right-drawer.is-open');
+    await page.waitForTimeout(260);
+    record.rightDrawerBox = await page.locator('.rfw-right-drawer').boundingBox();
+    record.rightDrawerVisibleFraction = visibleFraction(record.rightDrawerBox, width, height);
+    if (!record.rightDrawerBox || record.rightDrawerVisibleFraction < .98) record.assertions.push(`parameter drawer clipped: ${record.rightDrawerVisibleFraction.toFixed(3)}`);
     await setRange(page, '.rfw-right-drawer [data-rfw-param="mirrorHeight"]', 80);
-    await page.waitForTimeout(400);
+    await page.waitForTimeout(450);
     record.partialStatus = await page.locator('.rfw-status').textContent();
     if (!/不能看到完整物体|部分/.test(record.partialStatus || '')) record.assertions.push(`short mirror status not partial: ${record.partialStatus}`);
     await page.screenshot({ path: `${outDir}/r2-${width}x${height}-04-short-mirror-drawer.png`, fullPage: false });
 
     await setRange(page, '.rfw-right-drawer [data-rfw-param="mirrorHeight"]', 500);
-    await page.waitForTimeout(400);
+    await page.waitForTimeout(450);
     record.fullStatus = await page.locator('.rfw-status').textContent();
     if (!/覆盖了|完整/.test(record.fullStatus || '')) record.assertions.push(`tall mirror status not full: ${record.fullStatus}`);
     await page.locator('.rfw-right-drawer [data-rfw-close]').click();
-    await page.waitForTimeout(250);
+    await page.waitForTimeout(260);
     await page.screenshot({ path: `${outDir}/r2-${width}x${height}-05-full-visible.png`, fullPage: false });
 
     await page.locator('.rfw-left-handle').click();
     await page.waitForSelector('.rfw-left-drawer.is-open');
-    const leftDrawer = await page.locator('.rfw-left-drawer').boundingBox();
-    if (!leftDrawer || visibleFraction(leftDrawer, width, height) < .98) record.assertions.push('module drawer clipped');
+    await page.waitForTimeout(260);
+    record.leftDrawerBox = await page.locator('.rfw-left-drawer').boundingBox();
+    record.leftDrawerVisibleFraction = visibleFraction(record.leftDrawerBox, width, height);
+    if (!record.leftDrawerBox || record.leftDrawerVisibleFraction < .98) record.assertions.push(`module drawer clipped: ${record.leftDrawerVisibleFraction.toFixed(3)}`);
     await page.screenshot({ path: `${outDir}/r2-${width}x${height}-06-modules-open.png`, fullPage: false });
     await page.locator('.rfw-left-drawer [data-rfw-close]').click();
-    await page.waitForTimeout(220);
+    await page.waitForTimeout(260);
 
     record.final = await layoutSnapshot(page, width, height);
     validateLayout(record, record.final);
