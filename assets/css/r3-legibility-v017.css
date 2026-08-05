@@ -1,6 +1,7 @@
 /* R3 v0.17: finite-ray spherical-mirror workbench */
 body:has(.rfw-page[data-model-id="spherical-mirror"]){overflow-x:clip}
-.rfw-page[data-model-id="spherical-mirror"]{width:100%;max-width:2400px}
+.app.r3-v017-active{width:100vw!important;max-width:none!important;margin:0!important;padding:16px 80px 48px!important}
+.rfw-page[data-model-id="spherical-mirror"]{width:100%;max-width:2400px;margin-inline:auto}
 .rfw-page[data-model-id="spherical-mirror"] .rfw-hero{grid-template-columns:minmax(0,1fr) minmax(390px,.52fr);gap:28px;padding-block:12px 18px}
 .rfw-page[data-model-id="spherical-mirror"] .rfw-hero h1{font-size:clamp(36px,2.5vw,50px)}
 .rfw-page[data-model-id="spherical-mirror"] .rfw-hero p{font-size:16px;line-height:1.6}
@@ -38,7 +39,7 @@ body:has(.rfw-page[data-model-id="spherical-mirror"]){overflow-x:clip}
 .rfw-page[data-model-id="spherical-mirror"] .rfw-edge-handle span{font-size:12px}
 .rfw-page[data-model-id="spherical-mirror"] .rfw-drawer{font-size:14px}
 .rfw-page[data-model-id="spherical-mirror"] .rfw-drawer h2{font-size:27px}
-@media(min-width:761px){.app.r3-v017-active{padding-inline:80px!important}.rfw-page[data-model-id="spherical-mirror"] .rfw-left-handle{left:8px}.rfw-page[data-model-id="spherical-mirror"] .rfw-right-handle{right:8px}}
+@media(min-width:761px){.rfw-page[data-model-id="spherical-mirror"] .rfw-left-handle{left:8px}.rfw-page[data-model-id="spherical-mirror"] .rfw-right-handle{right:8px}}
 @media(max-width:1500px){.app.r3-v017-active{padding-inline:28px!important}.rfw-page[data-model-id="spherical-mirror"] .rfw-board,.rfw-page[data-model-id="spherical-mirror"] .rfw-board[data-count="2"]{grid-template-columns:minmax(0,1fr)!important;gap:22px!important}.rfw-page[data-model-id="spherical-mirror"] .rfw-module{min-height:520px!important;grid-template-rows:auto auto minmax(390px,auto)!important}.rfw-page[data-model-id="spherical-mirror"] .rfw-module-canvas-wrap{min-height:390px!important}}
 @media(max-height:820px) and (min-width:761px){.rfw-page[data-model-id="spherical-mirror"] .rfw-primary-card{min-height:790px;grid-template-rows:auto auto minmax(635px,1fr) auto auto!important}.rfw-page[data-model-id="spherical-mirror"] .rfw-main-canvas-wrap{min-height:635px!important;padding-block:6px}.rfw-page[data-model-id="spherical-mirror"] #rfwMainCanvas{width:min(100%,1040px)!important}}
 @media(max-width:760px){.app.r3-v017-active{padding-inline:9px!important}.rfw-page[data-model-id="spherical-mirror"] .rfw-hero{grid-template-columns:1fr}}
