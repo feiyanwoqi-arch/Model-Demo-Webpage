@@ -3,9 +3,13 @@ name: R3 live visual evidence
 on:
   push:
     branches: [main]
-    paths-ignore:
-      - 'docs/live-evidence/r3-v017/**'
-      - 'audit/latest-visual-run.json'
+    paths:
+      - 'index.html'
+      - 'assets/js/r3-*.js'
+      - 'assets/css/r3-*.css'
+      - 'tests/r3-*.js'
+      - 'tests/visual-audit-r3-*.mjs'
+      - '.github/workflows/r3-live-audit-v017.yml'
   workflow_dispatch:
 
 permissions:
