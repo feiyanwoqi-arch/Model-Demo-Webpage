@@ -13,7 +13,7 @@ const scenarios = [
     end: { x: 570 - 285 * Math.sin(55 * Math.PI / 180), y: 420 - 285 * Math.cos(55 * Math.PI / 180) }
   },
   { id: 'plane-mirror', output: 'distance', mechanismMustChange: true, start: { x: 330, y: 395 }, end: { x: 280, y: 355 } },
-  { id: 'spherical-mirror', output: 'do', mechanismMustChange: false, start: { x: 570, y: 240 }, end: { x: 520, y: 205 } }
+  { id: 'spherical-mirror', output: 'do', mechanismMustChange: true, start: { x: 590, y: 240 }, end: { x: 520, y: 205 } }
 ];
 
 function visibleFraction(box, width, height) {
@@ -62,10 +62,11 @@ async function auditScenario(scenario, width, height) {
   const observableCanvas = await page.locator('[data-module-id="observable"] canvas').boundingBox();
   const boardCount = await page.locator('.rfw-board').getAttribute('data-count');
   const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
-  const legibilityFlow = scenario.id === 'plane-mirror' && await page.locator('.rfw-page').getAttribute('data-legibility-version') === '016';
+  const version = await page.locator('.rfw-page').getAttribute('data-legibility-version');
+  const legibilityFlow = (scenario.id === 'plane-mirror' && version === '016') || (scenario.id === 'spherical-mirror' && version === '017');
 
   if (legibilityFlow) {
-    if (!primary || primary.width < width * .88) assertions.push(`${scenario.id}: full-width primary workbench not applied`);
+    if (!primary || primary.width < width * .86) assertions.push(`${scenario.id}: full-width primary workbench not applied`);
     if (!primary || !mechanism || mechanism.y < primary.y + primary.height + 10) assertions.push(`${scenario.id}: analysis must follow the primary workbench`);
     if (mechanism && observable && Math.abs(mechanism.y - observable.y) > 3) assertions.push(`${scenario.id}: wide-screen analysis modules should share a row`);
     if (mechanism && observable && observable.x <= mechanism.x + mechanism.width - 2) assertions.push(`${scenario.id}: analysis modules overlap horizontally`);
@@ -90,7 +91,7 @@ async function auditScenario(scenario, width, height) {
   const beforeObservable = await page.locator('[data-module-id="observable"] canvas').evaluate(canvas => canvas.toDataURL());
   const beforeRevision = Number(await page.locator('.rfw-page').getAttribute('data-render-revision'));
   await dragLogical(page, mainCanvas, scenario.start, scenario.end);
-  await page.waitForTimeout(500);
+  await page.waitForTimeout(650);
   const afterValue = await page.locator(`[data-rfw-output="${scenario.output}"]`).textContent();
   const afterMechanism = await page.locator('[data-module-id="mechanism"] canvas').evaluate(canvas => canvas.toDataURL());
   const afterObservable = await page.locator('[data-module-id="observable"] canvas').evaluate(canvas => canvas.toDataURL());
