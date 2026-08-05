@@ -14,7 +14,7 @@
     pending = setTimeout(() => {
       syncViewClass();
       const root = document.querySelector('.rfw-page[data-model-id="spherical-mirror"]');
-      if (!root || root.dataset.legibilityVersion === '017') return;
+      if (!root || root.dataset.legibilityVersion === '018') return;
       if (typeof window.renderModel === 'function') window.renderModel('spherical-mirror');
       requestAnimationFrame(syncViewClass);
     }, 30);
@@ -23,5 +23,5 @@
   window.addEventListener('hashchange', ensureMounted);
   if (view) new MutationObserver(ensureMounted).observe(view, { childList:true });
   ensureMounted();
-  window.R3RuntimeMountV017 = { ensureMounted, syncViewClass };
+  window.R3RuntimeMountV017 = { version:'0.18.0', ensureMounted, syncViewClass };
 })();
