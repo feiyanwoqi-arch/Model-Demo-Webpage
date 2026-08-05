@@ -30,13 +30,18 @@
 
   function enforceLayout() {
     const app = document.querySelector('.app.r3-v017-active');
-    if (!app) return;
+    const page = app?.querySelector('.rfw-page[data-model-id="spherical-mirror"]');
+    if (!app || !page) return;
     const padding = window.innerWidth <= 1500 ? '28px' : '80px';
     app.style.setProperty('width', '100vw', 'important');
     app.style.setProperty('max-width', 'none', 'important');
     app.style.setProperty('margin', '0', 'important');
     app.style.setProperty('padding-left', padding, 'important');
     app.style.setProperty('padding-right', padding, 'important');
+    page.style.setProperty('width', '100%', 'important');
+    page.style.setProperty('max-width', '2400px', 'important');
+    page.style.setProperty('margin-left', 'auto', 'important');
+    page.style.setProperty('margin-right', 'auto', 'important');
   }
 
   function bind(canvas) {
@@ -107,5 +112,5 @@
   window.addEventListener('resize', enforceLayout, { passive: true });
   scan();
 
-  window.R3DirectDragV017 = { version: '0.17.1', scan, enforceLayout };
+  window.R3DirectDragV017 = { version: '0.17.2', scan, enforceLayout };
 })();
