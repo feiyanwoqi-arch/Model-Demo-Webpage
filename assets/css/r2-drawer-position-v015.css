@@ -1,7 +1,14 @@
-/* R2 fixed-drawer viewport compensation v0.15
+/* R2 fixed-drawer viewport compensation and content-fit sizing v0.15
    The workbench app uses horizontal padding while the drawer is nested inside it.
-   Compensate that containing-block offset so the open drawer begins 12px from
-   the real viewport edge rather than being clipped by the app padding. */
+   Compensate that containing-block offset so the open drawer begins near the
+   real viewport edge rather than being clipped by the app padding. */
+.rfw-page[data-model-id="plane-mirror"] .rfw-drawer{
+  bottom:auto!important;
+  height:auto!important;
+  max-height:calc(100dvh - 24px)!important;
+  overflow:auto;
+}
+
 @media(min-width:1451px){
   .rfw-page[data-model-id="plane-mirror"] .rfw-left-drawer{
     left:calc(clamp(34px,3vw,72px) + 12px)!important;
