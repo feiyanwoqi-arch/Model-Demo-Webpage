@@ -38,6 +38,7 @@ jobs:
           target="docs/live-evidence/r2-v018"
           mkdir -p "$target"
           cp live-pages-r2-v018/metrics.json "$target/metrics.json"
+          cp live-pages-r2-v018/r2-live-1790x896-wide-compare.png "$target/wide-compare.png"
           cp live-pages-r2-v018/r2-live-1790x896-wide-formula.png "$target/wide-formula.png"
           cat > "$target/README.md" <<'EOF'
           # R2 v0.18 公网宽屏与公式验收证据
@@ -45,7 +46,8 @@ jobs:
           本目录由 `Live Pages audit` 在真实 GitHub Pages 公网页面验收成功后自动更新。
 
           - `metrics.json`：1790×896 公网左右布局、MathJax 实际字号、安全边界与真实拖动指标；
-          - `wide-formula.png`：1790×896 公网原尺寸截图。
+          - `wide-compare.png`：默认同步对照状态原尺寸截图；
+          - `wide-formula.png`：公式推导状态原尺寸截图。
 
           若公网验收失败，本目录不会被更新。
           EOF
