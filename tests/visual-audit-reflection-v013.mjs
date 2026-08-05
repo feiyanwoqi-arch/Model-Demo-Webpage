@@ -62,14 +62,22 @@ async function auditScenario(scenario, width, height) {
   const observableCanvas = await page.locator('[data-module-id="observable"] canvas').boundingBox();
   const boardCount = await page.locator('.rfw-board').getAttribute('data-count');
   const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
+  const legibilityFlow = scenario.id === 'plane-mirror' && await page.locator('.rfw-page').getAttribute('data-legibility-version') === '016';
 
-  for (const [name, box] of Object.entries({ primary, mechanism, observable })) {
-    const fraction = visibleFraction(box, width, height);
-    if (fraction < .90) assertions.push(`${scenario.id}: ${name} visible fraction ${fraction.toFixed(3)} at ${width}x${height}`);
+  if (legibilityFlow) {
+    if (!primary || primary.width < width * .88) assertions.push(`${scenario.id}: full-width primary workbench not applied`);
+    if (!primary || !mechanism || mechanism.y < primary.y + primary.height + 10) assertions.push(`${scenario.id}: analysis must follow the primary workbench`);
+    if (mechanism && observable && Math.abs(mechanism.y - observable.y) > 3) assertions.push(`${scenario.id}: wide-screen analysis modules should share a row`);
+    if (mechanism && observable && observable.x <= mechanism.x + mechanism.width - 2) assertions.push(`${scenario.id}: analysis modules overlap horizontally`);
+  } else {
+    for (const [name, box] of Object.entries({ primary, mechanism, observable })) {
+      const fraction = visibleFraction(box, width, height);
+      if (fraction < .90) assertions.push(`${scenario.id}: ${name} visible fraction ${fraction.toFixed(3)} at ${width}x${height}`);
+    }
+    if (mechanism && observable && observable.y <= mechanism.y + mechanism.height - 2) assertions.push(`${scenario.id}: analysis modules overlap`);
+    if (mechanism && observable && Math.abs(mechanism.x - observable.x) > 3) assertions.push(`${scenario.id}: analysis modules must share a readable column`);
   }
   if (boardCount !== '2') assertions.push(`${scenario.id}: expected two active modules, got ${boardCount}`);
-  if (mechanism && observable && observable.y <= mechanism.y + mechanism.height - 2) assertions.push(`${scenario.id}: analysis modules overlap`);
-  if (mechanism && observable && Math.abs(mechanism.x - observable.x) > 3) assertions.push(`${scenario.id}: analysis modules must share a readable column`);
   if (mechanismCanvas && mechanismCanvas.width < 500) assertions.push(`${scenario.id}: mechanism canvas too narrow ${mechanismCanvas.width}`);
   if (observableCanvas && observableCanvas.width < 500) assertions.push(`${scenario.id}: observable canvas too narrow ${observableCanvas.width}`);
   if (mechanismCanvas && mechanismCanvas.height < 150) assertions.push(`${scenario.id}: mechanism canvas too short ${mechanismCanvas.height}`);
@@ -92,7 +100,6 @@ async function auditScenario(scenario, width, height) {
   if (afterObservable === beforeObservable) assertions.push(`${scenario.id}: selected observable module did not redraw after direct drag`);
   if (scenario.mechanismMustChange && afterMechanism === beforeMechanism) assertions.push(`${scenario.id}: related mechanism module did not redraw from the changed state`);
 
-  // Capture the clean task state before opening either overlay drawer.
   await page.screenshot({ path: `${outDir}/${scenario.id}-${width}x${height}.png`, fullPage: false });
 
   await page.locator('.rfw-left-handle').click();
@@ -114,7 +121,7 @@ async function auditScenario(scenario, width, height) {
   await page.waitForTimeout(240);
 
   results.push({
-    scenario: scenario.id, width, height, primary, mechanism, observable, mechanismCanvas, observableCanvas,
+    scenario: scenario.id, width, height, legibilityFlow, primary, mechanism, observable, mechanismCanvas, observableCanvas,
     boardCount, overflow, beforeValue, afterValue, beforeRevision, afterRevision,
     mechanismChanged: beforeMechanism !== afterMechanism, observableChanged: beforeObservable !== afterObservable,
     errors, assertions
