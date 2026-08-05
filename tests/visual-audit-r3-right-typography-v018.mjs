@@ -11,7 +11,7 @@ const analysisRules = [
   ['.rfw-analysis-head h2',24,'analysis heading'],
   ['.rfw-analysis-head p',14,'analysis description'],
   ['.rfw-analysis-head output',12,'analysis counter'],
-  ['.rfw-module-head>div>span',11,'module eyebrow'],
+  ['.rfw-module-head>div>span',11.5,'module eyebrow'],
   ['.rfw-module-head h3',20,'module title'],
   ['.rfw-module-head p',13,'module subtitle'],
   ['.rfw-module-actions button',11,'module action'],
@@ -75,6 +75,14 @@ for(const [width,height] of viewports){
     await page.waitForSelector('.rfw-page[data-model-id="spherical-mirror"][data-legibility-version="018"]',{timeout:20000});
     await page.waitForSelector('.rfw-analysis-column',{timeout:10000});
     await page.waitForTimeout(900);
+
+    await page.locator('.rfw-left-handle').click({force:true});
+    await page.waitForSelector('.rfw-left-drawer.is-open',{timeout:10000});
+    await page.locator('.rfw-left-drawer [data-rfw-preset="proof"]').click({force:true});
+    await page.waitForSelector('.rfw-derivation-list',{timeout:10000});
+    await page.waitForSelector('.rfw-checks',{timeout:10000});
+    await page.locator('.rfw-left-drawer [data-rfw-close]').click({force:true});
+    await page.waitForTimeout(500);
 
     await page.locator('.rfw-analysis-column').evaluate(node=>node.scrollIntoView({block:'center',inline:'nearest',behavior:'instant'}));
     await page.waitForTimeout(300);
