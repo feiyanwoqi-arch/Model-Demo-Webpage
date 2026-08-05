@@ -14,7 +14,7 @@ const requiredResources=[
 await fs.mkdir(outDir,{recursive:true});
 const browser=await chromium.launch({headless:true});
 const page=await browser.newPage({viewport:{width:1735,height:865},deviceScaleFactor:1});
-const result={url:null,attempts:0,httpStatus:null,errors:[],assertions:[],resources:{},layout:null,textMetrics:null,drag:null,sections:{},drawer:null};
+const result={url:null,attempts:0,httpStatus:null,errors:[],assertions:[],resources:{},layout:null,textMetrics:null,drag:{before:null,after:null},sections:{},drawer:null};
 page.on('console',m=>{if(m.type()==='error')result.errors.push(`console: ${m.text()}`)});
 page.on('pageerror',e=>result.errors.push(`page: ${e.message}`));
 
