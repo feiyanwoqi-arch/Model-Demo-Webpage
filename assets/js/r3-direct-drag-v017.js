@@ -2,6 +2,7 @@
 (() => {
   if (window.R3DirectDragV017) return;
 
+  const GEOMETRY = { mirrorX:820, axisY:360 };
   const clampValue = (value, min, max) => Math.max(min, Math.min(max, value));
   let activeCanvas = null;
   let dragging = false;
@@ -28,33 +29,17 @@
     control.dispatchEvent(new Event('input', { bubbles: true }));
   }
 
-  function enforceLayout() {
-    const app = document.querySelector('.app.r3-v017-active');
-    const page = app?.querySelector('.rfw-page[data-model-id="spherical-mirror"]');
-    if (!app || !page) return;
-    const padding = window.innerWidth <= 1500 ? '28px' : '80px';
-    app.style.setProperty('width', '100vw', 'important');
-    app.style.setProperty('max-width', 'none', 'important');
-    app.style.setProperty('margin', '0', 'important');
-    app.style.setProperty('padding-left', padding, 'important');
-    app.style.setProperty('padding-right', padding, 'important');
-    page.style.setProperty('width', '100%', 'important');
-    page.style.setProperty('max-width', '2400px', 'important');
-    page.style.setProperty('margin-left', 'auto', 'important');
-    page.style.setProperty('margin-right', 'auto', 'important');
-  }
-
   function bind(canvas) {
-    if (!canvas || canvas.dataset.r3DirectDrag === '017') return;
-    canvas.dataset.r3DirectDrag = '017';
+    if (!canvas || canvas.dataset.r3DirectDrag === '018') return;
+    canvas.dataset.r3DirectDrag = '018';
 
     canvas.addEventListener('pointerdown', event => {
       const { distance, height } = controls(canvas);
       if (!distance || !height) return;
       const point = logicalPoint(canvas, event);
-      const objectX = 850 - Number(distance.value);
-      const objectY = 350 - Number(height.value);
-      if (Math.hypot(point.x - objectX, point.y - objectY) > 34) return;
+      const objectX = GEOMETRY.mirrorX - Number(distance.value);
+      const objectY = GEOMETRY.axisY - Number(height.value);
+      if (Math.hypot(point.x - objectX, point.y - objectY) > 32) return;
 
       dragging = true;
       pointerId = event.pointerId;
@@ -69,12 +54,9 @@
       const current = controls(canvas);
       if (!current.distance || !current.height || !current.root) return;
       const point = logicalPoint(canvas, event);
-      const nextDistance = Math.round(clampValue(850 - point.x, 70, 520));
-      const nextHeight = Math.round(clampValue(350 - point.y, 50, 150));
+      const nextDistance = Math.round(clampValue(GEOMETRY.mirrorX - point.x, 70, 520));
+      const nextHeight = Math.round(clampValue(GEOMETRY.axisY - point.y, 50, 150));
 
-      // Each input event synchronizes every control from the internal state.
-      // Re-query the second control after the first update so both dimensions
-      // are committed atomically instead of the first update restoring it.
       current.distance.value = String(nextDistance);
       emit(current.distance);
       const refreshedHeight = current.root.querySelector('[data-rfw-param="height"]');
@@ -102,15 +84,13 @@
   }
 
   function scan() {
-    enforceLayout();
     bind(document.querySelector('.rfw-page[data-model-id="spherical-mirror"] #rfwMainCanvas'));
   }
 
   const observer = new MutationObserver(scan);
-  observer.observe(document.getElementById('view') || document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ['class'] });
+  observer.observe(document.getElementById('view') || document.body, { childList: true, subtree: true });
   window.addEventListener('hashchange', () => setTimeout(scan, 0));
-  window.addEventListener('resize', enforceLayout, { passive: true });
   scan();
 
-  window.R3DirectDragV017 = { version: '0.17.2', scan, enforceLayout };
+  window.R3DirectDragV017 = { version: '0.18.0', scan, geometry:GEOMETRY };
 })();
