@@ -145,10 +145,10 @@ body:has(.rfw-page[data-model-id="spherical-mirror"]){overflow-x:clip}
 /* True synchronized view on wide desktops: main experiment and both modules are visible together. */
 @media(min-width:1880px){
   .rfw-page[data-model-id="spherical-mirror"] .rfw-workspace{
-    grid-template-columns:minmax(0,1.58fr) minmax(520px,.82fr)!important;
+    grid-template-columns:minmax(0,1.48fr) minmax(570px,.92fr)!important;
     grid-template-rows:minmax(0,1fr)!important;
-    height:min(calc(100dvh - 154px),1040px)!important;
-    min-height:760px!important;
+    height:min(calc(100dvh - 218px),1040px)!important;
+    min-height:700px!important;
     gap:16px!important;
   }
   .rfw-page[data-model-id="spherical-mirror"] .rfw-primary-column,
