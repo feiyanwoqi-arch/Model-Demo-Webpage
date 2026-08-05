@@ -2,56 +2,2856 @@
   {
     "width": 2560,
     "height": 1440,
-    "failures": [
-      "locator.click: Element is outside of the viewport\nCall log:\n  - waiting for locator('.rfw-left-drawer [data-rfw-preset=\"proof\"]')\n    - locator resolved to <button data-rfw-preset=\"proof\">公式＋验证</button>\n  - attempting click action\n    - scrolling into view if needed\n    - done scrolling\n\n    at /home/runner/work/Model-Demo-Webpage/Model-Demo-Webpage/tests/visual-audit-r3-right-typography-v018.mjs:81:70"
+    "failures": [],
+    "analysis": [
+      {
+        "selector": ".rfw-analysis-head h2",
+        "label": "analysis heading",
+        "min": 24,
+        "size": 28,
+        "text": "同步分析区"
+      },
+      {
+        "selector": ".rfw-analysis-head p",
+        "label": "analysis description",
+        "min": 14,
+        "size": 15,
+        "text": "最多同时挂载两个可读模块；主实验台与所选模块必须在同一视口完成比较。"
+      },
+      {
+        "selector": ".rfw-analysis-head output",
+        "label": "analysis counter",
+        "min": 12,
+        "size": 13,
+        "text": "2 / 2"
+      },
+      {
+        "selector": ".rfw-module-head>div>span",
+        "label": "module eyebrow",
+        "min": 11.5,
+        "size": 12,
+        "text": "数学表征"
+      },
+      {
+        "selector": ".rfw-module-head>div>span",
+        "label": "module eyebrow",
+        "min": 11.5,
+        "size": 12,
+        "text": "验证与边界"
+      },
+      {
+        "selector": ".rfw-module-head h3",
+        "label": "module title",
+        "min": 20,
+        "size": 21,
+        "text": "从图到公式"
+      },
+      {
+        "selector": ".rfw-module-head h3",
+        "label": "module title",
+        "min": 20,
+        "size": 21,
+        "text": "自洽性与模型边界"
+      },
+      {
+        "selector": ".rfw-module-head p",
+        "label": "module subtitle",
+        "min": 13,
+        "size": 13,
+        "text": "公式必须能回指局部机制和可测对象"
+      },
+      {
+        "selector": ".rfw-module-head p",
+        "label": "module subtitle",
+        "min": 13,
+        "size": 13,
+        "text": "任何漂亮图形都必须能被检查和证伪"
+      },
+      {
+        "selector": ".rfw-module-actions button",
+        "label": "module action",
+        "min": 11,
+        "size": 12,
+        "text": "放大"
+      },
+      {
+        "selector": ".rfw-module-actions button",
+        "label": "module action",
+        "min": 11,
+        "size": 12,
+        "text": "关闭"
+      },
+      {
+        "selector": ".rfw-module-actions button",
+        "label": "module action",
+        "min": 11,
+        "size": 12,
+        "text": "放大"
+      },
+      {
+        "selector": ".rfw-module-actions button",
+        "label": "module action",
+        "min": 11,
+        "size": 12,
+        "text": "关闭"
+      },
+      {
+        "selector": ".rfw-module-guide summary",
+        "label": "module guide summary",
+        "min": 13,
+        "size": 13,
+        "text": "目的、作用与建议操作"
+      },
+      {
+        "selector": ".rfw-module-guide summary",
+        "label": "module guide summary",
+        "min": 13,
+        "size": 13,
+        "text": "目的、作用与建议操作"
+      },
+      {
+        "selector": ".rfw-module-guide p",
+        "label": "module guide copy",
+        "min": 12.5,
+        "size": 12.5,
+        "text": "目的把几何关系压缩成可计算的方程，同时保留每一步的物理来源。"
+      },
+      {
+        "selector": ".rfw-module-guide p",
+        "label": "module guide copy",
+        "min": 12.5,
+        "size": 12.5,
+        "text": "作用承担跨表征映射，防止公式与图形各自成立却互不对应。"
+      },
+      {
+        "selector": ".rfw-module-guide p",
+        "label": "module guide copy",
+        "min": 12.5,
+        "size": 12.5,
+        "text": "操作按顺序展开推导，并在主图中寻找每个符号对应的对象。"
+      },
+      {
+        "selector": ".rfw-module-guide p",
+        "label": "module guide copy",
+        "min": 12.5,
+        "size": 12.5,
+        "text": "目的检查当前状态下的恒等关系、几何判据与近似适用性。"
+      },
+      {
+        "selector": ".rfw-module-guide p",
+        "label": "module guide copy",
+        "min": 12.5,
+        "size": 12.5,
+        "text": "作用区分严格结果、教学示意和超出模型能力的现实效应。"
+      },
+      {
+        "selector": ".rfw-module-guide p",
+        "label": "module guide copy",
+        "min": 12.5,
+        "size": 12.5,
+        "text": "操作优先阅读警告项；参数越极端，越不能只相信图像。"
+      },
+      {
+        "selector": ".rfw-module-guide b",
+        "label": "module guide label",
+        "min": 11,
+        "size": 12,
+        "text": "目的"
+      },
+      {
+        "selector": ".rfw-module-guide b",
+        "label": "module guide label",
+        "min": 11,
+        "size": 12,
+        "text": "作用"
+      },
+      {
+        "selector": ".rfw-module-guide b",
+        "label": "module guide label",
+        "min": 11,
+        "size": 12,
+        "text": "操作"
+      },
+      {
+        "selector": ".rfw-module-guide b",
+        "label": "module guide label",
+        "min": 11,
+        "size": 12,
+        "text": "目的"
+      },
+      {
+        "selector": ".rfw-module-guide b",
+        "label": "module guide label",
+        "min": 11,
+        "size": 12,
+        "text": "作用"
+      },
+      {
+        "selector": ".rfw-module-guide b",
+        "label": "module guide label",
+        "min": 11,
+        "size": 12,
+        "text": "操作"
+      },
+      {
+        "selector": ".rfw-derivation-list article>i",
+        "label": "derivation step number",
+        "min": 12,
+        "size": 12,
+        "text": "1"
+      },
+      {
+        "selector": ".rfw-derivation-list article>i",
+        "label": "derivation step number",
+        "min": 12,
+        "size": 12,
+        "text": "2"
+      },
+      {
+        "selector": ".rfw-derivation-list article>i",
+        "label": "derivation step number",
+        "min": 12,
+        "size": 12,
+        "text": "3"
+      },
+      {
+        "selector": ".rfw-derivation-list p",
+        "label": "derivation explanation",
+        "min": 14,
+        "size": 14,
+        "text": "球面镜在近轴、小口径条件下，平行轴线光近似聚到半曲率半径处。"
+      },
+      {
+        "selector": ".rfw-derivation-list p",
+        "label": "derivation explanation",
+        "min": 14,
+        "size": 14,
+        "text": "由两条近轴主光线与相似三角形消去中间几何量。"
+      },
+      {
+        "selector": ".rfw-derivation-list p",
+        "label": "derivation explanation",
+        "min": 14,
+        "size": 14,
+        "text": "符号同时编码像的正倒；绝对值给出线放大率。"
+      },
+      {
+        "selector": ".rfw-checks span",
+        "label": "check label",
+        "min": 12.5,
+        "size": 13,
+        "text": "镜方程残差"
+      },
+      {
+        "selector": ".rfw-checks span",
+        "label": "check label",
+        "min": 12.5,
+        "size": 13,
+        "text": "实/虚像判据"
+      },
+      {
+        "selector": ".rfw-checks span",
+        "label": "check label",
+        "min": 12.5,
+        "size": 13,
+        "text": "近轴有效性"
+      },
+      {
+        "selector": ".rfw-checks span",
+        "label": "check label",
+        "min": 12.5,
+        "size": 13,
+        "text": "屏幕位置"
+      },
+      {
+        "selector": ".rfw-checks b",
+        "label": "check result",
+        "min": 16,
+        "size": 17,
+        "text": "通过"
+      },
+      {
+        "selector": ".rfw-checks b",
+        "label": "check result",
+        "min": 16,
+        "size": 17,
+        "text": "实像"
+      },
+      {
+        "selector": ".rfw-checks b",
+        "label": "check result",
+        "min": 16,
+        "size": 17,
+        "text": "良好"
+      },
+      {
+        "selector": ".rfw-checks b",
+        "label": "check result",
+        "min": 16,
+        "size": 17,
+        "text": "接近像面"
+      },
+      {
+        "selector": ".rfw-checks p",
+        "label": "check explanation",
+        "min": 13.5,
+        "size": 14,
+        "text": "0.00e+0"
+      },
+      {
+        "selector": ".rfw-checks p",
+        "label": "check explanation",
+        "min": 13.5,
+        "size": 14,
+        "text": "反射光在镜前真实相交，可用屏幕接收。"
+      },
+      {
+        "selector": ".rfw-checks p",
+        "label": "check explanation",
+        "min": 13.5,
+        "size": 14,
+        "text": "当前精确球面光束焦散宽度约 0.68 px。"
+      },
+      {
+        "selector": ".rfw-checks p",
+        "label": "check explanation",
+        "min": 13.5,
+        "size": 14,
+        "text": "相对近轴像面偏移 0 px。"
+      },
+      {
+        "selector": ".rfw-boundary b",
+        "label": "boundary heading",
+        "min": 14,
+        "size": 15,
+        "text": "模型边界"
+      },
+      {
+        "selector": ".rfw-boundary p",
+        "label": "boundary explanation",
+        "min": 13.5,
+        "size": 14,
+        "text": "当光线离主轴很远或口径过大时会出现球差，简单 f=R/2 与镜方程不再精确。"
+      }
     ],
-    "analysis": [],
     "analysisLeafFailures": [],
-    "drawer": [],
+    "drawer": [
+      {
+        "selector": ".rfw-right-drawer header span",
+        "label": "drawer eyebrow",
+        "min": 11,
+        "size": 12,
+        "text": "UNIFIED STATE"
+      },
+      {
+        "selector": ".rfw-right-drawer h2",
+        "label": "drawer title",
+        "min": 24,
+        "size": 27,
+        "text": "参数与实时判据"
+      },
+      {
+        "selector": ".rfw-right-drawer header button",
+        "label": "drawer header action",
+        "min": 12,
+        "size": 12,
+        "text": "固定"
+      },
+      {
+        "selector": ".rfw-right-drawer header button",
+        "label": "drawer header action",
+        "min": 12,
+        "size": 12,
+        "text": "关闭"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-reset",
+        "label": "drawer reset",
+        "min": 13,
+        "size": 13,
+        "text": "恢复默认"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-control b",
+        "label": "control label",
+        "min": 14,
+        "size": 14,
+        "text": "镜面类型"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-control b",
+        "label": "control label",
+        "min": 14,
+        "size": 14,
+        "text": "焦距大小 |f|"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-control b",
+        "label": "control label",
+        "min": 14,
+        "size": 14,
+        "text": "物距 dₒ"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-control b",
+        "label": "control label",
+        "min": 14,
+        "size": 14,
+        "text": "物高 hₒ"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-control b",
+        "label": "control label",
+        "min": 14,
+        "size": 14,
+        "text": "有效口径比例"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-control b",
+        "label": "control label",
+        "min": 14,
+        "size": 14,
+        "text": "屏幕相对理论像面偏移"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-control output",
+        "label": "control value",
+        "min": 13,
+        "size": 13,
+        "text": "150 px"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-control output",
+        "label": "control value",
+        "min": 13,
+        "size": 13,
+        "text": "260 px"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-control output",
+        "label": "control value",
+        "min": 13,
+        "size": 13,
+        "text": "60 px"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-control output",
+        "label": "control value",
+        "min": 13,
+        "size": 13,
+        "text": "18%"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-control output",
+        "label": "control value",
+        "min": 13,
+        "size": 13,
+        "text": "0 px"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-control select",
+        "label": "control select",
+        "min": 13,
+        "size": 13,
+        "text": "凹面镜凸面镜"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-model-presets button",
+        "label": "preset button",
+        "min": 13,
+        "size": 13,
+        "text": "凹镜·实像"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-model-presets button",
+        "label": "preset button",
+        "min": 13,
+        "size": 13,
+        "text": "凹镜·放大虚像"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-model-presets button",
+        "label": "preset button",
+        "min": 13,
+        "size": 13,
+        "text": "凸面镜"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-full-metrics span",
+        "label": "metric label",
+        "min": 12.5,
+        "size": 13,
+        "text": "像距 dᵢ"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-full-metrics span",
+        "label": "metric label",
+        "min": 12.5,
+        "size": 13,
+        "text": "放大率 m"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-full-metrics span",
+        "label": "metric label",
+        "min": 12.5,
+        "size": 13,
+        "text": "像的性质"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-full-metrics span",
+        "label": "metric label",
+        "min": 12.5,
+        "size": 13,
+        "text": "焦距 f"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-full-metrics span",
+        "label": "metric label",
+        "min": 12.5,
+        "size": 13,
+        "text": "球面光束焦散宽度"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-full-metrics span",
+        "label": "metric label",
+        "min": 12.5,
+        "size": 13,
+        "text": "屏幕相对像面"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-full-metrics b",
+        "label": "metric value",
+        "min": 15,
+        "size": 16,
+        "text": "354.5 px"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-full-metrics b",
+        "label": "metric value",
+        "min": 15,
+        "size": 16,
+        "text": "-1.364"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-full-metrics b",
+        "label": "metric value",
+        "min": 15,
+        "size": 16,
+        "text": "实像·倒立"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-full-metrics b",
+        "label": "metric value",
+        "min": 15,
+        "size": 16,
+        "text": "150 px"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-full-metrics b",
+        "label": "metric value",
+        "min": 15,
+        "size": 16,
+        "text": "0.68 px"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-full-metrics b",
+        "label": "metric value",
+        "min": 15,
+        "size": 16,
+        "text": "0 px"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-status",
+        "label": "drawer status",
+        "min": 13.5,
+        "size": 14,
+        "text": "真实反射光在镜前相交，可在屏幕上接收。 当前口径下近轴近似良好，主光线与精确球面反射束基本一致。"
+      }
+    ],
     "drawerLeafFailures": []
   },
   {
     "width": 1920,
     "height": 1080,
-    "failures": [
-      "locator.click: Element is outside of the viewport\nCall log:\n  - waiting for locator('.rfw-left-drawer [data-rfw-preset=\"proof\"]')\n    - locator resolved to <button data-rfw-preset=\"proof\">公式＋验证</button>\n  - attempting click action\n    - scrolling into view if needed\n    - done scrolling\n\n    at /home/runner/work/Model-Demo-Webpage/Model-Demo-Webpage/tests/visual-audit-r3-right-typography-v018.mjs:81:70"
+    "failures": [],
+    "analysis": [
+      {
+        "selector": ".rfw-analysis-head h2",
+        "label": "analysis heading",
+        "min": 24,
+        "size": 28,
+        "text": "同步分析区"
+      },
+      {
+        "selector": ".rfw-analysis-head p",
+        "label": "analysis description",
+        "min": 14,
+        "size": 15,
+        "text": "最多同时挂载两个可读模块；主实验台与所选模块必须在同一视口完成比较。"
+      },
+      {
+        "selector": ".rfw-analysis-head output",
+        "label": "analysis counter",
+        "min": 12,
+        "size": 13,
+        "text": "2 / 2"
+      },
+      {
+        "selector": ".rfw-module-head>div>span",
+        "label": "module eyebrow",
+        "min": 11.5,
+        "size": 12,
+        "text": "数学表征"
+      },
+      {
+        "selector": ".rfw-module-head>div>span",
+        "label": "module eyebrow",
+        "min": 11.5,
+        "size": 12,
+        "text": "验证与边界"
+      },
+      {
+        "selector": ".rfw-module-head h3",
+        "label": "module title",
+        "min": 20,
+        "size": 21,
+        "text": "从图到公式"
+      },
+      {
+        "selector": ".rfw-module-head h3",
+        "label": "module title",
+        "min": 20,
+        "size": 21,
+        "text": "自洽性与模型边界"
+      },
+      {
+        "selector": ".rfw-module-head p",
+        "label": "module subtitle",
+        "min": 13,
+        "size": 13,
+        "text": "公式必须能回指局部机制和可测对象"
+      },
+      {
+        "selector": ".rfw-module-head p",
+        "label": "module subtitle",
+        "min": 13,
+        "size": 13,
+        "text": "任何漂亮图形都必须能被检查和证伪"
+      },
+      {
+        "selector": ".rfw-module-actions button",
+        "label": "module action",
+        "min": 11,
+        "size": 12,
+        "text": "放大"
+      },
+      {
+        "selector": ".rfw-module-actions button",
+        "label": "module action",
+        "min": 11,
+        "size": 12,
+        "text": "关闭"
+      },
+      {
+        "selector": ".rfw-module-actions button",
+        "label": "module action",
+        "min": 11,
+        "size": 12,
+        "text": "放大"
+      },
+      {
+        "selector": ".rfw-module-actions button",
+        "label": "module action",
+        "min": 11,
+        "size": 12,
+        "text": "关闭"
+      },
+      {
+        "selector": ".rfw-module-guide summary",
+        "label": "module guide summary",
+        "min": 13,
+        "size": 13,
+        "text": "目的、作用与建议操作"
+      },
+      {
+        "selector": ".rfw-module-guide summary",
+        "label": "module guide summary",
+        "min": 13,
+        "size": 13,
+        "text": "目的、作用与建议操作"
+      },
+      {
+        "selector": ".rfw-module-guide p",
+        "label": "module guide copy",
+        "min": 12.5,
+        "size": 12.5,
+        "text": "目的把几何关系压缩成可计算的方程，同时保留每一步的物理来源。"
+      },
+      {
+        "selector": ".rfw-module-guide p",
+        "label": "module guide copy",
+        "min": 12.5,
+        "size": 12.5,
+        "text": "作用承担跨表征映射，防止公式与图形各自成立却互不对应。"
+      },
+      {
+        "selector": ".rfw-module-guide p",
+        "label": "module guide copy",
+        "min": 12.5,
+        "size": 12.5,
+        "text": "操作按顺序展开推导，并在主图中寻找每个符号对应的对象。"
+      },
+      {
+        "selector": ".rfw-module-guide p",
+        "label": "module guide copy",
+        "min": 12.5,
+        "size": 12.5,
+        "text": "目的检查当前状态下的恒等关系、几何判据与近似适用性。"
+      },
+      {
+        "selector": ".rfw-module-guide p",
+        "label": "module guide copy",
+        "min": 12.5,
+        "size": 12.5,
+        "text": "作用区分严格结果、教学示意和超出模型能力的现实效应。"
+      },
+      {
+        "selector": ".rfw-module-guide p",
+        "label": "module guide copy",
+        "min": 12.5,
+        "size": 12.5,
+        "text": "操作优先阅读警告项；参数越极端，越不能只相信图像。"
+      },
+      {
+        "selector": ".rfw-module-guide b",
+        "label": "module guide label",
+        "min": 11,
+        "size": 12,
+        "text": "目的"
+      },
+      {
+        "selector": ".rfw-module-guide b",
+        "label": "module guide label",
+        "min": 11,
+        "size": 12,
+        "text": "作用"
+      },
+      {
+        "selector": ".rfw-module-guide b",
+        "label": "module guide label",
+        "min": 11,
+        "size": 12,
+        "text": "操作"
+      },
+      {
+        "selector": ".rfw-module-guide b",
+        "label": "module guide label",
+        "min": 11,
+        "size": 12,
+        "text": "目的"
+      },
+      {
+        "selector": ".rfw-module-guide b",
+        "label": "module guide label",
+        "min": 11,
+        "size": 12,
+        "text": "作用"
+      },
+      {
+        "selector": ".rfw-module-guide b",
+        "label": "module guide label",
+        "min": 11,
+        "size": 12,
+        "text": "操作"
+      },
+      {
+        "selector": ".rfw-derivation-list article>i",
+        "label": "derivation step number",
+        "min": 12,
+        "size": 12,
+        "text": "1"
+      },
+      {
+        "selector": ".rfw-derivation-list article>i",
+        "label": "derivation step number",
+        "min": 12,
+        "size": 12,
+        "text": "2"
+      },
+      {
+        "selector": ".rfw-derivation-list article>i",
+        "label": "derivation step number",
+        "min": 12,
+        "size": 12,
+        "text": "3"
+      },
+      {
+        "selector": ".rfw-derivation-list p",
+        "label": "derivation explanation",
+        "min": 14,
+        "size": 14,
+        "text": "球面镜在近轴、小口径条件下，平行轴线光近似聚到半曲率半径处。"
+      },
+      {
+        "selector": ".rfw-derivation-list p",
+        "label": "derivation explanation",
+        "min": 14,
+        "size": 14,
+        "text": "由两条近轴主光线与相似三角形消去中间几何量。"
+      },
+      {
+        "selector": ".rfw-derivation-list p",
+        "label": "derivation explanation",
+        "min": 14,
+        "size": 14,
+        "text": "符号同时编码像的正倒；绝对值给出线放大率。"
+      },
+      {
+        "selector": ".rfw-checks span",
+        "label": "check label",
+        "min": 12.5,
+        "size": 13,
+        "text": "镜方程残差"
+      },
+      {
+        "selector": ".rfw-checks span",
+        "label": "check label",
+        "min": 12.5,
+        "size": 13,
+        "text": "实/虚像判据"
+      },
+      {
+        "selector": ".rfw-checks span",
+        "label": "check label",
+        "min": 12.5,
+        "size": 13,
+        "text": "近轴有效性"
+      },
+      {
+        "selector": ".rfw-checks span",
+        "label": "check label",
+        "min": 12.5,
+        "size": 13,
+        "text": "屏幕位置"
+      },
+      {
+        "selector": ".rfw-checks b",
+        "label": "check result",
+        "min": 16,
+        "size": 17,
+        "text": "通过"
+      },
+      {
+        "selector": ".rfw-checks b",
+        "label": "check result",
+        "min": 16,
+        "size": 17,
+        "text": "实像"
+      },
+      {
+        "selector": ".rfw-checks b",
+        "label": "check result",
+        "min": 16,
+        "size": 17,
+        "text": "良好"
+      },
+      {
+        "selector": ".rfw-checks b",
+        "label": "check result",
+        "min": 16,
+        "size": 17,
+        "text": "接近像面"
+      },
+      {
+        "selector": ".rfw-checks p",
+        "label": "check explanation",
+        "min": 13.5,
+        "size": 14,
+        "text": "0.00e+0"
+      },
+      {
+        "selector": ".rfw-checks p",
+        "label": "check explanation",
+        "min": 13.5,
+        "size": 14,
+        "text": "反射光在镜前真实相交，可用屏幕接收。"
+      },
+      {
+        "selector": ".rfw-checks p",
+        "label": "check explanation",
+        "min": 13.5,
+        "size": 14,
+        "text": "当前精确球面光束焦散宽度约 0.68 px。"
+      },
+      {
+        "selector": ".rfw-checks p",
+        "label": "check explanation",
+        "min": 13.5,
+        "size": 14,
+        "text": "相对近轴像面偏移 0 px。"
+      },
+      {
+        "selector": ".rfw-boundary b",
+        "label": "boundary heading",
+        "min": 14,
+        "size": 15,
+        "text": "模型边界"
+      },
+      {
+        "selector": ".rfw-boundary p",
+        "label": "boundary explanation",
+        "min": 13.5,
+        "size": 14,
+        "text": "当光线离主轴很远或口径过大时会出现球差，简单 f=R/2 与镜方程不再精确。"
+      }
     ],
-    "analysis": [],
     "analysisLeafFailures": [],
-    "drawer": [],
+    "drawer": [
+      {
+        "selector": ".rfw-right-drawer header span",
+        "label": "drawer eyebrow",
+        "min": 11,
+        "size": 12,
+        "text": "UNIFIED STATE"
+      },
+      {
+        "selector": ".rfw-right-drawer h2",
+        "label": "drawer title",
+        "min": 24,
+        "size": 27,
+        "text": "参数与实时判据"
+      },
+      {
+        "selector": ".rfw-right-drawer header button",
+        "label": "drawer header action",
+        "min": 12,
+        "size": 12,
+        "text": "固定"
+      },
+      {
+        "selector": ".rfw-right-drawer header button",
+        "label": "drawer header action",
+        "min": 12,
+        "size": 12,
+        "text": "关闭"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-reset",
+        "label": "drawer reset",
+        "min": 13,
+        "size": 13,
+        "text": "恢复默认"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-control b",
+        "label": "control label",
+        "min": 14,
+        "size": 14,
+        "text": "镜面类型"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-control b",
+        "label": "control label",
+        "min": 14,
+        "size": 14,
+        "text": "焦距大小 |f|"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-control b",
+        "label": "control label",
+        "min": 14,
+        "size": 14,
+        "text": "物距 dₒ"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-control b",
+        "label": "control label",
+        "min": 14,
+        "size": 14,
+        "text": "物高 hₒ"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-control b",
+        "label": "control label",
+        "min": 14,
+        "size": 14,
+        "text": "有效口径比例"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-control b",
+        "label": "control label",
+        "min": 14,
+        "size": 14,
+        "text": "屏幕相对理论像面偏移"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-control output",
+        "label": "control value",
+        "min": 13,
+        "size": 13,
+        "text": "150 px"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-control output",
+        "label": "control value",
+        "min": 13,
+        "size": 13,
+        "text": "260 px"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-control output",
+        "label": "control value",
+        "min": 13,
+        "size": 13,
+        "text": "60 px"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-control output",
+        "label": "control value",
+        "min": 13,
+        "size": 13,
+        "text": "18%"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-control output",
+        "label": "control value",
+        "min": 13,
+        "size": 13,
+        "text": "0 px"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-control select",
+        "label": "control select",
+        "min": 13,
+        "size": 13,
+        "text": "凹面镜凸面镜"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-model-presets button",
+        "label": "preset button",
+        "min": 13,
+        "size": 13,
+        "text": "凹镜·实像"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-model-presets button",
+        "label": "preset button",
+        "min": 13,
+        "size": 13,
+        "text": "凹镜·放大虚像"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-model-presets button",
+        "label": "preset button",
+        "min": 13,
+        "size": 13,
+        "text": "凸面镜"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-full-metrics span",
+        "label": "metric label",
+        "min": 12.5,
+        "size": 13,
+        "text": "像距 dᵢ"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-full-metrics span",
+        "label": "metric label",
+        "min": 12.5,
+        "size": 13,
+        "text": "放大率 m"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-full-metrics span",
+        "label": "metric label",
+        "min": 12.5,
+        "size": 13,
+        "text": "像的性质"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-full-metrics span",
+        "label": "metric label",
+        "min": 12.5,
+        "size": 13,
+        "text": "焦距 f"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-full-metrics span",
+        "label": "metric label",
+        "min": 12.5,
+        "size": 13,
+        "text": "球面光束焦散宽度"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-full-metrics span",
+        "label": "metric label",
+        "min": 12.5,
+        "size": 13,
+        "text": "屏幕相对像面"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-full-metrics b",
+        "label": "metric value",
+        "min": 15,
+        "size": 16,
+        "text": "354.5 px"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-full-metrics b",
+        "label": "metric value",
+        "min": 15,
+        "size": 16,
+        "text": "-1.364"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-full-metrics b",
+        "label": "metric value",
+        "min": 15,
+        "size": 16,
+        "text": "实像·倒立"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-full-metrics b",
+        "label": "metric value",
+        "min": 15,
+        "size": 16,
+        "text": "150 px"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-full-metrics b",
+        "label": "metric value",
+        "min": 15,
+        "size": 16,
+        "text": "0.68 px"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-full-metrics b",
+        "label": "metric value",
+        "min": 15,
+        "size": 16,
+        "text": "0 px"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-status",
+        "label": "drawer status",
+        "min": 13.5,
+        "size": 14,
+        "text": "真实反射光在镜前相交，可在屏幕上接收。 当前口径下近轴近似良好，主光线与精确球面反射束基本一致。"
+      }
+    ],
     "drawerLeafFailures": []
   },
   {
     "width": 1735,
     "height": 865,
-    "failures": [
-      "locator.click: Element is outside of the viewport\nCall log:\n  - waiting for locator('.rfw-left-drawer [data-rfw-preset=\"proof\"]')\n    - locator resolved to <button data-rfw-preset=\"proof\">公式＋验证</button>\n  - attempting click action\n    - scrolling into view if needed\n    - done scrolling\n\n    at /home/runner/work/Model-Demo-Webpage/Model-Demo-Webpage/tests/visual-audit-r3-right-typography-v018.mjs:81:70"
+    "failures": [],
+    "analysis": [
+      {
+        "selector": ".rfw-analysis-head h2",
+        "label": "analysis heading",
+        "min": 24,
+        "size": 28,
+        "text": "同步分析区"
+      },
+      {
+        "selector": ".rfw-analysis-head p",
+        "label": "analysis description",
+        "min": 14,
+        "size": 15,
+        "text": "最多同时挂载两个可读模块；主实验台与所选模块必须在同一视口完成比较。"
+      },
+      {
+        "selector": ".rfw-analysis-head output",
+        "label": "analysis counter",
+        "min": 12,
+        "size": 13,
+        "text": "2 / 2"
+      },
+      {
+        "selector": ".rfw-module-head>div>span",
+        "label": "module eyebrow",
+        "min": 11.5,
+        "size": 12,
+        "text": "数学表征"
+      },
+      {
+        "selector": ".rfw-module-head>div>span",
+        "label": "module eyebrow",
+        "min": 11.5,
+        "size": 12,
+        "text": "验证与边界"
+      },
+      {
+        "selector": ".rfw-module-head h3",
+        "label": "module title",
+        "min": 20,
+        "size": 22,
+        "text": "从图到公式"
+      },
+      {
+        "selector": ".rfw-module-head h3",
+        "label": "module title",
+        "min": 20,
+        "size": 22,
+        "text": "自洽性与模型边界"
+      },
+      {
+        "selector": ".rfw-module-head p",
+        "label": "module subtitle",
+        "min": 13,
+        "size": 14,
+        "text": "公式必须能回指局部机制和可测对象"
+      },
+      {
+        "selector": ".rfw-module-head p",
+        "label": "module subtitle",
+        "min": 13,
+        "size": 14,
+        "text": "任何漂亮图形都必须能被检查和证伪"
+      },
+      {
+        "selector": ".rfw-module-actions button",
+        "label": "module action",
+        "min": 11,
+        "size": 12,
+        "text": "放大"
+      },
+      {
+        "selector": ".rfw-module-actions button",
+        "label": "module action",
+        "min": 11,
+        "size": 12,
+        "text": "关闭"
+      },
+      {
+        "selector": ".rfw-module-actions button",
+        "label": "module action",
+        "min": 11,
+        "size": 12,
+        "text": "放大"
+      },
+      {
+        "selector": ".rfw-module-actions button",
+        "label": "module action",
+        "min": 11,
+        "size": 12,
+        "text": "关闭"
+      },
+      {
+        "selector": ".rfw-module-guide summary",
+        "label": "module guide summary",
+        "min": 13,
+        "size": 14,
+        "text": "目的、作用与建议操作"
+      },
+      {
+        "selector": ".rfw-module-guide summary",
+        "label": "module guide summary",
+        "min": 13,
+        "size": 14,
+        "text": "目的、作用与建议操作"
+      },
+      {
+        "selector": ".rfw-module-guide p",
+        "label": "module guide copy",
+        "min": 12.5,
+        "size": 13,
+        "text": "目的把几何关系压缩成可计算的方程，同时保留每一步的物理来源。"
+      },
+      {
+        "selector": ".rfw-module-guide p",
+        "label": "module guide copy",
+        "min": 12.5,
+        "size": 13,
+        "text": "作用承担跨表征映射，防止公式与图形各自成立却互不对应。"
+      },
+      {
+        "selector": ".rfw-module-guide p",
+        "label": "module guide copy",
+        "min": 12.5,
+        "size": 13,
+        "text": "操作按顺序展开推导，并在主图中寻找每个符号对应的对象。"
+      },
+      {
+        "selector": ".rfw-module-guide p",
+        "label": "module guide copy",
+        "min": 12.5,
+        "size": 13,
+        "text": "目的检查当前状态下的恒等关系、几何判据与近似适用性。"
+      },
+      {
+        "selector": ".rfw-module-guide p",
+        "label": "module guide copy",
+        "min": 12.5,
+        "size": 13,
+        "text": "作用区分严格结果、教学示意和超出模型能力的现实效应。"
+      },
+      {
+        "selector": ".rfw-module-guide p",
+        "label": "module guide copy",
+        "min": 12.5,
+        "size": 13,
+        "text": "操作优先阅读警告项；参数越极端，越不能只相信图像。"
+      },
+      {
+        "selector": ".rfw-module-guide b",
+        "label": "module guide label",
+        "min": 11,
+        "size": 12,
+        "text": "目的"
+      },
+      {
+        "selector": ".rfw-module-guide b",
+        "label": "module guide label",
+        "min": 11,
+        "size": 12,
+        "text": "作用"
+      },
+      {
+        "selector": ".rfw-module-guide b",
+        "label": "module guide label",
+        "min": 11,
+        "size": 12,
+        "text": "操作"
+      },
+      {
+        "selector": ".rfw-module-guide b",
+        "label": "module guide label",
+        "min": 11,
+        "size": 12,
+        "text": "目的"
+      },
+      {
+        "selector": ".rfw-module-guide b",
+        "label": "module guide label",
+        "min": 11,
+        "size": 12,
+        "text": "作用"
+      },
+      {
+        "selector": ".rfw-module-guide b",
+        "label": "module guide label",
+        "min": 11,
+        "size": 12,
+        "text": "操作"
+      },
+      {
+        "selector": ".rfw-derivation-list article>i",
+        "label": "derivation step number",
+        "min": 12,
+        "size": 12,
+        "text": "1"
+      },
+      {
+        "selector": ".rfw-derivation-list article>i",
+        "label": "derivation step number",
+        "min": 12,
+        "size": 12,
+        "text": "2"
+      },
+      {
+        "selector": ".rfw-derivation-list article>i",
+        "label": "derivation step number",
+        "min": 12,
+        "size": 12,
+        "text": "3"
+      },
+      {
+        "selector": ".rfw-derivation-list p",
+        "label": "derivation explanation",
+        "min": 14,
+        "size": 14,
+        "text": "球面镜在近轴、小口径条件下，平行轴线光近似聚到半曲率半径处。"
+      },
+      {
+        "selector": ".rfw-derivation-list p",
+        "label": "derivation explanation",
+        "min": 14,
+        "size": 14,
+        "text": "由两条近轴主光线与相似三角形消去中间几何量。"
+      },
+      {
+        "selector": ".rfw-derivation-list p",
+        "label": "derivation explanation",
+        "min": 14,
+        "size": 14,
+        "text": "符号同时编码像的正倒；绝对值给出线放大率。"
+      },
+      {
+        "selector": ".rfw-checks span",
+        "label": "check label",
+        "min": 12.5,
+        "size": 13,
+        "text": "镜方程残差"
+      },
+      {
+        "selector": ".rfw-checks span",
+        "label": "check label",
+        "min": 12.5,
+        "size": 13,
+        "text": "实/虚像判据"
+      },
+      {
+        "selector": ".rfw-checks span",
+        "label": "check label",
+        "min": 12.5,
+        "size": 13,
+        "text": "近轴有效性"
+      },
+      {
+        "selector": ".rfw-checks span",
+        "label": "check label",
+        "min": 12.5,
+        "size": 13,
+        "text": "屏幕位置"
+      },
+      {
+        "selector": ".rfw-checks b",
+        "label": "check result",
+        "min": 16,
+        "size": 17,
+        "text": "通过"
+      },
+      {
+        "selector": ".rfw-checks b",
+        "label": "check result",
+        "min": 16,
+        "size": 17,
+        "text": "实像"
+      },
+      {
+        "selector": ".rfw-checks b",
+        "label": "check result",
+        "min": 16,
+        "size": 17,
+        "text": "良好"
+      },
+      {
+        "selector": ".rfw-checks b",
+        "label": "check result",
+        "min": 16,
+        "size": 17,
+        "text": "接近像面"
+      },
+      {
+        "selector": ".rfw-checks p",
+        "label": "check explanation",
+        "min": 13.5,
+        "size": 14,
+        "text": "0.00e+0"
+      },
+      {
+        "selector": ".rfw-checks p",
+        "label": "check explanation",
+        "min": 13.5,
+        "size": 14,
+        "text": "反射光在镜前真实相交，可用屏幕接收。"
+      },
+      {
+        "selector": ".rfw-checks p",
+        "label": "check explanation",
+        "min": 13.5,
+        "size": 14,
+        "text": "当前精确球面光束焦散宽度约 0.68 px。"
+      },
+      {
+        "selector": ".rfw-checks p",
+        "label": "check explanation",
+        "min": 13.5,
+        "size": 14,
+        "text": "相对近轴像面偏移 0 px。"
+      },
+      {
+        "selector": ".rfw-boundary b",
+        "label": "boundary heading",
+        "min": 14,
+        "size": 15,
+        "text": "模型边界"
+      },
+      {
+        "selector": ".rfw-boundary p",
+        "label": "boundary explanation",
+        "min": 13.5,
+        "size": 14,
+        "text": "当光线离主轴很远或口径过大时会出现球差，简单 f=R/2 与镜方程不再精确。"
+      }
     ],
-    "analysis": [],
     "analysisLeafFailures": [],
-    "drawer": [],
+    "drawer": [
+      {
+        "selector": ".rfw-right-drawer header span",
+        "label": "drawer eyebrow",
+        "min": 11,
+        "size": 12,
+        "text": "UNIFIED STATE"
+      },
+      {
+        "selector": ".rfw-right-drawer h2",
+        "label": "drawer title",
+        "min": 24,
+        "size": 27,
+        "text": "参数与实时判据"
+      },
+      {
+        "selector": ".rfw-right-drawer header button",
+        "label": "drawer header action",
+        "min": 12,
+        "size": 12,
+        "text": "固定"
+      },
+      {
+        "selector": ".rfw-right-drawer header button",
+        "label": "drawer header action",
+        "min": 12,
+        "size": 12,
+        "text": "关闭"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-reset",
+        "label": "drawer reset",
+        "min": 13,
+        "size": 13,
+        "text": "恢复默认"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-control b",
+        "label": "control label",
+        "min": 14,
+        "size": 14,
+        "text": "镜面类型"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-control b",
+        "label": "control label",
+        "min": 14,
+        "size": 14,
+        "text": "焦距大小 |f|"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-control b",
+        "label": "control label",
+        "min": 14,
+        "size": 14,
+        "text": "物距 dₒ"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-control b",
+        "label": "control label",
+        "min": 14,
+        "size": 14,
+        "text": "物高 hₒ"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-control b",
+        "label": "control label",
+        "min": 14,
+        "size": 14,
+        "text": "有效口径比例"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-control b",
+        "label": "control label",
+        "min": 14,
+        "size": 14,
+        "text": "屏幕相对理论像面偏移"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-control output",
+        "label": "control value",
+        "min": 13,
+        "size": 13,
+        "text": "150 px"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-control output",
+        "label": "control value",
+        "min": 13,
+        "size": 13,
+        "text": "260 px"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-control output",
+        "label": "control value",
+        "min": 13,
+        "size": 13,
+        "text": "60 px"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-control output",
+        "label": "control value",
+        "min": 13,
+        "size": 13,
+        "text": "18%"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-control output",
+        "label": "control value",
+        "min": 13,
+        "size": 13,
+        "text": "0 px"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-control select",
+        "label": "control select",
+        "min": 13,
+        "size": 13,
+        "text": "凹面镜凸面镜"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-model-presets button",
+        "label": "preset button",
+        "min": 13,
+        "size": 13,
+        "text": "凹镜·实像"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-model-presets button",
+        "label": "preset button",
+        "min": 13,
+        "size": 13,
+        "text": "凹镜·放大虚像"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-model-presets button",
+        "label": "preset button",
+        "min": 13,
+        "size": 13,
+        "text": "凸面镜"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-full-metrics span",
+        "label": "metric label",
+        "min": 12.5,
+        "size": 13,
+        "text": "像距 dᵢ"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-full-metrics span",
+        "label": "metric label",
+        "min": 12.5,
+        "size": 13,
+        "text": "放大率 m"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-full-metrics span",
+        "label": "metric label",
+        "min": 12.5,
+        "size": 13,
+        "text": "像的性质"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-full-metrics span",
+        "label": "metric label",
+        "min": 12.5,
+        "size": 13,
+        "text": "焦距 f"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-full-metrics span",
+        "label": "metric label",
+        "min": 12.5,
+        "size": 13,
+        "text": "球面光束焦散宽度"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-full-metrics span",
+        "label": "metric label",
+        "min": 12.5,
+        "size": 13,
+        "text": "屏幕相对像面"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-full-metrics b",
+        "label": "metric value",
+        "min": 15,
+        "size": 16,
+        "text": "354.5 px"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-full-metrics b",
+        "label": "metric value",
+        "min": 15,
+        "size": 16,
+        "text": "-1.364"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-full-metrics b",
+        "label": "metric value",
+        "min": 15,
+        "size": 16,
+        "text": "实像·倒立"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-full-metrics b",
+        "label": "metric value",
+        "min": 15,
+        "size": 16,
+        "text": "150 px"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-full-metrics b",
+        "label": "metric value",
+        "min": 15,
+        "size": 16,
+        "text": "0.68 px"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-full-metrics b",
+        "label": "metric value",
+        "min": 15,
+        "size": 16,
+        "text": "0 px"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-status",
+        "label": "drawer status",
+        "min": 13.5,
+        "size": 14,
+        "text": "真实反射光在镜前相交，可在屏幕上接收。 当前口径下近轴近似良好，主光线与精确球面反射束基本一致。"
+      }
+    ],
     "drawerLeafFailures": []
   },
   {
     "width": 1440,
     "height": 900,
-    "failures": [
-      "locator.click: Element is outside of the viewport\nCall log:\n  - waiting for locator('.rfw-left-drawer [data-rfw-preset=\"proof\"]')\n    - locator resolved to <button data-rfw-preset=\"proof\">公式＋验证</button>\n  - attempting click action\n    - scrolling into view if needed\n    - done scrolling\n\n    at /home/runner/work/Model-Demo-Webpage/Model-Demo-Webpage/tests/visual-audit-r3-right-typography-v018.mjs:81:70"
+    "failures": [],
+    "analysis": [
+      {
+        "selector": ".rfw-analysis-head h2",
+        "label": "analysis heading",
+        "min": 24,
+        "size": 28,
+        "text": "同步分析区"
+      },
+      {
+        "selector": ".rfw-analysis-head p",
+        "label": "analysis description",
+        "min": 14,
+        "size": 15,
+        "text": "最多同时挂载两个可读模块；主实验台与所选模块必须在同一视口完成比较。"
+      },
+      {
+        "selector": ".rfw-analysis-head output",
+        "label": "analysis counter",
+        "min": 12,
+        "size": 13,
+        "text": "2 / 2"
+      },
+      {
+        "selector": ".rfw-module-head>div>span",
+        "label": "module eyebrow",
+        "min": 11.5,
+        "size": 12,
+        "text": "数学表征"
+      },
+      {
+        "selector": ".rfw-module-head>div>span",
+        "label": "module eyebrow",
+        "min": 11.5,
+        "size": 12,
+        "text": "验证与边界"
+      },
+      {
+        "selector": ".rfw-module-head h3",
+        "label": "module title",
+        "min": 20,
+        "size": 22,
+        "text": "从图到公式"
+      },
+      {
+        "selector": ".rfw-module-head h3",
+        "label": "module title",
+        "min": 20,
+        "size": 22,
+        "text": "自洽性与模型边界"
+      },
+      {
+        "selector": ".rfw-module-head p",
+        "label": "module subtitle",
+        "min": 13,
+        "size": 14,
+        "text": "公式必须能回指局部机制和可测对象"
+      },
+      {
+        "selector": ".rfw-module-head p",
+        "label": "module subtitle",
+        "min": 13,
+        "size": 14,
+        "text": "任何漂亮图形都必须能被检查和证伪"
+      },
+      {
+        "selector": ".rfw-module-actions button",
+        "label": "module action",
+        "min": 11,
+        "size": 12,
+        "text": "放大"
+      },
+      {
+        "selector": ".rfw-module-actions button",
+        "label": "module action",
+        "min": 11,
+        "size": 12,
+        "text": "关闭"
+      },
+      {
+        "selector": ".rfw-module-actions button",
+        "label": "module action",
+        "min": 11,
+        "size": 12,
+        "text": "放大"
+      },
+      {
+        "selector": ".rfw-module-actions button",
+        "label": "module action",
+        "min": 11,
+        "size": 12,
+        "text": "关闭"
+      },
+      {
+        "selector": ".rfw-module-guide summary",
+        "label": "module guide summary",
+        "min": 13,
+        "size": 14,
+        "text": "目的、作用与建议操作"
+      },
+      {
+        "selector": ".rfw-module-guide summary",
+        "label": "module guide summary",
+        "min": 13,
+        "size": 14,
+        "text": "目的、作用与建议操作"
+      },
+      {
+        "selector": ".rfw-module-guide p",
+        "label": "module guide copy",
+        "min": 12.5,
+        "size": 13,
+        "text": "目的把几何关系压缩成可计算的方程，同时保留每一步的物理来源。"
+      },
+      {
+        "selector": ".rfw-module-guide p",
+        "label": "module guide copy",
+        "min": 12.5,
+        "size": 13,
+        "text": "作用承担跨表征映射，防止公式与图形各自成立却互不对应。"
+      },
+      {
+        "selector": ".rfw-module-guide p",
+        "label": "module guide copy",
+        "min": 12.5,
+        "size": 13,
+        "text": "操作按顺序展开推导，并在主图中寻找每个符号对应的对象。"
+      },
+      {
+        "selector": ".rfw-module-guide p",
+        "label": "module guide copy",
+        "min": 12.5,
+        "size": 13,
+        "text": "目的检查当前状态下的恒等关系、几何判据与近似适用性。"
+      },
+      {
+        "selector": ".rfw-module-guide p",
+        "label": "module guide copy",
+        "min": 12.5,
+        "size": 13,
+        "text": "作用区分严格结果、教学示意和超出模型能力的现实效应。"
+      },
+      {
+        "selector": ".rfw-module-guide p",
+        "label": "module guide copy",
+        "min": 12.5,
+        "size": 13,
+        "text": "操作优先阅读警告项；参数越极端，越不能只相信图像。"
+      },
+      {
+        "selector": ".rfw-module-guide b",
+        "label": "module guide label",
+        "min": 11,
+        "size": 12,
+        "text": "目的"
+      },
+      {
+        "selector": ".rfw-module-guide b",
+        "label": "module guide label",
+        "min": 11,
+        "size": 12,
+        "text": "作用"
+      },
+      {
+        "selector": ".rfw-module-guide b",
+        "label": "module guide label",
+        "min": 11,
+        "size": 12,
+        "text": "操作"
+      },
+      {
+        "selector": ".rfw-module-guide b",
+        "label": "module guide label",
+        "min": 11,
+        "size": 12,
+        "text": "目的"
+      },
+      {
+        "selector": ".rfw-module-guide b",
+        "label": "module guide label",
+        "min": 11,
+        "size": 12,
+        "text": "作用"
+      },
+      {
+        "selector": ".rfw-module-guide b",
+        "label": "module guide label",
+        "min": 11,
+        "size": 12,
+        "text": "操作"
+      },
+      {
+        "selector": ".rfw-derivation-list article>i",
+        "label": "derivation step number",
+        "min": 12,
+        "size": 12,
+        "text": "1"
+      },
+      {
+        "selector": ".rfw-derivation-list article>i",
+        "label": "derivation step number",
+        "min": 12,
+        "size": 12,
+        "text": "2"
+      },
+      {
+        "selector": ".rfw-derivation-list article>i",
+        "label": "derivation step number",
+        "min": 12,
+        "size": 12,
+        "text": "3"
+      },
+      {
+        "selector": ".rfw-derivation-list p",
+        "label": "derivation explanation",
+        "min": 14,
+        "size": 14,
+        "text": "球面镜在近轴、小口径条件下，平行轴线光近似聚到半曲率半径处。"
+      },
+      {
+        "selector": ".rfw-derivation-list p",
+        "label": "derivation explanation",
+        "min": 14,
+        "size": 14,
+        "text": "由两条近轴主光线与相似三角形消去中间几何量。"
+      },
+      {
+        "selector": ".rfw-derivation-list p",
+        "label": "derivation explanation",
+        "min": 14,
+        "size": 14,
+        "text": "符号同时编码像的正倒；绝对值给出线放大率。"
+      },
+      {
+        "selector": ".rfw-checks span",
+        "label": "check label",
+        "min": 12.5,
+        "size": 13,
+        "text": "镜方程残差"
+      },
+      {
+        "selector": ".rfw-checks span",
+        "label": "check label",
+        "min": 12.5,
+        "size": 13,
+        "text": "实/虚像判据"
+      },
+      {
+        "selector": ".rfw-checks span",
+        "label": "check label",
+        "min": 12.5,
+        "size": 13,
+        "text": "近轴有效性"
+      },
+      {
+        "selector": ".rfw-checks span",
+        "label": "check label",
+        "min": 12.5,
+        "size": 13,
+        "text": "屏幕位置"
+      },
+      {
+        "selector": ".rfw-checks b",
+        "label": "check result",
+        "min": 16,
+        "size": 17,
+        "text": "通过"
+      },
+      {
+        "selector": ".rfw-checks b",
+        "label": "check result",
+        "min": 16,
+        "size": 17,
+        "text": "实像"
+      },
+      {
+        "selector": ".rfw-checks b",
+        "label": "check result",
+        "min": 16,
+        "size": 17,
+        "text": "良好"
+      },
+      {
+        "selector": ".rfw-checks b",
+        "label": "check result",
+        "min": 16,
+        "size": 17,
+        "text": "接近像面"
+      },
+      {
+        "selector": ".rfw-checks p",
+        "label": "check explanation",
+        "min": 13.5,
+        "size": 14,
+        "text": "0.00e+0"
+      },
+      {
+        "selector": ".rfw-checks p",
+        "label": "check explanation",
+        "min": 13.5,
+        "size": 14,
+        "text": "反射光在镜前真实相交，可用屏幕接收。"
+      },
+      {
+        "selector": ".rfw-checks p",
+        "label": "check explanation",
+        "min": 13.5,
+        "size": 14,
+        "text": "当前精确球面光束焦散宽度约 0.68 px。"
+      },
+      {
+        "selector": ".rfw-checks p",
+        "label": "check explanation",
+        "min": 13.5,
+        "size": 14,
+        "text": "相对近轴像面偏移 0 px。"
+      },
+      {
+        "selector": ".rfw-boundary b",
+        "label": "boundary heading",
+        "min": 14,
+        "size": 15,
+        "text": "模型边界"
+      },
+      {
+        "selector": ".rfw-boundary p",
+        "label": "boundary explanation",
+        "min": 13.5,
+        "size": 14,
+        "text": "当光线离主轴很远或口径过大时会出现球差，简单 f=R/2 与镜方程不再精确。"
+      }
     ],
-    "analysis": [],
     "analysisLeafFailures": [],
-    "drawer": [],
+    "drawer": [
+      {
+        "selector": ".rfw-right-drawer header span",
+        "label": "drawer eyebrow",
+        "min": 11,
+        "size": 12,
+        "text": "UNIFIED STATE"
+      },
+      {
+        "selector": ".rfw-right-drawer h2",
+        "label": "drawer title",
+        "min": 24,
+        "size": 27,
+        "text": "参数与实时判据"
+      },
+      {
+        "selector": ".rfw-right-drawer header button",
+        "label": "drawer header action",
+        "min": 12,
+        "size": 12,
+        "text": "固定"
+      },
+      {
+        "selector": ".rfw-right-drawer header button",
+        "label": "drawer header action",
+        "min": 12,
+        "size": 12,
+        "text": "关闭"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-reset",
+        "label": "drawer reset",
+        "min": 13,
+        "size": 13,
+        "text": "恢复默认"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-control b",
+        "label": "control label",
+        "min": 14,
+        "size": 14,
+        "text": "镜面类型"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-control b",
+        "label": "control label",
+        "min": 14,
+        "size": 14,
+        "text": "焦距大小 |f|"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-control b",
+        "label": "control label",
+        "min": 14,
+        "size": 14,
+        "text": "物距 dₒ"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-control b",
+        "label": "control label",
+        "min": 14,
+        "size": 14,
+        "text": "物高 hₒ"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-control b",
+        "label": "control label",
+        "min": 14,
+        "size": 14,
+        "text": "有效口径比例"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-control b",
+        "label": "control label",
+        "min": 14,
+        "size": 14,
+        "text": "屏幕相对理论像面偏移"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-control output",
+        "label": "control value",
+        "min": 13,
+        "size": 13,
+        "text": "150 px"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-control output",
+        "label": "control value",
+        "min": 13,
+        "size": 13,
+        "text": "260 px"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-control output",
+        "label": "control value",
+        "min": 13,
+        "size": 13,
+        "text": "60 px"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-control output",
+        "label": "control value",
+        "min": 13,
+        "size": 13,
+        "text": "18%"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-control output",
+        "label": "control value",
+        "min": 13,
+        "size": 13,
+        "text": "0 px"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-control select",
+        "label": "control select",
+        "min": 13,
+        "size": 13,
+        "text": "凹面镜凸面镜"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-model-presets button",
+        "label": "preset button",
+        "min": 13,
+        "size": 13,
+        "text": "凹镜·实像"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-model-presets button",
+        "label": "preset button",
+        "min": 13,
+        "size": 13,
+        "text": "凹镜·放大虚像"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-model-presets button",
+        "label": "preset button",
+        "min": 13,
+        "size": 13,
+        "text": "凸面镜"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-full-metrics span",
+        "label": "metric label",
+        "min": 12.5,
+        "size": 13,
+        "text": "像距 dᵢ"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-full-metrics span",
+        "label": "metric label",
+        "min": 12.5,
+        "size": 13,
+        "text": "放大率 m"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-full-metrics span",
+        "label": "metric label",
+        "min": 12.5,
+        "size": 13,
+        "text": "像的性质"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-full-metrics span",
+        "label": "metric label",
+        "min": 12.5,
+        "size": 13,
+        "text": "焦距 f"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-full-metrics span",
+        "label": "metric label",
+        "min": 12.5,
+        "size": 13,
+        "text": "球面光束焦散宽度"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-full-metrics span",
+        "label": "metric label",
+        "min": 12.5,
+        "size": 13,
+        "text": "屏幕相对像面"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-full-metrics b",
+        "label": "metric value",
+        "min": 15,
+        "size": 16,
+        "text": "354.5 px"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-full-metrics b",
+        "label": "metric value",
+        "min": 15,
+        "size": 16,
+        "text": "-1.364"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-full-metrics b",
+        "label": "metric value",
+        "min": 15,
+        "size": 16,
+        "text": "实像·倒立"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-full-metrics b",
+        "label": "metric value",
+        "min": 15,
+        "size": 16,
+        "text": "150 px"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-full-metrics b",
+        "label": "metric value",
+        "min": 15,
+        "size": 16,
+        "text": "0.68 px"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-full-metrics b",
+        "label": "metric value",
+        "min": 15,
+        "size": 16,
+        "text": "0 px"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-status",
+        "label": "drawer status",
+        "min": 13.5,
+        "size": 14,
+        "text": "真实反射光在镜前相交，可在屏幕上接收。 当前口径下近轴近似良好，主光线与精确球面反射束基本一致。"
+      }
+    ],
     "drawerLeafFailures": []
   },
   {
     "width": 1366,
     "height": 768,
-    "failures": [
-      "locator.click: Element is outside of the viewport\nCall log:\n  - waiting for locator('.rfw-left-drawer [data-rfw-preset=\"proof\"]')\n    - locator resolved to <button data-rfw-preset=\"proof\">公式＋验证</button>\n  - attempting click action\n    - scrolling into view if needed\n    - done scrolling\n\n    at /home/runner/work/Model-Demo-Webpage/Model-Demo-Webpage/tests/visual-audit-r3-right-typography-v018.mjs:81:70"
+    "failures": [],
+    "analysis": [
+      {
+        "selector": ".rfw-analysis-head h2",
+        "label": "analysis heading",
+        "min": 24,
+        "size": 28,
+        "text": "同步分析区"
+      },
+      {
+        "selector": ".rfw-analysis-head p",
+        "label": "analysis description",
+        "min": 14,
+        "size": 15,
+        "text": "最多同时挂载两个可读模块；主实验台与所选模块必须在同一视口完成比较。"
+      },
+      {
+        "selector": ".rfw-analysis-head output",
+        "label": "analysis counter",
+        "min": 12,
+        "size": 13,
+        "text": "2 / 2"
+      },
+      {
+        "selector": ".rfw-module-head>div>span",
+        "label": "module eyebrow",
+        "min": 11.5,
+        "size": 12,
+        "text": "数学表征"
+      },
+      {
+        "selector": ".rfw-module-head>div>span",
+        "label": "module eyebrow",
+        "min": 11.5,
+        "size": 12,
+        "text": "验证与边界"
+      },
+      {
+        "selector": ".rfw-module-head h3",
+        "label": "module title",
+        "min": 20,
+        "size": 22,
+        "text": "从图到公式"
+      },
+      {
+        "selector": ".rfw-module-head h3",
+        "label": "module title",
+        "min": 20,
+        "size": 22,
+        "text": "自洽性与模型边界"
+      },
+      {
+        "selector": ".rfw-module-head p",
+        "label": "module subtitle",
+        "min": 13,
+        "size": 14,
+        "text": "公式必须能回指局部机制和可测对象"
+      },
+      {
+        "selector": ".rfw-module-head p",
+        "label": "module subtitle",
+        "min": 13,
+        "size": 14,
+        "text": "任何漂亮图形都必须能被检查和证伪"
+      },
+      {
+        "selector": ".rfw-module-actions button",
+        "label": "module action",
+        "min": 11,
+        "size": 12,
+        "text": "放大"
+      },
+      {
+        "selector": ".rfw-module-actions button",
+        "label": "module action",
+        "min": 11,
+        "size": 12,
+        "text": "关闭"
+      },
+      {
+        "selector": ".rfw-module-actions button",
+        "label": "module action",
+        "min": 11,
+        "size": 12,
+        "text": "放大"
+      },
+      {
+        "selector": ".rfw-module-actions button",
+        "label": "module action",
+        "min": 11,
+        "size": 12,
+        "text": "关闭"
+      },
+      {
+        "selector": ".rfw-module-guide summary",
+        "label": "module guide summary",
+        "min": 13,
+        "size": 14,
+        "text": "目的、作用与建议操作"
+      },
+      {
+        "selector": ".rfw-module-guide summary",
+        "label": "module guide summary",
+        "min": 13,
+        "size": 14,
+        "text": "目的、作用与建议操作"
+      },
+      {
+        "selector": ".rfw-module-guide p",
+        "label": "module guide copy",
+        "min": 12.5,
+        "size": 13,
+        "text": "目的把几何关系压缩成可计算的方程，同时保留每一步的物理来源。"
+      },
+      {
+        "selector": ".rfw-module-guide p",
+        "label": "module guide copy",
+        "min": 12.5,
+        "size": 13,
+        "text": "作用承担跨表征映射，防止公式与图形各自成立却互不对应。"
+      },
+      {
+        "selector": ".rfw-module-guide p",
+        "label": "module guide copy",
+        "min": 12.5,
+        "size": 13,
+        "text": "操作按顺序展开推导，并在主图中寻找每个符号对应的对象。"
+      },
+      {
+        "selector": ".rfw-module-guide p",
+        "label": "module guide copy",
+        "min": 12.5,
+        "size": 13,
+        "text": "目的检查当前状态下的恒等关系、几何判据与近似适用性。"
+      },
+      {
+        "selector": ".rfw-module-guide p",
+        "label": "module guide copy",
+        "min": 12.5,
+        "size": 13,
+        "text": "作用区分严格结果、教学示意和超出模型能力的现实效应。"
+      },
+      {
+        "selector": ".rfw-module-guide p",
+        "label": "module guide copy",
+        "min": 12.5,
+        "size": 13,
+        "text": "操作优先阅读警告项；参数越极端，越不能只相信图像。"
+      },
+      {
+        "selector": ".rfw-module-guide b",
+        "label": "module guide label",
+        "min": 11,
+        "size": 12,
+        "text": "目的"
+      },
+      {
+        "selector": ".rfw-module-guide b",
+        "label": "module guide label",
+        "min": 11,
+        "size": 12,
+        "text": "作用"
+      },
+      {
+        "selector": ".rfw-module-guide b",
+        "label": "module guide label",
+        "min": 11,
+        "size": 12,
+        "text": "操作"
+      },
+      {
+        "selector": ".rfw-module-guide b",
+        "label": "module guide label",
+        "min": 11,
+        "size": 12,
+        "text": "目的"
+      },
+      {
+        "selector": ".rfw-module-guide b",
+        "label": "module guide label",
+        "min": 11,
+        "size": 12,
+        "text": "作用"
+      },
+      {
+        "selector": ".rfw-module-guide b",
+        "label": "module guide label",
+        "min": 11,
+        "size": 12,
+        "text": "操作"
+      },
+      {
+        "selector": ".rfw-derivation-list article>i",
+        "label": "derivation step number",
+        "min": 12,
+        "size": 12,
+        "text": "1"
+      },
+      {
+        "selector": ".rfw-derivation-list article>i",
+        "label": "derivation step number",
+        "min": 12,
+        "size": 12,
+        "text": "2"
+      },
+      {
+        "selector": ".rfw-derivation-list article>i",
+        "label": "derivation step number",
+        "min": 12,
+        "size": 12,
+        "text": "3"
+      },
+      {
+        "selector": ".rfw-derivation-list p",
+        "label": "derivation explanation",
+        "min": 14,
+        "size": 14,
+        "text": "球面镜在近轴、小口径条件下，平行轴线光近似聚到半曲率半径处。"
+      },
+      {
+        "selector": ".rfw-derivation-list p",
+        "label": "derivation explanation",
+        "min": 14,
+        "size": 14,
+        "text": "由两条近轴主光线与相似三角形消去中间几何量。"
+      },
+      {
+        "selector": ".rfw-derivation-list p",
+        "label": "derivation explanation",
+        "min": 14,
+        "size": 14,
+        "text": "符号同时编码像的正倒；绝对值给出线放大率。"
+      },
+      {
+        "selector": ".rfw-checks span",
+        "label": "check label",
+        "min": 12.5,
+        "size": 13,
+        "text": "镜方程残差"
+      },
+      {
+        "selector": ".rfw-checks span",
+        "label": "check label",
+        "min": 12.5,
+        "size": 13,
+        "text": "实/虚像判据"
+      },
+      {
+        "selector": ".rfw-checks span",
+        "label": "check label",
+        "min": 12.5,
+        "size": 13,
+        "text": "近轴有效性"
+      },
+      {
+        "selector": ".rfw-checks span",
+        "label": "check label",
+        "min": 12.5,
+        "size": 13,
+        "text": "屏幕位置"
+      },
+      {
+        "selector": ".rfw-checks b",
+        "label": "check result",
+        "min": 16,
+        "size": 17,
+        "text": "通过"
+      },
+      {
+        "selector": ".rfw-checks b",
+        "label": "check result",
+        "min": 16,
+        "size": 17,
+        "text": "实像"
+      },
+      {
+        "selector": ".rfw-checks b",
+        "label": "check result",
+        "min": 16,
+        "size": 17,
+        "text": "良好"
+      },
+      {
+        "selector": ".rfw-checks b",
+        "label": "check result",
+        "min": 16,
+        "size": 17,
+        "text": "接近像面"
+      },
+      {
+        "selector": ".rfw-checks p",
+        "label": "check explanation",
+        "min": 13.5,
+        "size": 14,
+        "text": "0.00e+0"
+      },
+      {
+        "selector": ".rfw-checks p",
+        "label": "check explanation",
+        "min": 13.5,
+        "size": 14,
+        "text": "反射光在镜前真实相交，可用屏幕接收。"
+      },
+      {
+        "selector": ".rfw-checks p",
+        "label": "check explanation",
+        "min": 13.5,
+        "size": 14,
+        "text": "当前精确球面光束焦散宽度约 0.68 px。"
+      },
+      {
+        "selector": ".rfw-checks p",
+        "label": "check explanation",
+        "min": 13.5,
+        "size": 14,
+        "text": "相对近轴像面偏移 0 px。"
+      },
+      {
+        "selector": ".rfw-boundary b",
+        "label": "boundary heading",
+        "min": 14,
+        "size": 15,
+        "text": "模型边界"
+      },
+      {
+        "selector": ".rfw-boundary p",
+        "label": "boundary explanation",
+        "min": 13.5,
+        "size": 14,
+        "text": "当光线离主轴很远或口径过大时会出现球差，简单 f=R/2 与镜方程不再精确。"
+      }
     ],
-    "analysis": [],
     "analysisLeafFailures": [],
-    "drawer": [],
+    "drawer": [
+      {
+        "selector": ".rfw-right-drawer header span",
+        "label": "drawer eyebrow",
+        "min": 11,
+        "size": 12,
+        "text": "UNIFIED STATE"
+      },
+      {
+        "selector": ".rfw-right-drawer h2",
+        "label": "drawer title",
+        "min": 24,
+        "size": 27,
+        "text": "参数与实时判据"
+      },
+      {
+        "selector": ".rfw-right-drawer header button",
+        "label": "drawer header action",
+        "min": 12,
+        "size": 12,
+        "text": "固定"
+      },
+      {
+        "selector": ".rfw-right-drawer header button",
+        "label": "drawer header action",
+        "min": 12,
+        "size": 12,
+        "text": "关闭"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-reset",
+        "label": "drawer reset",
+        "min": 13,
+        "size": 13,
+        "text": "恢复默认"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-control b",
+        "label": "control label",
+        "min": 14,
+        "size": 14,
+        "text": "镜面类型"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-control b",
+        "label": "control label",
+        "min": 14,
+        "size": 14,
+        "text": "焦距大小 |f|"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-control b",
+        "label": "control label",
+        "min": 14,
+        "size": 14,
+        "text": "物距 dₒ"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-control b",
+        "label": "control label",
+        "min": 14,
+        "size": 14,
+        "text": "物高 hₒ"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-control b",
+        "label": "control label",
+        "min": 14,
+        "size": 14,
+        "text": "有效口径比例"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-control b",
+        "label": "control label",
+        "min": 14,
+        "size": 14,
+        "text": "屏幕相对理论像面偏移"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-control output",
+        "label": "control value",
+        "min": 13,
+        "size": 13,
+        "text": "150 px"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-control output",
+        "label": "control value",
+        "min": 13,
+        "size": 13,
+        "text": "260 px"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-control output",
+        "label": "control value",
+        "min": 13,
+        "size": 13,
+        "text": "60 px"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-control output",
+        "label": "control value",
+        "min": 13,
+        "size": 13,
+        "text": "18%"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-control output",
+        "label": "control value",
+        "min": 13,
+        "size": 13,
+        "text": "0 px"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-control select",
+        "label": "control select",
+        "min": 13,
+        "size": 13,
+        "text": "凹面镜凸面镜"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-model-presets button",
+        "label": "preset button",
+        "min": 13,
+        "size": 13,
+        "text": "凹镜·实像"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-model-presets button",
+        "label": "preset button",
+        "min": 13,
+        "size": 13,
+        "text": "凹镜·放大虚像"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-model-presets button",
+        "label": "preset button",
+        "min": 13,
+        "size": 13,
+        "text": "凸面镜"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-full-metrics span",
+        "label": "metric label",
+        "min": 12.5,
+        "size": 13,
+        "text": "像距 dᵢ"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-full-metrics span",
+        "label": "metric label",
+        "min": 12.5,
+        "size": 13,
+        "text": "放大率 m"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-full-metrics span",
+        "label": "metric label",
+        "min": 12.5,
+        "size": 13,
+        "text": "像的性质"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-full-metrics span",
+        "label": "metric label",
+        "min": 12.5,
+        "size": 13,
+        "text": "焦距 f"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-full-metrics span",
+        "label": "metric label",
+        "min": 12.5,
+        "size": 13,
+        "text": "球面光束焦散宽度"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-full-metrics span",
+        "label": "metric label",
+        "min": 12.5,
+        "size": 13,
+        "text": "屏幕相对像面"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-full-metrics b",
+        "label": "metric value",
+        "min": 15,
+        "size": 16,
+        "text": "354.5 px"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-full-metrics b",
+        "label": "metric value",
+        "min": 15,
+        "size": 16,
+        "text": "-1.364"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-full-metrics b",
+        "label": "metric value",
+        "min": 15,
+        "size": 16,
+        "text": "实像·倒立"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-full-metrics b",
+        "label": "metric value",
+        "min": 15,
+        "size": 16,
+        "text": "150 px"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-full-metrics b",
+        "label": "metric value",
+        "min": 15,
+        "size": 16,
+        "text": "0.68 px"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-full-metrics b",
+        "label": "metric value",
+        "min": 15,
+        "size": 16,
+        "text": "0 px"
+      },
+      {
+        "selector": ".rfw-right-drawer .rfw-status",
+        "label": "drawer status",
+        "min": 13.5,
+        "size": 14,
+        "text": "真实反射光在镜前相交，可在屏幕上接收。 当前口径下近轴近似良好，主光线与精确球面反射束基本一致。"
+      }
+    ],
     "drawerLeafFailures": []
   }
 ]
