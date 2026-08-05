@@ -38,6 +38,8 @@ jobs:
         run: node tests/visual-audit-r1-v014.mjs
       - name: R2 strict runtime visual audit
         run: node tests/visual-audit-r2-v015.mjs
+      - name: R2 direct-control audit
+        run: node tests/visual-audit-r2-direct-control-v015.mjs
       - name: Upload visual audit
         if: always()
         uses: actions/upload-artifact@v4
@@ -48,5 +50,6 @@ jobs:
             visual-audit-reflection-v013/
             visual-audit-r1-v014/
             visual-audit-r2-v015/
+            visual-audit-r2-direct-control-v015/
           if-no-files-found: error
           retention-days: 14
