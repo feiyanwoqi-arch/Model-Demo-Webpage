@@ -58,6 +58,25 @@ function auditText(record,metrics,names){
     }
   }
 }
+function overlap(a,b,padding=3){
+  if(!a||!b)return false;
+  return a.left-padding<b.right&&a.right+padding>b.left&&a.top-padding<b.bottom&&a.bottom+padding>b.top;
+}
+function auditMainLabelCollisions(record,metrics){
+  const labels=metrics?.main?.labels||[];
+  const find=pattern=>labels.find(item=>pattern.test(item.label));
+  const pairs=[
+    [/^C=2F$/,/^物体$/,'C/物体'],
+    [/^F$/,/^物体$/,'F/物体'],
+    [/^近轴实像位置$/,/^物体$/,'实像标注/物体'],
+    [/^近轴实像位置$/,/^C=2F$/,'实像标注/C'],
+    [/球面镜$/,/有限口径产生可见球差|近轴像与有限光束基本一致|物体接近焦点/,'镜面标题/状态卡']
+  ];
+  for(const [aPattern,bPattern,name] of pairs){
+    const a=find(aPattern),b=find(bPattern);
+    if(a&&b&&overlap(a,b))record.assertions.push(`main label collision: ${name}`);
+  }
+}
 
 for(const [width,height] of viewports){
   const record={width,height,errors:[],assertions:[],sections:{},before:null,after:null,metrics:null,layout:null,states:{}};
@@ -71,10 +90,12 @@ for(const [width,height] of viewports){
 
     record.layout=await page.evaluate(()=>{
       const rect=s=>document.querySelector(s)?.getBoundingClientRect();
-      const primary=rect('.rfw-primary-card'),analysis=rect('.rfw-analysis-column');
+      const primary=rect('.rfw-primary-card'),analysis=rect('.rfw-analysis-column'),app=rect('.app');
       const style=s=>{const n=document.querySelector(s);return n?getComputedStyle(n):null};
+      const appStyle=style('.app');
       return{
         appClass:document.querySelector('.app')?.className||'',
+        app:app&&{left:app.left,right:app.right,width:app.width,maxWidth:appStyle?.maxWidth||'',paddingLeft:appStyle?.paddingLeft||'',paddingRight:appStyle?.paddingRight||''},
         primary:primary&&{top:primary.top,bottom:primary.bottom,left:primary.left,right:primary.right,width:primary.width},
         analysis:analysis&&{top:analysis.top,bottom:analysis.bottom,left:analysis.left,right:analysis.right,width:analysis.width},
         horizontalOverflow:document.documentElement.scrollWidth-document.documentElement.clientWidth,
@@ -85,6 +106,8 @@ for(const [width,height] of viewports){
     });
     if(!record.layout.appClass.includes('r3-v017-active'))record.assertions.push(`missing R3 runtime class: ${record.layout.appClass}`);
     if(record.layout.horizontalOverflow>2)record.assertions.push(`horizontal overflow ${record.layout.horizontalOverflow}px`);
+    if((record.layout.app?.width||0)<width-2)record.assertions.push(`app not native width: ${record.layout.app?.width||0}px of ${width}px`);
+    if(record.layout.app?.maxWidth!=='none')record.assertions.push(`app max-width still constrained: ${record.layout.app?.maxWidth}`);
     if((record.layout.primary?.width||0)<width*.86)record.assertions.push(`primary workbench too narrow ${record.layout.primary?.width||0}px`);
     if((record.layout.analysis?.top||0)<(record.layout.primary?.bottom||0)+10)record.assertions.push('analysis remains beside or overlaps primary workbench');
     if(record.layout.moduleTitle<20)record.assertions.push(`module title ${record.layout.moduleTitle}px < 20px`);
@@ -103,10 +126,13 @@ for(const [width,height] of viewports){
     await page.waitForTimeout(800);
     record.after={
       distance:await page.locator('[data-rfw-output="do"]').textContent(),
-      height:await page.locator('[data-rfw-output="height"]').textContent()
+      height:await page.locator('[data-rfw-output="height"]').textContent(),
+      dragDistance:await page.locator('.rfw-page').getAttribute('data-r3-drag-distance'),
+      dragHeight:await page.locator('.rfw-page').getAttribute('data-r3-drag-height')
     };
     if(Math.abs(parseFloat(record.after.distance)-330)>3)record.assertions.push(`object drag distance ${record.after.distance}`);
     if(Math.abs(parseFloat(record.after.height)-145)>3)record.assertions.push(`object drag height ${record.after.height}`);
+    if(record.after.dragDistance!=='330'||record.after.dragHeight!=='145')record.assertions.push(`direct-drag controller state ${record.after.dragDistance}/${record.after.dragHeight}`);
 
     record.sections.mechanism=await fullyVisible(record,page,'[data-module-id="mechanism"]',width,height,'mechanism module');
     await page.screenshot({path:`${outDir}/r3-${width}x${height}-02-mechanism.png`,fullPage:false});
@@ -115,7 +141,10 @@ for(const [width,height] of viewports){
 
     record.metrics=await page.evaluate(()=>window.R2CanvasTextAuditV016?.getMetrics?.()||null);
     if(!record.metrics)record.assertions.push('missing all-canvas text metrics');
-    else auditText(record,record.metrics,['main','mechanism','observable']);
+    else{
+      auditText(record,record.metrics,['main','mechanism','observable']);
+      auditMainLabelCollisions(record,record.metrics);
+    }
 
     await setParam(page,'aperture',0.9);await page.waitForTimeout(650);
     record.states.largeAperture=await page.evaluate(()=>({blur:Number(document.querySelector('.rfw-page')?.dataset.r3Blur),status:document.querySelector('#rfwStatus')?.textContent||''}));
