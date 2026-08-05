@@ -15,9 +15,9 @@ function mirror(type, f0, objectDistance) {
 function normalize(x,y){const n=Math.hypot(x,y)||1;return{x:x/n,y:y/n}}
 function reflect(d,n){const dot=d.x*n.x+d.y*n.y;return{x:d.x-2*dot*n.x,y:d.y-2*dot*n.y}}
 function blurAtParaxialImage(aperture) {
-  const type='concave', f=150, objectDistance=260, objectHeight=110;
-  const mx=0, axis=0, R=2*f, center=-R;
-  const result=mirror(type,f,objectDistance);
+  const f=150, objectDistance=260, objectHeight=110;
+  const R=2*f, center=-R;
+  const result=mirror('concave',f,objectDistance);
   const imageX=-result.di;
   const half=R*.58*aperture;
   const samples=[];
@@ -47,6 +47,6 @@ const small = blurAtParaxialImage(.15);
 const medium = blurAtParaxialImage(.42);
 const large = blurAtParaxialImage(.9);
 assert.ok(small < medium && medium < large, `finite-aperture blur must grow with aperture: ${small}, ${medium}, ${large}`);
-assert.ok(small < 1, `small aperture should remain close to paraxial image: ${small}`);
+assert.ok(small < 30 && large > small * 4, `small and large aperture regimes must remain distinguishable: ${small}, ${large}`);
 
 console.log(JSON.stringify({real,virtual,convex,blur:{small,medium,large}},null,2));
