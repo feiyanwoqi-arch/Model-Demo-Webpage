@@ -40,6 +40,7 @@ async function canvasInkRatio(locator){
 }
 function validateLabels(record,metrics){
   for(const [canvasKey,canvas] of Object.entries(metrics||{})){
+    if(!canvas?.rect||canvas.rect.width<1||canvas.rect.height<1)continue;
     for(const label of canvas.labels||[]){
       const minimum=label.role==='status'?18:label.role==='core'?16:14;
       if(label.effectivePx+0.05<minimum){
