@@ -45,6 +45,14 @@ jobs:
         id: r3audit
         continue-on-error: true
         run: node tests/visual-audit-r3-v017.mjs
+      - name: Upload R3 native screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: r3-live-evidence-v017
+          path: visual-audit-r3-v017/
+          if-no-files-found: warn
+          retention-days: 14
       - name: Publish R3 screenshots and metrics
         if: always()
         env:
