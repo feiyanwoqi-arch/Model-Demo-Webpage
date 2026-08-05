@@ -81,5 +81,5 @@ jobs:
           done
           exit 1
       - name: Enforce R3 audit result
-        if: !cancelled() && steps.r3audit.outcome != 'success'
+        if: ${{ !cancelled() && steps.r3audit.outcome != 'success' }}
         run: exit 1
