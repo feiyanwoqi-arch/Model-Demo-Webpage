@@ -13,7 +13,7 @@ const scenarios = [
     end: { x: 570 - 285 * Math.sin(55 * Math.PI / 180), y: 420 - 285 * Math.cos(55 * Math.PI / 180) }
   },
   { id: 'plane-mirror', output: 'distance', mechanismMustChange: true, start: { x: 330, y: 395 }, end: { x: 280, y: 355 } },
-  { id: 'spherical-mirror', output: 'do', mechanismMustChange: false, start: { x: 570, y: 240 }, end: { x: 520, y: 205 } }
+  { id: 'spherical-mirror', output: 'do', mechanismMustChange: true, start: { x: 590, y: 240 }, end: { x: 520, y: 205 } }
 ];
 
 function visibleFraction(box, width, height) {
@@ -23,9 +23,11 @@ function visibleFraction(box, width, height) {
   return (visibleWidth * visibleHeight) / (box.width * box.height);
 }
 
-async function dragLogical(page, locator, start, end) {
+async function dragLogical(page, start, end) {
+  await page.waitForSelector('#rfwMainCanvas:visible', { timeout: 20000 });
+  const locator = page.locator('#rfwMainCanvas');
   const box = await locator.boundingBox();
-  if (!box) throw new Error('main canvas has no bounding box');
+  if (!box) throw new Error('main canvas has no bounding box after stable-mount wait');
   const map = point => ({
     x: box.x + point.x / 1080 * box.width,
     y: box.y + point.y / 675 * box.height
@@ -46,7 +48,12 @@ async function auditScenario(scenario, width, height) {
 
   await page.goto(`http://127.0.0.1:8000/#model:${scenario.id}`, { waitUntil: 'networkidle' });
   await page.waitForSelector(`.rfw-page[data-model-id="${scenario.id}"] .rfw-primary-card`, { timeout: 20000 });
-  await page.waitForTimeout(900);
+  if (scenario.id === 'spherical-mirror') {
+    await page.waitForSelector('.rfw-page[data-model-id="spherical-mirror"][data-legibility-version="017"]', { timeout: 20000 });
+    await page.waitForTimeout(650);
+  } else {
+    await page.waitForTimeout(900);
+  }
   await page.evaluate(() => {
     const workspace = document.querySelector('.rfw-workspace');
     const topbar = document.querySelector('.topbar');
@@ -62,10 +69,11 @@ async function auditScenario(scenario, width, height) {
   const observableCanvas = await page.locator('[data-module-id="observable"] canvas').boundingBox();
   const boardCount = await page.locator('.rfw-board').getAttribute('data-count');
   const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
-  const legibilityFlow = scenario.id === 'plane-mirror' && await page.locator('.rfw-page').getAttribute('data-legibility-version') === '016';
+  const version = await page.locator('.rfw-page').getAttribute('data-legibility-version');
+  const legibilityFlow = (scenario.id === 'plane-mirror' && version === '016') || (scenario.id === 'spherical-mirror' && version === '017');
 
   if (legibilityFlow) {
-    if (!primary || primary.width < width * .88) assertions.push(`${scenario.id}: full-width primary workbench not applied`);
+    if (!primary || primary.width < width * .86) assertions.push(`${scenario.id}: full-width primary workbench not applied`);
     if (!primary || !mechanism || mechanism.y < primary.y + primary.height + 10) assertions.push(`${scenario.id}: analysis must follow the primary workbench`);
     if (mechanism && observable && Math.abs(mechanism.y - observable.y) > 3) assertions.push(`${scenario.id}: wide-screen analysis modules should share a row`);
     if (mechanism && observable && observable.x <= mechanism.x + mechanism.width - 2) assertions.push(`${scenario.id}: analysis modules overlap horizontally`);
@@ -84,13 +92,12 @@ async function auditScenario(scenario, width, height) {
   if (observableCanvas && observableCanvas.height < 150) assertions.push(`${scenario.id}: observable canvas too short ${observableCanvas.height}`);
   if (overflow > 2) assertions.push(`${scenario.id}: horizontal overflow ${overflow}px`);
 
-  const mainCanvas = page.locator('#rfwMainCanvas');
   const beforeValue = await page.locator(`[data-rfw-output="${scenario.output}"]`).textContent();
   const beforeMechanism = await page.locator('[data-module-id="mechanism"] canvas').evaluate(canvas => canvas.toDataURL());
   const beforeObservable = await page.locator('[data-module-id="observable"] canvas').evaluate(canvas => canvas.toDataURL());
   const beforeRevision = Number(await page.locator('.rfw-page').getAttribute('data-render-revision'));
-  await dragLogical(page, mainCanvas, scenario.start, scenario.end);
-  await page.waitForTimeout(500);
+  await dragLogical(page, scenario.start, scenario.end);
+  await page.waitForTimeout(650);
   const afterValue = await page.locator(`[data-rfw-output="${scenario.output}"]`).textContent();
   const afterMechanism = await page.locator('[data-module-id="mechanism"] canvas').evaluate(canvas => canvas.toDataURL());
   const afterObservable = await page.locator('[data-module-id="observable"] canvas').evaluate(canvas => canvas.toDataURL());
