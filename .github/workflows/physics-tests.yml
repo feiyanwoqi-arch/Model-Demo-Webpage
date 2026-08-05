@@ -31,6 +31,7 @@ jobs:
           node --check assets/js/reflection-foundations-v013-patch.js
           node --check assets/js/reflection-foundations-v013.js
           node --check assets/js/reflection-foundations-v013-sync-patch.js
+          node --check assets/js/r3-finite-ray-v017.js
       - name: Thin-film physical invariants
         run: node tests/thin-film-v08-physics.test.js
       - name: Model-page structure contract
@@ -45,3 +46,5 @@ jobs:
         run: node tests/simultaneous-viewport-v012.test.js
       - name: Reflection foundations contract
         run: node tests/reflection-foundations-v013.test.js
+      - name: R3 finite-ray physical invariants
+        run: node tests/r3-finite-ray-v017.test.js
