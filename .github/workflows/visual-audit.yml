@@ -11,7 +11,7 @@ permissions:
 jobs:
   optics-workbenches:
     runs-on: ubuntu-latest
-    timeout-minutes: 24
+    timeout-minutes: 26
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -40,6 +40,8 @@ jobs:
         run: node tests/visual-audit-r2-v015.mjs
       - name: R2 direct-control audit
         run: node tests/visual-audit-r2-direct-control-v015.mjs
+      - name: R2 drawer content-fit audit
+        run: node tests/visual-audit-r2-drawer-fit-v015.mjs
       - name: Upload visual audit
         if: always()
         uses: actions/upload-artifact@v4
@@ -51,5 +53,6 @@ jobs:
             visual-audit-r1-v014/
             visual-audit-r2-v015/
             visual-audit-r2-direct-control-v015/
+            visual-audit-r2-drawer-fit-v015/
           if-no-files-found: error
           retention-days: 14
