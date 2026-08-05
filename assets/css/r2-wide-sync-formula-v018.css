@@ -1,0 +1,111 @@
+/* R2 v0.18: wide synchronized workspace + formula-first typography */
+
+/* On genuinely wide desktop screens, restore simultaneous left/right reading.
+   The main workbench remains dominant; analysis gets a real readable column. */
+@media (min-width:1600px) and (min-height:760px){
+  .rfw-page[data-model-id="plane-mirror"] .rfw-workspace{
+    display:grid!important;
+    grid-template-columns:minmax(0,1.58fr) minmax(620px,.92fr)!important;
+    grid-template-rows:auto!important;
+    gap:22px!important;
+    align-items:start!important;
+  }
+  .rfw-page[data-model-id="plane-mirror"] .rfw-primary-column,
+  .rfw-page[data-model-id="plane-mirror"] .rfw-analysis-column{
+    width:auto!important;
+    min-width:0!important;
+  }
+  .rfw-page[data-model-id="plane-mirror"] .rfw-primary-card{
+    min-height:790px!important;
+    grid-template-rows:auto auto minmax(585px,1fr) auto auto!important;
+  }
+  .rfw-page[data-model-id="plane-mirror"] .rfw-main-canvas-wrap{
+    min-height:585px!important;
+    padding:8px 12px!important;
+  }
+  .rfw-page[data-model-id="plane-mirror"] #rfwMainCanvas{
+    width:min(100%,1040px)!important;
+  }
+  .rfw-page[data-model-id="plane-mirror"] .rfw-analysis-column{
+    position:sticky;
+    top:12px;
+    display:grid!important;
+    grid-template-rows:auto auto!important;
+    gap:10px!important;
+  }
+  .rfw-page[data-model-id="plane-mirror"] .rfw-analysis-head{
+    min-height:66px!important;
+    padding:5px 4px 8px!important;
+  }
+  .rfw-page[data-model-id="plane-mirror"] .rfw-board,
+  .rfw-page[data-model-id="plane-mirror"] .rfw-board[data-count="2"]{
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr)!important;
+    grid-template-rows:auto auto!important;
+    gap:14px!important;
+  }
+  .rfw-page[data-model-id="plane-mirror"] .rfw-module{
+    min-height:330px!important;
+    grid-template-rows:auto auto minmax(210px,auto)!important;
+  }
+  .rfw-page[data-model-id="plane-mirror"] .rfw-module-head{
+    min-height:66px!important;
+    padding:10px 13px!important;
+  }
+  .rfw-page[data-model-id="plane-mirror"] .rfw-module-canvas-wrap{
+    min-height:210px!important;
+    padding:6px 8px 10px!important;
+  }
+}
+
+/* Formula content is the teaching object, not decoration inside a large card. */
+.rfw-page[data-model-id="plane-mirror"] [data-module-id="derivation"] .rfw-module-canvas-wrap,
+.rfw-page[data-model-id="plane-mirror"] [data-module-id="proof"] .rfw-module-canvas-wrap{
+  display:flex!important;
+  align-items:stretch!important;
+}
+.rfw-page[data-model-id="plane-mirror"] [data-module-id="derivation"] .rfw-module-canvas-wrap>*,
+.rfw-page[data-model-id="plane-mirror"] [data-module-id="proof"] .rfw-module-canvas-wrap>*{
+  width:100%;
+}
+.rfw-page[data-model-id="plane-mirror"] .rfw-equation{
+  font-size:clamp(24px,1.55vw,32px)!important;
+  line-height:1.35!important;
+  margin:8px 0!important;
+}
+.rfw-page[data-model-id="plane-mirror"] .rfw-inline-math{
+  font-size:1.16em!important;
+}
+.rfw-page[data-model-id="plane-mirror"] .rfw-equation mjx-container[display="true"]{
+  margin:.22em 0!important;
+  font-size:1em!important;
+}
+.rfw-page[data-model-id="plane-mirror"] [data-module-id="derivation"] mjx-container,
+.rfw-page[data-model-id="plane-mirror"] [data-module-id="proof"] mjx-container{
+  font-size:clamp(22px,1.35vw,30px)!important;
+}
+.rfw-page[data-model-id="plane-mirror"] [data-module-id="derivation"] .rfw-step,
+.rfw-page[data-model-id="plane-mirror"] [data-module-id="proof"] .rfw-step{
+  min-height:64px!important;
+  padding:12px 15px!important;
+  display:grid!important;
+  grid-template-columns:34px minmax(0,1fr) minmax(170px,.62fr)!important;
+  align-items:center!important;
+  column-gap:14px!important;
+}
+.rfw-page[data-model-id="plane-mirror"] [data-module-id="derivation"] .rfw-step p,
+.rfw-page[data-model-id="plane-mirror"] [data-module-id="proof"] .rfw-step p{
+  font-size:15px!important;
+  line-height:1.5!important;
+}
+
+/* At medium desktop widths, retain the readable vertical flow rather than crush columns. */
+@media (max-width:1599px){
+  .rfw-page[data-model-id="plane-mirror"] .rfw-equation{
+    font-size:clamp(25px,2.1vw,34px)!important;
+  }
+  .rfw-page[data-model-id="plane-mirror"] [data-module-id="derivation"] mjx-container,
+  .rfw-page[data-model-id="plane-mirror"] [data-module-id="proof"] mjx-container{
+    font-size:clamp(24px,2vw,32px)!important;
+  }
+}
