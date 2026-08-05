@@ -45,6 +45,10 @@ jobs:
         id: r3audit
         continue-on-error: true
         run: node tests/visual-audit-r3-v017.mjs
+      - name: Run R3 right-panel typography audit
+        id: r3typography
+        continue-on-error: true
+        run: node tests/visual-audit-r3-right-typography-v018.mjs
       - name: Upload R3 native screenshots
         if: always() && !cancelled()
         uses: actions/upload-artifact@v4
@@ -57,15 +61,21 @@ jobs:
         if: always() && !cancelled()
         env:
           SOURCE_SHA: ${{ github.sha }}
-          AUDIT_OUTCOME: ${{ steps.r3audit.outcome }}
+          R3_AUDIT_OUTCOME: ${{ steps.r3audit.outcome }}
+          TYPOGRAPHY_OUTCOME: ${{ steps.r3typography.outcome }}
           RUN_ID: ${{ github.run_id }}
         run: |
+          if [ "$R3_AUDIT_OUTCOME" = "success" ] && [ "$TYPOGRAPHY_OUTCOME" = "success" ]; then
+            AUDIT_OUTCOME=success
+          else
+            AUDIT_OUTCOME=failure
+          fi
           rm -rf /tmp/r3-live-evidence
           mkdir -p /tmp/r3-live-evidence
           if [ -d visual-audit-r3-v017 ]; then
             cp -R visual-audit-r3-v017/. /tmp/r3-live-evidence/
           fi
-          printf '{\n  "source_sha": "%s",\n  "run_id": %s,\n  "audit_outcome": "%s"\n}\n' "$SOURCE_SHA" "$RUN_ID" "$AUDIT_OUTCOME" > /tmp/r3-live-evidence/run.json
+          printf '{\n  "source_sha": "%s",\n  "run_id": %s,\n  "audit_outcome": "%s",\n  "native_audit": "%s",\n  "right_typography_audit": "%s"\n}\n' "$SOURCE_SHA" "$RUN_ID" "$AUDIT_OUTCOME" "$R3_AUDIT_OUTCOME" "$TYPOGRAPHY_OUTCOME" > /tmp/r3-live-evidence/run.json
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
           for attempt in 1 2 3 4; do
@@ -75,11 +85,11 @@ jobs:
             mkdir -p docs/live-evidence/r3-v017
             cp -R /tmp/r3-live-evidence/. docs/live-evidence/r3-v017/
             git add docs/live-evidence/r3-v017
-            git commit -m "[r3-live-audit] publish v0.17 screenshots and metrics [skip ci]" || exit 0
+            git commit -m "[r3-live-audit] publish v0.18 typography screenshots and metrics [skip ci]" || exit 0
             if git push origin HEAD:main; then exit 0; fi
             sleep $((attempt * 3))
           done
           exit 1
       - name: Enforce R3 audit result
-        if: ${{ !cancelled() && steps.r3audit.outcome != 'success' }}
+        if: ${{ !cancelled() && (steps.r3audit.outcome != 'success' || steps.r3typography.outcome != 'success') }}
         run: exit 1
