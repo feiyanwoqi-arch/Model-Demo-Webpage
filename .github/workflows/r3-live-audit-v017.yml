@@ -62,7 +62,12 @@ jobs:
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
           git add docs/live-evidence/r3-v017
           git commit -m "[r3-live-audit] publish v0.17 screenshots and metrics [skip ci]" || exit 0
-          git push
+          for attempt in 1 2 3 4; do
+            git pull --rebase origin main
+            if git push; then exit 0; fi
+            sleep $((attempt * 3))
+          done
+          exit 1
       - name: Enforce R3 audit result
         if: steps.r3audit.outcome != 'success'
         run: exit 1
