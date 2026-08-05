@@ -18,17 +18,17 @@
 .rfw-page[data-model-id="plane-mirror"] .rfw-module[data-module-id="derivation"] .rfw-derivation-list article>i{
   width:30px;
   height:30px;
-  font-size:13px;
+  font-size:14px;
 }
 .rfw-page[data-model-id="plane-mirror"] .rfw-module[data-module-id="derivation"] .rfw-derivation-list mjx-container[display="true"]{
-  margin:.04em 0 .12em!important;
-  font-size:1.55rem!important;
-  line-height:1.1!important;
+  margin:.02em 0 .1em!important;
+  font-size:1.82rem!important;
+  line-height:1.08!important;
   overflow:visible!important;
 }
 .rfw-page[data-model-id="plane-mirror"] .rfw-module[data-module-id="derivation"] .rfw-derivation-list p{
-  margin:2px 0 0;
-  font-size:13px;
+  margin:3px 0 0;
+  font-size:15px;
   line-height:1.38;
 }
 
@@ -153,22 +153,22 @@
     padding:8px 10px;
   }
   .rfw-page[data-model-id="plane-mirror"] .rfw-module-head>div>span{
-    font-size:9px;
+    font-size:10px;
   }
   .rfw-page[data-model-id="plane-mirror"] .rfw-module-head h3{
-    font-size:19px;
+    font-size:20px;
     line-height:1.2;
   }
   .rfw-page[data-model-id="plane-mirror"] .rfw-module-head p{
-    font-size:12px;
+    font-size:13px;
     line-height:1.35;
   }
   .rfw-page[data-model-id="plane-mirror"] .rfw-module-actions button{
-    font-size:11px;
+    font-size:12px;
     padding:6px 8px;
   }
   .rfw-page[data-model-id="plane-mirror"] .rfw-module-guide summary{
-    font-size:11px;
+    font-size:12px;
     padding:6px 9px;
   }
   .rfw-page[data-model-id="plane-mirror"] .rfw-module-canvas-wrap{
@@ -192,20 +192,20 @@
     gap:6px;
   }
   .rfw-page[data-model-id="plane-mirror"] .rfw-module[data-module-id="derivation"] .rfw-derivation-list article{
-    grid-template-columns:30px minmax(0,1fr);
+    grid-template-columns:31px minmax(0,1fr);
     gap:8px;
     padding:6px 9px;
   }
   .rfw-page[data-model-id="plane-mirror"] .rfw-module[data-module-id="derivation"] .rfw-derivation-list article>i{
-    width:27px;
-    height:27px;
-    font-size:12px;
+    width:28px;
+    height:28px;
+    font-size:13px;
   }
   .rfw-page[data-model-id="plane-mirror"] .rfw-module[data-module-id="derivation"] .rfw-derivation-list mjx-container[display="true"]{
-    font-size:1.48rem!important;
+    font-size:1.75rem!important;
   }
   .rfw-page[data-model-id="plane-mirror"] .rfw-module[data-module-id="derivation"] .rfw-derivation-list p{
-    font-size:12px;
-    line-height:1.3;
+    font-size:14px;
+    line-height:1.32;
   }
 }
