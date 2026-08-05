@@ -114,9 +114,14 @@ for(const [width,height] of viewports){
     const main=page.locator('#rfwMainCanvas');
     record.before={
       distance:await page.locator('[data-rfw-output="do"]').textContent(),
-      height:await page.locator('[data-rfw-output="height"]').textContent()
+      height:await page.locator('[data-rfw-output="height"]').textContent(),
+      aperture:await page.locator('[data-rfw-output="aperture"]').textContent(),
+      blur:Number(await page.locator('.rfw-page').getAttribute('data-r3-blur'))
     };
-    await dragLogical(page,main,{x:560,y:250},{x:490,y:215});
+    if(Math.abs(parseFloat(record.before.height)-60)>2)record.assertions.push(`default object height ${record.before.height}`);
+    if(Math.abs(parseFloat(record.before.aperture)-18)>2)record.assertions.push(`default aperture ${record.before.aperture}`);
+    if(!(record.before.blur<12))record.assertions.push(`default teaching state blur ${record.before.blur}`);
+    await dragLogical(page,main,{x:560,y:300},{x:490,y:215});
     await page.waitForTimeout(600);
     record.after={
       distance:await page.locator('[data-rfw-output="do"]').textContent(),
