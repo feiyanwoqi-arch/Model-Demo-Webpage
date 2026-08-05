@@ -13,10 +13,12 @@
     const originalText = api.text.bind(api);
     api.text = (label, x, y, color, size, align, weight) => {
       const factor = isAnalysis ? 1.20 : 1.06;
-      const shiftedY = isAnalysis && y < 36 ? y + 5 : y;
-      return originalText(label, x, shiftedY, color, size * factor, align, weight);
+      let nextX = x;
+      let nextY = isAnalysis && y < 36 ? y + 5 : y;
+      if (isMain && String(label).startsWith('完整可见：')) nextY -= 4;
+      if (isAnalysis && String(label).startsWith('未被有效镜面')) nextX -= 4;
+      return originalText(label, nextX, nextY, color, size * factor, align, weight);
     };
     return api;
   };
-  window.canvasAPI = window.canvasAPI;
 })();
