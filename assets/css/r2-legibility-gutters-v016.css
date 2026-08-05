@@ -1,0 +1,6 @@
+/* Reserve true viewport gutters for fixed edge controls. */
+@media(min-width:761px){
+  .app.r2-v015-active{padding-inline:80px!important}
+  .rfw-page[data-model-id="plane-mirror"] .rfw-left-handle{left:8px}
+  .rfw-page[data-model-id="plane-mirror"] .rfw-right-handle{right:8px}
+}
