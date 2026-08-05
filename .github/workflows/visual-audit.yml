@@ -57,7 +57,7 @@ jobs:
         run: node tests/visual-audit-r2-drawer-fit-v015.mjs
       - name: R3 finite-ray and legibility audit
         if: always()
-        run: node tests/visual-audit-r3-v017.mjs
+        run: node tests/visual-audit-r3-v0171.mjs
       - name: Upload visual audit
         if: always()
         uses: actions/upload-artifact@v4
@@ -71,7 +71,7 @@ jobs:
             visual-audit-r2-all-canvas-text-v016/
             visual-audit-r2-direct-control-v015/
             visual-audit-r2-drawer-fit-v015/
-            visual-audit-r3-v017/
+            visual-audit-r3-v0171/
           if-no-files-found: warn
           retention-days: 14
       - name: Record latest direct-main run
