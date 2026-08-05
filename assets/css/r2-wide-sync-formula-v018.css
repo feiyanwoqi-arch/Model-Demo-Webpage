@@ -1,19 +1,20 @@
 /* R2 v0.18: wide synchronized workspace + formula-first typography */
 
-/* On genuinely wide desktop screens, restore simultaneous left/right reading.
-   The main workbench remains dominant; analysis gets a real readable column. */
+/* Wide desktops keep the experiment and synchronized analysis side by side. */
 @media (min-width:1600px) and (min-height:760px){
   .rfw-page[data-model-id="plane-mirror"] .rfw-workspace{
     display:grid!important;
-    grid-template-columns:minmax(0,1.58fr) minmax(620px,.92fr)!important;
+    grid-template-columns:minmax(850px,1.58fr) minmax(600px,.92fr)!important;
     grid-template-rows:auto!important;
     gap:22px!important;
     align-items:start!important;
+    height:auto!important;
   }
   .rfw-page[data-model-id="plane-mirror"] .rfw-primary-column,
   .rfw-page[data-model-id="plane-mirror"] .rfw-analysis-column{
     width:auto!important;
     min-width:0!important;
+    height:auto!important;
   }
   .rfw-page[data-model-id="plane-mirror"] .rfw-primary-card{
     min-height:790px!important;
@@ -27,8 +28,8 @@
     width:min(100%,1040px)!important;
   }
   .rfw-page[data-model-id="plane-mirror"] .rfw-analysis-column{
-    position:sticky;
-    top:12px;
+    position:sticky!important;
+    top:12px!important;
     display:grid!important;
     grid-template-rows:auto auto!important;
     gap:10px!important;
@@ -43,6 +44,7 @@
     grid-template-columns:minmax(0,1fr)!important;
     grid-template-rows:auto auto!important;
     gap:14px!important;
+    height:auto!important;
   }
   .rfw-page[data-model-id="plane-mirror"] .rfw-module{
     min-height:330px!important;
@@ -58,54 +60,67 @@
   }
 }
 
-/* Formula content is the teaching object, not decoration inside a large card. */
-.rfw-page[data-model-id="plane-mirror"] [data-module-id="derivation"] .rfw-module-canvas-wrap,
-.rfw-page[data-model-id="plane-mirror"] [data-module-id="proof"] .rfw-module-canvas-wrap{
-  display:flex!important;
-  align-items:stretch!important;
+/* The derivation module is DOM + MathJax, not a Canvas. Enlarge the actual formula nodes. */
+.rfw-page[data-model-id="plane-mirror"] [data-module-id="derivation"] .rfw-module-canvas-wrap{
+  display:block!important;
+  overflow:visible!important;
+  padding:8px 10px 12px!important;
 }
-.rfw-page[data-model-id="plane-mirror"] [data-module-id="derivation"] .rfw-module-canvas-wrap>*,
-.rfw-page[data-model-id="plane-mirror"] [data-module-id="proof"] .rfw-module-canvas-wrap>*{
-  width:100%;
-}
-.rfw-page[data-model-id="plane-mirror"] .rfw-equation{
-  font-size:clamp(24px,1.55vw,32px)!important;
-  line-height:1.35!important;
-  margin:8px 0!important;
-}
-.rfw-page[data-model-id="plane-mirror"] .rfw-inline-math{
-  font-size:1.16em!important;
-}
-.rfw-page[data-model-id="plane-mirror"] .rfw-equation mjx-container[display="true"]{
-  margin:.22em 0!important;
-  font-size:1em!important;
-}
-.rfw-page[data-model-id="plane-mirror"] [data-module-id="derivation"] mjx-container,
-.rfw-page[data-model-id="plane-mirror"] [data-module-id="proof"] mjx-container{
-  font-size:clamp(22px,1.35vw,30px)!important;
-}
-.rfw-page[data-model-id="plane-mirror"] [data-module-id="derivation"] .rfw-step,
-.rfw-page[data-model-id="plane-mirror"] [data-module-id="proof"] .rfw-step{
-  min-height:64px!important;
-  padding:12px 15px!important;
+.rfw-page[data-model-id="plane-mirror"] [data-module-id="derivation"] .rfw-derivation-list{
   display:grid!important;
-  grid-template-columns:34px minmax(0,1fr) minmax(170px,.62fr)!important;
+  gap:10px!important;
+  width:100%!important;
+  padding:4px!important;
+}
+.rfw-page[data-model-id="plane-mirror"] [data-module-id="derivation"] .rfw-derivation-list article{
+  min-height:68px!important;
+  padding:12px 14px!important;
+  display:grid!important;
+  grid-template-columns:34px minmax(0,1fr) minmax(190px,.72fr)!important;
   align-items:center!important;
   column-gap:14px!important;
+  overflow:visible!important;
 }
-.rfw-page[data-model-id="plane-mirror"] [data-module-id="derivation"] .rfw-step p,
-.rfw-page[data-model-id="plane-mirror"] [data-module-id="proof"] .rfw-step p{
+.rfw-page[data-model-id="plane-mirror"] [data-module-id="derivation"] .rfw-derivation-list article>span{
+  width:30px!important;
+  height:30px!important;
+  font-size:14px!important;
+}
+.rfw-page[data-model-id="plane-mirror"] [data-module-id="derivation"] .rfw-step-text{
   font-size:15px!important;
-  line-height:1.5!important;
+  line-height:1.55!important;
+}
+.rfw-page[data-model-id="plane-mirror"] [data-module-id="derivation"] .rfw-equation{
+  min-width:0!important;
+  margin:0!important;
+  padding:4px 8px!important;
+  font-size:clamp(22px,1.35vw,29px)!important;
+  line-height:1.35!important;
+  text-align:center!important;
+  overflow:visible!important;
+}
+.rfw-page[data-model-id="plane-mirror"] [data-module-id="derivation"] .rfw-equation mjx-container,
+.rfw-page[data-model-id="plane-mirror"] [data-module-id="derivation"] mjx-container{
+  margin:.12em 0!important;
+  font-size:clamp(22px,1.35vw,29px)!important;
+  line-height:1.25!important;
+  max-width:100%!important;
 }
 
-/* At medium desktop widths, retain the readable vertical flow rather than crush columns. */
+/* Medium and narrow desktops retain the legible vertical flow. */
 @media (max-width:1599px){
-  .rfw-page[data-model-id="plane-mirror"] .rfw-equation{
-    font-size:clamp(25px,2.1vw,34px)!important;
+  .rfw-page[data-model-id="plane-mirror"] [data-module-id="derivation"] .rfw-equation,
+  .rfw-page[data-model-id="plane-mirror"] [data-module-id="derivation"] mjx-container{
+    font-size:clamp(23px,2vw,31px)!important;
   }
-  .rfw-page[data-model-id="plane-mirror"] [data-module-id="derivation"] mjx-container,
-  .rfw-page[data-model-id="plane-mirror"] [data-module-id="proof"] mjx-container{
-    font-size:clamp(24px,2vw,32px)!important;
+}
+
+@media (max-width:760px){
+  .rfw-page[data-model-id="plane-mirror"] [data-module-id="derivation"] .rfw-derivation-list article{
+    grid-template-columns:32px minmax(0,1fr)!important;
+  }
+  .rfw-page[data-model-id="plane-mirror"] [data-module-id="derivation"] .rfw-equation{
+    grid-column:2;
+    text-align:left!important;
   }
 }
