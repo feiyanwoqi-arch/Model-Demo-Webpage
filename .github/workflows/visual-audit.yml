@@ -3,12 +3,14 @@ name: Visual audit
 on:
   push:
     branches: [main]
+    paths-ignore:
+      - 'audit/latest-visual-run.json'
   pull_request:
     branches: [main]
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   optics-workbenches:
@@ -33,20 +35,28 @@ jobs:
           cat /tmp/model-demo-webpage.log
           exit 1
       - name: Thin-film task scenarios
+        if: always()
         run: node tests/visual-audit-v012.mjs
       - name: Reflection foundations task scenarios
+        if: always()
         run: node tests/visual-audit-reflection-v013.mjs
       - name: R1 strict runtime visual audit
+        if: always()
         run: node tests/visual-audit-r1-v014.mjs
       - name: R2 effective-font and full-module audit
+        if: always()
         run: node tests/visual-audit-r2-legibility-v016.mjs
       - name: R2 all actual canvas text audit
+        if: always()
         run: node tests/visual-audit-r2-all-canvas-text-v016.mjs
       - name: R2 direct-control audit
+        if: always()
         run: node tests/visual-audit-r2-direct-control-v015.mjs
       - name: R2 drawer content-fit audit
+        if: always()
         run: node tests/visual-audit-r2-drawer-fit-v015.mjs
       - name: R3 finite-ray and legibility audit
+        if: always()
         run: node tests/visual-audit-r3-v017.mjs
       - name: Upload visual audit
         if: always()
@@ -62,5 +72,21 @@ jobs:
             visual-audit-r2-direct-control-v015/
             visual-audit-r2-drawer-fit-v015/
             visual-audit-r3-v017/
-          if-no-files-found: error
+          if-no-files-found: warn
           retention-days: 14
+      - name: Record latest direct-main run
+        if: always() && github.event_name != 'pull_request'
+        env:
+          RUN_ID: ${{ github.run_id }}
+          RUN_ATTEMPT: ${{ github.run_attempt }}
+          SOURCE_SHA: ${{ github.sha }}
+          JOB_STATUS: ${{ job.status }}
+        run: |
+          mkdir -p audit
+          printf '{\n  "run_id": %s,\n  "run_attempt": %s,\n  "source_sha": "%s",\n  "job_status": "%s"\n}\n' \
+            "$RUN_ID" "$RUN_ATTEMPT" "$SOURCE_SHA" "$JOB_STATUS" > audit/latest-visual-run.json
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add audit/latest-visual-run.json
+          git commit -m "Record visual audit run $RUN_ID [skip ci]" || exit 0
+          git push
