@@ -22,36 +22,30 @@ jobs:
         run: |
           npm install --no-save playwright@1.54.2
           npx playwright install --with-deps chromium
-      - name: Audit published R2 v0.16 page
-        run: node tests/live-pages-r2-v016.mjs
+      - name: Audit published R2 v0.18 page
+        run: node tests/live-pages-r2-v018.mjs
       - name: Upload live Pages evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: live-pages-r2-v016
-          path: live-pages-r2-v016/
+          name: live-pages-r2-v018
+          path: live-pages-r2-v018/
           if-no-files-found: error
           retention-days: 14
       - name: Publish durable audit evidence
         if: success()
         run: |
-          target="docs/live-evidence/r2-v016"
+          target="docs/live-evidence/r2-v018"
           mkdir -p "$target"
-          cp live-pages-r2-v016/metrics.json "$target/metrics.json"
-          cp live-pages-r2-v016/r2-live-1735x865-01-main.png "$target/main.png"
-          cp live-pages-r2-v016/r2-live-1735x865-02-mechanism.png "$target/mechanism.png"
-          cp live-pages-r2-v016/r2-live-1735x865-03-observable.png "$target/observable.png"
-          cp live-pages-r2-v016/r2-live-1735x865-04-parameters.png "$target/parameters.png"
+          cp live-pages-r2-v018/metrics.json "$target/metrics.json"
+          cp live-pages-r2-v018/r2-live-1790x896-wide-formula.png "$target/wide-formula.png"
           cat > "$target/README.md" <<'EOF'
-          # R2 v0.16 公网验收证据
+          # R2 v0.18 公网宽屏与公式验收证据
 
           本目录由 `Live Pages audit` 在真实 GitHub Pages 公网页面验收成功后自动更新。
 
-          - `metrics.json`：公网资源、布局、实际 Canvas 字号、安全边距、完整模块、拖动和抽屉指标；
-          - `main.png`：1735×865 公网主实验台原尺寸截图；
-          - `mechanism.png`：公网机制模块原尺寸截图；
-          - `observable.png`：公网判据模块原尺寸截图；
-          - `parameters.png`：公网参数抽屉原尺寸截图。
+          - `metrics.json`：1790×896 公网左右布局、MathJax 实际字号、安全边界与真实拖动指标；
+          - `wide-formula.png`：1790×896 公网原尺寸截图。
 
           若公网验收失败，本目录不会被更新。
           EOF
@@ -61,6 +55,6 @@ jobs:
           if git diff --cached --quiet; then
             echo "Live evidence unchanged."
           else
-            git commit -m "[live-audit-result] record R2 v0.16 public evidence"
+            git commit -m "[live-audit-result] record R2 v0.18 public evidence"
             git push
           fi
