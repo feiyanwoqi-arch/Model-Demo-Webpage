@@ -1,48 +1,232 @@
-/* R3 v0.17: finite-ray spherical-mirror workbench */
+/* R3 repair pass v0.18: readable, synchronized spherical-mirror workbench */
 body:has(.rfw-page[data-model-id="spherical-mirror"]){overflow-x:clip}
-.app.r3-v017-active{width:100vw!important;max-width:none!important;margin:0!important;padding:16px 80px 48px!important}
+.app.r3-v017-active{
+  width:100vw!important;
+  max-width:none!important;
+  margin:0!important;
+  padding:14px clamp(18px,2.2vw,44px) 36px!important;
+}
 #view.r3-v017-mounted{width:100%!important;max-width:none!important;margin-inline:0!important}
-.rfw-page[data-model-id="spherical-mirror"]{width:100%;max-width:2400px;margin-inline:auto}
-.rfw-page[data-model-id="spherical-mirror"] .rfw-hero{grid-template-columns:minmax(0,1fr) minmax(390px,.52fr);gap:28px;padding-block:12px 18px}
-.rfw-page[data-model-id="spherical-mirror"] .rfw-hero h1{font-size:clamp(36px,2.5vw,50px)}
-.rfw-page[data-model-id="spherical-mirror"] .rfw-hero p{font-size:16px;line-height:1.6}
-.rfw-page[data-model-id="spherical-mirror"] .rfw-core>span{font-size:14px;line-height:1.55}
-.rfw-page[data-model-id="spherical-mirror"] .rfw-workspace{display:grid!important;grid-template-columns:minmax(0,1fr)!important;grid-template-rows:auto auto!important;gap:24px!important;height:auto!important;min-height:0!important;align-items:start!important}
+.rfw-page[data-model-id="spherical-mirror"]{width:100%;max-width:2200px;margin-inline:auto}
+.rfw-page[data-model-id="spherical-mirror"] .rfw-hero{
+  grid-template-columns:minmax(0,1fr) minmax(360px,.48fr);
+  gap:22px;
+  padding:8px 6px 14px;
+}
+.rfw-page[data-model-id="spherical-mirror"] .rfw-hero h1{font-size:clamp(32px,2.25vw,46px)}
+.rfw-page[data-model-id="spherical-mirror"] .rfw-hero p{font-size:15px;line-height:1.58}
+.rfw-page[data-model-id="spherical-mirror"] .rfw-core>span{font-size:13px;line-height:1.5}
+
+.rfw-page[data-model-id="spherical-mirror"] .rfw-workspace{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr)!important;
+  grid-template-rows:auto auto!important;
+  gap:18px!important;
+  height:auto!important;
+  min-height:0!important;
+  align-items:start!important;
+}
 .rfw-page[data-model-id="spherical-mirror"] .rfw-primary-column,
 .rfw-page[data-model-id="spherical-mirror"] .rfw-analysis-column{width:100%;height:auto!important;min-height:0!important}
-.rfw-page[data-model-id="spherical-mirror"] .rfw-primary-card{height:auto!important;min-height:900px;grid-template-rows:auto auto minmax(730px,1fr) auto auto!important}
-.rfw-page[data-model-id="spherical-mirror"] .rfw-main-canvas-wrap{min-height:730px!important;padding:12px 18px}
-.rfw-page[data-model-id="spherical-mirror"] #rfwMainCanvas{width:min(100%,1188px)!important;height:auto!important;max-width:100%!important;max-height:none!important}
-.rfw-page[data-model-id="spherical-mirror"] .rfw-primary-head{padding:16px 19px}
-.rfw-page[data-model-id="spherical-mirror"] .rfw-primary-head h2{font-size:28px}
-.rfw-page[data-model-id="spherical-mirror"] .rfw-primary-head p{font-size:15px;line-height:1.5}
-.rfw-page[data-model-id="spherical-mirror"] .rfw-primary-head .legend{font-size:14px;gap:18px;max-width:55%}
+.rfw-page[data-model-id="spherical-mirror"] .rfw-primary-card{
+  height:auto!important;
+  min-height:735px;
+  grid-template-rows:auto auto minmax(560px,1fr) auto auto!important;
+}
+.rfw-page[data-model-id="spherical-mirror"] .rfw-main-canvas-wrap{
+  min-height:560px!important;
+  padding:8px 12px;
+  overflow:hidden!important;
+}
+.rfw-page[data-model-id="spherical-mirror"] #rfwMainCanvas{
+  display:block;
+  width:min(100%,1080px)!important;
+  height:auto!important;
+  max-width:100%!important;
+  max-height:100%!important;
+  touch-action:none;
+}
+.rfw-page[data-model-id="spherical-mirror"] .rfw-primary-head{padding:13px 16px}
+.rfw-page[data-model-id="spherical-mirror"] .rfw-primary-head h2{font-size:25px}
+.rfw-page[data-model-id="spherical-mirror"] .rfw-primary-head p{font-size:13px;line-height:1.45}
+.rfw-page[data-model-id="spherical-mirror"] .rfw-primary-head .legend{font-size:12px;gap:14px;max-width:52%}
 .rfw-page[data-model-id="spherical-mirror"] .rfw-primary-guide summary,
-.rfw-page[data-model-id="spherical-mirror"] .rfw-module-guide summary{padding:10px 15px;font-size:14px}
-.rfw-page[data-model-id="spherical-mirror"] .rfw-live-strip span{font-size:13px;margin-bottom:5px}
-.rfw-page[data-model-id="spherical-mirror"] .rfw-live-strip b{font-size:19px;line-height:1.35}
-.rfw-page[data-model-id="spherical-mirror"] .rfw-live-strip article{padding:13px 16px}
-.rfw-page[data-model-id="spherical-mirror"] .rfw-primary-foot{font-size:14px;line-height:1.55;padding:11px 16px}
-.rfw-page[data-model-id="spherical-mirror"] .rfw-analysis-column{display:grid!important;grid-template-rows:auto auto!important;gap:12px}
-.rfw-page[data-model-id="spherical-mirror"] .rfw-analysis-head{min-height:74px;padding:8px 6px 10px}
-.rfw-page[data-model-id="spherical-mirror"] .rfw-analysis-head h2{font-size:27px}
-.rfw-page[data-model-id="spherical-mirror"] .rfw-analysis-head p{font-size:15px;line-height:1.5}
+.rfw-page[data-model-id="spherical-mirror"] .rfw-module-guide summary{padding:8px 13px;font-size:12px}
+.rfw-page[data-model-id="spherical-mirror"] .rfw-live-strip span{font-size:11px;margin-bottom:4px}
+.rfw-page[data-model-id="spherical-mirror"] .rfw-live-strip b{font-size:16px;line-height:1.3}
+.rfw-page[data-model-id="spherical-mirror"] .rfw-live-strip article{padding:10px 13px}
+.rfw-page[data-model-id="spherical-mirror"] .rfw-primary-foot{font-size:12px;line-height:1.5;padding:9px 13px}
+
+.rfw-page[data-model-id="spherical-mirror"] .rfw-analysis-column{display:grid!important;grid-template-rows:auto auto!important;gap:10px}
+.rfw-page[data-model-id="spherical-mirror"] .rfw-analysis-head{min-height:64px;padding:6px 4px 8px}
+.rfw-page[data-model-id="spherical-mirror"] .rfw-analysis-head h2{font-size:24px}
+.rfw-page[data-model-id="spherical-mirror"] .rfw-analysis-head p{font-size:13px;line-height:1.45}
 .rfw-page[data-model-id="spherical-mirror"] .rfw-board,
-.rfw-page[data-model-id="spherical-mirror"] .rfw-board[data-count="2"]{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;grid-template-rows:auto!important;gap:18px!important;height:auto!important;min-height:0!important;align-items:start!important}
-.rfw-page[data-model-id="spherical-mirror"] .rfw-module{height:auto!important;min-height:430px!important;grid-template-rows:auto auto minmax(300px,auto)!important;overflow:hidden}
-.rfw-page[data-model-id="spherical-mirror"] .rfw-module-head{min-height:76px;padding:13px 15px}
-.rfw-page[data-model-id="spherical-mirror"] .rfw-module-head h3{font-size:22px;line-height:1.3}
-.rfw-page[data-model-id="spherical-mirror"] .rfw-module-head p{font-size:14px;line-height:1.5}
-.rfw-page[data-model-id="spherical-mirror"] .rfw-module-canvas-wrap{min-height:300px!important;padding:8px 10px 12px;overflow:visible!important}
-.rfw-page[data-model-id="spherical-mirror"] .rfw-module-canvas-wrap canvas{width:100%!important;height:auto!important;max-width:100%!important;max-height:none!important;aspect-ratio:720/260!important}
-.rfw-page[data-model-id="spherical-mirror"] .rfw-edge-handle{width:68px;min-height:82px;padding:12px 10px}
-.rfw-page[data-model-id="spherical-mirror"] .rfw-edge-handle b{font-size:15px}
-.rfw-page[data-model-id="spherical-mirror"] .rfw-edge-handle span{font-size:12px}
-.rfw-page[data-model-id="spherical-mirror"] .rfw-drawer{font-size:14px}
-.rfw-page[data-model-id="spherical-mirror"] .rfw-drawer h2{font-size:27px}
-@media(min-width:1900px){.rfw-page[data-model-id="spherical-mirror"] #rfwMainCanvas{width:min(100%,1600px)!important}}
-@media(min-width:2400px){.rfw-page[data-model-id="spherical-mirror"] #rfwMainCanvas{width:min(100%,1800px)!important}}
-@media(min-width:761px){.rfw-page[data-model-id="spherical-mirror"] .rfw-left-handle{left:8px}.rfw-page[data-model-id="spherical-mirror"] .rfw-right-handle{right:8px}}
-@media(max-width:1500px){.app.r3-v017-active{padding-inline:28px!important}.rfw-page[data-model-id="spherical-mirror"] .rfw-board,.rfw-page[data-model-id="spherical-mirror"] .rfw-board[data-count="2"]{grid-template-columns:minmax(0,1fr)!important;gap:22px!important}.rfw-page[data-model-id="spherical-mirror"] .rfw-module{min-height:520px!important;grid-template-rows:auto auto minmax(390px,auto)!important}.rfw-page[data-model-id="spherical-mirror"] .rfw-module-canvas-wrap{min-height:390px!important}}
-@media(max-height:820px) and (min-width:761px){.rfw-page[data-model-id="spherical-mirror"] .rfw-primary-card{min-height:790px;grid-template-rows:auto auto minmax(635px,1fr) auto auto!important}.rfw-page[data-model-id="spherical-mirror"] .rfw-main-canvas-wrap{min-height:635px!important;padding-block:6px}.rfw-page[data-model-id="spherical-mirror"] #rfwMainCanvas{width:min(100%,1080px)!important}}
-@media(max-width:760px){.app.r3-v017-active{padding-inline:9px!important}.rfw-page[data-model-id="spherical-mirror"] .rfw-hero{grid-template-columns:1fr}}
+.rfw-page[data-model-id="spherical-mirror"] .rfw-board[data-count="2"]{
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  grid-template-rows:auto!important;
+  gap:14px!important;
+  height:auto!important;
+  min-height:0!important;
+  align-items:start!important;
+}
+.rfw-page[data-model-id="spherical-mirror"] .rfw-module{
+  height:auto!important;
+  min-height:365px!important;
+  grid-template-rows:auto auto minmax(255px,auto)!important;
+  overflow:hidden;
+}
+.rfw-page[data-model-id="spherical-mirror"] .rfw-module-head{min-height:66px;padding:10px 13px}
+.rfw-page[data-model-id="spherical-mirror"] .rfw-module-head h3{font-size:19px;line-height:1.25}
+.rfw-page[data-model-id="spherical-mirror"] .rfw-module-head p{font-size:12px;line-height:1.4}
+.rfw-page[data-model-id="spherical-mirror"] .rfw-module-canvas-wrap{
+  min-height:255px!important;
+  padding:6px 8px 10px;
+  overflow:hidden!important;
+}
+.rfw-page[data-model-id="spherical-mirror"] .rfw-module-canvas-wrap canvas{
+  display:block;
+  width:min(100%,900px)!important;
+  height:auto!important;
+  max-width:100%!important;
+  max-height:100%!important;
+  aspect-ratio:720/260!important;
+}
+
+/* The edge controls are compact horizontal pills, not broken vertical text. */
+.rfw-page[data-model-id="spherical-mirror"] .rfw-edge-handle{
+  writing-mode:horizontal-tb!important;
+  width:auto!important;
+  min-height:0!important;
+  height:auto!important;
+  padding:8px 10px!important;
+  display:flex!important;
+  flex-direction:row!important;
+  align-items:center!important;
+  gap:5px!important;
+  border-radius:999px!important;
+  line-height:1!important;
+  transform:translateY(-50%)!important;
+}
+.rfw-page[data-model-id="spherical-mirror"] .rfw-edge-handle b{font-size:12px;white-space:nowrap}
+.rfw-page[data-model-id="spherical-mirror"] .rfw-edge-handle span{font-size:10px;white-space:nowrap}
+.rfw-page[data-model-id="spherical-mirror"] .rfw-left-handle{left:8px}
+.rfw-page[data-model-id="spherical-mirror"] .rfw-right-handle{right:8px}
+
+.rfw-page[data-model-id="spherical-mirror"] .rfw-drawer{
+  width:min(360px,calc(100vw - 24px));
+  top:10px;
+  bottom:10px;
+  border-radius:15px;
+  font-size:13px;
+}
+.rfw-page[data-model-id="spherical-mirror"] .rfw-drawer h2{font-size:24px}
+.rfw-page[data-model-id="spherical-mirror"] .rfw-drawer>header{padding:11px 12px}
+.rfw-page[data-model-id="spherical-mirror"] .rfw-param-body{padding:10px 12px}
+.rfw-page[data-model-id="spherical-mirror"] .rfw-controls{gap:9px}
+.rfw-page[data-model-id="spherical-mirror"] .rfw-control{gap:5px}
+.rfw-page[data-model-id="spherical-mirror"] .rfw-control b{font-size:11px}
+.rfw-page[data-model-id="spherical-mirror"] .rfw-control output{font-size:10px}
+.rfw-page[data-model-id="spherical-mirror"] .rfw-control input{min-height:20px}
+.rfw-page[data-model-id="spherical-mirror"] .rfw-model-presets{gap:6px;margin:10px 0}
+.rfw-page[data-model-id="spherical-mirror"] .rfw-full-metrics{gap:6px;padding-top:9px}
+.rfw-page[data-model-id="spherical-mirror"] .rfw-full-metrics article{padding:7px}
+.rfw-page[data-model-id="spherical-mirror"] .rfw-status{font-size:10px;line-height:1.5;padding:8px}
+
+/* On ordinary desktop widths, opening parameters keeps the experiment visible beside the drawer. */
+@media(min-width:1100px) and (max-width:1879px){
+  .rfw-page[data-model-id="spherical-mirror"]:has(.rfw-right-drawer.is-open)>.rfw-hero,
+  .rfw-page[data-model-id="spherical-mirror"]:has(.rfw-right-drawer.is-open)>.rfw-workspace{
+    margin-right:370px;
+  }
+}
+
+/* True synchronized view on wide desktops: main experiment and both modules are visible together. */
+@media(min-width:1880px){
+  .rfw-page[data-model-id="spherical-mirror"] .rfw-workspace{
+    grid-template-columns:minmax(0,1.58fr) minmax(520px,.82fr)!important;
+    grid-template-rows:minmax(0,1fr)!important;
+    height:min(calc(100dvh - 154px),1040px)!important;
+    min-height:760px!important;
+    gap:16px!important;
+  }
+  .rfw-page[data-model-id="spherical-mirror"] .rfw-primary-column,
+  .rfw-page[data-model-id="spherical-mirror"] .rfw-analysis-column{height:100%!important}
+  .rfw-page[data-model-id="spherical-mirror"] .rfw-primary-card{
+    min-height:0!important;
+    height:100%!important;
+    grid-template-rows:auto auto minmax(0,1fr) auto auto!important;
+  }
+  .rfw-page[data-model-id="spherical-mirror"] .rfw-main-canvas-wrap{min-height:0!important}
+  .rfw-page[data-model-id="spherical-mirror"] #rfwMainCanvas{
+    width:auto!important;
+    height:auto!important;
+    max-width:100%!important;
+    max-height:100%!important;
+  }
+  .rfw-page[data-model-id="spherical-mirror"] .rfw-analysis-column{
+    grid-template-rows:auto minmax(0,1fr)!important;
+  }
+  .rfw-page[data-model-id="spherical-mirror"] .rfw-board,
+  .rfw-page[data-model-id="spherical-mirror"] .rfw-board[data-count="2"]{
+    grid-template-columns:minmax(0,1fr)!important;
+    grid-template-rows:repeat(2,minmax(0,1fr))!important;
+    height:100%!important;
+    gap:10px!important;
+  }
+  .rfw-page[data-model-id="spherical-mirror"] .rfw-module{
+    min-height:0!important;
+    height:100%!important;
+    grid-template-rows:auto auto minmax(0,1fr)!important;
+  }
+  .rfw-page[data-model-id="spherical-mirror"] .rfw-module-head{min-height:54px;padding:8px 11px}
+  .rfw-page[data-model-id="spherical-mirror"] .rfw-module-head h3{font-size:16px}
+  .rfw-page[data-model-id="spherical-mirror"] .rfw-module-head p{font-size:10px}
+  .rfw-page[data-model-id="spherical-mirror"] .rfw-module-guide summary{padding:5px 10px;font-size:10px}
+  .rfw-page[data-model-id="spherical-mirror"] .rfw-module-canvas-wrap{min-height:0!important;padding:4px 6px 7px}
+  .rfw-page[data-model-id="spherical-mirror"] .rfw-module-canvas-wrap canvas{
+    width:auto!important;
+    height:auto!important;
+    max-width:100%!important;
+    max-height:100%!important;
+  }
+}
+
+@media(max-width:1500px){
+  .app.r3-v017-active{padding-inline:28px!important}
+  .rfw-page[data-model-id="spherical-mirror"] .rfw-primary-card{
+    min-height:690px;
+    grid-template-rows:auto auto minmax(515px,1fr) auto auto!important;
+  }
+  .rfw-page[data-model-id="spherical-mirror"] .rfw-main-canvas-wrap{min-height:515px!important;padding-block:5px}
+  .rfw-page[data-model-id="spherical-mirror"] #rfwMainCanvas{width:min(100%,980px)!important}
+  .rfw-page[data-model-id="spherical-mirror"] .rfw-board,
+  .rfw-page[data-model-id="spherical-mirror"] .rfw-board[data-count="2"]{
+    grid-template-columns:minmax(0,1fr)!important;
+    gap:16px!important;
+  }
+  .rfw-page[data-model-id="spherical-mirror"] .rfw-module{
+    min-height:355px!important;
+    grid-template-rows:auto auto minmax(245px,auto)!important;
+  }
+  .rfw-page[data-model-id="spherical-mirror"] .rfw-module-canvas-wrap{min-height:245px!important}
+}
+
+@media(max-height:820px) and (min-width:761px) and (max-width:1879px){
+  .rfw-page[data-model-id="spherical-mirror"] .rfw-primary-card{
+    min-height:650px;
+    grid-template-rows:auto auto minmax(475px,1fr) auto auto!important;
+  }
+  .rfw-page[data-model-id="spherical-mirror"] .rfw-main-canvas-wrap{min-height:475px!important}
+  .rfw-page[data-model-id="spherical-mirror"] #rfwMainCanvas{width:min(100%,900px)!important}
+}
+
+@media(max-width:760px){
+  .app.r3-v017-active{padding-inline:8px!important}
+  .rfw-page[data-model-id="spherical-mirror"] .rfw-hero{grid-template-columns:1fr}
+  .rfw-page[data-model-id="spherical-mirror"] .rfw-primary-head{align-items:flex-start}
+  .rfw-page[data-model-id="spherical-mirror"] .rfw-primary-head .legend{display:none}
+  .rfw-page[data-model-id="spherical-mirror"] .rfw-live-strip{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .rfw-page[data-model-id="spherical-mirror"] .rfw-edge-handle{top:auto!important;bottom:12px;transform:none!important}
+}
