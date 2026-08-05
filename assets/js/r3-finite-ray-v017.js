@@ -3,6 +3,9 @@
   const model = window.models?.['spherical-mirror'];
   if (!model || window.R3FiniteRayV017) return;
 
+  // Start with a genuinely paraxial teaching state; large height/aperture remain available for aberration exploration.
+  model.defaults = { ...model.defaults, height:60 };
+
   const C = {
     green:'#66d900', greenDark:'#4b7900', teal:'#0e7c84', orange:'#e98242',
     ink:'#0b3040', muted:'#5f777f', grey:'#96a8ac', light:'#d9e5e3',
@@ -143,14 +146,14 @@
     const status = statusFor(state, g);
     api.rect(54, 52, 338, 104, status.fill, status.stroke, 15);
     text(api, status.title, 73, 80, status.color, 18, 'left', 800);
-    text(api, `近轴像距  dᵢ = ${Number.isFinite(g.di) ? g.di.toFixed(1) : '∞'} px`, 73, 112, C.ink, 14, 'left', 800);
-    text(api, `理论像面光斑  ${Number.isFinite(g.blur) ? g.blur.toFixed(2) : '—'} px`, 73, 138, C.muted, 14, 'left', 700);
+    text(api, `近轴像距  dᵢ = ${Number.isFinite(g.di) ? g.di.toFixed(1) : '∞'} px`, 73, 112, C.ink, 15, 'left', 800);
+    text(api, `理论像面光斑  ${Number.isFinite(g.blur) ? g.blur.toFixed(2) : '—'} px`, 73, 138, C.muted, 15, 'left', 700);
 
     drawMirror(api, state, mx, axis, 1, true);
     const mirrorHalf = Math.min(2 * state.f * .54, 2 * state.f * .58 * state.aperture);
     text(api, state.type === 'concave' ? '凹面球面镜' : '凸面球面镜', mx + 22, axis - mirrorHalf - 24, C.teal, 16, 'left', 800);
-    text(api, '镜前：真实传播', mx - 20, 52, C.teal, 14, 'right', 800);
-    text(api, '镜后：仅画虚像延长线', mx + 18, 52, C.orange, 14, 'left', 800);
+    text(api, '镜前：真实传播', mx - 20, 52, C.teal, 15, 'right', 800);
+    text(api, '镜后：仅画虚像延长线', mx + 18, 52, C.orange, 15, 'left', 800);
 
     const fX = mx - g.f;
     const cX = mx - 2 * g.f;
@@ -188,22 +191,25 @@
         api.line(g.imageX, axis, g.imageX, g.paraxialTipY, C.grey, 4, [8,6]);
         api.circle(g.imageX, g.paraxialTipY, 10, '#fff', C.grey, 3);
       }
-      const align = g.imageX < 180 ? 'left' : g.imageX > 900 ? 'right' : 'center';
-      const labelX = align === 'left' ? g.imageX + 16 : align === 'right' ? g.imageX - 16 : g.imageX;
-      const labelY = g.paraxialTipY + (g.paraxialTipY > axis ? 28 : -28);
-      text(api, g.real ? '近轴实像' : '近轴虚像', labelX, labelY, g.real ? C.orange : C.grey, 15, align, 800);
+      const imageLabel = g.real ? '近轴实像' : '近轴虚像';
+      const labelBelow = g.paraxialTipY > axis;
+      const labelX = clamp(g.imageX + (g.real ? -62 : 62), 92, 988);
+      const labelY = clamp(g.paraxialTipY + (labelBelow ? 38 : -38), 188, 572);
+      api.rect(labelX - 47, labelY - 15, 94, 30, 'rgba(255,255,255,.92)', g.real ? C.orange : C.grey, 10);
+      text(api, imageLabel, labelX, labelY, g.real ? C.orange : C.grey, 14, 'center', 800);
     }
 
-    api.rect(254, 618, 572, 36, 'rgba(255,255,255,.88)', '#d9e5e3', 11);
-    text(api, '粗线：代表光线　淡线：有限口径采样　虚线：仅用于虚像反向定位', 540, 636, C.muted, 13, 'center', 700);
+    api.rect(278, 604, 524, 55, 'rgba(255,255,255,.90)', '#d9e5e3', 11);
+    text(api, '粗线：代表光线　　淡线：有限口径采样', 540, 622, C.muted, 15, 'center', 700);
+    text(api, '虚线：仅用于虚像的反向定位', 540, 645, C.muted, 15, 'center', 700);
   }
 
   function drawMechanism(api, state) {
     api.clear();
     const g = traceFinite(state, MAIN);
     const ray = g.rays[g.rays.length - 1];
-    text(api, '一个入射点的局部反射', 26, 24, C.teal, 16, 'left', 800);
-    text(api, '像面上的有限口径离散', 694, 24, C.orange, 16, 'right', 800);
+    text(api, '一个入射点的局部反射', 26, 24, C.teal, 17, 'left', 800);
+    text(api, '像面上的有限口径离散', 694, 24, C.orange, 17, 'right', 800);
 
     api.rect(20, 48, 390, 190, C.paper, '#dce8e6', 12);
     const hit = { x:285, y:138 };
@@ -213,15 +219,15 @@
     api.arrow(hit.x, hit.y, reflectedEnd.x, reflectedEnd.y, C.teal, 4);
     api.line(hit.x - ray.normal.x * 85, hit.y - ray.normal.y * 85, hit.x + ray.normal.x * 85, hit.y + ray.normal.y * 85, C.purple, 2, [7,5]);
     api.circle(hit.x, hit.y, 7, '#fff', C.orange, 3);
-    text(api, '入射光', incomingStart.x + 10, incomingStart.y - 12, C.greenDark, 13, 'left', 800);
-    text(api, '反射光', reflectedEnd.x - 8, reflectedEnd.y + 14, C.teal, 13, 'right', 800);
-    text(api, '局部法线', hit.x + ray.normal.x * 70, hit.y + ray.normal.y * 70 - 12, C.purple, 13, 'center', 800);
-    text(api, '法线由入射点指向曲率中心；反射方向由向量反射式唯一确定。', 215, 219, C.muted, 12, 'center', 700);
+    text(api, '入射光', incomingStart.x + 10, incomingStart.y - 12, C.greenDark, 15, 'left', 800);
+    text(api, '反射光', reflectedEnd.x - 8, reflectedEnd.y + 14, C.teal, 15, 'right', 800);
+    text(api, '局部法线', hit.x + ray.normal.x * 70, hit.y + ray.normal.y * 70 - 12, C.purple, 15, 'center', 800);
+    text(api, '法线指向曲率中心；反射方向由向量反射式确定。', 215, 219, C.muted, 14, 'center', 700);
 
     api.rect(430, 48, 270, 190, C.paper, '#dce8e6', 12);
     const planeX = 555;
     api.line(planeX, 68, planeX, 218, C.orange, 3, [7,5]);
-    text(api, '近轴像面', planeX, 59, C.orange, 13, 'center', 800);
+    text(api, '近轴像面', planeX, 59, C.orange, 15, 'center', 800);
     const centerY = 143;
     const deltas = g.samples.map(sample => sample - g.paraxialTipY);
     const span = deltas.length ? Math.max(1, Math.max(...deltas) - Math.min(...deltas)) : 1;
@@ -234,7 +240,7 @@
     api.line(611, top, 625, top, C.orange, 2);
     api.line(611, bottom, 625, bottom, C.orange, 2);
     text(api, `${Number.isFinite(g.blur) ? g.blur.toFixed(1) : '—'} px`, 638, (top + bottom) / 2, C.orange, 14, 'left', 800);
-    text(api, g.blur < 8 ? '接近同焦' : '边缘与近轴不同焦', 565, 225, g.blur < 8 ? C.greenDark : '#9a4d20', 13, 'center', 800);
+    text(api, g.blur < 8 ? '接近同焦' : '边缘与近轴不同焦', 565, 225, g.blur < 8 ? C.greenDark : '#9a4d20', 15, 'center', 800);
   }
 
   function drawObservable(api, state) {
@@ -242,7 +248,7 @@
     const out = mirrorResult(state);
     const x0 = 58, x1 = 662, y = 132;
     const mapRatio = ratio => x0 + (x1 - x0) * ratio / (ratio + 1.35);
-    text(api, '成像性质由物距比 u/f 决定', 26, 24, C.teal, 16, 'left', 800);
+    text(api, '成像性质由物距比 u/f 决定', 26, 24, C.teal, 17, 'left', 800);
     text(api, `当前 u/f = ${(state.do / state.f).toFixed(2)}`, 694, 24, C.greenDark, 15, 'right', 800);
 
     if (state.type === 'concave') {
@@ -250,9 +256,9 @@
       api.line(x0, y - 34, F, y - 34, C.orange, 7);
       api.line(F, y - 34, twoF, y - 34, C.green, 7);
       api.line(twoF, y - 34, x1, y - 34, C.teal, 7);
-      text(api, 'u<f：正立虚像', (x0 + F) / 2, y - 58, C.orange, 13, 'center', 800);
-      text(api, 'f<u<2f：放大实像', (F + twoF) / 2, y - 58, C.greenDark, 13, 'center', 800);
-      text(api, 'u>2f：缩小实像', (twoF + x1) / 2, y - 58, C.teal, 13, 'center', 800);
+      text(api, 'u<f：正立虚像', (x0 + F) / 2, y - 58, C.orange, 15, 'center', 800);
+      text(api, 'f<u<2f：放大实像', (F + twoF) / 2, y - 58, C.greenDark, 15, 'center', 800);
+      text(api, 'u>2f：缩小实像', (twoF + x1) / 2, y - 58, C.teal, 15, 'center', 800);
       api.line(x0, y, x1, y, C.ink, 3);
       api.circle(F, y, 6, C.orange, '#fff', 2);
       api.circle(twoF, y, 6, C.purple, '#fff', 2);
@@ -323,6 +329,22 @@
     if (!root) return;
     document.querySelector('.app')?.classList.add('r3-v017-active');
     root.dataset.legibilityVersion = '018';
+    const setTeachingDefaults = (force = false) => {
+      const aperture = root.querySelector('[data-rfw-param="aperture"]');
+      const height = root.querySelector('[data-rfw-param="height"]');
+      if (height && (force || Number(height.value) === 110)) {
+        height.value = '60';
+        height.dispatchEvent(new Event('input', { bubbles:true }));
+      }
+      if (aperture && (force || Math.abs(Number(aperture.value) - .42) < .001)) {
+        aperture.value = '.18';
+        aperture.dispatchEvent(new Event('input', { bubbles:true }));
+      }
+    };
+    setTeachingDefaults();
+    const reset = root.querySelector('#rfwReset');
+    const resetHandler = () => setTimeout(() => setTeachingDefaults(true), 0);
+    reset?.addEventListener('click', resetHandler, true);
     const observer = new MutationObserver(records => {
       if (records.some(record => record.type === 'attributes' && record.attributeName === 'data-render-revision')) schedule(root);
     });
@@ -334,6 +356,7 @@
       observer.disconnect();
       window.removeEventListener('resize', resize);
       document.querySelector('.app')?.classList.remove('r3-v017-active');
+      reset?.removeEventListener('click', resetHandler, true);
       cancelAnimationFrame(frame);
     };
   }
