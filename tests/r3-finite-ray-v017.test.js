@@ -3,7 +3,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 
 const source = fs.readFileSync('assets/js/r3-finite-ray-v017.js','utf8');
-for (const token of ['traceFinite','mirrorResult','reflect(direction, normal)','data.legibilityVersion']) {
+for (const token of ['traceFinite','mirrorResult','reflect(direction, normal)','dataset.legibilityVersion']) {
   assert.ok(source.includes(token), `missing R3 implementation token: ${token}`);
 }
 
