@@ -1,0 +1,64 @@
+name: R3 live visual evidence
+
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - 'docs/live-evidence/r3-v017/**'
+      - 'audit/latest-visual-run.json'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: r3-live-visual-evidence-main
+  cancel-in-progress: true
+
+jobs:
+  audit-r3:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Playwright
+        run: |
+          npm install --no-save playwright@1.54.2
+          npx playwright install --with-deps chromium
+      - name: Start static server
+        run: |
+          python3 -m http.server 8000 > /tmp/model-demo-webpage.log 2>&1 &
+          for i in {1..30}; do
+            curl -fsS http://127.0.0.1:8000/ >/dev/null && exit 0
+            sleep 1
+          done
+          cat /tmp/model-demo-webpage.log
+          exit 1
+      - name: Run R3 native viewport audit
+        id: r3audit
+        continue-on-error: true
+        run: node tests/visual-audit-r3-v017.mjs
+      - name: Publish R3 screenshots and metrics
+        if: always()
+        env:
+          SOURCE_SHA: ${{ github.sha }}
+          AUDIT_OUTCOME: ${{ steps.r3audit.outcome }}
+          RUN_ID: ${{ github.run_id }}
+        run: |
+          rm -rf docs/live-evidence/r3-v017
+          mkdir -p docs/live-evidence/r3-v017
+          if [ -d visual-audit-r3-v017 ]; then
+            cp -R visual-audit-r3-v017/. docs/live-evidence/r3-v017/
+          fi
+          printf '{\n  "source_sha": "%s",\n  "run_id": %s,\n  "audit_outcome": "%s"\n}\n' "$SOURCE_SHA" "$RUN_ID" "$AUDIT_OUTCOME" > docs/live-evidence/r3-v017/run.json
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add docs/live-evidence/r3-v017
+          git commit -m "[r3-live-audit] publish v0.17 screenshots and metrics [skip ci]" || exit 0
+          git push
+      - name: Enforce R3 audit result
+        if: steps.r3audit.outcome != 'success'
+        run: exit 1
