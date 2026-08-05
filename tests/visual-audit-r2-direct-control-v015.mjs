@@ -41,7 +41,16 @@ async function dragLogical(page, canvas, start, end) {
 }
 
 for (const [width, height] of viewports) {
-  const result = { width, height, shortHeight: null, tallHeight: null, errors: [], assertions: [] };
+  const result = {
+    width,
+    height,
+    rightDrawerBox: null,
+    rightDrawerVisibleFraction: null,
+    shortHeight: null,
+    tallHeight: null,
+    errors: [],
+    assertions: []
+  };
   const page = await browser.newPage({ viewport: { width, height }, deviceScaleFactor: 1 });
   page.on('console', message => { if (message.type() === 'error') result.errors.push(`console: ${message.text()}`); });
   page.on('pageerror', error => result.errors.push(`page: ${error.message}`));
@@ -49,21 +58,24 @@ for (const [width, height] of viewports) {
   try {
     await page.goto('http://127.0.0.1:8000/#model:plane-mirror', { waitUntil: 'networkidle' });
     await page.waitForSelector('.rfw-page[data-model-id="plane-mirror"] #rfwMainCanvas', { timeout: 20000 });
-    await page.waitForTimeout(900);
+    await page.waitForTimeout(1300);
     await focusWorkspace(page);
+    await page.waitForTimeout(700);
 
     await page.locator('.rfw-right-handle').click();
     await page.waitForSelector('.rfw-right-drawer.is-open');
-    const rightDrawer = await page.locator('.rfw-right-drawer').boundingBox();
-    if (!rightDrawer || visibleFraction(rightDrawer, width, height) < .99) {
-      result.assertions.push(`right drawer visible fraction ${visibleFraction(rightDrawer, width, height).toFixed(3)}`);
+    await page.waitForTimeout(260);
+    result.rightDrawerBox = await page.locator('.rfw-right-drawer').boundingBox();
+    result.rightDrawerVisibleFraction = visibleFraction(result.rightDrawerBox, width, height);
+    if (!result.rightDrawerBox || result.rightDrawerVisibleFraction < .99) {
+      result.assertions.push(`right drawer visible fraction ${result.rightDrawerVisibleFraction.toFixed(3)}`);
     }
     await page.locator('.rfw-right-drawer [data-rfw-close]').click();
-    await page.waitForTimeout(220);
+    await page.waitForTimeout(260);
 
     const canvas = page.locator('#rfwMainCanvas');
     await dragLogical(page, canvas, { x: 600, y: 190 }, { x: 600, y: 275 });
-    await page.waitForTimeout(450);
+    await page.waitForTimeout(500);
     result.shortHeight = await page.locator('[data-rfw-output="mirrorHeight"]').textContent();
     const shortStatus = await page.locator('.rfw-status').textContent();
     if (Math.abs(parseFloat(result.shortHeight) - 90) > 4) result.assertions.push(`direct short-mirror drag ended at ${result.shortHeight}, expected about 90 px`);
@@ -72,7 +84,7 @@ for (const [width, height] of viewports) {
 
     const currentTop = 320 - parseFloat(result.shortHeight) / 2;
     await dragLogical(page, canvas, { x: 600, y: currentTop }, { x: 600, y: 70 });
-    await page.waitForTimeout(450);
+    await page.waitForTimeout(500);
     result.tallHeight = await page.locator('[data-rfw-output="mirrorHeight"]').textContent();
     const tallStatus = await page.locator('.rfw-status').textContent();
     if (Math.abs(parseFloat(result.tallHeight) - 500) > 3) result.assertions.push(`direct tall-mirror drag ended at ${result.tallHeight}, expected about 500 px`);
