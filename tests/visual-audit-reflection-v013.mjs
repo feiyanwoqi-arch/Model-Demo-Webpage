@@ -63,6 +63,7 @@ async function auditScenario(scenario, width, height) {
   await page.waitForTimeout(450);
 
   const primary = await page.locator('.rfw-primary-card').boundingBox();
+  const analysis = await page.locator('.rfw-analysis-column').boundingBox();
   const mechanism = await page.locator('[data-module-id="mechanism"]').boundingBox();
   const observable = await page.locator('[data-module-id="observable"]').boundingBox();
   const mechanismCanvas = await page.locator('[data-module-id="mechanism"] canvas').boundingBox();
@@ -70,10 +71,21 @@ async function auditScenario(scenario, width, height) {
   const boardCount = await page.locator('.rfw-board').getAttribute('data-count');
   const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
   const version = await page.locator('.rfw-page').getAttribute('data-legibility-version');
-  const legibilityFlow = (scenario.id === 'plane-mirror' && version === '016') || (scenario.id === 'spherical-mirror' && version === '017');
+  const planeWide = scenario.id === 'plane-mirror' && version === '016' && width >= 1600;
+  const stackedLegibility = scenario.id === 'spherical-mirror' && version === '017';
 
-  if (legibilityFlow) {
-    if (!primary || primary.width < width * .86) assertions.push(`${scenario.id}: full-width primary workbench not applied`);
+  if (planeWide) {
+    for (const [name, box] of Object.entries({ primary, mechanism, observable })) {
+      const fraction = visibleFraction(box, width, height);
+      if (fraction < .995) assertions.push(`${scenario.id}: ${name} not simultaneously visible ${fraction.toFixed(3)}`);
+    }
+    if (!primary || primary.width < width * .55) assertions.push(`${scenario.id}: primary column too narrow`);
+    if (!analysis || analysis.width < 598) assertions.push(`${scenario.id}: analysis column too narrow`);
+    if (!primary || !analysis || analysis.x < primary.x + primary.width + 10) assertions.push(`${scenario.id}: analysis must be to the right of primary`);
+    if (mechanism && observable && Math.abs(mechanism.x - observable.x) > 3) assertions.push(`${scenario.id}: right modules must share one column`);
+    if (mechanism && observable && observable.y < mechanism.y + mechanism.height + 8) assertions.push(`${scenario.id}: right modules overlap vertically`);
+  } else if (stackedLegibility) {
+    if (!primary || primary.width < width * .78) assertions.push(`${scenario.id}: primary workbench too narrow`);
     if (!primary || !mechanism || mechanism.y < primary.y + primary.height + 10) assertions.push(`${scenario.id}: analysis must follow the primary workbench`);
     if (mechanism && observable && Math.abs(mechanism.y - observable.y) > 3) assertions.push(`${scenario.id}: wide-screen analysis modules should share a row`);
     if (mechanism && observable && observable.x <= mechanism.x + mechanism.width - 2) assertions.push(`${scenario.id}: analysis modules overlap horizontally`);
@@ -128,7 +140,7 @@ async function auditScenario(scenario, width, height) {
   await page.waitForTimeout(240);
 
   results.push({
-    scenario: scenario.id, width, height, legibilityFlow, primary, mechanism, observable, mechanismCanvas, observableCanvas,
+    scenario: scenario.id, width, height, planeWide, stackedLegibility, primary, analysis, mechanism, observable, mechanismCanvas, observableCanvas,
     boardCount, overflow, beforeValue, afterValue, beforeRevision, afterRevision,
     mechanismChanged: beforeMechanism !== afterMechanism, observableChanged: beforeObservable !== afterObservable,
     errors, assertions
