@@ -35,6 +35,13 @@ async function dragLogical(page,canvas,start,end){
   await page.mouse.move(a.x,a.y);await page.mouse.down();
   await page.mouse.move(b.x,b.y,{steps:20});await page.mouse.up();
 }
+async function setParam(page,key,value){
+  await page.locator(`[data-rfw-param="${key}"]`).evaluate((node,next)=>{
+    node.value=String(next);
+    node.dispatchEvent(new Event('input',{bubbles:true}));
+    node.dispatchEvent(new Event('change',{bubbles:true}));
+  },value);
+}
 function auditText(record,metrics,names){
   for(const name of names){
     const canvas=metrics?.[name];
@@ -110,15 +117,13 @@ for(const [width,height] of viewports){
     if(!record.metrics)record.assertions.push('missing all-canvas text metrics');
     else auditText(record,record.metrics,['main','mechanism','observable']);
 
-    const aperture=page.locator('[data-rfw-param="aperture"]');
-    await aperture.fill('0.9');await aperture.dispatchEvent('input');await page.waitForTimeout(650);
+    await setParam(page,'aperture',0.9);await page.waitForTimeout(650);
     record.states.largeAperture=await page.evaluate(()=>({blur:Number(document.querySelector('.rfw-page')?.dataset.r3Blur),status:document.querySelector('#rfwStatus')?.textContent||''}));
     if(!(record.states.largeAperture.blur>1))record.assertions.push(`large aperture blur not visible: ${record.states.largeAperture.blur}`);
     await center(page,'#rfwMainCanvas');
     await page.screenshot({path:`${outDir}/r3-${width}x${height}-04-large-aperture.png`,fullPage:false});
 
-    const type=page.locator('[data-rfw-param="type"]');
-    await type.selectOption('convex');await page.waitForTimeout(650);
+    await setParam(page,'type','convex');await page.waitForTimeout(650);
     record.states.convex={status:await page.locator('#rfwStatus').textContent(),image:await page.locator('.rfw-live-strip').textContent()};
     if(!record.states.convex.status.includes('虚像'))record.assertions.push('convex state does not report virtual image');
 
