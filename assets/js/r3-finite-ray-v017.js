@@ -196,7 +196,7 @@
       const labelX = clamp(g.imageX + (g.real ? -62 : 62), 92, 988);
       const labelY = clamp(g.paraxialTipY + (labelBelow ? 38 : -38), 188, 572);
       api.rect(labelX - 47, labelY - 15, 94, 30, 'rgba(255,255,255,.92)', g.real ? C.orange : C.grey, 10);
-      text(api, imageLabel, labelX, labelY, g.real ? C.orange : C.grey, 14, 'center', 800);
+      text(api, imageLabel, labelX, labelY, g.real ? C.orange : C.grey, 15, 'center', 800);
     }
 
     api.rect(278, 604, 524, 55, 'rgba(255,255,255,.90)', '#d9e5e3', 11);
@@ -329,6 +329,8 @@
     if (!root) return;
     document.querySelector('.app')?.classList.add('r3-v017-active');
     root.dataset.legibilityVersion = '018';
+    const eyebrow = root.querySelector('.rfw-hero .eyebrow');
+    if (eyebrow) eyebrow.textContent = eyebrow.textContent.replace('R3 · v1.0', 'R3 · v0.18');
     const setTeachingDefaults = (force = false) => {
       const aperture = root.querySelector('[data-rfw-param="aperture"]');
       const height = root.querySelector('[data-rfw-param="height"]');
