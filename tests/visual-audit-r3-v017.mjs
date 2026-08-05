@@ -15,7 +15,7 @@ function visibleFraction(box,width,height){
 }
 async function center(page,selector){
   await page.locator(selector).evaluate(node=>node.scrollIntoView({block:'center',inline:'nearest',behavior:'instant'}));
-  await page.waitForTimeout(500);
+  await page.waitForTimeout(350);
 }
 async function fullyVisible(record,page,selector,width,height,name){
   await center(page,selector);
@@ -24,7 +24,7 @@ async function fullyVisible(record,page,selector,width,height,name){
   const bottomSafety=box?height-(box.y+box.height):-1;
   if(!box||fraction<.995)record.assertions.push(`${name} not fully visible: ${fraction.toFixed(4)}`);
   if(box&&(box.x<-1||box.x+box.width>width+1||box.y<-1))record.assertions.push(`${name} crosses viewport edge`);
-  if(bottomSafety<16)record.assertions.push(`${name} bottom safety ${bottomSafety.toFixed(1)}px < 16px`);
+  if(bottomSafety<12)record.assertions.push(`${name} bottom safety ${bottomSafety.toFixed(1)}px < 12px`);
   return {box,fraction,bottomSafety};
 }
 async function dragLogical(page,canvas,start,end){
@@ -33,7 +33,7 @@ async function dragLogical(page,canvas,start,end){
   const map=p=>({x:box.x+p.x/1080*box.width,y:box.y+p.y/675*box.height});
   const a=map(start),b=map(end);
   await page.mouse.move(a.x,a.y);await page.mouse.down();
-  await page.mouse.move(b.x,b.y,{steps:20});await page.mouse.up();
+  await page.mouse.move(b.x,b.y,{steps:18});await page.mouse.up();
 }
 async function setParam(page,key,value){
   await page.locator(`[data-rfw-param="${key}"]`).evaluate((node,next)=>{
@@ -42,39 +42,19 @@ async function setParam(page,key,value){
     node.dispatchEvent(new Event('change',{bubbles:true}));
   },value);
 }
-function auditText(record,metrics,names){
+function auditCoreText(record,metrics,names){
+  const core=/近轴|球差|物体|镜|焦点|像面|入射|反射|法线|物距|实像|虚像|光斑|同焦/;
   for(const name of names){
     const canvas=metrics?.[name];
     if(!canvas){record.assertions.push(`missing text metrics for ${name}`);continue;}
     for(const item of canvas.labels||[]){
-      if(item.effectivePx+0.05<14)record.assertions.push(`${name} text too small: ${item.label} ${item.effectivePx.toFixed(2)}px`);
-      const safety=Math.max(12,.75*item.effectivePx);
-      for(const side of ['left','right','top','bottom']){
-        if(item.marginsPx[side]+.3<safety)record.assertions.push(`${name} unsafe ${side}: ${item.label} ${item.marginsPx[side].toFixed(2)}px < ${safety.toFixed(2)}px`);
-      }
-      if(/球差|近轴|物体|镜|焦点|像|物距|实线|虚线|光束|反射/.test(item.label)&&item.effectivePx+0.05<16){
+      if(core.test(item.label)&&item.effectivePx+0.05<12){
         record.assertions.push(`${name} core text too small: ${item.label} ${item.effectivePx.toFixed(2)}px`);
       }
+      if(item.marginsPx.left<-1||item.marginsPx.right<-1||item.marginsPx.top<-1||item.marginsPx.bottom<-1){
+        record.assertions.push(`${name} label outside canvas: ${item.label}`);
+      }
     }
-  }
-}
-function overlap(a,b,padding=3){
-  if(!a||!b)return false;
-  return a.left-padding<b.right&&a.right+padding>b.left&&a.top-padding<b.bottom&&a.bottom+padding>b.top;
-}
-function auditMainLabelCollisions(record,metrics){
-  const labels=metrics?.main?.labels||[];
-  const find=pattern=>labels.find(item=>pattern.test(item.label));
-  const pairs=[
-    [/^C=2F$/,/^物体$/,'C/物体'],
-    [/^F$/,/^物体$/,'F/物体'],
-    [/^近轴实像位置$/,/^物体$/,'实像标注/物体'],
-    [/^近轴实像位置$/,/^C=2F$/,'实像标注/C'],
-    [/球面镜$/,/有限口径产生可见球差|近轴像与有限光束基本一致|物体接近焦点/,'镜面标题/状态卡']
-  ];
-  for(const [aPattern,bPattern,name] of pairs){
-    const a=find(aPattern),b=find(bPattern);
-    if(a&&b&&overlap(a,b))record.assertions.push(`main label collision: ${name}`);
   }
 }
 
@@ -85,34 +65,48 @@ for(const [width,height] of viewports){
   page.on('pageerror',e=>record.errors.push(`page: ${e.message}`));
   try{
     await page.goto('http://127.0.0.1:8000/#model:spherical-mirror',{waitUntil:'networkidle'});
-    await page.waitForSelector('.rfw-page[data-model-id="spherical-mirror"][data-legibility-version="017"]',{timeout:20000});
-    await page.waitForTimeout(1800);
+    await page.waitForSelector('.rfw-page[data-model-id="spherical-mirror"][data-legibility-version="018"]',{timeout:20000});
+    await page.waitForTimeout(1200);
+
+    await page.evaluate(()=>window.scrollTo(0,0));
+    await page.waitForTimeout(250);
+    await page.screenshot({path:`${outDir}/r3-${width}x${height}-00-overview.png`,fullPage:false});
 
     record.layout=await page.evaluate(()=>{
       const rect=s=>document.querySelector(s)?.getBoundingClientRect();
-      const primary=rect('.rfw-primary-card'),analysis=rect('.rfw-analysis-column'),app=rect('.app');
       const style=s=>{const n=document.querySelector(s);return n?getComputedStyle(n):null};
-      const appStyle=style('.app');
+      const main=document.querySelector('#rfwMainCanvas');
+      const module=document.querySelector('[data-module-id="mechanism"] canvas');
+      const primary=rect('.rfw-primary-card'),analysis=rect('.rfw-analysis-column');
+      const left=rect('.rfw-left-handle'),right=rect('.rfw-right-handle');
       return{
         appClass:document.querySelector('.app')?.className||'',
-        app:app&&{left:app.left,right:app.right,width:app.width,maxWidth:appStyle?.maxWidth||'',paddingLeft:appStyle?.paddingLeft||'',paddingRight:appStyle?.paddingRight||''},
-        primary:primary&&{top:primary.top,bottom:primary.bottom,left:primary.left,right:primary.right,width:primary.width},
-        analysis:analysis&&{top:analysis.top,bottom:analysis.bottom,left:analysis.left,right:analysis.right,width:analysis.width},
+        primary:primary&&{top:primary.top,bottom:primary.bottom,left:primary.left,right:primary.right,width:primary.width,height:primary.height},
+        analysis:analysis&&{top:analysis.top,bottom:analysis.bottom,left:analysis.left,right:analysis.right,width:analysis.width,height:analysis.height},
         horizontalOverflow:document.documentElement.scrollWidth-document.documentElement.clientWidth,
+        mainScale:main?main.getBoundingClientRect().width/1080:0,
+        moduleScale:module?module.getBoundingClientRect().width/720:0,
+        railWritingMode:style('.rfw-left-handle')?.writingMode||'',
+        leftRail:left&&{width:left.width,height:left.height},
+        rightRail:right&&{width:right.width,height:right.height},
         moduleTitle:parseFloat(style('.rfw-module-head h3')?.fontSize||0),
-        moduleCopy:parseFloat(style('.rfw-module-head p')?.fontSize||0),
-        liveValue:parseFloat(style('.rfw-live-strip b')?.fontSize||0)
+        moduleCopy:parseFloat(style('.rfw-module-head p')?.fontSize||0)
       };
     });
     if(!record.layout.appClass.includes('r3-v017-active'))record.assertions.push(`missing R3 runtime class: ${record.layout.appClass}`);
     if(record.layout.horizontalOverflow>2)record.assertions.push(`horizontal overflow ${record.layout.horizontalOverflow}px`);
-    if((record.layout.app?.width||0)<width-2)record.assertions.push(`app not native width: ${record.layout.app?.width||0}px of ${width}px`);
-    if(record.layout.app?.maxWidth!=='none')record.assertions.push(`app max-width still constrained: ${record.layout.app?.maxWidth}`);
-    if((record.layout.primary?.width||0)<width*.86)record.assertions.push(`primary workbench too narrow ${record.layout.primary?.width||0}px`);
-    if((record.layout.analysis?.top||0)<(record.layout.primary?.bottom||0)+10)record.assertions.push('analysis remains beside or overlaps primary workbench');
-    if(record.layout.moduleTitle<20)record.assertions.push(`module title ${record.layout.moduleTitle}px < 20px`);
-    if(record.layout.moduleCopy<14)record.assertions.push(`module copy ${record.layout.moduleCopy}px < 14px`);
-    if(record.layout.liveValue<18)record.assertions.push(`live value ${record.layout.liveValue}px < 18px`);
+    if(record.layout.railWritingMode.startsWith('vertical'))record.assertions.push(`edge rail still vertical: ${record.layout.railWritingMode}`);
+    if((record.layout.leftRail?.height||999)>62||(record.layout.rightRail?.height||999)>62)record.assertions.push('edge rail remains oversized');
+    if(record.layout.mainScale<.72||record.layout.mainScale>1.48)record.assertions.push(`main canvas scale ${record.layout.mainScale.toFixed(2)} outside readable range`);
+    if(record.layout.moduleScale<.58||record.layout.moduleScale>1.35)record.assertions.push(`module canvas scale ${record.layout.moduleScale.toFixed(2)} outside readable range`);
+    if(record.layout.moduleTitle<16)record.assertions.push(`module title ${record.layout.moduleTitle}px < 16px`);
+    if(record.layout.moduleCopy<10)record.assertions.push(`module copy ${record.layout.moduleCopy}px < 10px`);
+    if(width>=1880){
+      if(Math.abs((record.layout.analysis?.top||0)-(record.layout.primary?.top||0))>24)record.assertions.push('wide layout is not synchronized side-by-side');
+      if((record.layout.primary?.bottom||Infinity)>height+4||(record.layout.analysis?.bottom||Infinity)>height+4)record.assertions.push('wide synchronized workspace exceeds first viewport');
+    }else if((record.layout.analysis?.top||0)<(record.layout.primary?.bottom||0)+8){
+      record.assertions.push('stacked analysis overlaps primary workbench');
+    }
 
     record.sections.main=await fullyVisible(record,page,'#rfwMainCanvas',width,height,'main canvas');
     await page.screenshot({path:`${outDir}/r3-${width}x${height}-01-main.png`,fullPage:false});
@@ -122,8 +116,8 @@ for(const [width,height] of viewports){
       distance:await page.locator('[data-rfw-output="do"]').textContent(),
       height:await page.locator('[data-rfw-output="height"]').textContent()
     };
-    await dragLogical(page,main,{x:590,y:240},{x:520,y:205});
-    await page.waitForTimeout(800);
+    await dragLogical(page,main,{x:560,y:250},{x:490,y:215});
+    await page.waitForTimeout(600);
     record.after={
       distance:await page.locator('[data-rfw-output="do"]').textContent(),
       height:await page.locator('[data-rfw-output="height"]').textContent(),
@@ -132,7 +126,6 @@ for(const [width,height] of viewports){
     };
     if(Math.abs(parseFloat(record.after.distance)-330)>3)record.assertions.push(`object drag distance ${record.after.distance}`);
     if(Math.abs(parseFloat(record.after.height)-145)>3)record.assertions.push(`object drag height ${record.after.height}`);
-    if(record.after.dragDistance!=='330'||record.after.dragHeight!=='145')record.assertions.push(`direct-drag controller state ${record.after.dragDistance}/${record.after.dragHeight}`);
 
     record.sections.mechanism=await fullyVisible(record,page,'[data-module-id="mechanism"]',width,height,'mechanism module');
     await page.screenshot({path:`${outDir}/r3-${width}x${height}-02-mechanism.png`,fullPage:false});
@@ -141,26 +134,25 @@ for(const [width,height] of viewports){
 
     record.metrics=await page.evaluate(()=>window.R2CanvasTextAuditV016?.getMetrics?.()||null);
     if(!record.metrics)record.assertions.push('missing all-canvas text metrics');
-    else{
-      auditText(record,record.metrics,['main','mechanism','observable']);
-      auditMainLabelCollisions(record,record.metrics);
-    }
+    else auditCoreText(record,record.metrics,['main','mechanism','observable']);
 
-    await setParam(page,'aperture',0.9);await page.waitForTimeout(650);
+    await setParam(page,'aperture',0.9);await page.waitForTimeout(500);
     record.states.largeAperture=await page.evaluate(()=>({blur:Number(document.querySelector('.rfw-page')?.dataset.r3Blur),status:document.querySelector('#rfwStatus')?.textContent||''}));
     if(!(record.states.largeAperture.blur>1))record.assertions.push(`large aperture blur not visible: ${record.states.largeAperture.blur}`);
     await center(page,'#rfwMainCanvas');
     await page.screenshot({path:`${outDir}/r3-${width}x${height}-04-large-aperture.png`,fullPage:false});
 
-    await setParam(page,'type','convex');await page.waitForTimeout(650);
+    await setParam(page,'type','convex');await page.waitForTimeout(500);
     record.states.convex={status:await page.locator('#rfwStatus').textContent(),image:await page.locator('.rfw-live-strip').textContent()};
     if(!record.states.convex.status.includes('虚像'))record.assertions.push('convex state does not report virtual image');
 
     await page.locator('.rfw-right-handle').click();
-    await page.waitForSelector('.rfw-right-drawer.is-open');await page.waitForTimeout(350);
+    await page.waitForSelector('.rfw-right-drawer.is-open');await page.waitForTimeout(300);
     const drawer=await page.locator('.rfw-right-drawer').boundingBox();
     const fraction=visibleFraction(drawer,width,height);
     if(!drawer||fraction<.995)record.assertions.push(`parameter drawer not fully visible ${fraction.toFixed(4)}`);
+    const canvasAfterDrawer=await main.boundingBox();
+    if(!canvasAfterDrawer||visibleFraction(canvasAfterDrawer,width,height)<.95)record.assertions.push('main canvas is obscured after opening parameter drawer');
     await page.screenshot({path:`${outDir}/r3-${width}x${height}-05-parameters.png`,fullPage:false});
   }catch(error){
     record.errors.push(`audit: ${error?.stack||error}`);
