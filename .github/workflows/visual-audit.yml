@@ -11,7 +11,7 @@ permissions:
 jobs:
   optics-workbenches:
     runs-on: ubuntu-latest
-    timeout-minutes: 26
+    timeout-minutes: 28
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -36,8 +36,8 @@ jobs:
         run: node tests/visual-audit-reflection-v013.mjs
       - name: R1 strict runtime visual audit
         run: node tests/visual-audit-r1-v014.mjs
-      - name: R2 strict runtime visual audit
-        run: node tests/visual-audit-r2-v015.mjs
+      - name: R2 effective-font and full-module audit
+        run: node tests/visual-audit-r2-legibility-v016.mjs
       - name: R2 direct-control audit
         run: node tests/visual-audit-r2-direct-control-v015.mjs
       - name: R2 drawer content-fit audit
@@ -46,12 +46,12 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: optics-visual-audit-v015
+          name: optics-visual-audit-v016
           path: |
             visual-audit-v012/
             visual-audit-reflection-v013/
             visual-audit-r1-v014/
-            visual-audit-r2-v015/
+            visual-audit-r2-legibility-v016/
             visual-audit-r2-direct-control-v015/
             visual-audit-r2-drawer-fit-v015/
           if-no-files-found: error
