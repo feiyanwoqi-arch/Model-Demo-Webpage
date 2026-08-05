@@ -11,7 +11,7 @@ permissions:
 jobs:
   optics-workbenches:
     runs-on: ubuntu-latest
-    timeout-minutes: 28
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -38,6 +38,8 @@ jobs:
         run: node tests/visual-audit-r1-v014.mjs
       - name: R2 effective-font and full-module audit
         run: node tests/visual-audit-r2-legibility-v016.mjs
+      - name: R2 all actual canvas text audit
+        run: node tests/visual-audit-r2-all-canvas-text-v016.mjs
       - name: R2 direct-control audit
         run: node tests/visual-audit-r2-direct-control-v015.mjs
       - name: R2 drawer content-fit audit
@@ -52,6 +54,7 @@ jobs:
             visual-audit-reflection-v013/
             visual-audit-r1-v014/
             visual-audit-r2-legibility-v016/
+            visual-audit-r2-all-canvas-text-v016/
             visual-audit-r2-direct-control-v015/
             visual-audit-r2-drawer-fit-v015/
           if-no-files-found: error
