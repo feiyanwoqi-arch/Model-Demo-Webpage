@@ -1,6 +1,7 @@
 /* R3 v0.17: finite-ray spherical-mirror workbench */
 body:has(.rfw-page[data-model-id="spherical-mirror"]){overflow-x:clip}
 .app.r3-v017-active{width:100vw!important;max-width:none!important;margin:0!important;padding:16px 80px 48px!important}
+#view.r3-v017-mounted{width:100%!important;max-width:none!important;margin-inline:0!important}
 .rfw-page[data-model-id="spherical-mirror"]{width:100%;max-width:2400px;margin-inline:auto}
 .rfw-page[data-model-id="spherical-mirror"] .rfw-hero{grid-template-columns:minmax(0,1fr) minmax(390px,.52fr);gap:28px;padding-block:12px 18px}
 .rfw-page[data-model-id="spherical-mirror"] .rfw-hero h1{font-size:clamp(36px,2.5vw,50px)}
