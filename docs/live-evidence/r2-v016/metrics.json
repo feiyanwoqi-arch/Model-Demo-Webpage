@@ -1,0 +1,727 @@
+{
+  "url": "https://feiyanwoqi-arch.github.io/Model-Demo-Webpage/?r2v016=1785924022110#model:plane-mirror",
+  "attempts": 1,
+  "httpStatus": 200,
+  "errors": [],
+  "assertions": [],
+  "resources": {
+    "assets/css/r2-legibility-v016.css": true,
+    "assets/css/r2-legibility-gutters-v016.css": true,
+    "assets/js/r2-legibility-v016.js": true,
+    "assets/js/r2-main-legibility-patch-v016.js": true,
+    "assets/js/r2-canvas-text-audit-v016.js": true,
+    "assets/js/r2-main-final-redraw-v016.js": true
+  },
+  "layout": {
+    "primary": {
+      "x": 80,
+      "y": 233.296875,
+      "width": 1575,
+      "height": 1032.3125,
+      "right": 1655,
+      "bottom": 1265.609375
+    },
+    "analysis": {
+      "x": 80,
+      "y": 1289.609375,
+      "width": 1575,
+      "height": 527.125,
+      "right": 1655,
+      "bottom": 1816.734375
+    },
+    "mechanism": {
+      "x": 80,
+      "y": 1385.953125,
+      "width": 778.5,
+      "height": 430.78125,
+      "right": 858.5,
+      "bottom": 1816.734375
+    },
+    "observable": {
+      "x": 876.5,
+      "y": 1385.953125,
+      "width": 778.5,
+      "height": 430.78125,
+      "right": 1655,
+      "bottom": 1816.734375
+    },
+    "leftHandle": {
+      "x": 8,
+      "y": 391.5,
+      "width": 68,
+      "height": 82,
+      "right": 76,
+      "bottom": 473.5
+    },
+    "rightHandle": {
+      "x": 1659,
+      "y": 391.5,
+      "width": 68,
+      "height": 82,
+      "right": 1727,
+      "bottom": 473.5
+    },
+    "overflow": 0,
+    "appClass": "app r2-v015-active",
+    "viewClass": "r2-v015-mounted"
+  },
+  "textMetrics": {
+    "main": {
+      "rect": {
+        "x": 273.5,
+        "y": -598.21875,
+        "width": 1188,
+        "height": 742.5
+      },
+      "logicalWidth": 1080,
+      "logicalHeight": 675,
+      "scale": 1.1,
+      "labels": [
+        {
+          "label": "真实传播区（镜前）",
+          "x": 70,
+          "y": 40,
+          "size": 20,
+          "align": "left",
+          "weight": 800,
+          "left": 70,
+          "right": 250,
+          "top": 28.799999999999997,
+          "bottom": 51.2,
+          "effectivePx": 22,
+          "marginsPx": {
+            "left": 77,
+            "right": 913.0000000000001,
+            "top": 31.68,
+            "bottom": 686.18
+          }
+        },
+        {
+          "label": "虚拟定位区（镜后没有真实光）",
+          "x": 1010,
+          "y": 40,
+          "size": 20,
+          "align": "right",
+          "weight": 800,
+          "left": 730,
+          "right": 1010,
+          "top": 28.799999999999997,
+          "bottom": 51.2,
+          "effectivePx": 22,
+          "marginsPx": {
+            "left": 803.0000000000001,
+            "right": 77,
+            "top": 31.68,
+            "bottom": 686.18
+          }
+        },
+        {
+          "label": "拖动镜面端点",
+          "x": 572,
+          "y": 168,
+          "size": 18,
+          "align": "right",
+          "weight": 800,
+          "left": 464,
+          "right": 572,
+          "top": 157.92,
+          "bottom": 178.08,
+          "effectivePx": 19.8,
+          "marginsPx": {
+            "left": 510.40000000000003,
+            "right": 558.8000000000001,
+            "top": 173.712,
+            "bottom": 546.612
+          }
+        },
+        {
+          "label": "拖动物体顶部",
+          "x": 280,
+          "y": 315,
+          "size": 19,
+          "align": "center",
+          "weight": 800,
+          "left": 223,
+          "right": 337,
+          "top": 304.36,
+          "bottom": 325.64,
+          "effectivePx": 20.900000000000002,
+          "marginsPx": {
+            "left": 245.3,
+            "right": 817.3000000000001,
+            "top": 334.79600000000005,
+            "bottom": 384.29600000000005
+          }
+        },
+        {
+          "label": "物体",
+          "x": 280,
+          "y": 575,
+          "size": 19,
+          "align": "center",
+          "weight": 800,
+          "left": 261,
+          "right": 299,
+          "top": 564.36,
+          "bottom": 585.64,
+          "effectivePx": 20.900000000000002,
+          "marginsPx": {
+            "left": 287.1,
+            "right": 859.1,
+            "top": 620.796,
+            "bottom": 98.29600000000002
+          }
+        },
+        {
+          "label": "虚像（定位结果）",
+          "x": 920,
+          "y": 575,
+          "size": 19,
+          "align": "center",
+          "weight": 800,
+          "left": 844,
+          "right": 996,
+          "top": 564.36,
+          "bottom": 585.64,
+          "effectivePx": 20.900000000000002,
+          "marginsPx": {
+            "left": 928.4000000000001,
+            "right": 92.4,
+            "top": 620.796,
+            "bottom": 98.29600000000002
+          }
+        },
+        {
+          "label": "顶部必要点",
+          "x": 623,
+          "y": 368.03225806451616,
+          "size": 18,
+          "align": "left",
+          "weight": 800,
+          "left": 623,
+          "right": 713,
+          "top": 357.9522580645162,
+          "bottom": 378.11225806451614,
+          "effectivePx": 19.8,
+          "marginsPx": {
+            "left": 685.3000000000001,
+            "right": 403.70000000000005,
+            "top": 393.7474838709678,
+            "bottom": 326.57651612903226
+          }
+        },
+        {
+          "label": "底部必要点",
+          "x": 623,
+          "y": 482.51612903225805,
+          "size": 18,
+          "align": "left",
+          "weight": 800,
+          "left": 623,
+          "right": 713,
+          "top": 472.43612903225807,
+          "bottom": 492.59612903225803,
+          "effectivePx": 19.8,
+          "marginsPx": {
+            "left": 685.3000000000001,
+            "right": 403.70000000000005,
+            "top": 519.6797419354839,
+            "bottom": 200.64425806451618
+          }
+        },
+        {
+          "label": "拖动眼睛",
+          "x": 145,
+          "y": 465,
+          "size": 19,
+          "align": "center",
+          "weight": 800,
+          "left": 107,
+          "right": 183,
+          "top": 454.36,
+          "bottom": 475.64,
+          "effectivePx": 20.900000000000002,
+          "marginsPx": {
+            "left": 117.7,
+            "right": 986.7,
+            "top": 499.79600000000005,
+            "bottom": 219.29600000000002
+          }
+        },
+        {
+          "label": "仅部分物体可见",
+          "x": 858,
+          "y": 92,
+          "size": 25,
+          "align": "center",
+          "weight": 800,
+          "left": 770.5,
+          "right": 945.5,
+          "top": 78,
+          "bottom": 106,
+          "effectivePx": 27.500000000000004,
+          "marginsPx": {
+            "left": 847.5500000000001,
+            "right": 147.95000000000002,
+            "top": 85.80000000000001,
+            "bottom": 625.9000000000001
+          }
+        },
+        {
+          "label": "所需区间 383–498 px",
+          "x": 858,
+          "y": 129,
+          "size": 18,
+          "align": "center",
+          "weight": 800,
+          "left": 771.45849609375,
+          "right": 944.54150390625,
+          "top": 118.92,
+          "bottom": 139.08,
+          "effectivePx": 19.8,
+          "marginsPx": {
+            "left": 848.6043457031251,
+            "right": 149.004345703125,
+            "top": 130.812,
+            "bottom": 589.5120000000001
+          }
+        },
+        {
+          "label": "未被有效镜面 190–450 px 完整覆盖",
+          "x": 858,
+          "y": 159,
+          "size": 17,
+          "align": "center",
+          "weight": 700,
+          "left": 722.90478515625,
+          "right": 993.09521484375,
+          "top": 149.48,
+          "bottom": 168.52,
+          "effectivePx": 18.700000000000003,
+          "marginsPx": {
+            "left": 795.1952636718751,
+            "right": 95.595263671875,
+            "top": 164.428,
+            "bottom": 557.128
+          }
+        },
+        {
+          "label": "物距 dₒ = 320 px",
+          "x": 440,
+          "y": 609,
+          "size": 18,
+          "align": "center",
+          "weight": 800,
+          "left": 372.0341796875,
+          "right": 507.9658203125,
+          "top": 598.92,
+          "bottom": 619.08,
+          "effectivePx": 19.8,
+          "marginsPx": {
+            "left": 409.23759765625005,
+            "right": 629.23759765625,
+            "top": 658.812,
+            "bottom": 61.51199999999996
+          }
+        },
+        {
+          "label": "像距 |dᵢ| = 320 px",
+          "x": 760,
+          "y": 609,
+          "size": 18,
+          "align": "center",
+          "weight": 800,
+          "left": 689.41943359375,
+          "right": 830.58056640625,
+          "top": 598.92,
+          "bottom": 619.08,
+          "effectivePx": 19.8,
+          "marginsPx": {
+            "left": 758.361376953125,
+            "right": 274.36137695312505,
+            "top": 658.812,
+            "bottom": 61.51199999999996
+          }
+        },
+        {
+          "label": "实线表示真实传播；镜后虚线只是眼睛的反向追迹",
+          "x": 540,
+          "y": 625,
+          "size": 18,
+          "align": "center",
+          "weight": 700,
+          "left": 342,
+          "right": 738,
+          "top": 614.92,
+          "bottom": 635.08,
+          "effectivePx": 19.8,
+          "marginsPx": {
+            "left": 376.20000000000005,
+            "right": 376.20000000000005,
+            "top": 676.412,
+            "bottom": 43.911999999999956
+          }
+        },
+        {
+          "label": "完整可见：顶部与底部两个必要反射点都落在有效镜面内",
+          "x": 540,
+          "y": 651,
+          "size": 18,
+          "align": "center",
+          "weight": 700,
+          "left": 315,
+          "right": 765,
+          "top": 640.92,
+          "bottom": 661.08,
+          "effectivePx": 19.8,
+          "marginsPx": {
+            "left": 346.5,
+            "right": 346.5,
+            "top": 705.0120000000001,
+            "bottom": 15.311999999999957
+          }
+        }
+      ]
+    },
+    "mechanism": {
+      "rect": {
+        "x": 91,
+        "y": 539.140625,
+        "width": 756.5,
+        "height": 273.171875
+      },
+      "logicalWidth": 720,
+      "logicalHeight": 260,
+      "scale": 1.0506610576923077,
+      "labels": [
+        {
+          "label": "有限瞳孔接收真实反射光",
+          "x": 34,
+          "y": 24,
+          "size": 18,
+          "align": "left",
+          "weight": 800,
+          "left": 34,
+          "right": 232,
+          "top": 13.919999999999998,
+          "bottom": 34.08,
+          "effectivePx": 18.911899038461538,
+          "marginsPx": {
+            "left": 35.722475961538464,
+            "right": 512.7225961538461,
+            "top": 14.62520192307692,
+            "bottom": 237.36534615384616
+          }
+        },
+        {
+          "label": "延长线交于同一虚像点",
+          "x": 686,
+          "y": 24,
+          "size": 18,
+          "align": "right",
+          "weight": 800,
+          "left": 506,
+          "right": 686,
+          "top": 13.919999999999998,
+          "bottom": 34.08,
+          "effectivePx": 18.911899038461538,
+          "marginsPx": {
+            "left": 531.6344951923077,
+            "right": 35.722475961538464,
+            "top": 14.62520192307692,
+            "bottom": 237.36534615384616
+          }
+        },
+        {
+          "label": "物点",
+          "x": 184,
+          "y": 75.74999999999999,
+          "size": 17,
+          "align": "center",
+          "weight": 800,
+          "left": 167,
+          "right": 201,
+          "top": 66.22999999999999,
+          "bottom": 85.26999999999998,
+          "effectivePx": 17.861237980769232,
+          "marginsPx": {
+            "left": 175.4603966346154,
+            "right": 545.2930889423077,
+            "top": 69.58528185096152,
+            "bottom": 183.58200661057694
+          }
+        },
+        {
+          "label": "虚像点",
+          "x": 536,
+          "y": 75.74999999999999,
+          "size": 17,
+          "align": "center",
+          "weight": 800,
+          "left": 510.5,
+          "right": 561.5,
+          "top": 66.22999999999999,
+          "bottom": 85.26999999999998,
+          "effectivePx": 17.861237980769232,
+          "marginsPx": {
+            "left": 536.3624699519231,
+            "right": 166.52977764423076,
+            "top": 69.58528185096152,
+            "bottom": 183.58200661057694
+          }
+        },
+        {
+          "label": "物距 = 像距 = 320 px；镜后虚线只用于定位",
+          "x": 360,
+          "y": 230,
+          "size": 17,
+          "align": "center",
+          "weight": 800,
+          "left": 195.1630859375,
+          "right": 524.8369140625,
+          "top": 220.48,
+          "bottom": 239.52,
+          "effectivePx": 17.861237980769232,
+          "marginsPx": {
+            "left": 205.0502542935885,
+            "right": 205.0502542935885,
+            "top": 231.64974999999998,
+            "bottom": 21.51753846153845
+          }
+        }
+      ]
+    },
+    "observable": {
+      "rect": {
+        "x": 887.5,
+        "y": 539.140625,
+        "width": 756.5,
+        "height": 273.171875
+      },
+      "logicalWidth": 720,
+      "logicalHeight": 260,
+      "scale": 1.0506610576923077,
+      "labels": [
+        {
+          "label": "有限镜面覆盖判据",
+          "x": 34,
+          "y": 24,
+          "size": 18,
+          "align": "left",
+          "weight": 800,
+          "left": 34,
+          "right": 178,
+          "top": 13.919999999999998,
+          "bottom": 34.08,
+          "effectivePx": 18.911899038461538,
+          "marginsPx": {
+            "left": 35.722475961538464,
+            "right": 569.4582932692308,
+            "top": 14.62520192307692,
+            "bottom": 237.36534615384616
+          }
+        },
+        {
+          "label": "至少一个必要点落在镜面外",
+          "x": 686,
+          "y": 24,
+          "size": 18,
+          "align": "right",
+          "weight": 800,
+          "left": 470,
+          "right": 686,
+          "top": 13.919999999999998,
+          "bottom": 34.08,
+          "effectivePx": 18.911899038461538,
+          "marginsPx": {
+            "left": 493.8106971153846,
+            "right": 35.722475961538464,
+            "top": 14.62520192307692,
+            "bottom": 237.36534615384616
+          }
+        },
+        {
+          "label": "顶部必要点",
+          "x": 183,
+          "y": 131.90967741935486,
+          "size": 17,
+          "align": "right",
+          "weight": 800,
+          "left": 98,
+          "right": 183,
+          "top": 122.38967741935487,
+          "bottom": 141.42967741935487,
+          "effectivePx": 17.861237980769232,
+          "marginsPx": {
+            "left": 102.96478365384615,
+            "right": 564.2049879807693,
+            "top": 128.59006792803973,
+            "bottom": 124.57722053349872
+          }
+        },
+        {
+          "label": "底部必要点",
+          "x": 183,
+          "y": 192.25483870967741,
+          "size": 17,
+          "align": "right",
+          "weight": 800,
+          "left": 98,
+          "right": 183,
+          "top": 182.7348387096774,
+          "bottom": 201.77483870967743,
+          "effectivePx": 17.861237980769232,
+          "marginsPx": {
+            "left": 102.96478365384615,
+            "right": 564.2049879807693,
+            "top": 191.9923789159429,
+            "bottom": 61.174909545595526
+          }
+        },
+        {
+          "label": "所需区间",
+          "x": 334,
+          "y": 161.08225806451614,
+          "size": 17,
+          "align": "left",
+          "weight": 800,
+          "left": 334,
+          "right": 402,
+          "top": 151.56225806451613,
+          "bottom": 170.60225806451615,
+          "effectivePx": 17.861237980769232,
+          "marginsPx": {
+            "left": 350.9207932692308,
+            "right": 334.11021634615383,
+            "top": 159.240562364299,
+            "bottom": 93.92672609723942
+          }
+        },
+        {
+          "label": "镜面截断部分视线",
+          "x": 555,
+          "y": 86,
+          "size": 21,
+          "align": "center",
+          "weight": 800,
+          "left": 471,
+          "right": 639,
+          "top": 74.24,
+          "bottom": 97.76,
+          "effectivePx": 22.063882211538463,
+          "marginsPx": {
+            "left": 494.8613581730769,
+            "right": 85.10354567307692,
+            "top": 78.00107692307692,
+            "bottom": 170.45925
+          }
+        },
+        {
+          "label": "所需区间 383–498 px",
+          "x": 555,
+          "y": 126,
+          "size": 17,
+          "align": "center",
+          "weight": 800,
+          "left": 473.266357421875,
+          "right": 636.733642578125,
+          "top": 116.48,
+          "bottom": 135.52,
+          "effectivePx": 17.861237980769232,
+          "marginsPx": {
+            "left": 497.24253165905293,
+            "right": 87.48471915905291,
+            "top": 122.381,
+            "bottom": 130.78628846153845
+          }
+        },
+        {
+          "label": "未被有效镜面 190–450 px 完整覆盖",
+          "x": 555,
+          "y": 158,
+          "size": 16,
+          "align": "center",
+          "weight": 700,
+          "left": 427.8515625,
+          "right": 682.1484375,
+          "top": 149.04,
+          "bottom": 166.96,
+          "effectivePx": 16.810576923076923,
+          "marginsPx": {
+            "left": 449.52697519155646,
+            "right": 39.76916269155649,
+            "top": 156.59052403846152,
+            "bottom": 97.7535048076923
+          }
+        },
+        {
+          "label": "眼睛移动会改变必要反射点，但不会改变虚像的对称位置",
+          "x": 360,
+          "y": 229,
+          "size": 17,
+          "align": "center",
+          "weight": 700,
+          "left": 147.5,
+          "right": 572.5,
+          "top": 219.48,
+          "bottom": 238.52,
+          "effectivePx": 17.861237980769232,
+          "marginsPx": {
+            "left": 154.9725060096154,
+            "right": 154.9725060096154,
+            "top": 230.59908894230767,
+            "bottom": 22.56819951923076
+          }
+        }
+      ]
+    }
+  },
+  "drag": {
+    "before": {
+      "distance": "270 px",
+      "height": "150 px"
+    },
+    "after": {
+      "distance": "320 px",
+      "height": "195 px"
+    }
+  },
+  "sections": {
+    "mainCanvas": {
+      "box": {
+        "x": 273.5,
+        "y": 60.78125,
+        "width": 1188,
+        "height": 742.5
+      },
+      "fraction": 1,
+      "bottomSafety": 61.71875
+    },
+    "mechanism": {
+      "box": {
+        "x": 80,
+        "y": 397.953125,
+        "width": 778.5,
+        "height": 430.78125
+      },
+      "fraction": 1,
+      "bottomSafety": 36.265625
+    },
+    "observable": {
+      "box": {
+        "x": 876.5,
+        "y": 397.953125,
+        "width": 778.5,
+        "height": 430.78125
+      },
+      "fraction": 1,
+      "bottomSafety": 36.265625
+    }
+  },
+  "drawer": {
+    "x": 1283,
+    "y": 12,
+    "width": 440,
+    "height": 719.234375
+  }
+}
