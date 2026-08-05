@@ -17,15 +17,49 @@ GitHub Pages 从 `main` 分支根目录自动发布：
 #model:thin-film
 ```
 
-## 当前版本：v0.13
+## 当前版本：v0.15
 
-### 反射前三个基础模型工作台
+### v0.15：R2 平面镜虚像严格运行验收
+
+R2 以“真实光传播 → 有限镜面截获 → 进入有限瞳孔 → 观察者反向追迹 → 对称虚像定位”为统一因果链，重建主实验台与同步分析模块。
+
+核心升级：
+
+- 明确区分镜前真实传播区和镜后虚拟定位区；
+- 同时显示物体、有限镜面、眼睛、真实入射光、真实反射光、反向延长线、虚像和顶部/底部必要反射点；
+- 镜面有效区之外的候选命中点用减弱路径和红色叉号表示；
+- 镜面上下端点可以直接拖动；
+- 有限镜面判据从“比较两个长度”升级为“所需反射点区间是否被有效镜面区间包含”；
+- 眼睛移动改变必要反射点，但不改变虚像的对称位置；
+- 眼睛/相机可以记录虚像，镜后屏幕不能接收真实会聚光；
+- 主图和所有分析模块共享统一状态；
+- 修复宽屏旧版版心、Canvas 初始空白、比例失真、抽屉裁切和高屏幕抽屉空白。
+
+R2 在以下桌面视口执行真实拖动与任务级截图验收：
+
+```text
+2560×1440
+1920×1080
+1735×865
+1440×900
+1366×768
+```
+
+完整实现与验收证据见 [`docs/R2_RUNTIME_VISUAL_AUDIT_V015.md`](docs/R2_RUNTIME_VISUAL_AUDIT_V015.md)。
+
+### v0.14：R1 反射定律与表面粗糙度严格视觉返工
+
+R1 将局部法线、入射角、反射角、观察方向、接受角、角分布峰宽和相对接收信号连接成同一可见因果链，并建立“真实浏览器运行结果是最终验收事实”的规则。
+
+完整说明见 [`docs/R1_RUNTIME_VISUAL_AUDIT_V014.md`](docs/R1_RUNTIME_VISUAL_AUDIT_V014.md)。
+
+### v0.13：反射前三个基础模型同步工作台
 
 v0.13 首次把薄膜旗舰多轮升级后形成的核心标准批量应用到：
 
-- **R1 反射定律与表面粗糙度**；
-- **R2 平面镜虚像**；
-- **R3 球面镜成像**。
+- R1 反射定律与表面粗糙度；
+- R2 平面镜虚像；
+- R3 球面镜成像。
 
 统一结构：
 
@@ -41,26 +75,7 @@ v0.13 首次把薄膜旗舰多轮升级后形成的核心标准批量应用到�
 右侧边缘轨：参数、预设和完整验证
 ```
 
-核心变化：
-
-- 主实验台与两个已选模块必须在同一视口完成比较；
-- 同屏预算固定为两个分析模块，避免把几何图压成不可读缩略图；
-- 每个模型默认显示“局部机制＋可观测量”；
-- 模块可切换为“装置＋观测”或“公式＋验证”；
-- 左右间歇性控件改为可固定、可关闭、支持触屏的边缘抽屉；
-- 所有 Canvas 保持高 DPI 重绘和统一逻辑坐标；
-- 每个模块明确目的、作用与建议操作；
-- 每个模型加入随状态变化的验证与边界提示。
-
-物理升级：
-
-- R1 将“粗糙度”严格定性为**局部法线离散度的几何示意**，并增加观察方向、角分布和接收信号；
-- R2 修复旧版同一点眼睛连接任意两个镜面命中点的光路缺陷，改用有限瞳孔和镜像法严格构造反射路径，并加入有限镜面完整可见性；
-- R3 增加有效口径、精确球面法线反射束、球差焦散宽度、屏幕偏移和 F/2F 成像区域图。
-
-项目级核心标准见 [`docs/INTERACTIVE_MODEL_CONSTRUCTION_STANDARD_V1.md`](docs/INTERACTIVE_MODEL_CONSTRUCTION_STANDARD_V1.md)。
-
-本轮实现与验收说明见 [`docs/REFLECTION_FOUNDATIONS_V013.md`](docs/REFLECTION_FOUNDATIONS_V013.md)。
+本轮历史说明见 [`docs/REFLECTION_FOUNDATIONS_V013.md`](docs/REFLECTION_FOUNDATIONS_V013.md)。
 
 ### v0.12：薄膜三视图同屏因果闭环
 
@@ -85,12 +100,31 @@ v0.12 修复“状态同步但观察不同步”的缺陷。当用户选择两�
 - v0.9：板块目的、作用、建议操作、语义标题和模型边界；
 - v0.8：单层薄膜精确多束、装置、光谱、反演和物理回归测试。
 
+## 项目级核心标准
+
+- 主标准：[`docs/INTERACTIVE_MODEL_CONSTRUCTION_STANDARD_V1.md`](docs/INTERACTIVE_MODEL_CONSTRUCTION_STANDARD_V1.md)
+- v1.2 发布与真实环境增补：[`docs/INTERACTIVE_MODEL_STANDARD_V12_AMENDMENTS.md`](docs/INTERACTIVE_MODEL_STANDARD_V12_AMENDMENTS.md)
+
+v1.2 进一步规定：
+
+```text
+代码完成
+→ 分支测试通过
+→ 人工视觉复验通过
+→ PR 可审阅
+→ 合并 main
+→ 发布完成
+→ 真实线上地址无缓存复验通过
+```
+
+这些状态不得互相替代。PR 通过不等于网站已经更新。
+
 ## 当前内容
 
 ### 01 反射
 
-- **R1 反射定律与表面粗糙度（v0.13 同步工作台）**
-- **R2 平面镜虚像（v0.13 同步工作台）**
+- **R1 反射定律与表面粗糙度（v0.14 严格视觉工作台）**
+- **R2 平面镜虚像（v0.15 严格运行工作台）**
 - **R3 球面镜成像（v0.13 同步工作台）**
 - R4 菲涅耳反射与布儒斯特角
 - R5 全反射与倏逝场
@@ -131,6 +165,9 @@ v0.12 修复“状态同步但观察不同步”的缺陷。当用户选择两�
 → 动作、原因和结果同屏
 → 读取可观测量
 → 检查公式、近似与边界
+→ 在真实浏览器中完成任务
+→ 人工查看关键状态截图
+→ 合并、发布并复验线上页面
 ```
 
 ## 本地运行
@@ -160,6 +197,10 @@ node tests/reflection-foundations-v013.test.js
 ```text
 tests/visual-audit-v012.mjs
 tests/visual-audit-reflection-v013.mjs
+tests/visual-audit-r1-v014.mjs
+tests/visual-audit-r2-v015.mjs
+tests/visual-audit-r2-direct-control-v015.mjs
+tests/visual-audit-r2-drawer-fit-v015.mjs
 ```
 
 ## 关键代码结构
@@ -168,14 +209,20 @@ tests/visual-audit-reflection-v013.mjs
 assets/
 ├── css/
 │   ├── reflection-foundations-v013.css
+│   ├── r1-visual-refinement-v014.css
+│   ├── r2-visual-refinement-v015.css
+│   ├── r2-drawer-position-v015.css
 │   ├── thin-film-workbench-v010.css
 │   ├── adaptive-edge-rails-v011.css
 │   └── simultaneous-viewport-v012.css
 └── js/
     ├── reflection-foundations-v013.js
-    ├── reflection-foundations-v013-patch.js
+    ├── r1-visual-refinement-v014.js
+    ├── r2-visual-refinement-v015.js
+    ├── r2-mechanism-sync-v015.js
+    ├── r2-render-stability-v015.js
+    ├── r2-interval-clarity-v015.js
     ├── canvas-hidpi-v092.js
-    ├── thin-film-v08-physics.js
     ├── thin-film-workbench-v010.js
     ├── adaptive-edge-rails-v011.js
     └── simultaneous-viewport-v012.js
@@ -183,12 +230,18 @@ assets/
 tests/
 ├── reflection-foundations-v013.test.js
 ├── visual-audit-reflection-v013.mjs
+├── visual-audit-r1-v014.mjs
+├── visual-audit-r2-v015.mjs
+├── visual-audit-r2-direct-control-v015.mjs
+├── visual-audit-r2-drawer-fit-v015.mjs
 ├── thin-film-v08-physics.test.js
-├── simultaneous-viewport-v012.test.js
 └── visual-audit-v012.mjs
 
 docs/
 ├── INTERACTIVE_MODEL_CONSTRUCTION_STANDARD_V1.md
+├── INTERACTIVE_MODEL_STANDARD_V12_AMENDMENTS.md
+├── R1_RUNTIME_VISUAL_AUDIT_V014.md
+├── R2_RUNTIME_VISUAL_AUDIT_V015.md
 ├── REFLECTION_FOUNDATIONS_V013.md
 ├── SIMULTANEOUS_VIEWPORT_V012.md
 ├── ADAPTIVE_VISIBILITY_POLICY_V011.md
@@ -204,3 +257,6 @@ docs/
 - 修改交互方向、坐标映射或布局后，必须执行真实指针和目标视口验收。
 - 物理公式、装置图、局部机制、可观测量和验证必须共享同一状态。
 - 任何近似必须同时拥有边界说明和至少一个运行时检查。
+- 自动测试失败时必须同时检查产品与测试工具，不得默认测试工具绝对正确。
+- 用户实际浏览器截图可以推翻实验室验收结论。
+- 未完成 `main` 合并、Pages 发布和真实线上无缓存复验，不得宣告网站已经更新。
