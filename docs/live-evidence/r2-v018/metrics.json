@@ -1,0 +1,62 @@
+{
+  "attempts": 1,
+  "status": 200,
+  "errors": [],
+  "assertions": [],
+  "layout": {
+    "primary": {
+      "x": 80,
+      "y": 48.8125,
+      "width": 1008,
+      "height": 895.5625,
+      "right": 1088,
+      "bottom": 944.375
+    },
+    "analysis": {
+      "x": 1110,
+      "y": 48.8125,
+      "width": 600,
+      "height": 827.71875,
+      "right": 1710,
+      "bottom": 876.53125
+    },
+    "mechanism": {
+      "x": 1110,
+      "y": 160.65625,
+      "width": 600,
+      "height": 350.9375,
+      "right": 1710,
+      "bottom": 511.59375
+    },
+    "observable": {
+      "x": 1110,
+      "y": 525.59375,
+      "width": 600,
+      "height": 350.9375,
+      "right": 1710,
+      "bottom": 876.53125
+    },
+    "overflow": 0
+  },
+  "formula": {
+    "formulas": [
+      {
+        "text": "θi=θr",
+        "fontSize": 24.165
+      },
+      {
+        "text": "di=−do",
+        "fontSize": 24.165
+      },
+      {
+        "text": "m=hiho=−dido=+1",
+        "fontSize": 24.165
+      }
+    ],
+    "steps": [
+      86.984375,
+      101.984375,
+      110.234375
+    ]
+  }
+}
