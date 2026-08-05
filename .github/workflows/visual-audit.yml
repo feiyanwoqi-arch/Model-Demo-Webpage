@@ -55,6 +55,9 @@ jobs:
       - name: R2 drawer content-fit audit
         if: always()
         run: node tests/visual-audit-r2-drawer-fit-v015.mjs
+      - name: R2 wide synchronized layout and formula audit
+        if: always()
+        run: node tests/visual-audit-r2-wide-formula-v018.mjs
       - name: R3 finite-ray and legibility audit
         if: always()
         run: node tests/visual-audit-r3-v017.mjs
@@ -62,7 +65,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: optics-visual-audit-v017
+          name: optics-visual-audit-v018
           path: |
             visual-audit-v012/
             visual-audit-reflection-v013/
@@ -71,6 +74,7 @@ jobs:
             visual-audit-r2-all-canvas-text-v016/
             visual-audit-r2-direct-control-v015/
             visual-audit-r2-drawer-fit-v015/
+            visual-audit-r2-wide-formula-v018/
             visual-audit-r3-v017/
           if-no-files-found: warn
           retention-days: 14
