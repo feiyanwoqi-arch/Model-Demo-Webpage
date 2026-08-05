@@ -1,0 +1,119 @@
+/* R2 plane-mirror runtime-reviewed refinement v0.15 */
+body:has(.app.r2-v015-active){overflow-x:clip}
+.app.r2-v015-active{
+  width:100vw!important;
+  max-width:none!important;
+  margin:0!important;
+  padding:16px clamp(34px,3vw,72px) 36px!important;
+}
+#view.r2-v015-mounted{
+  width:100%!important;
+  max-width:none!important;
+  margin:0!important;
+}
+.rfw-page[data-model-id="plane-mirror"]{
+  width:100%;
+  max-width:2400px;
+  margin-inline:auto;
+}
+.rfw-page[data-model-id="plane-mirror"] .rfw-hero{
+  grid-template-columns:minmax(0,1fr) minmax(390px,.58fr);
+  gap:24px;
+  padding:8px 10px 10px;
+}
+.rfw-page[data-model-id="plane-mirror"] .rfw-hero h1{font-size:clamp(31px,2.1vw,46px)}
+.rfw-page[data-model-id="plane-mirror"] .rfw-hero p{font-size:14px;line-height:1.55}
+.rfw-page[data-model-id="plane-mirror"] .rfw-workspace{
+  grid-template-columns:minmax(620px,1.16fr) minmax(590px,1fr);
+  gap:14px;
+  height:min(calc(100dvh - 150px),980px);
+}
+.rfw-page[data-model-id="plane-mirror"] .rfw-primary-head{padding:12px 15px}
+.rfw-page[data-model-id="plane-mirror"] .rfw-primary-head h2{font-size:23px}
+.rfw-page[data-model-id="plane-mirror"] .rfw-primary-head p{font-size:12px;line-height:1.45}
+.rfw-page[data-model-id="plane-mirror"] .rfw-primary-head .legend{font-size:11px;gap:14px}
+.rfw-page[data-model-id="plane-mirror"] .rfw-primary-guide summary,
+.rfw-page[data-model-id="plane-mirror"] .rfw-module-guide summary{font-size:11px}
+.rfw-page[data-model-id="plane-mirror"] .rfw-live-strip span{font-size:10px}
+.rfw-page[data-model-id="plane-mirror"] .rfw-live-strip b{font-size:15px;line-height:1.3}
+.rfw-page[data-model-id="plane-mirror"] .rfw-live-strip article{padding:9px 12px}
+.rfw-page[data-model-id="plane-mirror"] .rfw-live-strip .is-r2-visible{background:#f2ffdf}
+.rfw-page[data-model-id="plane-mirror"] .rfw-live-strip .is-r2-visible b{color:#4b7900}
+.rfw-page[data-model-id="plane-mirror"] .rfw-live-strip .is-r2-partial{background:#fff4eb}
+.rfw-page[data-model-id="plane-mirror"] .rfw-live-strip .is-r2-partial b{color:#a35225}
+.rfw-page[data-model-id="plane-mirror"] .rfw-primary-foot{font-size:11px;padding:8px 12px}
+.rfw-page[data-model-id="plane-mirror"] .rfw-analysis-head{padding:5px 5px 8px}
+.rfw-page[data-model-id="plane-mirror"] .rfw-analysis-head h2{font-size:21px}
+.rfw-page[data-model-id="plane-mirror"] .rfw-analysis-head p{font-size:11px}
+.rfw-page[data-model-id="plane-mirror"] .rfw-analysis-head output{font-size:11px;padding:7px 11px}
+.rfw-page[data-model-id="plane-mirror"] .rfw-module-head{min-height:54px;padding:9px 12px}
+.rfw-page[data-model-id="plane-mirror"] .rfw-module-head h3{font-size:16px}
+.rfw-page[data-model-id="plane-mirror"] .rfw-module-head p{font-size:11px;line-height:1.4}
+.rfw-page[data-model-id="plane-mirror"] .rfw-module-actions button{font-size:10px;padding:6px 9px}
+.rfw-page[data-model-id="plane-mirror"] .rfw-module-canvas-wrap{
+  background:#fbfdfc;
+  align-items:center;
+}
+.rfw-page[data-model-id="plane-mirror"] .rfw-module-canvas-wrap canvas{
+  width:100%;
+  height:auto;
+  max-width:100%;
+  max-height:100%;
+  object-fit:contain;
+  aspect-ratio:720/260;
+}
+.rfw-page[data-model-id="plane-mirror"] #rfwMainCanvas{touch-action:none}
+.rfw-page[data-model-id="plane-mirror"] .rfw-edge-handle{
+  writing-mode:horizontal-tb;
+  width:58px;
+  min-height:72px;
+  padding:10px 8px;
+  gap:6px;
+  border-radius:14px;
+  line-height:1.1;
+}
+.rfw-page[data-model-id="plane-mirror"] .rfw-edge-handle b{font-size:13px;white-space:nowrap}
+.rfw-page[data-model-id="plane-mirror"] .rfw-edge-handle span{font-size:10px;white-space:nowrap}
+.rfw-page[data-model-id="plane-mirror"] .rfw-left-handle{left:8px}
+.rfw-page[data-model-id="plane-mirror"] .rfw-right-handle{right:8px}
+.rfw-page[data-model-id="plane-mirror"] .rfw-drawer{width:min(440px,calc(100vw - 38px))}
+.rfw-page[data-model-id="plane-mirror"] .rfw-left-drawer{left:12px!important}
+.rfw-page[data-model-id="plane-mirror"] .rfw-left-drawer.is-open{transform:translateX(0)!important}
+.rfw-page[data-model-id="plane-mirror"] .rfw-right-drawer{right:12px!important}
+.rfw-page[data-model-id="plane-mirror"] .rfw-drawer h2{font-size:24px}
+.rfw-page[data-model-id="plane-mirror"] .rfw-control b{font-size:12px}
+.rfw-page[data-model-id="plane-mirror"] .rfw-control output{font-size:11px}
+.rfw-page[data-model-id="plane-mirror"] .rfw-control input{min-height:22px}
+.rfw-page[data-model-id="plane-mirror"] .rfw-full-metrics span{font-size:10px}
+.rfw-page[data-model-id="plane-mirror"] .rfw-full-metrics b{font-size:12px}
+.rfw-page[data-model-id="plane-mirror"] .rfw-status{font-size:11px}
+
+@media(min-width:2100px){
+  .rfw-page[data-model-id="plane-mirror"] .rfw-workspace{
+    grid-template-columns:minmax(0,1.17fr) minmax(0,1fr);
+  }
+}
+@media(max-width:1450px){
+  .app.r2-v015-active{padding-inline:34px!important}
+  .rfw-page[data-model-id="plane-mirror"] .rfw-workspace{
+    grid-template-columns:minmax(555px,1.08fr) minmax(500px,1fr);
+  }
+  .rfw-page[data-model-id="plane-mirror"] .rfw-hero{grid-template-columns:1fr minmax(330px,.55fr)}
+  .rfw-page[data-model-id="plane-mirror"] .rfw-edge-handle{width:52px;min-height:66px}
+}
+@media(max-height:820px) and (min-width:1121px){
+  .rfw-page[data-model-id="plane-mirror"] .rfw-workspace{min-height:620px;height:calc(100dvh - 118px)}
+  .rfw-page[data-model-id="plane-mirror"] .rfw-primary-head{padding-block:8px}
+  .rfw-page[data-model-id="plane-mirror"] .rfw-module-head{min-height:49px;padding-block:7px}
+  .rfw-page[data-model-id="plane-mirror"] .rfw-module-head p{font-size:10px}
+  .rfw-page[data-model-id="plane-mirror"] .rfw-live-strip article{padding-block:7px}
+}
+@media(max-width:1120px){
+  .app.r2-v015-active{padding-inline:18px!important}
+  .rfw-page[data-model-id="plane-mirror"] .rfw-workspace{grid-template-columns:1fr;height:auto}
+}
+@media(max-width:760px){
+  .app.r2-v015-active{padding-inline:7px!important}
+  .rfw-page[data-model-id="plane-mirror"] .rfw-edge-handle{width:auto;min-height:0}
+  .rfw-page[data-model-id="plane-mirror"] .rfw-hero{grid-template-columns:1fr}
+}
