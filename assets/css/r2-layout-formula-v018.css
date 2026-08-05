@@ -1,0 +1,211 @@
+/* R2 v0.18: restore the intended same-screen workbench and make formulas readable. */
+
+/* MathJax is DOM, not Canvas. Give it an explicit reading-size budget. */
+.rfw-page[data-model-id="plane-mirror"] .rfw-module[data-module-id="derivation"] .rfw-module-html{
+  padding:10px 12px;
+  overflow:hidden;
+}
+.rfw-page[data-model-id="plane-mirror"] .rfw-module[data-module-id="derivation"] .rfw-derivation-list{
+  gap:9px;
+}
+.rfw-page[data-model-id="plane-mirror"] .rfw-module[data-module-id="derivation"] .rfw-derivation-list article{
+  grid-template-columns:34px minmax(0,1fr);
+  align-items:center;
+  gap:10px;
+  padding:9px 12px;
+  border-radius:12px;
+}
+.rfw-page[data-model-id="plane-mirror"] .rfw-module[data-module-id="derivation"] .rfw-derivation-list article>i{
+  width:30px;
+  height:30px;
+  font-size:13px;
+}
+.rfw-page[data-model-id="plane-mirror"] .rfw-module[data-module-id="derivation"] .rfw-derivation-list mjx-container[display="true"]{
+  margin:.04em 0 .12em!important;
+  font-size:1.55rem!important;
+  line-height:1.1!important;
+  overflow:visible!important;
+}
+.rfw-page[data-model-id="plane-mirror"] .rfw-module[data-module-id="derivation"] .rfw-derivation-list p{
+  margin:2px 0 0;
+  font-size:13px;
+  line-height:1.38;
+}
+
+/* Desktop workbench: main experiment left, two synchronized modules stacked right. */
+@media (min-width:1600px) and (min-height:760px){
+  .app.r2-v015-active{
+    padding-inline:50px!important;
+  }
+  .rfw-page[data-model-id="plane-mirror"] .rfw-left-handle{
+    left:4px;
+  }
+  .rfw-page[data-model-id="plane-mirror"] .rfw-right-handle{
+    right:4px;
+  }
+  .rfw-page[data-model-id="plane-mirror"] .rfw-edge-handle{
+    width:44px;
+    min-height:74px;
+    padding:10px 6px;
+  }
+
+  .rfw-page[data-model-id="plane-mirror"] .rfw-workspace{
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr) 600px!important;
+    grid-template-rows:minmax(0,1fr)!important;
+    gap:14px!important;
+    height:min(900px,calc(100dvh - 24px))!important;
+    min-height:760px!important;
+    align-items:stretch!important;
+  }
+  .rfw-page[data-model-id="plane-mirror"] .rfw-primary-column,
+  .rfw-page[data-model-id="plane-mirror"] .rfw-analysis-column{
+    width:100%;
+    height:100%!important;
+    min-height:0!important;
+  }
+  .rfw-page[data-model-id="plane-mirror"] .rfw-primary-card{
+    height:100%!important;
+    min-height:0!important;
+    grid-template-rows:auto auto minmax(0,1fr) auto auto!important;
+  }
+  .rfw-page[data-model-id="plane-mirror"] .rfw-main-canvas-wrap{
+    min-height:0!important;
+    padding:6px 8px!important;
+    overflow:hidden!important;
+  }
+  .rfw-page[data-model-id="plane-mirror"] #rfwMainCanvas{
+    width:min(100%,1024px)!important;
+    height:auto!important;
+    max-width:100%!important;
+    max-height:100%!important;
+  }
+
+  .rfw-page[data-model-id="plane-mirror"] .rfw-primary-head{
+    min-height:60px;
+    padding:9px 13px;
+  }
+  .rfw-page[data-model-id="plane-mirror"] .rfw-primary-head h2{
+    font-size:24px;
+  }
+  .rfw-page[data-model-id="plane-mirror"] .rfw-primary-head p{
+    font-size:13px;
+  }
+  .rfw-page[data-model-id="plane-mirror"] .rfw-primary-head .legend{
+    font-size:12px;
+    max-width:48%;
+  }
+  .rfw-page[data-model-id="plane-mirror"] .rfw-primary-guide summary{
+    padding:7px 12px;
+    font-size:12px;
+  }
+  .rfw-page[data-model-id="plane-mirror"] .rfw-live-strip article{
+    padding:8px 11px;
+  }
+  .rfw-page[data-model-id="plane-mirror"] .rfw-live-strip span{
+    font-size:11px;
+    margin-bottom:3px;
+  }
+  .rfw-page[data-model-id="plane-mirror"] .rfw-live-strip b{
+    font-size:16px;
+  }
+  .rfw-page[data-model-id="plane-mirror"] .rfw-primary-foot{
+    padding:7px 11px;
+    font-size:11px;
+  }
+
+  .rfw-page[data-model-id="plane-mirror"] .rfw-analysis-column{
+    display:grid!important;
+    grid-template-rows:auto minmax(0,1fr)!important;
+    gap:8px!important;
+  }
+  .rfw-page[data-model-id="plane-mirror"] .rfw-analysis-head{
+    min-height:54px;
+    padding:3px 4px 6px;
+  }
+  .rfw-page[data-model-id="plane-mirror"] .rfw-analysis-head h2{
+    font-size:22px;
+  }
+  .rfw-page[data-model-id="plane-mirror"] .rfw-analysis-head p{
+    font-size:12px;
+  }
+  .rfw-page[data-model-id="plane-mirror"] .rfw-analysis-head output{
+    font-size:12px;
+    padding:7px 10px;
+  }
+  .rfw-page[data-model-id="plane-mirror"] .rfw-board,
+  .rfw-page[data-model-id="plane-mirror"] .rfw-board[data-count="2"]{
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr)!important;
+    grid-template-rows:repeat(2,minmax(0,1fr))!important;
+    gap:10px!important;
+    height:100%!important;
+    min-height:0!important;
+  }
+  .rfw-page[data-model-id="plane-mirror"] .rfw-module{
+    height:100%!important;
+    min-height:0!important;
+    grid-template-rows:auto auto minmax(0,1fr)!important;
+    overflow:hidden!important;
+  }
+  .rfw-page[data-model-id="plane-mirror"] .rfw-module-head{
+    min-height:56px;
+    padding:8px 10px;
+  }
+  .rfw-page[data-model-id="plane-mirror"] .rfw-module-head>div>span{
+    font-size:9px;
+  }
+  .rfw-page[data-model-id="plane-mirror"] .rfw-module-head h3{
+    font-size:19px;
+    line-height:1.2;
+  }
+  .rfw-page[data-model-id="plane-mirror"] .rfw-module-head p{
+    font-size:12px;
+    line-height:1.35;
+  }
+  .rfw-page[data-model-id="plane-mirror"] .rfw-module-actions button{
+    font-size:11px;
+    padding:6px 8px;
+  }
+  .rfw-page[data-model-id="plane-mirror"] .rfw-module-guide summary{
+    font-size:11px;
+    padding:6px 9px;
+  }
+  .rfw-page[data-model-id="plane-mirror"] .rfw-module-canvas-wrap{
+    min-height:0!important;
+    padding:4px 7px 7px!important;
+    overflow:hidden!important;
+  }
+  .rfw-page[data-model-id="plane-mirror"] .rfw-module-canvas-wrap canvas{
+    width:100%!important;
+    height:auto!important;
+    max-width:100%!important;
+    max-height:100%!important;
+    aspect-ratio:720/260!important;
+  }
+
+  .rfw-page[data-model-id="plane-mirror"] .rfw-module[data-module-id="derivation"] .rfw-module-html{
+    min-height:0;
+    padding:7px 9px;
+  }
+  .rfw-page[data-model-id="plane-mirror"] .rfw-module[data-module-id="derivation"] .rfw-derivation-list{
+    gap:6px;
+  }
+  .rfw-page[data-model-id="plane-mirror"] .rfw-module[data-module-id="derivation"] .rfw-derivation-list article{
+    grid-template-columns:30px minmax(0,1fr);
+    gap:8px;
+    padding:6px 9px;
+  }
+  .rfw-page[data-model-id="plane-mirror"] .rfw-module[data-module-id="derivation"] .rfw-derivation-list article>i{
+    width:27px;
+    height:27px;
+    font-size:12px;
+  }
+  .rfw-page[data-model-id="plane-mirror"] .rfw-module[data-module-id="derivation"] .rfw-derivation-list mjx-container[display="true"]{
+    font-size:1.48rem!important;
+  }
+  .rfw-page[data-model-id="plane-mirror"] .rfw-module[data-module-id="derivation"] .rfw-derivation-list p{
+    font-size:12px;
+    line-height:1.3;
+  }
+}
