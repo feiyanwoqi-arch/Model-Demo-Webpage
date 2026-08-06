@@ -56,6 +56,25 @@ async function inspectCanvas(page,key,selector){
   },{key,selector});
 }
 
+async function inspectHeaderEdgeOverlap(page){
+  return page.evaluate(()=>{
+    const rectOf=node=>{const r=node.getBoundingClientRect();return {left:r.left,right:r.right,top:r.top,bottom:r.bottom,width:r.width,height:r.height};};
+    const handles=[...document.querySelectorAll('.tir-left-handle,.tir-right-handle')].filter(node=>getComputedStyle(node).visibility!=='hidden').map(node=>({label:node.textContent.trim(),rect:rectOf(node)}));
+    const targets=[...document.querySelectorAll('.tir-primary>header>div>span,.tir-primary>header h2,.tir-primary>header p,.tir-primary>header .tir-legend span')]
+      .filter(node=>node.textContent.trim()&&getComputedStyle(node).display!=='none')
+      .map(node=>({label:node.textContent.trim(),rect:rectOf(node)}));
+    const overlaps=[];
+    for(const handle of handles){
+      for(const target of targets){
+        const x=Math.min(handle.rect.right,target.rect.right)-Math.max(handle.rect.left,target.rect.left);
+        const y=Math.min(handle.rect.bottom,target.rect.bottom)-Math.max(handle.rect.top,target.rect.top);
+        if(x>1&&y>1)overlaps.push({handle:handle.label,target:target.label,x,y,handleRect:handle.rect,targetRect:target.rect});
+      }
+    }
+    return overlaps;
+  });
+}
+
 async function openApparatus(page){
   await page.locator('.tir-left-handle').evaluate(n=>n.click());
   await page.waitForSelector('.tir-left-drawer.is-open');
@@ -65,7 +84,7 @@ async function openApparatus(page){
 }
 
 for(const [width,height] of viewports){
-  const record={width,height,failures:[],runtime:null,canvases:{}};
+  const record={width,height,failures:[],runtime:null,canvases:{},headerEdgeOverlaps:[]};
   const page=await browser.newPage({viewport:{width,height},deviceScaleFactor:1});
   page.on('pageerror',e=>record.failures.push(`page: ${e.message}`));
   page.on('console',m=>{if(m.type()==='error')record.failures.push(`console: ${m.text()}`);});
@@ -85,6 +104,8 @@ for(const [width,height] of viewports){
     if(record.runtime.legendBoxOffset<10)record.failures.push(`legend box offset missing: ${JSON.stringify(record.runtime)}`);
 
     await page.evaluate(()=>scrollTo(0,0));
+    record.headerEdgeOverlaps=await inspectHeaderEdgeOverlap(page);
+    if(record.headerEdgeOverlaps.length)record.failures.push(`edge control covers primary header text: ${JSON.stringify(record.headerEdgeOverlaps)}`);
     await page.screenshot({path:`${outDir}/r5-strict-${width}x${height}-00-overview.png`,fullPage:false});
 
     for(const [key,selector] of [['main','#r5MainCanvas'],['transition','[data-r5-canvas="transition"]'],['decay','[data-r5-canvas="decay"]']]){
