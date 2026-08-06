@@ -25,11 +25,12 @@ const bootstrap = position('assets/js/bootstrap.js');
 const r3Runtime = position('assets/js/r3-runtime-mount-v017.js');
 const r5Workbench = position('assets/js/r5-workbench-v019.js');
 const r5CanvasFit = position('assets/js/r5-canvas-fit-v019.js');
-const r5FontFloor = position('assets/js/r5-font-floor-v0194.js');
+const r5Typography = position('assets/js/r5-canvas-typography-v019.js');
 assert(r4Physics < r4Workbench, 'R4 physics must load before the R4 workbench');
 assert(r4Workbench < r4HiDpi && r4HiDpi < bootstrap, 'R4 runtime fixes must be installed before initial routing');
 assert(bootstrap < r3Runtime && r3Runtime < r5Workbench, 'preserve the validated R3/R5 runtime chain');
-assert(r5Workbench < r5CanvasFit && r5CanvasFit < r5FontFloor, 'R5 measured fit and font-floor runtimes must load after the R5 workbench');
+assert(r5Workbench < r5CanvasFit && r5CanvasFit < r5Typography, 'R5 fit and typography runtimes must load after the R5 workbench');
+assert(!index.includes('r5-font-floor-v0194.js'), 'superseded temporary R5 font-floor runtime must not load');
 
 for (const token of [
   'R4 Fresnel physics regression',
@@ -48,5 +49,6 @@ for (const token of [
 assert(!fs.existsSync(path.join(root, '.r4-reconcile-trigger')), 'temporary reconciliation trigger must not ship');
 assert(!fs.existsSync(path.join(root, '.github/workflows/r4-reconcile-main.yml')), 'temporary reconciliation workflow must not ship');
 assert(!fs.existsSync(path.join(root, 'tests/visual-audit-r4-v019.mjs')), 'superseded pre-pixel R4 audit must not ship');
+assert(!fs.existsSync(path.join(root, 'assets/js/r5-font-floor-v0194.js')), 'superseded temporary R5 font-floor file must not ship');
 
 console.log('R4/R5 v0.19.1 integration contract passed');
