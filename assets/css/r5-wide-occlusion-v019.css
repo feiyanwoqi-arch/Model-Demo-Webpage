@@ -54,4 +54,21 @@
     max-height:100%!important;
     object-fit:contain;
   }
+  .tir-page .tir-analysis:has([data-module-id="derivation"]){
+    height:auto!important;
+    min-height:0!important;
+  }
+  .tir-page .tir-board:has([data-module-id="derivation"]){
+    height:auto!important;
+    grid-template-rows:auto auto!important;
+  }
+  .tir-page .tir-board:has([data-module-id="derivation"]) .tir-module{
+    height:auto!important;
+    min-height:620px!important;
+  }
+  .tir-page .tir-board:has([data-module-id="derivation"]) .tir-module-html{
+    height:auto!important;
+    min-height:0!important;
+    overflow:visible!important;
+  }
 }
