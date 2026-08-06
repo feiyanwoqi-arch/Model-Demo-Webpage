@@ -1,0 +1,58 @@
+[
+  {
+    "width": 2560,
+    "height": 1440,
+    "right": {
+      "box": {
+        "x": 2108,
+        "y": 12,
+        "width": 440,
+        "height": 719.234375
+      },
+      "clientHeight": 717,
+      "scrollHeight": 717,
+      "visibleFraction": 1
+    },
+    "left": {
+      "box": {
+        "x": 84,
+        "y": 12,
+        "width": 440,
+        "height": 729.34375
+      },
+      "clientHeight": 727,
+      "scrollHeight": 727,
+      "visibleFraction": 1
+    },
+    "errors": [],
+    "assertions": []
+  },
+  {
+    "width": 1920,
+    "height": 1080,
+    "right": {
+      "box": {
+        "x": 1468,
+        "y": 12,
+        "width": 440,
+        "height": 719.234375
+      },
+      "clientHeight": 717,
+      "scrollHeight": 717,
+      "visibleFraction": 1
+    },
+    "left": {
+      "box": {
+        "x": 69.59375,
+        "y": 12,
+        "width": 440,
+        "height": 729.34375
+      },
+      "clientHeight": 727,
+      "scrollHeight": 727,
+      "visibleFraction": 1
+    },
+    "errors": [],
+    "assertions": []
+  }
+]

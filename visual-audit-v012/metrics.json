@@ -1,0 +1,173 @@
+[
+  {
+    "name": "wide",
+    "width": 2560,
+    "height": 1440,
+    "hero": {
+      "x": 72,
+      "y": 68,
+      "width": 2416,
+      "height": 98.796875
+    },
+    "coreColumn": {
+      "x": 72,
+      "y": 190.796875,
+      "width": 1300.15625,
+      "height": 1112.625
+    },
+    "analysisColumn": {
+      "x": 1386.15625,
+      "y": 190.796875,
+      "width": 1101.84375,
+      "height": 594.234375
+    },
+    "coreStage": {
+      "x": 72,
+      "y": 341.796875,
+      "width": 1300.15625,
+      "height": 961.625
+    },
+    "apparatus": {
+      "x": 1386.15625,
+      "y": 234.390625,
+      "width": 1101.84375,
+      "height": 452.15625
+    },
+    "phase": {
+      "x": 1386.15625,
+      "y": 694.546875,
+      "width": 1101.84375,
+      "height": 604.921875
+    },
+    "apparatusWindow": {
+      "x": 1387.15625,
+      "y": 288.390625,
+      "width": 1099.84375,
+      "height": 397.15625
+    },
+    "phaseWindow": {
+      "x": 1387.15625,
+      "y": 748.546875,
+      "width": 1099.84375,
+      "height": 549.921875
+    },
+    "boardCount": "2",
+    "horizontalOverflow": 0,
+    "errors": [],
+    "assertions": []
+  },
+  {
+    "name": "desktop",
+    "width": 1920,
+    "height": 1080,
+    "hero": {
+      "x": 72,
+      "y": 68,
+      "width": 1776,
+      "height": 98.796875
+    },
+    "coreColumn": {
+      "x": 72,
+      "y": 190.796875,
+      "width": 953.734375,
+      "height": 894.359375
+    },
+    "analysisColumn": {
+      "x": 1039.734375,
+      "y": 190.796875,
+      "width": 808.265625,
+      "height": 594.234375
+    },
+    "coreStage": {
+      "x": 72,
+      "y": 302.796875,
+      "width": 953.734375,
+      "height": 743.359375
+    },
+    "apparatus": {
+      "x": 1039.734375,
+      "y": 195.390625,
+      "width": 808.265625,
+      "height": 346.140625
+    },
+    "phase": {
+      "x": 1039.734375,
+      "y": 549.53125,
+      "width": 808.265625,
+      "height": 458.125
+    },
+    "apparatusWindow": {
+      "x": 1040.734375,
+      "y": 249.390625,
+      "width": 806.265625,
+      "height": 291.140625
+    },
+    "phaseWindow": {
+      "x": 1040.734375,
+      "y": 603.53125,
+      "width": 806.265625,
+      "height": 403.125
+    },
+    "boardCount": "2",
+    "horizontalOverflow": 0,
+    "errors": [],
+    "assertions": []
+  },
+  {
+    "name": "reported-viewport",
+    "width": 1735,
+    "height": 865,
+    "hero": {
+      "x": 72,
+      "y": 68,
+      "width": 1591,
+      "height": 96.8125
+    },
+    "coreColumn": {
+      "x": 72,
+      "y": 188.8125,
+      "width": 853.59375,
+      "height": 878.265625
+    },
+    "analysisColumn": {
+      "x": 939.59375,
+      "y": 188.8125,
+      "width": 723.40625,
+      "height": 594.234375
+    },
+    "coreStage": {
+      "x": 72,
+      "y": 202.8125,
+      "width": 853.59375,
+      "height": 681.265625
+    },
+    "apparatus": {
+      "x": 939.59375,
+      "y": 49.40625,
+      "width": 723.40625,
+      "height": 306.5
+    },
+    "phase": {
+      "x": 939.59375,
+      "y": 363.90625,
+      "width": 723.40625,
+      "height": 405.703125
+    },
+    "apparatusWindow": {
+      "x": 940.59375,
+      "y": 94.40625,
+      "width": 721.40625,
+      "height": 260.5
+    },
+    "phaseWindow": {
+      "x": 940.59375,
+      "y": 407.90625,
+      "width": 721.40625,
+      "height": 360.703125
+    },
+    "boardCount": "2",
+    "horizontalOverflow": 0,
+    "errors": [],
+    "assertions": []
+  }
+]

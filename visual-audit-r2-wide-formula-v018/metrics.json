@@ -1,0 +1,224 @@
+[
+  {
+    "width": 1920,
+    "height": 1080,
+    "errors": [],
+    "assertions": [],
+    "layout": {
+      "primary": {
+        "x": 80,
+        "y": 112.390625,
+        "width": 1098.40625,
+        "height": 931.8125,
+        "right": 1178.40625,
+        "bottom": 1044.203125
+      },
+      "analysis": {
+        "x": 1200.40625,
+        "y": 112.390625,
+        "width": 639.59375,
+        "height": 833.8125,
+        "right": 1840,
+        "bottom": 946.203125
+      },
+      "mechanism": {
+        "x": 1200.40625,
+        "y": 201.734375,
+        "width": 639.59375,
+        "height": 365.234375,
+        "right": 1840,
+        "bottom": 566.96875
+      },
+      "observable": {
+        "x": 1200.40625,
+        "y": 580.96875,
+        "width": 639.59375,
+        "height": 365.234375,
+        "right": 1840,
+        "bottom": 946.203125
+      },
+      "overflow": 0
+    },
+    "formula": {
+      "formulas": [
+        {
+          "text": "θi=θr",
+          "fontSize": 25.92,
+          "left": 8,
+          "right": 8,
+          "top": 7.109375,
+          "bottom": 7.109375
+        },
+        {
+          "text": "di=−do",
+          "fontSize": 25.92,
+          "left": 8,
+          "right": 8,
+          "top": 7.109375,
+          "bottom": 7.109375
+        },
+        {
+          "text": "m=hiho=−dido=+1",
+          "fontSize": 25.92,
+          "left": 8,
+          "right": 8,
+          "top": 7.109375,
+          "bottom": 7.109375
+        }
+      ],
+      "steps": [
+        89.609375,
+        104.609375,
+        114.546875
+      ]
+    }
+  },
+  {
+    "width": 1790,
+    "height": 896,
+    "errors": [],
+    "assertions": [],
+    "layout": {
+      "primary": {
+        "x": 80,
+        "y": 48.8125,
+        "width": 1008,
+        "height": 895.5625,
+        "right": 1088,
+        "bottom": 944.375
+      },
+      "analysis": {
+        "x": 1110,
+        "y": 48.8125,
+        "width": 600,
+        "height": 827.71875,
+        "right": 1710,
+        "bottom": 876.53125
+      },
+      "mechanism": {
+        "x": 1110,
+        "y": 160.65625,
+        "width": 600,
+        "height": 350.9375,
+        "right": 1710,
+        "bottom": 511.59375
+      },
+      "observable": {
+        "x": 1110,
+        "y": 525.59375,
+        "width": 600,
+        "height": 350.9375,
+        "right": 1710,
+        "bottom": 876.53125
+      },
+      "overflow": 0
+    },
+    "formula": {
+      "formulas": [
+        {
+          "text": "θi=θr",
+          "fontSize": 24.165,
+          "left": 8,
+          "right": 8,
+          "top": 6.890625,
+          "bottom": 6.890625
+        },
+        {
+          "text": "di=−do",
+          "fontSize": 24.165,
+          "left": 8,
+          "right": 8,
+          "top": 6.890625,
+          "bottom": 6.890625
+        },
+        {
+          "text": "m=hiho=−dido=+1",
+          "fontSize": 24.165,
+          "left": 8,
+          "right": 8,
+          "top": 6.890625,
+          "bottom": 6.890625
+        }
+      ],
+      "steps": [
+        86.984375,
+        101.984375,
+        110.234375
+      ]
+    }
+  },
+  {
+    "width": 1735,
+    "height": 865,
+    "errors": [],
+    "assertions": [],
+    "layout": {
+      "primary": {
+        "x": 80,
+        "y": 49.296875,
+        "width": 953,
+        "height": 861.1875,
+        "right": 1033,
+        "bottom": 910.484375
+      },
+      "analysis": {
+        "x": 1055,
+        "y": 49.296875,
+        "width": 600,
+        "height": 827.71875,
+        "right": 1655,
+        "bottom": 877.015625
+      },
+      "mechanism": {
+        "x": 1055,
+        "y": 161.140625,
+        "width": 600,
+        "height": 350.9375,
+        "right": 1655,
+        "bottom": 512.078125
+      },
+      "observable": {
+        "x": 1055,
+        "y": 526.078125,
+        "width": 600,
+        "height": 350.9375,
+        "right": 1655,
+        "bottom": 877.015625
+      },
+      "overflow": 0
+    },
+    "formula": {
+      "formulas": [
+        {
+          "text": "θi=θr",
+          "fontSize": 23.4225,
+          "left": 8,
+          "right": 8,
+          "top": 6.796875,
+          "bottom": 6.796875
+        },
+        {
+          "text": "di=−do",
+          "fontSize": 23.4225,
+          "left": 8,
+          "right": 8,
+          "top": 6.796875,
+          "bottom": 6.796875
+        },
+        {
+          "text": "m=hiho=−dido=+1",
+          "fontSize": 23.4225,
+          "left": 8,
+          "right": 8,
+          "top": 6.796875,
+          "bottom": 6.796875
+        }
+      ],
+      "steps": [
+        85.859375,
+        100.859375,
+        108.390625
+      ]
+    }
+  }
+]
