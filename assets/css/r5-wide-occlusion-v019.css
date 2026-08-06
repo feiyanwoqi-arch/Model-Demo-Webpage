@@ -1,29 +1,32 @@
-/* R5 v0.19.2 — actual screenshot occlusion repair.
-   At 1920×1080 the previous first-viewport compression let the intrinsic
-   canvases continue underneath the guide/live rows. Give the synchronized
-   workbench enough real height so every canvas pixel belongs to its own row. */
+/* R5 v0.19.3 — actual screenshot occlusion repair.
+   Wide layouts keep the synchronized first viewport, but every canvas now
+   scales from the height of its assigned grid row instead of continuing below
+   the guide, live strip, or module card. */
 @media (min-width:1880px) and (max-height:1200px){
   .tir-page .tir-workspace{
-    height:930px!important;
-    min-height:930px!important;
+    height:min(calc(100dvh - 245px),1020px)!important;
+    min-height:700px!important;
+    grid-template-rows:minmax(0,1fr)!important;
   }
   .tir-page .tir-primary,
   .tir-page .tir-analysis{
-    height:930px!important;
-    min-height:930px!important;
+    height:100%!important;
+    min-height:0!important;
   }
   .tir-page .tir-primary{
-    grid-template-rows:auto auto minmax(675px,1fr) auto auto!important;
+    grid-template-rows:auto auto minmax(0,1fr) auto auto!important;
   }
   .tir-page .tir-main-canvas-wrap{
-    min-height:675px!important;
-    height:675px!important;
+    min-height:0!important;
+    height:auto!important;
+    overflow:hidden!important;
   }
   .tir-page #r5MainCanvas{
-    width:1080px!important;
-    height:675px!important;
+    width:auto!important;
+    height:100%!important;
     max-width:100%!important;
     max-height:100%!important;
+    object-fit:contain;
   }
   .tir-page .tir-analysis{
     grid-template-rows:auto minmax(0,1fr)!important;
@@ -31,16 +34,24 @@
   .tir-page .tir-board,
   .tir-page .tir-board[data-count="2"]{
     height:100%!important;
-    grid-template-rows:repeat(2,minmax(410px,1fr))!important;
+    min-height:0!important;
+    grid-template-rows:repeat(2,minmax(0,1fr))!important;
   }
   .tir-page .tir-module{
     height:100%!important;
-    min-height:410px!important;
-    grid-template-rows:auto auto minmax(270px,1fr)!important;
+    min-height:0!important;
+    grid-template-rows:auto auto minmax(0,1fr)!important;
   }
   .tir-page .tir-module-canvas-wrap{
-    min-height:270px!important;
+    min-height:0!important;
     height:auto!important;
+    overflow:hidden!important;
+  }
+  .tir-page .tir-module-canvas-wrap canvas{
+    width:auto!important;
+    height:100%!important;
+    max-width:100%!important;
+    max-height:100%!important;
+    object-fit:contain;
   }
 }
-/* final native-evidence trigger after v0.19.2 source refinement */
