@@ -30,11 +30,14 @@ assert.ok(css.includes('touch-action:none'), 'direct manipulation must support p
 assert.ok(cssPatch.includes('calc(100vh - 236px)'), 'benchmark viewport correction is missing');
 assert.ok(patch.includes('canvasresolutionchange'), 'R4 must redraw after a backing-store resolution change');
 assert.ok(patch.includes("canvas?.closest?.('.r4w-page')"), 'HiDPI fix must be scoped to R4 only');
+assert.ok(patch.includes('String.raw'), 'R4 formulas must preserve LaTeX backslashes');
+assert.ok(patch.includes('r4FormulaRepair'), 'R4 formula repair marker is missing');
 assert.ok(index.indexOf('r4-fresnel-physics-v019.js') < index.indexOf('r4-fresnel-workbench-v019.js'), 'R4 physics must load before the workbench');
 assert.ok(index.indexOf('r4-fresnel-workbench-v019.js') < index.indexOf('r4-hidpi-runtime-fix-v0191.js'), 'R4 runtime fix must load after the workbench');
 assert.ok(index.indexOf('r4-hidpi-runtime-fix-v0191.js') < index.indexOf('bootstrap.js'), 'R4 runtime fix must load before initial routing');
 if (workflow) {
   assert.ok(workflow.includes('r4-fresnel-physics-v019.test.js'), 'workflow must run R4 physics regression');
   assert.ok(workflow.includes('visual-audit-r4-v0191.mjs'), 'workflow must run the pixel-aware R4 browser audit');
+  assert.ok(workflow.includes('visual-audit-r4-math-v0191.mjs'), 'workflow must reject visible R4 MathJax errors');
 }
 console.log('R4 workbench v0.19.1 source contract tests passed');
