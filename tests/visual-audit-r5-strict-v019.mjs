@@ -16,7 +16,7 @@ async function inspectCanvas(page,key,selector){
   return page.evaluate(({key,selector})=>{
     const canvas=document.querySelector(selector);
     const audit=window.R5TIRWorkbenchV019?.getTextAudit?.()?.[key]||[];
-    if(!canvas)return {missing:true,items:[],scale:0,overlaps:[],cropped:[]};
+    if(!canvas)return {missing:true,items:[],scale:0,overlaps:[],cropped:[],legendGap:null};
     const rect=canvas.getBoundingClientRect();
     const scale=Math.min(rect.width/canvas.width,rect.height/canvas.height);
     const ctx=canvas.getContext('2d');
@@ -45,7 +45,14 @@ async function inspectCanvas(page,key,selector){
       const yOverlap=Math.min(A.bottom,B.bottom)-Math.max(A.top,B.top);
       if(xOverlap>1&&yOverlap>1)overlaps.push({a,b,xOverlap,yOverlap,A:{left:A.left,right:A.right,top:A.top,bottom:A.bottom},B:{left:B.left,right:B.right,top:B.top,bottom:B.bottom}});
     }
-    return {missing:false,scale,items:audit,overlaps,cropped,width:rect.width,height:rect.height};
+    let legendGap=null;
+    if(key==='main'){
+      const drag=boxes.find(x=>x.label==='拖动入射方向');
+      const offset=Number(window.R5CanvasTypographyV019?.legendBoxOffset)||0;
+      const legendTop=canvas.height-92+offset;
+      legendGap=drag?legendTop-drag.bottom:null;
+    }
+    return {missing:false,scale,items:audit,overlaps,cropped,legendGap,width:rect.width,height:rect.height};
   },{key,selector});
 }
 
@@ -65,15 +72,17 @@ for(const [width,height] of viewports){
   try{
     await page.goto('http://127.0.0.1:8000/#model:total-internal',{waitUntil:'networkidle'});
     await page.waitForSelector('.tir-page[data-legibility-version="019"]',{timeout:20000});
-    await page.waitForFunction(()=>document.querySelector('.tir-page')?.dataset.r5CanvasTypography==='0196',{timeout:10000});
+    await page.waitForFunction(()=>document.querySelector('.tir-page')?.dataset.r5CanvasTypography==='0197',{timeout:10000});
     await page.waitForTimeout(1200);
     record.runtime=await page.evaluate(()=>({
       marker:document.querySelector('.tir-page')?.dataset.r5CanvasTypography||'',
       fit:document.querySelector('.tir-page')?.dataset.r5CanvasFit||'',
-      typography:window.R5CanvasTypographyV019?.version||''
+      typography:window.R5CanvasTypographyV019?.version||'',
+      legendBoxOffset:window.R5CanvasTypographyV019?.legendBoxOffset||0
     }));
-    if(record.runtime.marker!=='0196'||record.runtime.typography!=='0.19.6')record.failures.push(`typography runtime missing: ${JSON.stringify(record.runtime)}`);
+    if(record.runtime.marker!=='0197'||record.runtime.typography!=='0.19.7')record.failures.push(`typography runtime missing: ${JSON.stringify(record.runtime)}`);
     if(record.runtime.fit!=='019')record.failures.push(`canvas fit runtime missing: ${JSON.stringify(record.runtime)}`);
+    if(record.runtime.legendBoxOffset<10)record.failures.push(`legend box offset missing: ${JSON.stringify(record.runtime)}`);
 
     await page.evaluate(()=>scrollTo(0,0));
     await page.screenshot({path:`${outDir}/r5-strict-${width}x${height}-00-overview.png`,fullPage:false});
@@ -89,6 +98,7 @@ for(const [width,height] of viewports){
       }
       if(audit.cropped.length)record.failures.push(`${key} text cropped: ${JSON.stringify(audit.cropped)}`);
       if(audit.overlaps.length)record.failures.push(`${key} label overlap: ${JSON.stringify(audit.overlaps)}`);
+      if(key==='main'&&(!Number.isFinite(audit.legendGap)||audit.legendGap<8))record.failures.push(`main drag label too close to legend box: ${audit.legendGap}`);
     }
 
     await page.locator('#r5MainCanvas').scrollIntoViewIfNeeded();
