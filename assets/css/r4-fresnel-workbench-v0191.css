@@ -1,0 +1,8 @@
+/* R4 v0.19.1 — viewport-fit correction after real browser audit */
+@media (min-width:1500px){
+  .r4w-workspace{
+    height:calc(100vh - 236px);
+    min-height:610px;
+    max-height:760px;
+  }
+}
