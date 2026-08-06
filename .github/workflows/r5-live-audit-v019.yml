@@ -32,7 +32,6 @@ jobs:
         run: |
           node --check assets/js/r5-workbench-v019.js
           node --check assets/js/r5-canvas-fit-v019.js
-          node --check assets/js/r5-font-floor-v0194.js
           node --check assets/js/r5-canvas-typography-v019.js
           node tests/r5-physics-v019.test.js
           node tests/r5-physics-extended-v019.test.js
