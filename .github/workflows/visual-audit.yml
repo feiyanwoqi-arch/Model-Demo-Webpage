@@ -11,7 +11,7 @@ permissions:
 jobs:
   optics-workbenches:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 50
     steps:
       - uses: actions/checkout@v4
       - name: Validate R5 source and physics
@@ -24,6 +24,12 @@ jobs:
           node --check tests/visual-audit-r5-occlusion-v019.mjs
       - uses: actions/setup-node@v4
         with: {node-version: '22'}
+      - name: R4 Fresnel physics regression
+        run: node tests/r4-fresnel-physics-v019.test.js
+      - name: R4 workbench source contract
+        run: node tests/r4-workbench-v019.test.js
+      - name: R4 and R5 integration contract
+        run: node tests/r4-r5-integration-v0191.test.js
       - name: Install Playwright
         run: |
           npm install --no-save playwright@1.54.2
@@ -54,21 +60,25 @@ jobs:
       - name: R3 finite-ray and legibility audit
         if: always()
         run: node tests/visual-audit-r3-v017.mjs
+      - name: R4 Fresnel/Brewster pixel-aware task audit
+        if: always()
+        run: node tests/visual-audit-r4-v0191.mjs
+      - name: R4 MathJax rendering audit
+        if: always()
+        run: node tests/visual-audit-r4-math-v0191.mjs
       - name: R5 task and typography audit
         id: r5audit
         if: always()
-        continue-on-error: true
         run: node tests/visual-audit-r5-v019.mjs
       - name: R5 containment, drawer and apparatus audit
         id: r5focused
         if: always()
-        continue-on-error: true
         run: node tests/visual-audit-r5-occlusion-v019.mjs
       - name: Upload visual audit
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: optics-visual-audit-v019-r5
+          name: optics-visual-audit-v0191-r4-r5
           path: |
             visual-audit-v012/
             visual-audit-r1-v014/
@@ -77,6 +87,8 @@ jobs:
             visual-audit-r2-drawer-fit-v015/
             visual-audit-r2-wide-formula-v018/
             visual-audit-r3-v017/
+            visual-audit-r4-v0191/
+            visual-audit-r4-math-v0191/
             visual-audit-r5-v019/
             visual-audit-r5-occlusion-v019/
           if-no-files-found: warn
@@ -98,6 +110,3 @@ jobs:
           git add audit/latest-visual-run.json
           git commit -m "Record visual audit run $RUN_ID [skip ci]" || exit 0
           git push
-      - name: Enforce R5 audit result
-        if: always() && (steps.r5audit.outcome != 'success' || steps.r5focused.outcome != 'success')
-        run: exit 1
