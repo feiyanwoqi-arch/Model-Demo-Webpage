@@ -1,6 +1,7 @@
 {
-  "run_id": 31072655115,
+  "run_id": 31072992228,
   "run_attempt": 1,
-  "source_sha": "586640d050bed804678058e2eaeacd1cfc84ad5d",
-  "job_status": "success"
+  "source_sha": "5d0ae2712e71fc51879221630cd6d21a557f94e5",
+  "job_status": "failure",
+  "r5_outcome": "failure"
 }
