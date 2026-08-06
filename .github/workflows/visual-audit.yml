@@ -53,6 +53,9 @@ jobs:
       - name: R4 Fresnel/Brewster pixel-aware task audit
         if: always()
         run: node tests/visual-audit-r4-v0191.mjs
+      - name: R4 MathJax rendering audit
+        if: always()
+        run: node tests/visual-audit-r4-math-v0191.mjs
       - name: Upload visual audit
         if: always()
         uses: actions/upload-artifact@v4
@@ -67,6 +70,7 @@ jobs:
             visual-audit-r2-wide-formula-v018/
             visual-audit-r3-v017/
             visual-audit-r4-v0191/
+            visual-audit-r4-math-v0191/
           if-no-files-found: warn
           retention-days: 14
       - name: Record latest direct-main run
