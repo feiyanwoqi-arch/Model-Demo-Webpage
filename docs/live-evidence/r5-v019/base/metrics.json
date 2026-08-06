@@ -188,12 +188,12 @@
       },
       {
         "name": "main",
-        "label": "实线：传播波方向",
+        "label": "实线＝传播波",
         "effective": 17.85185185185185
       },
       {
         "name": "main",
-        "label": "紫色波列：倏逝场（法向平均能流 0）",
+        "label": "紫色波列＝倏逝场（法向平均能流 0）",
         "effective": 17.85185185185185
       },
       {
@@ -457,12 +457,12 @@
       },
       {
         "name": "main",
-        "label": "实线：传播波方向",
+        "label": "实线＝传播波",
         "effective": 16.20356514084507
       },
       {
         "name": "main",
-        "label": "紫色波列：倏逝场（法向平均能流 0）",
+        "label": "紫色波列＝倏逝场（法向平均能流 0）",
         "effective": 16.20356514084507
       },
       {
@@ -549,35 +549,35 @@
         "x": 34.6875,
         "y": 230.8125,
         "width": 1665.625,
-        "height": 869.578125,
-        "bottom": 1100.390625,
+        "height": 881.578125,
+        "bottom": 1112.390625,
         "right": 1700.3125
       },
       "analysis": {
         "x": 34.6875,
-        "y": 1120.390625,
+        "y": 1132.390625,
         "width": 1665.625,
         "height": 495.4375,
-        "bottom": 1615.828125,
+        "bottom": 1627.828125,
         "right": 1700.3125
       },
       "main": {
-        "x": 384,
+        "x": 374.5,
         "y": 380.78125,
-        "width": 967,
-        "height": 604,
-        "bottom": 984.78125,
-        "right": 1351
+        "width": 986,
+        "height": 616,
+        "bottom": 996.78125,
+        "right": 1360.5
       },
       "transition": {
         "x": 135.09375,
-        "y": 1352.328125,
+        "y": 1364.328125,
         "width": 624,
         "height": 251,
-        "bottom": 1603.328125,
+        "bottom": 1615.328125,
         "right": 759.09375
       },
-      "mainScale": 0.8953703703703704,
+      "mainScale": 0.912962962962963,
       "moduleScale": 0.8666666666666667,
       "edgeWriting": "horizontal-tb",
       "analysisTitle": 28,
@@ -657,82 +657,82 @@
       {
         "name": "main",
         "label": "低折射率介质  n₂=1.00",
-        "effective": 17.237455985915492
+        "effective": 17.57614436619718
       },
       {
         "name": "main",
         "label": "高折射率介质  n₁=1.52",
-        "effective": 17.237455985915492
+        "effective": 17.57614436619718
       },
       {
         "name": "main",
         "label": "界面法线",
-        "effective": 15.221296296296297
+        "effective": 15.52037037037037
       },
       {
         "name": "main",
         "label": "拖动入射方向",
-        "effective": 15.221296296296297
+        "effective": 15.52037037037037
       },
       {
         "name": "main",
         "label": "倏逝场沿界面有相位传播",
-        "effective": 17.237455985915492
+        "effective": 17.57614436619718
       },
       {
         "name": "main",
         "label": "离开界面：场幅 ∝ e⁻ᵏᶻ",
-        "effective": 15.221296296296297
+        "effective": 15.52037037037037
       },
       {
         "name": "main",
         "label": "场探针",
-        "effective": 17.237455985915492
+        "effective": 17.57614436619718
       },
       {
         "name": "main",
         "label": "841 nm",
-        "effective": 15.109375
+        "effective": 15.40625
       },
       {
         "name": "main",
         "label": "θᵢ=62.0°",
-        "effective": 16.116666666666667
+        "effective": 16.433333333333334
       },
       {
         "name": "main",
         "label": "θᵣ=θᵢ=62.0°",
-        "effective": 16.116666666666667
+        "effective": 16.433333333333334
       },
       {
         "name": "main",
         "label": "全反射：仅剩倏逝场",
-        "effective": 19.69814814814815
+        "effective": 20.085185185185185
       },
       {
         "name": "main",
         "label": "临界角  41.14°",
-        "effective": 17.237455985915492
+        "effective": 17.57614436619718
       },
       {
         "name": "main",
         "label": "振幅穿透深度  113 nm",
-        "effective": 17.237455985915492
+        "effective": 17.57614436619718
       },
       {
         "name": "main",
         "label": "探针场幅  0.1%",
-        "effective": 17.237455985915492
+        "effective": 17.57614436619718
       },
       {
         "name": "main",
-        "label": "实线：传播波方向",
-        "effective": 17.237455985915492
+        "label": "实线＝传播波",
+        "effective": 17.57614436619718
       },
       {
         "name": "main",
-        "label": "紫色波列：倏逝场（法向平均能流 0）",
-        "effective": 17.237455985915492
+        "label": "紫色波列＝倏逝场（法向平均能流 0）",
+        "effective": 17.57614436619718
       },
       {
         "name": "transition",
@@ -818,36 +818,36 @@
         "x": 28,
         "y": 372.71875,
         "width": 1384,
-        "height": 867.578125,
-        "bottom": 1240.296875,
+        "height": 879.578125,
+        "bottom": 1252.296875,
         "right": 1412
       },
       "analysis": {
         "x": 28,
-        "y": 1260.296875,
+        "y": 1272.296875,
         "width": 1384,
-        "height": 913.703125,
-        "bottom": 2174,
+        "height": 927.703125,
+        "bottom": 2200,
         "right": 1412
       },
       "main": {
-        "x": 238.5,
+        "x": 228.5,
         "y": 522.6875,
-        "width": 963,
-        "height": 602,
-        "bottom": 1124.6875,
-        "right": 1201.5
+        "width": 983,
+        "height": 614,
+        "bottom": 1136.6875,
+        "right": 1211.5
       },
       "transition": {
-        "x": 408,
-        "y": 1492.234375,
-        "width": 624,
-        "height": 251,
-        "bottom": 1743.234375,
-        "right": 1032
+        "x": 398,
+        "y": 1503.734375,
+        "width": 644,
+        "height": 259,
+        "bottom": 1762.734375,
+        "right": 1042
       },
-      "mainScale": 0.8916666666666667,
-      "moduleScale": 0.8666666666666667,
+      "mainScale": 0.9101851851851852,
+      "moduleScale": 0.8944444444444445,
       "edgeWriting": "horizontal-tb",
       "analysisTitle": 28,
       "moduleTitle": 21,
@@ -926,152 +926,152 @@
       {
         "name": "main",
         "label": "低折射率介质  n₂=1.00",
-        "effective": 19.38444333996024
+        "effective": 19.787027833001986
       },
       {
         "name": "main",
         "label": "高折射率介质  n₁=1.52",
-        "effective": 19.38444333996024
+        "effective": 19.787027833001986
       },
       {
         "name": "main",
         "label": "界面法线",
-        "effective": 16.991302186878727
+        "effective": 17.344184890656063
       },
       {
         "name": "main",
         "label": "拖动入射方向",
-        "effective": 16.991302186878727
+        "effective": 17.344184890656063
       },
       {
         "name": "main",
         "label": "倏逝场沿界面有相位传播",
-        "effective": 19.38444333996024
+        "effective": 19.787027833001986
       },
       {
         "name": "main",
         "label": "离开界面：场幅 ∝ e⁻ᵏᶻ",
-        "effective": 16.991302186878727
+        "effective": 17.344184890656063
       },
       {
         "name": "main",
         "label": "场探针",
-        "effective": 19.38444333996024
+        "effective": 19.787027833001986
       },
       {
         "name": "main",
         "label": "841 nm",
-        "effective": 16.991302186878727
+        "effective": 17.344184890656063
       },
       {
         "name": "main",
         "label": "θᵢ=62.0°",
-        "effective": 16.991302186878727
+        "effective": 17.344184890656063
       },
       {
         "name": "main",
         "label": "θᵣ=θᵢ=62.0°",
-        "effective": 16.991302186878727
+        "effective": 17.344184890656063
       },
       {
         "name": "main",
         "label": "全反射：仅剩倏逝场",
-        "effective": 21.77758449304175
+        "effective": 22.229870775347912
       },
       {
         "name": "main",
         "label": "临界角  41.14°",
-        "effective": 19.38444333996024
+        "effective": 19.787027833001986
       },
       {
         "name": "main",
         "label": "振幅穿透深度  113 nm",
-        "effective": 19.38444333996024
+        "effective": 19.787027833001986
       },
       {
         "name": "main",
         "label": "探针场幅  0.1%",
-        "effective": 19.38444333996024
+        "effective": 19.787027833001986
       },
       {
         "name": "main",
-        "label": "实线：传播波方向",
-        "effective": 19.38444333996024
+        "label": "实线＝传播波",
+        "effective": 19.787027833001986
       },
       {
         "name": "main",
-        "label": "紫色波列：倏逝场（法向平均能流 0）",
-        "effective": 19.38444333996024
+        "label": "紫色波列＝倏逝场（法向平均能流 0）",
+        "effective": 19.787027833001986
       },
       {
         "name": "transition",
         "label": "传播解 → 临界点 → 倏逝解",
-        "effective": 18.22416998671979
+        "effective": 18.808277999114654
       },
       {
         "name": "transition",
         "label": "切向波数守恒；kz² 跨过 0",
-        "effective": 16.22151394422311
+        "effective": 16.741434262948207
       },
       {
         "name": "transition",
         "label": "θc",
-        "effective": 14.218857901726428
+        "effective": 14.674590526781763
       },
       {
         "name": "transition",
         "label": "当前状态",
-        "effective": 16.22151394422311
+        "effective": 16.741434262948207
       },
       {
         "name": "transition",
         "label": "kz² > 0：传播折射波",
-        "effective": 16.22151394422311
+        "effective": 16.741434262948207
       },
       {
         "name": "transition",
         "label": "kz² < 0：kz=iκ，指数衰减",
-        "effective": 14.733333333333334
+        "effective": 15.205555555555556
       },
       {
         "name": "transition",
         "label": "入射角 θᵢ",
-        "effective": 14.218857901726428
+        "effective": 14.674590526781763
       },
       {
         "name": "decay",
         "label": "倏逝场的空间衰减",
-        "effective": 18.22416998671979
+        "effective": 18.808277999114654
       },
       {
         "name": "decay",
         "label": "δE=113 nm",
-        "effective": 14.218857901726428
+        "effective": 14.674590526781763
       },
       {
         "name": "decay",
         "label": "1.0",
-        "effective": 14.218857901726428
+        "effective": 14.674590526781763
       },
       {
         "name": "decay",
         "label": "0",
-        "effective": 14.218857901726428
+        "effective": 14.674590526781763
       },
       {
         "name": "decay",
         "label": "探针 0.1%",
-        "effective": 16.22151394422311
+        "effective": 16.741434262948207
       },
       {
         "name": "decay",
         "label": "δE",
-        "effective": 14.218857901726428
+        "effective": 14.674590526781763
       },
       {
         "name": "decay",
         "label": "离界面深度 z（0–900 nm）",
-        "effective": 14.218857901726428
+        "effective": 14.674590526781763
       }
     ]
   },
@@ -1095,8 +1095,8 @@
         "x": 28,
         "y": 1242.296875,
         "width": 1310,
-        "height": 931.703125,
-        "bottom": 2174,
+        "height": 939.703125,
+        "bottom": 2182,
         "right": 1338
       },
       "main": {
@@ -1108,15 +1108,15 @@
         "right": 1149.5
       },
       "transition": {
-        "x": 358.5,
+        "x": 353.5,
         "y": 1473.734375,
-        "width": 649,
-        "height": 261,
-        "bottom": 1734.734375,
-        "right": 1007.5
+        "width": 659,
+        "height": 265,
+        "bottom": 1738.734375,
+        "right": 1012.5
       },
       "mainScale": 0.8638888888888889,
-      "moduleScale": 0.9013888888888889,
+      "moduleScale": 0.9152777777777777,
       "edgeWriting": "horizontal-tb",
       "analysisTitle": 28,
       "moduleTitle": 21,
@@ -1264,83 +1264,83 @@
       },
       {
         "name": "main",
-        "label": "实线：传播波方向",
+        "label": "实线＝传播波",
         "effective": 16.203473413379072
       },
       {
         "name": "main",
-        "label": "紫色波列：倏逝场（法向平均能流 0）",
+        "label": "紫色波列＝倏逝场（法向平均能流 0）",
         "effective": 16.203473413379072
       },
       {
         "name": "transition",
         "label": "传播解 → 临界点 → 倏逝解",
-        "effective": 18.95430500221337
+        "effective": 19.246359008410803
       },
       {
         "name": "transition",
         "label": "切向波数守恒；kz² 跨过 0",
-        "effective": 16.871414342629482
+        "effective": 17.13137450199203
       },
       {
         "name": "transition",
         "label": "θc",
-        "effective": 14.788523683045597
+        "effective": 15.016389995573263
       },
       {
         "name": "transition",
         "label": "当前状态",
-        "effective": 16.871414342629482
+        "effective": 17.13137450199203
       },
       {
         "name": "transition",
         "label": "kz² > 0：传播折射波",
-        "effective": 16.871414342629482
+        "effective": 17.13137450199203
       },
       {
         "name": "transition",
         "label": "kz² < 0：kz=iκ，指数衰减",
-        "effective": 15.323611111111111
+        "effective": 15.559722222222222
       },
       {
         "name": "transition",
         "label": "入射角 θᵢ",
-        "effective": 14.788523683045597
+        "effective": 15.016389995573263
       },
       {
         "name": "decay",
         "label": "倏逝场的空间衰减",
-        "effective": 18.95430500221337
+        "effective": 19.246359008410803
       },
       {
         "name": "decay",
         "label": "δE=113 nm",
-        "effective": 14.788523683045597
+        "effective": 15.016389995573263
       },
       {
         "name": "decay",
         "label": "1.0",
-        "effective": 14.788523683045597
+        "effective": 15.016389995573263
       },
       {
         "name": "decay",
         "label": "0",
-        "effective": 14.788523683045597
+        "effective": 15.016389995573263
       },
       {
         "name": "decay",
         "label": "探针 0.1%",
-        "effective": 16.871414342629482
+        "effective": 17.13137450199203
       },
       {
         "name": "decay",
         "label": "δE",
-        "effective": 14.788523683045597
+        "effective": 15.016389995573263
       },
       {
         "name": "decay",
         "label": "离界面深度 z（0–900 nm）",
-        "effective": 14.788523683045597
+        "effective": 15.016389995573263
       }
     ]
   }
