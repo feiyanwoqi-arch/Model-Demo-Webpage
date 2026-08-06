@@ -105,8 +105,14 @@
     "width": 1920,
     "height": 1080,
     "failures": [
-      "main canvas escapes wrap: {\"canvas\":{\"top\":381.890625,\"bottom\":1056.890625,\"left\":66,\"right\":1146},\"wrap\":{\"top\":373.890625,\"bottom\":1048.890625,\"left\":39.390625,\"right\":1172.609375},\"guideBottom\":373.890625,\"liveTop\":1054.3125}",
-      "main canvas lies under live strip: {\"canvas\":{\"top\":381.890625,\"bottom\":1056.890625,\"left\":66,\"right\":1146},\"wrap\":{\"top\":373.890625,\"bottom\":1048.890625,\"left\":39.390625,\"right\":1172.609375},\"guideBottom\":373.890625,\"liveTop\":1054.3125}"
+      "main canvas escapes wrap: {\"canvas\":{\"top\":381.890625,\"bottom\":1056.890625,\"left\":66,\"right\":1146},\"wrap\":{\"top\":373.890625,\"bottom\":959.3125,\"left\":39.390625,\"right\":1172.609375},\"guideBottom\":373.890625,\"liveTop\":959.3125}",
+      "main canvas lies under live strip: {\"canvas\":{\"top\":381.890625,\"bottom\":1056.890625,\"left\":66,\"right\":1146},\"wrap\":{\"top\":373.890625,\"bottom\":959.3125,\"left\":39.390625,\"right\":1172.609375},\"guideBottom\":373.890625,\"liveTop\":959.3125}",
+      "transition canvas escapes its wrap: {\"card\":{\"top\":325.09375,\"bottom\":690.5,\"left\":1191.609375,\"right\":1881.609375},\"canvas\":{\"top\":458.859375,\"bottom\":728.71875,\"left\":1201.609375,\"right\":1871.59375},\"wrap\":{\"top\":451.859375,\"bottom\":689.5,\"left\":1192.609375,\"right\":1880.609375},\"scroll\":{\"height\":288,\"client\":238}}",
+      "transition wrap clips intrinsic content: {\"height\":288,\"client\":238}",
+      "decay canvas escapes its wrap: {\"card\":{\"top\":701.5,\"bottom\":1066.921875,\"left\":1191.609375,\"right\":1881.609375},\"canvas\":{\"top\":835.265625,\"bottom\":1105.125,\"left\":1201.609375,\"right\":1871.59375},\"wrap\":{\"top\":828.265625,\"bottom\":1065.921875,\"left\":1192.609375,\"right\":1880.609375},\"scroll\":{\"height\":288,\"client\":238}}",
+      "decay wrap clips intrinsic content: {\"height\":288,\"client\":238}",
+      "apparatus canvas escapes its wrap: {\"card\":{\"top\":325.09375,\"bottom\":690.5,\"left\":1191.609375,\"right\":1881.609375},\"canvas\":{\"top\":458.859375,\"bottom\":728.71875,\"left\":1201.609375,\"right\":1871.59375},\"wrap\":{\"top\":451.859375,\"bottom\":689.5,\"left\":1192.609375,\"right\":1880.609375},\"scroll\":{\"height\":288,\"client\":238}}",
+      "apparatus wrap clips intrinsic content: {\"height\":288,\"client\":238}"
     ],
     "containment": {
       "main": {
@@ -118,17 +124,17 @@
         },
         "wrap": {
           "top": 373.890625,
-          "bottom": 1048.890625,
+          "bottom": 959.3125,
           "left": 39.390625,
           "right": 1172.609375
         },
         "guideBottom": 373.890625,
-        "liveTop": 1054.3125
+        "liveTop": 959.3125
       },
       "transition": {
         "card": {
           "top": 325.09375,
-          "bottom": 738,
+          "bottom": 690.5,
           "left": 1191.609375,
           "right": 1881.609375
         },
@@ -140,61 +146,61 @@
         },
         "wrap": {
           "top": 451.859375,
-          "bottom": 737,
+          "bottom": 689.5,
           "left": 1192.609375,
           "right": 1880.609375
         },
         "scroll": {
           "height": 288,
-          "client": 285
+          "client": 238
         }
       },
       "decay": {
         "card": {
-          "top": 749,
-          "bottom": 1161.921875,
+          "top": 701.5,
+          "bottom": 1066.921875,
           "left": 1191.609375,
           "right": 1881.609375
         },
         "canvas": {
-          "top": 882.765625,
-          "bottom": 1152.625,
+          "top": 835.265625,
+          "bottom": 1105.125,
           "left": 1201.609375,
           "right": 1871.59375
         },
         "wrap": {
-          "top": 875.765625,
-          "bottom": 1160.921875,
+          "top": 828.265625,
+          "bottom": 1065.921875,
           "left": 1192.609375,
           "right": 1880.609375
         },
         "scroll": {
           "height": 288,
-          "client": 285
+          "client": 238
         }
       },
       "apparatus": {
         "card": {
-          "top": 244.09375,
-          "bottom": 657,
+          "top": 325.09375,
+          "bottom": 690.5,
           "left": 1191.609375,
           "right": 1881.609375
         },
         "canvas": {
-          "top": 377.859375,
-          "bottom": 647.71875,
+          "top": 458.859375,
+          "bottom": 728.71875,
           "left": 1201.609375,
           "right": 1871.59375
         },
         "wrap": {
-          "top": 370.859375,
-          "bottom": 656,
+          "top": 451.859375,
+          "bottom": 689.5,
           "left": 1192.609375,
           "right": 1880.609375
         },
         "scroll": {
           "height": 288,
-          "client": 285
+          "client": 238
         }
       }
     },
