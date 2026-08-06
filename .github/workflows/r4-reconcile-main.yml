@@ -2,7 +2,9 @@ name: Reconcile R4 with main
 on:
   push:
     branches: [agent/r4-fresnel-v019]
-    paths: ['.github/workflows/r4-reconcile-main.yml']
+    paths:
+      - '.github/workflows/r4-reconcile-main.yml'
+      - '.r4-reconcile-trigger'
 permissions:
   contents: write
 jobs:
@@ -78,7 +80,7 @@ jobs:
           path.write_text(text)
           PY
 
-          rm -f .github/workflows/r4-reconcile-main.yml
+          rm -f .github/workflows/r4-reconcile-main.yml .r4-reconcile-trigger
           git add -A
           git diff --cached --check
           git commit -m "Merge latest main into R4 v0.19.1 and preserve R5 validation"
