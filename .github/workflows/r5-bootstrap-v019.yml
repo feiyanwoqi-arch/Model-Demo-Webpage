@@ -1,0 +1,67 @@
+name: Assemble R5 v0.19
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/r5-bootstrap-v019.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  assemble:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Decode exact R5 sources
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/r5-final /tmp/r5-rest
+          mkdir -p /tmp/r5-final/assets/js /tmp/r5-final/assets/css /tmp/r5-final/tests /tmp/r5-final/.github/workflows /tmp/r5-rest
+          cat .r5-upload/jsgz.*.b64 | base64 -d | gunzip > /tmp/r5-final/assets/js/r5-workbench-v019.js
+          cat .r5-upload/resttgz.*.b64 | base64 -d > /tmp/r5-rest.tar.gz
+          tar -xzf /tmp/r5-rest.tar.gz -C /tmp/r5-rest
+          cp /tmp/r5-rest/r5-workbench-v019.css /tmp/r5-final/assets/css/r5-workbench-v019.css
+          cp /tmp/r5-rest/r5-physics-v019.test.js /tmp/r5-final/tests/r5-physics-v019.test.js
+          cp /tmp/r5-rest/visual-audit-r5-v019.mjs /tmp/r5-final/tests/visual-audit-r5-v019.mjs
+          cp /tmp/r5-rest/r5-live-audit-v019.yml /tmp/r5-final/.github/workflows/r5-live-audit-v019.yml
+          node --check /tmp/r5-final/assets/js/r5-workbench-v019.js
+          node /tmp/r5-final/tests/r5-physics-v019.test.js
+          node --check /tmp/r5-final/tests/visual-audit-r5-v019.mjs
+      - name: Commit R5 directly to main
+        run: |
+          set -euo pipefail
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          for attempt in 1 2 3 4; do
+            git fetch origin main
+            git reset --hard origin/main
+            mkdir -p assets/js assets/css tests .github/workflows
+            cp -R /tmp/r5-final/assets/js/. assets/js/
+            cp -R /tmp/r5-final/assets/css/. assets/css/
+            cp -R /tmp/r5-final/tests/. tests/
+            cp -R /tmp/r5-final/.github/workflows/. .github/workflows/
+            python3 - <<'PY'
+          from pathlib import Path
+          p=Path('index.html')
+          s=p.read_text()
+          css='<link rel="stylesheet" href="assets/css/r5-workbench-v019.css">'
+          js='<script src="assets/js/r5-workbench-v019.js"></script>'
+          if css not in s:
+              anchor='<link rel="stylesheet" href="assets/css/r3-right-typography-v018.css">'
+              s=s.replace(anchor,anchor+'\n'+css)
+          if js not in s:
+              anchor='<script src="assets/js/r3-direct-drag-v017.js"></script>'
+              s=s.replace(anchor,anchor+'\n'+js)
+          p.write_text(s)
+          PY
+            rm -rf .r5-upload .github/workflows/r5-bootstrap-v019.yml
+            git add -A
+            git commit -m "Build R5 v0.19 total-internal-reflection workbench" || exit 0
+            if git push origin HEAD:main; then exit 0; fi
+            sleep $((attempt * 3))
+          done
+          exit 1
