@@ -271,13 +271,13 @@
   function drawApparatus(canvas,s,o){
     const a=api(canvas,'apparatus');a.clear('#fbfdfc');
     a.text('受抑全反射：第二介质进入倏逝场',34,27,C.tealDark,19,'left',850);
-    a.text('教学近似：耦合尺度 ∝ e⁻²ᵏᵍ',686,27,C.orangeDark,14,'right',800);
+    a.text('教学近似：耦合尺度 ∝ e⁻²ᵏᵍ',686,27,C.orangeDark,16,'right',800);
     const y1=105,y2=190,gapPx=65;
     a.rect(65,y2,590,58,C.lower,C.teal,10,1.5);
     a.rect(65,y1-gapPx,590,58,'#e8f4f3',C.teal,10,1.5);
-    a.text(`第一棱镜 n₁=${s.n1.toFixed(2)}`,86,y2+29,C.ink,14,'left',800);
-    a.text(`第二耦合介质 n₃=${s.n3.toFixed(2)}`,86,y1-gapPx+29,C.ink,14,'left',800);
-    a.text(`间隙 g=${Math.round(s.gap)} nm`,360,146,C.purple,14,'center',800);
+    a.text(`第一棱镜 n₁=${s.n1.toFixed(2)}`,86,y2+29,C.ink,16,'left',800);
+    a.text(`第二耦合介质 n₃=${s.n3.toFixed(2)}`,86,y1-gapPx+29,C.ink,16,'left',800);
+    a.text(`间隙 g=${Math.round(s.gap)} nm`,360,146,C.purple,16,'center',800);
     a.arrow(120,260,270,y2,C.green,4);
     a.arrow(270,y2,430,260,C.teal,4);
     if(o.tir){
@@ -285,7 +285,7 @@
       a.arrow(360,y1-gapPx+58,520,70,`rgba(233,130,66,${alpha})`,3+3*alpha);
     }
     a.rect(470,198,186,70,o.tir?C.purpleLight:C.warn,o.tir?C.purple:C.orange,12,1.5);
-    a.text(o.tir?'近似耦合强度':'需先进入全反射区',563,220,o.tir?C.purple:C.orangeDark,14,'center',800);
+    a.text(o.tir?'近似耦合强度':'需先进入全反射区',563,220,o.tir?C.purple:C.orangeDark,16,'center',800);
     a.mono(o.tir?`${(o.coupling*100).toFixed(2)}%`:'—',563,247,o.tir?C.purple:C.muted,19,'center',850);
   }
 

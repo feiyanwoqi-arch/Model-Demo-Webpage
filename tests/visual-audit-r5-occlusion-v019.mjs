@@ -40,7 +40,7 @@ async function fontFloor(page,rootSelector,floor){
     const root=document.querySelector(rootSelector);if(!root)return [{text:'<missing root>',size:null}];
     return [...root.querySelectorAll('*')].filter(n=>{
       if(n.children.length||/^(SCRIPT|STYLE|CANVAS|SVG|PATH|INPUT|OPTION)$/i.test(n.tagName)||n.closest('mjx-container'))return false;
-      const t=(n.textContent||'').trim();return t&&(${visible.toString()})(n)&&parseFloat(getComputedStyle(n).fontSize)<floor;
+      const t=(n.textContent||'').trim(),s=getComputedStyle(n),r=n.getBoundingClientRect();return t&&s.display!=='none'&&s.visibility!=='hidden'&&Number(s.opacity)>0&&r.width>0&&r.height>0&&parseFloat(s.fontSize)<floor;
     }).map(n=>({text:(n.textContent||'').trim().replace(/\s+/g,' ').slice(0,100),size:parseFloat(getComputedStyle(n).fontSize),tag:n.tagName}));
   },{rootSelector,floor});
 }
