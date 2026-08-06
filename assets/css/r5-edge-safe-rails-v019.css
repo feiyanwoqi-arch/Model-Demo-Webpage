@@ -1,0 +1,8 @@
+/* R5 v0.19.8 — keep the fixed module/parameter controls from covering
+   primary-header copy at desktop widths that use the stacked workspace. */
+@media (min-width:761px) and (max-width:1879px){
+  .tir-page .tir-primary > header{
+    padding-left:72px!important;
+    padding-right:72px!important;
+  }
+}
