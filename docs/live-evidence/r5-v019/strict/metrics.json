@@ -4,9 +4,10 @@
     "height": 1440,
     "failures": [],
     "runtime": {
-      "marker": "0196",
+      "marker": "0197",
       "fit": "019",
-      "typography": "0.19.6"
+      "typography": "0.19.7",
+      "legendBoxOffset": 14
     },
     "canvases": {
       "main": {
@@ -114,20 +115,21 @@
           {
             "label": "实线＝传播波",
             "x": 605,
-            "y": 600,
+            "y": 614,
             "size": 16,
             "align": "center"
           },
           {
             "label": "紫色波列＝倏逝场（法向平均能流 0）",
             "x": 605,
-            "y": 626,
+            "y": 640,
             "size": 16,
             "align": "center"
           }
         ],
         "overlaps": [],
         "cropped": [],
+        "legendGap": 17.13436218521747,
         "width": 1205,
         "height": 753
       },
@@ -187,6 +189,7 @@
         ],
         "overlaps": [],
         "cropped": [],
+        "legendGap": null,
         "width": 773,
         "height": 311
       },
@@ -246,6 +249,7 @@
         ],
         "overlaps": [],
         "cropped": [],
+        "legendGap": null,
         "width": 773,
         "height": 311
       },
@@ -305,19 +309,22 @@
         ],
         "overlaps": [],
         "cropped": [],
+        "legendGap": null,
         "width": 773,
         "height": 311
       }
-    }
+    },
+    "headerEdgeOverlaps": []
   },
   {
     "width": 1920,
     "height": 1080,
     "failures": [],
     "runtime": {
-      "marker": "0196",
+      "marker": "0197",
       "fit": "019",
-      "typography": "0.19.6"
+      "typography": "0.19.7",
+      "legendBoxOffset": 14
     },
     "canvases": {
       "main": {
@@ -425,20 +432,21 @@
           {
             "label": "实线＝传播波",
             "x": 605,
-            "y": 600,
+            "y": 614,
             "size": 19.25176056338028,
             "align": "center"
           },
           {
             "label": "紫色波列＝倏逝场（法向平均能流 0）",
             "x": 605,
-            "y": 626,
+            "y": 640,
             "size": 19.25176056338028,
             "align": "center"
           }
         ],
         "overlaps": [],
         "cropped": [],
+        "legendGap": 17.13436218521747,
         "width": 909,
         "height": 568
       },
@@ -498,6 +506,7 @@
         ],
         "overlaps": [],
         "cropped": [],
+        "legendGap": null,
         "width": 545,
         "height": 219
       },
@@ -557,6 +566,7 @@
         ],
         "overlaps": [],
         "cropped": [],
+        "legendGap": null,
         "width": 545,
         "height": 219
       },
@@ -616,19 +626,22 @@
         ],
         "overlaps": [],
         "cropped": [],
+        "legendGap": null,
         "width": 545,
         "height": 219
       }
-    }
+    },
+    "headerEdgeOverlaps": []
   },
   {
     "width": 1735,
     "height": 865,
     "failures": [],
     "runtime": {
-      "marker": "0196",
+      "marker": "0197",
       "fit": "019",
-      "typography": "0.19.6"
+      "typography": "0.19.7",
+      "legendBoxOffset": 14
     },
     "canvases": {
       "main": {
@@ -736,20 +749,21 @@
           {
             "label": "实线＝传播波",
             "x": 605,
-            "y": 600,
+            "y": 614,
             "size": 19.25176056338028,
             "align": "center"
           },
           {
             "label": "紫色波列＝倏逝场（法向平均能流 0）",
             "x": 605,
-            "y": 626,
+            "y": 640,
             "size": 19.25176056338028,
             "align": "center"
           }
         ],
         "overlaps": [],
         "cropped": [],
+        "legendGap": 17.13436218521747,
         "width": 909,
         "height": 568
       },
@@ -809,6 +823,7 @@
         ],
         "overlaps": [],
         "cropped": [],
+        "legendGap": null,
         "width": 624,
         "height": 251
       },
@@ -868,12 +883,13 @@
         ],
         "overlaps": [],
         "cropped": [],
+        "legendGap": null,
         "width": 624,
         "height": 251
       },
       "apparatus": {
         "missing": false,
-        "scale": 0.9586206896551724,
+        "scale": 0.9655172413793104,
         "items": [
           {
             "label": "受抑全反射：第二介质进入倏逝场",
@@ -886,35 +902,35 @@
             "label": "耦合量级 ∝ e⁻²κg",
             "x": 686,
             "y": 27,
-            "size": 16.899280575539567,
+            "size": 16.77857142857143,
             "align": "right"
           },
           {
             "label": "第一棱镜 n₁=1.52",
             "x": 86,
             "y": 219,
-            "size": 16.899280575539567,
+            "size": 16.77857142857143,
             "align": "left"
           },
           {
             "label": "第二耦合介质 n₃=1.52",
             "x": 86,
             "y": 69,
-            "size": 16.899280575539567,
+            "size": 16.77857142857143,
             "align": "left"
           },
           {
             "label": "间隙 g=650 nm",
             "x": 360,
             "y": 146,
-            "size": 16.899280575539567,
+            "size": 16.77857142857143,
             "align": "center"
           },
           {
             "label": "近似耦合强度",
             "x": 563,
             "y": 220,
-            "size": 16.899280575539567,
+            "size": 16.77857142857143,
             "align": "center"
           },
           {
@@ -927,19 +943,22 @@
         ],
         "overlaps": [],
         "cropped": [],
-        "width": 691,
-        "height": 278
+        "legendGap": null,
+        "width": 696,
+        "height": 280
       }
-    }
+    },
+    "headerEdgeOverlaps": []
   },
   {
     "width": 1440,
     "height": 900,
     "failures": [],
     "runtime": {
-      "marker": "0196",
+      "marker": "0197",
       "fit": "019",
-      "typography": "0.19.6"
+      "typography": "0.19.7",
+      "legendBoxOffset": 14
     },
     "canvases": {
       "main": {
@@ -1047,20 +1066,21 @@
           {
             "label": "实线＝传播波",
             "x": 605,
-            "y": 600,
+            "y": 614,
             "size": 21.73956262425447,
             "align": "center"
           },
           {
             "label": "紫色波列＝倏逝场（法向平均能流 0）",
             "x": 605,
-            "y": 626,
+            "y": 640,
             "size": 21.73956262425447,
             "align": "center"
           }
         ],
         "overlaps": [],
         "cropped": [],
+        "legendGap": 17.13436218521747,
         "width": 805,
         "height": 503
       },
@@ -1120,6 +1140,7 @@
         ],
         "overlaps": [],
         "cropped": [],
+        "legendGap": null,
         "width": 624,
         "height": 251
       },
@@ -1179,12 +1200,13 @@
         ],
         "overlaps": [],
         "cropped": [],
+        "legendGap": null,
         "width": 624,
         "height": 251
       },
       "apparatus": {
         "missing": false,
-        "scale": 1.106896551724138,
+        "scale": 1.103448275862069,
         "items": [
           {
             "label": "受抑全反射：第二介质进入倏逝场",
@@ -1238,19 +1260,22 @@
         ],
         "overlaps": [],
         "cropped": [],
-        "width": 798,
-        "height": 321
+        "legendGap": null,
+        "width": 795,
+        "height": 320
       }
-    }
+    },
+    "headerEdgeOverlaps": []
   },
   {
     "width": 1366,
     "height": 768,
     "failures": [],
     "runtime": {
-      "marker": "0196",
+      "marker": "0197",
       "fit": "019",
-      "typography": "0.19.6"
+      "typography": "0.19.7",
+      "legendBoxOffset": 14
     },
     "canvases": {
       "main": {
@@ -1358,20 +1383,21 @@
           {
             "label": "实线＝传播波",
             "x": 605,
-            "y": 600,
+            "y": 614,
             "size": 18.756432246998283,
             "align": "center"
           },
           {
             "label": "紫色波列＝倏逝场（法向平均能流 0）",
             "x": 605,
-            "y": 626,
+            "y": 640,
             "size": 18.756432246998283,
             "align": "center"
           }
         ],
         "overlaps": [],
         "cropped": [],
+        "legendGap": 17.13436218521747,
         "width": 933,
         "height": 583
       },
@@ -1431,6 +1457,7 @@
         ],
         "overlaps": [],
         "cropped": [],
+        "legendGap": null,
         "width": 624,
         "height": 251
       },
@@ -1490,12 +1517,13 @@
         ],
         "overlaps": [],
         "cropped": [],
+        "legendGap": null,
         "width": 624,
         "height": 251
       },
       "apparatus": {
         "missing": false,
-        "scale": 1.096551724137931,
+        "scale": 1.0862068965517242,
         "items": [
           {
             "label": "受抑全反射：第二介质进入倏逝场",
@@ -1549,9 +1577,11 @@
         ],
         "overlaps": [],
         "cropped": [],
-        "width": 791,
-        "height": 318
+        "legendGap": null,
+        "width": 783,
+        "height": 315
       }
-    }
+    },
+    "headerEdgeOverlaps": []
   }
 ]
