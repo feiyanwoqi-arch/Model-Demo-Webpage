@@ -35,7 +35,7 @@ async function inspectCanvas(page,key,selector){
     const overlapPairs=[
       ['传播解 → 临界点 → 倏逝解','切向波数守恒；kz² 跨过 0'],
       ['受抑全反射：第二介质进入倏逝场','耦合量级 ∝ e⁻²κg'],
-      ['实线：传播波方向','紫色波列：倏逝场（法向平均能流 0）']
+      ['实线＝传播波','紫色波列＝倏逝场（法向平均能流 0）']
     ];
     const overlaps=[];
     for(const [a,b] of overlapPairs){
@@ -43,7 +43,7 @@ async function inspectCanvas(page,key,selector){
       if(!A||!B)continue;
       const xOverlap=Math.min(A.right,B.right)-Math.max(A.left,B.left);
       const yOverlap=Math.min(A.bottom,B.bottom)-Math.max(A.top,B.top);
-      if(xOverlap>1&&yOverlap>1)overlaps.push({a,b,xOverlap,yOverlap,A:{left:A.left,right:A.right},B:{left:B.left,right:B.right}});
+      if(xOverlap>1&&yOverlap>1)overlaps.push({a,b,xOverlap,yOverlap,A:{left:A.left,right:A.right,top:A.top,bottom:A.bottom},B:{left:B.left,right:B.right,top:B.top,bottom:B.bottom}});
     }
     return {missing:false,scale,items:audit,overlaps,cropped,width:rect.width,height:rect.height};
   },{key,selector});
@@ -65,15 +65,14 @@ for(const [width,height] of viewports){
   try{
     await page.goto('http://127.0.0.1:8000/#model:total-internal',{waitUntil:'networkidle'});
     await page.waitForSelector('.tir-page[data-legibility-version="019"]',{timeout:20000});
-    await page.waitForFunction(()=>document.querySelector('.tir-page')?.dataset.r5CanvasTypography==='0195',{timeout:10000});
+    await page.waitForFunction(()=>document.querySelector('.tir-page')?.dataset.r5CanvasTypography==='0196',{timeout:10000});
     await page.waitForTimeout(1200);
     record.runtime=await page.evaluate(()=>({
       marker:document.querySelector('.tir-page')?.dataset.r5CanvasTypography||'',
       fit:document.querySelector('.tir-page')?.dataset.r5CanvasFit||'',
-      typography:window.R5CanvasTypographyV019?.version||'',
-      floor:window.R5CanvasFontFloorV0194?.version||''
+      typography:window.R5CanvasTypographyV019?.version||''
     }));
-    if(record.runtime.marker!=='0195'||record.runtime.typography!=='0.19.5')record.failures.push(`typography runtime missing: ${JSON.stringify(record.runtime)}`);
+    if(record.runtime.marker!=='0196'||record.runtime.typography!=='0.19.6')record.failures.push(`typography runtime missing: ${JSON.stringify(record.runtime)}`);
     if(record.runtime.fit!=='019')record.failures.push(`canvas fit runtime missing: ${JSON.stringify(record.runtime)}`);
 
     await page.evaluate(()=>scrollTo(0,0));
