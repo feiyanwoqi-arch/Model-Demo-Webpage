@@ -8,7 +8,13 @@
   const replacements = new Map([
     ['横向波数守恒；法向波数平方跨过 0', '切向波数守恒；kz² 跨过 0'],
     ['教学近似：耦合尺度 ∝ e⁻²ᵏᵍ', '耦合量级 ∝ e⁻²κg'],
-    ['紫色波列：倏逝场（平均法向能流为 0）', '紫色波列：倏逝场（法向平均能流 0）']
+    ['实线：传播波方向', '实线＝传播波'],
+    ['紫色波列：倏逝场（平均法向能流为 0）', '紫色波列＝倏逝场（法向平均能流 0）']
+  ]);
+
+  const mainLegendPlacement = new Map([
+    ['实线：传播波方向', canvas => ({ x: 605, y: canvas.height - 75 })],
+    ['紫色波列：倏逝场（平均法向能流为 0）', canvas => ({ x: 605, y: canvas.height - 49 })]
   ]);
 
   let refreshTimer = 0;
@@ -56,6 +62,11 @@
     return String(font).replace(/\d+(?:\.\d+)?px/, `${size.toFixed(2)}px`);
   }
 
+  function placementFor(sourceLabel, canvas, x, y) {
+    if (canvasKey(canvas) !== 'main') return { x, y };
+    return mainLegendPlacement.get(sourceLabel)?.(canvas) || { x, y };
+  }
+
   CanvasRenderingContext2D.prototype.fillText = function r5LegibleFillText(text, x, y, maxWidth) {
     const canvas = this.canvas;
     if (!isR5Canvas(canvas)) {
@@ -66,13 +77,14 @@
 
     const sourceLabel = String(text);
     const label = replacements.get(sourceLabel) || sourceLabel;
+    const point = placementFor(sourceLabel, canvas, x, y);
     const originalFont = this.font;
     const nextSize = compensatedSize(label, canvas, parseSize(originalFont));
     this.font = replaceFontSize(originalFont, nextSize);
     try {
       return maxWidth === undefined
-        ? originalFillText.call(this, label, x, y)
-        : originalFillText.call(this, label, x, y, maxWidth);
+        ? originalFillText.call(this, label, point.x, point.y)
+        : originalFillText.call(this, label, point.x, point.y, maxWidth);
     } finally {
       this.font = originalFont;
     }
@@ -89,9 +101,11 @@
     for (const [key, items] of Object.entries(raw)) {
       const canvas = canvasFor(key);
       result[key] = (items || []).map(item => {
-        const label = replacements.get(String(item.label)) || String(item.label);
+        const sourceLabel = String(item.label);
+        const label = replacements.get(sourceLabel) || sourceLabel;
+        const point = canvas ? placementFor(sourceLabel, canvas, item.x, item.y) : { x: item.x, y: item.y };
         const size = canvas ? compensatedSize(label, canvas, Number(item.size) || 16) : Number(item.size) || 16;
-        return { ...item, label, size };
+        return { ...item, ...point, label, size };
       });
     }
     return result;
@@ -103,7 +117,7 @@
     api.__r5RawTextAudit = api.getTextAudit.bind(api);
     api.getTextAudit = transformedAudit;
     api.__r5TypographyPatched = true;
-    api.typographyVersion = '0.19.5';
+    api.typographyVersion = '0.19.6';
     return true;
   }
 
@@ -113,7 +127,7 @@
     const input = document.querySelector('.tir-page[data-model-id="total-internal"] [data-r5-param="angle"]');
     if (!input) return;
     input.dispatchEvent(new Event('input', { bubbles: true }));
-    document.querySelector('.tir-page[data-model-id="total-internal"]')?.setAttribute('data-r5-canvas-typography', '0195');
+    document.querySelector('.tir-page[data-model-id="total-internal"]')?.setAttribute('data-r5-canvas-typography', '0196');
   }
 
   function scheduleRefresh() {
@@ -137,7 +151,7 @@
   }
 
   window.R5CanvasTypographyV019 = {
-    version: '0.19.5',
+    version: '0.19.6',
     replacements,
     effectiveFloor,
     compensatedSize,
