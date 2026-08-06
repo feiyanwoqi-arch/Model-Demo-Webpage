@@ -75,6 +75,29 @@ async function inspectHeaderEdgeOverlap(page){
   });
 }
 
+async function exerciseLegendRegimes(page){
+  await page.locator('.tir-right-handle').evaluate(n=>n.click());
+  await page.waitForSelector('.tir-right-drawer.is-open');
+  const checks=[];
+  for(const preset of ['below','tir','invalid']){
+    await page.locator(`[data-r5-state-preset="${preset}"]`).evaluate(n=>n.click());
+    await page.waitForTimeout(120);
+    await page.locator('[data-r5-param="angle"]').dispatchEvent('input');
+    await page.waitForTimeout(180);
+    checks.push(await page.evaluate(preset=>({
+      preset,
+      regime:document.querySelector('.tir-page')?.dataset.r5Regime||'',
+      labels:(window.R5TIRWorkbenchV019?.getTextAudit?.()?.main||[]).map(item=>item.label)
+    }),preset));
+  }
+  await page.locator('[data-r5-state-preset="tir"]').evaluate(n=>n.click());
+  await page.waitForTimeout(120);
+  await page.locator('[data-r5-param="angle"]').dispatchEvent('input');
+  await page.locator('.tir-right-drawer [data-r5-close]').evaluate(n=>n.click());
+  await page.waitForTimeout(180);
+  return checks;
+}
+
 async function openApparatus(page){
   await page.locator('.tir-left-handle').evaluate(n=>n.click());
   await page.waitForSelector('.tir-left-drawer.is-open');
@@ -84,14 +107,14 @@ async function openApparatus(page){
 }
 
 for(const [width,height] of viewports){
-  const record={width,height,failures:[],runtime:null,canvases:{},headerEdgeOverlaps:[]};
+  const record={width,height,failures:[],runtime:null,canvases:{},headerEdgeOverlaps:[],legendRegimes:[]};
   const page=await browser.newPage({viewport:{width,height},deviceScaleFactor:1});
   page.on('pageerror',e=>record.failures.push(`page: ${e.message}`));
   page.on('console',m=>{if(m.type()==='error')record.failures.push(`console: ${m.text()}`);});
   try{
     await page.goto('http://127.0.0.1:8000/#model:total-internal',{waitUntil:'networkidle'});
     await page.waitForSelector('.tir-page[data-legibility-version="019"]',{timeout:20000});
-    await page.waitForFunction(()=>document.querySelector('.tir-page')?.dataset.r5CanvasTypography==='0197',{timeout:10000});
+    await page.waitForFunction(()=>document.querySelector('.tir-page')?.dataset.r5CanvasTypography==='0198',{timeout:10000});
     await page.waitForTimeout(1200);
     record.runtime=await page.evaluate(()=>({
       marker:document.querySelector('.tir-page')?.dataset.r5CanvasTypography||'',
@@ -99,7 +122,7 @@ for(const [width,height] of viewports){
       typography:window.R5CanvasTypographyV019?.version||'',
       legendBoxOffset:window.R5CanvasTypographyV019?.legendBoxOffset||0
     }));
-    if(record.runtime.marker!=='0197'||record.runtime.typography!=='0.19.7')record.failures.push(`typography runtime missing: ${JSON.stringify(record.runtime)}`);
+    if(record.runtime.marker!=='0198'||record.runtime.typography!=='0.19.8')record.failures.push(`typography runtime missing: ${JSON.stringify(record.runtime)}`);
     if(record.runtime.fit!=='019')record.failures.push(`canvas fit runtime missing: ${JSON.stringify(record.runtime)}`);
     if(record.runtime.legendBoxOffset<10)record.failures.push(`legend box offset missing: ${JSON.stringify(record.runtime)}`);
 
@@ -128,6 +151,15 @@ for(const [width,height] of viewports){
     await page.locator('[data-module-id="transition"]').screenshot({path:`${outDir}/r5-strict-${width}x${height}-02-transition.png`});
     await page.locator('[data-module-id="decay"]').scrollIntoViewIfNeeded();
     await page.locator('[data-module-id="decay"]').screenshot({path:`${outDir}/r5-strict-${width}x${height}-03-decay.png`});
+
+    record.legendRegimes=await exerciseLegendRegimes(page);
+    for(const check of record.legendRegimes){
+      const hasPurple=check.labels.includes('紫色波列＝倏逝场（法向平均能流 0）');
+      const hasOrange=check.labels.includes('橙色箭头＝传播折射波');
+      if(check.preset==='tir'&&(check.regime!=='tir'||!hasPurple||hasOrange))record.failures.push(`TIR legend mismatch: ${JSON.stringify(check)}`);
+      if(check.preset==='below'&&(check.regime!=='transmission'||!hasOrange||hasPurple))record.failures.push(`transmission legend mismatch: ${JSON.stringify(check)}`);
+      if(check.preset==='invalid'&&(check.regime!=='no-tir'||!hasOrange||hasPurple))record.failures.push(`no-critical legend mismatch: ${JSON.stringify(check)}`);
+    }
 
     await openApparatus(page);
     const apparatus=await inspectCanvas(page,'apparatus','[data-r5-canvas="apparatus"]');
