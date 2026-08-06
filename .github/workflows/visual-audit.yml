@@ -11,9 +11,39 @@ permissions:
 jobs:
   optics-workbenches:
     runs-on: ubuntu-latest
-    timeout-minutes: 35
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
+      - name: Assemble staged R5 sources for validation
+        run: |
+          set -euo pipefail
+          if [ -d .r5-upload ]; then
+            rm -rf /tmp/r5-rest
+            mkdir -p /tmp/r5-rest assets/js assets/css tests
+            cat .r5-upload/jsgz.*.b64 | base64 -d | gunzip > assets/js/r5-workbench-v019.js
+            cat .r5-upload/resttgz.*.b64 | base64 -d > /tmp/r5-rest.tar.gz
+            tar -xzf /tmp/r5-rest.tar.gz -C /tmp/r5-rest
+            cp /tmp/r5-rest/r5-workbench-v019.css assets/css/r5-workbench-v019.css
+            cp /tmp/r5-rest/r5-physics-v019.test.js tests/r5-physics-v019.test.js
+            cp /tmp/r5-rest/visual-audit-r5-v019.mjs tests/visual-audit-r5-v019.mjs
+            python3 - <<'PY'
+          from pathlib import Path
+          p=Path('index.html')
+          s=p.read_text()
+          css='<link rel="stylesheet" href="assets/css/r5-workbench-v019.css">'
+          js='<script src="assets/js/r5-workbench-v019.js"></script>'
+          if css not in s:
+              anchor='<link rel="stylesheet" href="assets/css/r3-right-typography-v018.css">'
+              s=s.replace(anchor,anchor+'\n'+css)
+          if js not in s:
+              anchor='<script src="assets/js/r3-direct-drag-v017.js"></script>'
+              s=s.replace(anchor,anchor+'\n'+js)
+          p.write_text(s)
+          PY
+          fi
+          node --check assets/js/r5-workbench-v019.js
+          node tests/r5-physics-v019.test.js
+          node --check tests/visual-audit-r5-v019.mjs
       - uses: actions/setup-node@v4
         with: {node-version: '22'}
       - name: Install Playwright
@@ -46,11 +76,16 @@ jobs:
       - name: R3 finite-ray and legibility audit
         if: always()
         run: node tests/visual-audit-r3-v017.mjs
+      - name: R5 total-internal-reflection task and typography audit
+        id: r5audit
+        if: always()
+        continue-on-error: true
+        run: node tests/visual-audit-r5-v019.mjs
       - name: Upload visual audit
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: optics-visual-audit-v018-final
+          name: optics-visual-audit-v019-r5
           path: |
             visual-audit-v012/
             visual-audit-r1-v014/
@@ -59,8 +94,20 @@ jobs:
             visual-audit-r2-drawer-fit-v015/
             visual-audit-r2-wide-formula-v018/
             visual-audit-r3-v017/
+            visual-audit-r5-v019/
           if-no-files-found: warn
           retention-days: 14
+      - name: Commit validated R5 product directly to main
+        if: github.event_name != 'pull_request' && steps.r5audit.outcome == 'success'
+        run: |
+          set -euo pipefail
+          if [ ! -d .r5-upload ]; then exit 0; fi
+          rm -rf .r5-upload .github/workflows/r5-bootstrap-v019.yml
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add -A
+          git commit -m "Build R5 v0.19 total-internal-reflection workbench"
+          git push
       - name: Record latest direct-main run
         if: always() && github.event_name != 'pull_request'
         env:
@@ -68,11 +115,15 @@ jobs:
           RUN_ATTEMPT: ${{ github.run_attempt }}
           SOURCE_SHA: ${{ github.sha }}
           JOB_STATUS: ${{ job.status }}
+          R5_OUTCOME: ${{ steps.r5audit.outcome }}
         run: |
           mkdir -p audit
-          printf '{\n  "run_id": %s,\n  "run_attempt": %s,\n  "source_sha": "%s",\n  "job_status": "%s"\n}\n' "$RUN_ID" "$RUN_ATTEMPT" "$SOURCE_SHA" "$JOB_STATUS" > audit/latest-visual-run.json
+          printf '{\n  "run_id": %s,\n  "run_attempt": %s,\n  "source_sha": "%s",\n  "job_status": "%s",\n  "r5_outcome": "%s"\n}\n' "$RUN_ID" "$RUN_ATTEMPT" "$SOURCE_SHA" "$JOB_STATUS" "$R5_OUTCOME" > audit/latest-visual-run.json
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
           git add audit/latest-visual-run.json
           git commit -m "Record visual audit run $RUN_ID [skip ci]" || exit 0
           git push
+      - name: Enforce R5 audit result
+        if: always() && steps.r5audit.outcome != 'success'
+        run: exit 1
