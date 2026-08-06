@@ -27,6 +27,7 @@ jobs:
             cp /tmp/r5-rest/r5-physics-v019.test.js tests/r5-physics-v019.test.js
             cp /tmp/r5-rest/visual-audit-r5-v019.mjs tests/visual-audit-r5-v019.mjs
             sed -i "s#require('./r5-workbench-v019.js')#require('../assets/js/r5-workbench-v019.js')#" tests/r5-physics-v019.test.js
+            python3 .r5-upload/repair-v0191.py
             python3 - <<'PY'
           from pathlib import Path
           p=Path('index.html')
