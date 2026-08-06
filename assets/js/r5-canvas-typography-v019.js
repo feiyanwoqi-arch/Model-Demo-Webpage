@@ -3,8 +3,10 @@
   if (window.R5CanvasTypographyV019) return;
 
   const originalFillText = CanvasRenderingContext2D.prototype.fillText;
+  const originalRoundRect = CanvasRenderingContext2D.prototype.roundRect;
   const CORE = /全反射|倏逝|临界|探针|传播|反射|折射|穿透|能流|法向|当前状态|介质|波数|耦合/;
   const CONCLUSION = /全反射：|当前折射率顺序|临界状态|传播折射波仍存在|传播解 →|倏逝场的空间衰减|受抑全反射/;
+  const MAIN_LEGEND_BOX_OFFSET = 14;
   const replacements = new Map([
     ['横向波数守恒；法向波数平方跨过 0', '切向波数守恒；kz² 跨过 0'],
     ['教学近似：耦合尺度 ∝ e⁻²ᵏᵍ', '耦合量级 ∝ e⁻²κg'],
@@ -13,8 +15,8 @@
   ]);
 
   const mainLegendPlacement = new Map([
-    ['实线：传播波方向', canvas => ({ x: 605, y: canvas.height - 75 })],
-    ['紫色波列：倏逝场（平均法向能流为 0）', canvas => ({ x: 605, y: canvas.height - 49 })]
+    ['实线：传播波方向', canvas => ({ x: 605, y: canvas.height - 61 })],
+    ['紫色波列：倏逝场（平均法向能流为 0）', canvas => ({ x: 605, y: canvas.height - 35 })]
   ]);
 
   let refreshTimer = 0;
@@ -67,6 +69,17 @@
     return mainLegendPlacement.get(sourceLabel)?.(canvas) || { x, y };
   }
 
+  CanvasRenderingContext2D.prototype.roundRect = function r5LegendRoundRect(x, y, width, height, radii) {
+    const canvas = this.canvas;
+    const isLegend = isR5Canvas(canvas)
+      && canvasKey(canvas) === 'main'
+      && Math.abs(x - 340) < 0.1
+      && Math.abs(y - (canvas.height - 92)) < 0.1
+      && Math.abs(width - 530) < 0.1
+      && Math.abs(height - 60) < 0.1;
+    return originalRoundRect.call(this, x, isLegend ? y + MAIN_LEGEND_BOX_OFFSET : y, width, height, radii);
+  };
+
   CanvasRenderingContext2D.prototype.fillText = function r5LegibleFillText(text, x, y, maxWidth) {
     const canvas = this.canvas;
     if (!isR5Canvas(canvas)) {
@@ -117,7 +130,7 @@
     api.__r5RawTextAudit = api.getTextAudit.bind(api);
     api.getTextAudit = transformedAudit;
     api.__r5TypographyPatched = true;
-    api.typographyVersion = '0.19.6';
+    api.typographyVersion = '0.19.7';
     return true;
   }
 
@@ -127,7 +140,7 @@
     const input = document.querySelector('.tir-page[data-model-id="total-internal"] [data-r5-param="angle"]');
     if (!input) return;
     input.dispatchEvent(new Event('input', { bubbles: true }));
-    document.querySelector('.tir-page[data-model-id="total-internal"]')?.setAttribute('data-r5-canvas-typography', '0196');
+    document.querySelector('.tir-page[data-model-id="total-internal"]')?.setAttribute('data-r5-canvas-typography', '0197');
   }
 
   function scheduleRefresh() {
@@ -151,10 +164,11 @@
   }
 
   window.R5CanvasTypographyV019 = {
-    version: '0.19.6',
+    version: '0.19.7',
     replacements,
     effectiveFloor,
     compensatedSize,
+    legendBoxOffset: MAIN_LEGEND_BOX_OFFSET,
     scheduleRefresh
   };
 
