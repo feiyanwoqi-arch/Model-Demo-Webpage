@@ -272,7 +272,9 @@
     "width": 1920,
     "height": 1080,
     "errors": [],
-    "assertions": [],
+    "assertions": [
+      "wide workspace exceeds first viewport"
+    ],
     "layout": {
       "app": "app r5-v019-active",
       "overflow": 0,
@@ -280,16 +282,16 @@
         "x": 38.390625,
         "y": 231.921875,
         "width": 1135.21875,
-        "height": 835,
-        "bottom": 1066.921875,
+        "height": 930,
+        "bottom": 1161.921875,
         "right": 1173.609375
       },
       "analysis": {
         "x": 1191.609375,
         "y": 231.921875,
         "width": 690,
-        "height": 835,
-        "bottom": 1066.921875,
+        "height": 930,
+        "bottom": 1161.921875,
         "right": 1881.609375
       },
       "main": {

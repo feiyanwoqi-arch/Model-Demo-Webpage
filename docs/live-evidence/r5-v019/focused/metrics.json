@@ -1,0 +1,515 @@
+[
+  {
+    "width": 2560,
+    "height": 1440,
+    "failures": [],
+    "containment": {
+      "main": {
+        "canvas": {
+          "top": 425.765625,
+          "bottom": 1100.765625,
+          "left": 313.5,
+          "right": 1393.5
+        },
+        "wrap": {
+          "top": 378.0625,
+          "bottom": 1148.484375,
+          "left": 101,
+          "right": 1606.015625
+        },
+        "guideBottom": 378.0625,
+        "liveTop": 1148.484375
+      },
+      "transition": {
+        "card": {
+          "top": 329.265625,
+          "bottom": 787.171875,
+          "left": 1625.015625,
+          "right": 2460
+        },
+        "canvas": {
+          "top": 474.09375,
+          "bottom": 764.09375,
+          "left": 1682.5,
+          "right": 2402.5
+        },
+        "wrap": {
+          "top": 456.03125,
+          "bottom": 786.171875,
+          "left": 1626.015625,
+          "right": 2459
+        },
+        "scroll": {
+          "height": 330,
+          "client": 330
+        }
+      },
+      "decay": {
+        "card": {
+          "top": 798.171875,
+          "bottom": 1256.09375,
+          "left": 1625.015625,
+          "right": 2460
+        },
+        "canvas": {
+          "top": 943.015625,
+          "bottom": 1233.015625,
+          "left": 1682.5,
+          "right": 2402.5
+        },
+        "wrap": {
+          "top": 924.9375,
+          "bottom": 1255.09375,
+          "left": 1626.015625,
+          "right": 2459
+        },
+        "scroll": {
+          "height": 330,
+          "client": 330
+        }
+      },
+      "apparatus": {
+        "card": {
+          "top": 329.265625,
+          "bottom": 787.171875,
+          "left": 1625.015625,
+          "right": 2460
+        },
+        "canvas": {
+          "top": 474.09375,
+          "bottom": 764.09375,
+          "left": 1682.5,
+          "right": 2402.5
+        },
+        "wrap": {
+          "top": 456.03125,
+          "bottom": 786.171875,
+          "left": 1626.015625,
+          "right": 2459
+        },
+        "scroll": {
+          "height": 330,
+          "client": 330
+        }
+      }
+    },
+    "fonts": {
+      "leftDrawer": []
+    },
+    "states": {
+      "near": 0.2293115247709202,
+      "far": 2.1140272706310503e-8
+    }
+  },
+  {
+    "width": 1920,
+    "height": 1080,
+    "failures": [
+      "main canvas escapes wrap: {\"canvas\":{\"top\":381.890625,\"bottom\":1056.890625,\"left\":66,\"right\":1146},\"wrap\":{\"top\":373.890625,\"bottom\":1048.890625,\"left\":39.390625,\"right\":1172.609375},\"guideBottom\":373.890625,\"liveTop\":1054.3125}",
+      "main canvas lies under live strip: {\"canvas\":{\"top\":381.890625,\"bottom\":1056.890625,\"left\":66,\"right\":1146},\"wrap\":{\"top\":373.890625,\"bottom\":1048.890625,\"left\":39.390625,\"right\":1172.609375},\"guideBottom\":373.890625,\"liveTop\":1054.3125}"
+    ],
+    "containment": {
+      "main": {
+        "canvas": {
+          "top": 381.890625,
+          "bottom": 1056.890625,
+          "left": 66,
+          "right": 1146
+        },
+        "wrap": {
+          "top": 373.890625,
+          "bottom": 1048.890625,
+          "left": 39.390625,
+          "right": 1172.609375
+        },
+        "guideBottom": 373.890625,
+        "liveTop": 1054.3125
+      },
+      "transition": {
+        "card": {
+          "top": 325.09375,
+          "bottom": 738,
+          "left": 1191.609375,
+          "right": 1881.609375
+        },
+        "canvas": {
+          "top": 458.859375,
+          "bottom": 728.71875,
+          "left": 1201.609375,
+          "right": 1871.59375
+        },
+        "wrap": {
+          "top": 451.859375,
+          "bottom": 737,
+          "left": 1192.609375,
+          "right": 1880.609375
+        },
+        "scroll": {
+          "height": 288,
+          "client": 285
+        }
+      },
+      "decay": {
+        "card": {
+          "top": 749,
+          "bottom": 1161.921875,
+          "left": 1191.609375,
+          "right": 1881.609375
+        },
+        "canvas": {
+          "top": 882.765625,
+          "bottom": 1152.625,
+          "left": 1201.609375,
+          "right": 1871.59375
+        },
+        "wrap": {
+          "top": 875.765625,
+          "bottom": 1160.921875,
+          "left": 1192.609375,
+          "right": 1880.609375
+        },
+        "scroll": {
+          "height": 288,
+          "client": 285
+        }
+      },
+      "apparatus": {
+        "card": {
+          "top": 244.09375,
+          "bottom": 657,
+          "left": 1191.609375,
+          "right": 1881.609375
+        },
+        "canvas": {
+          "top": 377.859375,
+          "bottom": 647.71875,
+          "left": 1201.609375,
+          "right": 1871.59375
+        },
+        "wrap": {
+          "top": 370.859375,
+          "bottom": 656,
+          "left": 1192.609375,
+          "right": 1880.609375
+        },
+        "scroll": {
+          "height": 288,
+          "client": 285
+        }
+      }
+    },
+    "fonts": {
+      "leftDrawer": []
+    },
+    "states": {
+      "near": 0.2293115247709202,
+      "far": 2.1140272706310503e-8
+    }
+  },
+  {
+    "width": 1735,
+    "height": 865,
+    "failures": [],
+    "containment": {
+      "main": {
+        "canvas": {
+          "top": 380.78125,
+          "bottom": 1118.28125,
+          "left": 277.5,
+          "right": 1457.5
+        },
+        "wrap": {
+          "top": 372.78125,
+          "bottom": 1126.28125,
+          "left": 35.6875,
+          "right": 1699.3125
+        },
+        "guideBottom": 372.78125,
+        "liveTop": 1126.28125
+      },
+      "transition": {
+        "card": {
+          "top": 1347.0625,
+          "bottom": 1821.484375,
+          "left": 34.6875,
+          "right": 859.5
+        },
+        "canvas": {
+          "top": 1485.328125,
+          "bottom": 1809.484375,
+          "left": 44.6875,
+          "right": 849.5
+        },
+        "wrap": {
+          "top": 1478.328125,
+          "bottom": 1820.484375,
+          "left": 35.6875,
+          "right": 858.5
+        },
+        "scroll": {
+          "height": 342,
+          "client": 342
+        }
+      },
+      "decay": {
+        "card": {
+          "top": 1347.0625,
+          "bottom": 1821.484375,
+          "left": 875.5,
+          "right": 1700.3125
+        },
+        "canvas": {
+          "top": 1485.328125,
+          "bottom": 1809.484375,
+          "left": 885.5,
+          "right": 1690.3125
+        },
+        "wrap": {
+          "top": 1478.328125,
+          "bottom": 1820.484375,
+          "left": 876.5,
+          "right": 1699.3125
+        },
+        "scroll": {
+          "height": 342,
+          "client": 342
+        }
+      },
+      "apparatus": {
+        "card": {
+          "top": 353.0625,
+          "bottom": 827.484375,
+          "left": 34.6875,
+          "right": 859.5
+        },
+        "canvas": {
+          "top": 491.328125,
+          "bottom": 815.484375,
+          "left": 44.6875,
+          "right": 849.5
+        },
+        "wrap": {
+          "top": 484.328125,
+          "bottom": 826.484375,
+          "left": 35.6875,
+          "right": 858.5
+        },
+        "scroll": {
+          "height": 342,
+          "client": 342
+        }
+      }
+    },
+    "fonts": {
+      "leftDrawer": []
+    },
+    "states": {
+      "near": 0.2293115247709202,
+      "far": 2.1140272706310503e-8
+    }
+  },
+  {
+    "width": 1440,
+    "height": 900,
+    "failures": [],
+    "containment": {
+      "main": {
+        "canvas": {
+          "top": 522.6875,
+          "bottom": 1260.1875,
+          "left": 130,
+          "right": 1310
+        },
+        "wrap": {
+          "top": 514.6875,
+          "bottom": 1268.1875,
+          "left": 29,
+          "right": 1411
+        },
+        "guideBottom": 514.6875,
+        "liveTop": 1268.1875
+      },
+      "transition": {
+        "card": {
+          "top": 1488.96875,
+          "bottom": 2001.734375,
+          "left": 28,
+          "right": 1412
+        },
+        "canvas": {
+          "top": 1627.234375,
+          "bottom": 1989.734375,
+          "left": 270,
+          "right": 1170
+        },
+        "wrap": {
+          "top": 1620.234375,
+          "bottom": 2000.734375,
+          "left": 29,
+          "right": 1411
+        },
+        "scroll": {
+          "height": 381,
+          "client": 381
+        }
+      },
+      "decay": {
+        "card": {
+          "top": 2017.734375,
+          "bottom": 2530.5,
+          "left": 28,
+          "right": 1412
+        },
+        "canvas": {
+          "top": 2156,
+          "bottom": 2518.5,
+          "left": 270,
+          "right": 1170
+        },
+        "wrap": {
+          "top": 2149,
+          "bottom": 2529.5,
+          "left": 29,
+          "right": 1411
+        },
+        "scroll": {
+          "height": 381,
+          "client": 381
+        }
+      },
+      "apparatus": {
+        "card": {
+          "top": -141.03125,
+          "bottom": 371.734375,
+          "left": 28,
+          "right": 1412
+        },
+        "canvas": {
+          "top": -2.765625,
+          "bottom": 359.734375,
+          "left": 270,
+          "right": 1170
+        },
+        "wrap": {
+          "top": -9.765625,
+          "bottom": 370.734375,
+          "left": 29,
+          "right": 1411
+        },
+        "scroll": {
+          "height": 381,
+          "client": 381
+        }
+      }
+    },
+    "fonts": {
+      "leftDrawer": []
+    },
+    "states": {
+      "near": 0.2293115247709202,
+      "far": 2.1140272706310503e-8
+    }
+  },
+  {
+    "width": 1366,
+    "height": 768,
+    "failures": [],
+    "containment": {
+      "main": {
+        "canvas": {
+          "top": 522.6875,
+          "bottom": 1197.6875,
+          "left": 143,
+          "right": 1223
+        },
+        "wrap": {
+          "top": 514.6875,
+          "bottom": 1205.6875,
+          "left": 29,
+          "right": 1337
+        },
+        "guideBottom": 514.6875,
+        "liveTop": 1205.6875
+      },
+      "transition": {
+        "card": {
+          "top": 1426.46875,
+          "bottom": 1939.234375,
+          "left": 28,
+          "right": 1338
+        },
+        "canvas": {
+          "top": 1564.734375,
+          "bottom": 1927.234375,
+          "left": 233,
+          "right": 1133
+        },
+        "wrap": {
+          "top": 1557.734375,
+          "bottom": 1938.234375,
+          "left": 29,
+          "right": 1337
+        },
+        "scroll": {
+          "height": 381,
+          "client": 381
+        }
+      },
+      "decay": {
+        "card": {
+          "top": 1955.234375,
+          "bottom": 2468,
+          "left": 28,
+          "right": 1338
+        },
+        "canvas": {
+          "top": 2093.5,
+          "bottom": 2456,
+          "left": 233,
+          "right": 1133
+        },
+        "wrap": {
+          "top": 2086.5,
+          "bottom": 2467,
+          "left": 29,
+          "right": 1337
+        },
+        "scroll": {
+          "height": 381,
+          "client": 381
+        }
+      },
+      "apparatus": {
+        "card": {
+          "top": -272.53125,
+          "bottom": 240.234375,
+          "left": 28,
+          "right": 1338
+        },
+        "canvas": {
+          "top": -134.265625,
+          "bottom": 228.234375,
+          "left": 233,
+          "right": 1133
+        },
+        "wrap": {
+          "top": -141.265625,
+          "bottom": 239.234375,
+          "left": 29,
+          "right": 1337
+        },
+        "scroll": {
+          "height": 381,
+          "client": 381
+        }
+      }
+    },
+    "fonts": {
+      "leftDrawer": []
+    },
+    "states": {
+      "near": 0.2293115247709202,
+      "far": 2.1140272706310503e-8
+    }
+  }
+]
