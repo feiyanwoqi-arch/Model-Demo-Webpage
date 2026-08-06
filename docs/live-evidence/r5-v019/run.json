@@ -1,6 +1,7 @@
 {
-  "source_sha": "d8116be4545930522ed6e92072f989aeb32b6bd2",
-  "run_id": 31078437785,
+  "source_sha": "a49819a01ba8bcf71249dd070cb0e07b9807b72a",
+  "run_id": 31078477748,
   "base_outcome": "skipped",
-  "focused_outcome": "failure"
+  "focused_outcome": "failure",
+  "strict_outcome": "failure"
 }
