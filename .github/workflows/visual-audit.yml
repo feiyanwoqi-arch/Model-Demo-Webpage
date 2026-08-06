@@ -11,11 +11,15 @@ permissions:
 jobs:
   optics-workbenches:
     runs-on: ubuntu-latest
-    timeout-minutes: 35
+    timeout-minutes: 40
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with: {node-version: '22'}
+      - name: R4 Fresnel physics regression
+        run: node tests/r4-fresnel-physics-v019.test.js
+      - name: R4 workbench source contract
+        run: node tests/r4-workbench-v019.test.js
       - name: Install Playwright
         run: |
           npm install --no-save playwright@1.54.2
@@ -46,11 +50,14 @@ jobs:
       - name: R3 finite-ray and legibility audit
         if: always()
         run: node tests/visual-audit-r3-v017.mjs
+      - name: R4 Fresnel/Brewster task audit
+        if: always()
+        run: node tests/visual-audit-r4-v019.mjs
       - name: Upload visual audit
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: optics-visual-audit-v018-final
+          name: optics-visual-audit-v019-r4
           path: |
             visual-audit-v012/
             visual-audit-r1-v014/
@@ -59,6 +66,7 @@ jobs:
             visual-audit-r2-drawer-fit-v015/
             visual-audit-r2-wide-formula-v018/
             visual-audit-r3-v017/
+            visual-audit-r4-v019/
           if-no-files-found: warn
           retention-days: 14
       - name: Record latest direct-main run
