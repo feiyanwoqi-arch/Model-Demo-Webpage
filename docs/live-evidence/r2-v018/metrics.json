@@ -5,36 +5,36 @@
   "assertions": [],
   "layout": {
     "primary": {
-      "x": 80,
+      "x": 0,
       "y": 48.8125,
-      "width": 1008,
-      "height": 895.5625,
-      "right": 1088,
-      "bottom": 944.375
+      "width": 1117.375,
+      "height": 931.8125,
+      "right": 1117.375,
+      "bottom": 980.625
     },
     "analysis": {
-      "x": 1110,
+      "x": 1139.375,
       "y": 48.8125,
-      "width": 600,
-      "height": 827.71875,
-      "right": 1710,
-      "bottom": 876.53125
+      "width": 650.625,
+      "height": 841.78125,
+      "right": 1790,
+      "bottom": 890.59375
     },
     "mechanism": {
-      "x": 1110,
-      "y": 160.65625,
-      "width": 600,
-      "height": 350.9375,
-      "right": 1710,
-      "bottom": 511.59375
+      "x": 1139.375,
+      "y": 138.15625,
+      "width": 650.625,
+      "height": 369.21875,
+      "right": 1790,
+      "bottom": 507.375
     },
     "observable": {
-      "x": 1110,
-      "y": 525.59375,
-      "width": 600,
-      "height": 350.9375,
-      "right": 1710,
-      "bottom": 876.53125
+      "x": 1139.375,
+      "y": 521.375,
+      "width": 650.625,
+      "height": 369.21875,
+      "right": 1790,
+      "bottom": 890.59375
     },
     "overflow": 0
   },
