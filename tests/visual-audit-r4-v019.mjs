@@ -13,6 +13,10 @@ function fraction(box,width,height){
   const visibleHeight=Math.max(0,Math.min(height,box.y+box.height)-Math.max(0,box.y));
   return visibleWidth*visibleHeight/(box.width*box.height);
 }
+async function center(page,locator){
+  await locator.evaluate(node=>node.scrollIntoView({block:'center',inline:'nearest',behavior:'instant'}));
+  await page.waitForTimeout(220);
+}
 async function dragLogical(page,canvas,start,end,width=1080,height=560){
   const box=await canvas.boundingBox();
   if(!box)throw new Error('canvas has no bounding box');
@@ -58,6 +62,7 @@ for(const [width,height] of viewports){
     }
 
     const main=page.locator('#r4wMainCanvas');
+    await center(page,main);
     const before=Number(await page.locator('.r4w-page').getAttribute('data-angle'));
     await dragLogical(page,main,{x:224,y:134},{x:187,y:190});
     await page.waitForTimeout(300);
@@ -66,6 +71,7 @@ for(const [width,height] of viewports){
     if(!(after>before+8))record.assertions.push(`direct source drag failed: ${before} -> ${after}`);
 
     const curveCanvas=page.locator('[data-r4-slot="A"] canvas');
+    await center(page,curveCanvas);
     await dragLogical(page,curveCanvas,{x:410,y:100},{x:520,y:100},720,250);
     await page.waitForTimeout(250);
     const curveAngle=Number(await page.locator('.r4w-page').getAttribute('data-angle'));
@@ -100,7 +106,7 @@ for(const [width,height] of viewports){
     await page.locator('[data-r4-slot-select="A"]').last().selectOption('boundary');
     await page.locator('[data-r4-slot-select="B"]').last().selectOption('apparatus');
     await page.locator('[data-r4-close]').click();
-    await page.waitForTimeout(300);
+    await center(page,page.locator('[data-r4-slot="A"]'));
     if(await page.locator('[data-r4-slot="A"]').getAttribute('data-module')!=='boundary')record.assertions.push('slot A did not switch to boundary view');
     if(await page.locator('[data-r4-slot="B"]').getAttribute('data-module')!=='apparatus')record.assertions.push('slot B did not switch to apparatus view');
     await page.screenshot({path:`${outDir}/r4-${width}x${height}-02-boundary-apparatus.png`,fullPage:false});
