@@ -50,14 +50,14 @@ jobs:
       - name: R3 finite-ray and legibility audit
         if: always()
         run: node tests/visual-audit-r3-v017.mjs
-      - name: R4 Fresnel/Brewster task audit
+      - name: R4 Fresnel/Brewster pixel-aware task audit
         if: always()
-        run: node tests/visual-audit-r4-v019.mjs
+        run: node tests/visual-audit-r4-v0191.mjs
       - name: Upload visual audit
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: optics-visual-audit-v019-r4
+          name: optics-visual-audit-v0191-r4
           path: |
             visual-audit-v012/
             visual-audit-r1-v014/
@@ -66,7 +66,7 @@ jobs:
             visual-audit-r2-drawer-fit-v015/
             visual-audit-r2-wide-formula-v018/
             visual-audit-r3-v017/
-            visual-audit-r4-v019/
+            visual-audit-r4-v0191/
           if-no-files-found: warn
           retention-days: 14
       - name: Record latest direct-main run
