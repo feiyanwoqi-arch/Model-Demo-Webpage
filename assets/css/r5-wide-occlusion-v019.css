@@ -1,6 +1,6 @@
 /* R5 v0.19.2 — actual screenshot occlusion repair.
    At 1920×1080 the previous first-viewport compression let the intrinsic
-   canvases continue underneath the guide/live rows.  Give the synchronized
+   canvases continue underneath the guide/live rows. Give the synchronized
    workbench enough real height so every canvas pixel belongs to its own row. */
 @media (min-width:1880px) and (max-height:1200px){
   .tir-page .tir-workspace{
@@ -43,3 +43,4 @@
     height:auto!important;
   }
 }
+/* final native-evidence trigger after v0.19.2 source refinement */
