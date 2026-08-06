@@ -1,0 +1,94 @@
+name: Refine R5 v0.19 source
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/r5-source-refine-v019.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  refine:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Patch source and focused audit
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          p=Path('tests/visual-audit-r5-occlusion-v019.mjs')
+          s=p.read_text()
+          old="const t=(n.textContent||'').trim();return t&&(${visible.toString()})(n)&&parseFloat(getComputedStyle(n).fontSize)<floor;"
+          new="const t=(n.textContent||'').trim(),s=getComputedStyle(n),r=n.getBoundingClientRect();return t&&s.display!=='none'&&s.visibility!=='hidden'&&Number(s.opacity)>0&&r.width>0&&r.height>0&&parseFloat(s.fontSize)<floor;"
+          if old in s: s=s.replace(old,new)
+          elif new not in s: raise SystemExit('focused audit syntax anchor missing')
+          p.write_text(s)
+
+          p=Path('assets/js/r5-workbench-v019.js')
+          s=p.read_text()
+          replacements={
+            "a.text('受挫全反射：第二高折射率介质通过倏逝场耦合',686,27,C.muted,14,'right',700);":"a.text('受挫全反射：第二高折射率介质通过倏逝场耦合',686,27,C.muted,16,'right',700);",
+            "a.text(`介质 1  n₁=${s.n1.toFixed(2)}`,360,71,C.ink,14,'center',800);":"a.text(`介质 1  n₁=${s.n1.toFixed(2)}`,360,71,C.ink,16,'center',800);",
+            "a.text(`低折射率间隙  n₂=${s.n2.toFixed(2)}`,360,155,C.ink,14,'center',800);":"a.text(`低折射率间隙  n₂=${s.n2.toFixed(2)}`,360,155,C.ink,16,'center',800);",
+            "a.text(`介质 3  n₃=${s.n3.toFixed(2)}`,360,250,C.ink,14,'center',800);":"a.text(`介质 3  n₃=${s.n3.toFixed(2)}`,360,250,C.ink,16,'center',800);",
+            "a.text(`间隙 g=${Math.round(s.gap)} nm`,92,154,C.purple,14,'center',800);":"a.text(`间隙 g=${Math.round(s.gap)} nm`,92,154,C.purple,16,'center',800);",
+            "a.text('标量指数近似；精确三层结构需完整矢量边界计算',360,270,C.muted,14,'center',700);":"a.text('标量指数近似；精确三层结构需完整矢量边界计算',360,270,C.muted,16,'center',700);"
+          }
+          for old,new in replacements.items():
+            if old in s: s=s.replace(old,new)
+            elif new not in s: raise SystemExit('apparatus label anchor missing: '+old[:48])
+          p.write_text(s)
+
+          p=Path('.github/workflows/visual-audit.yml')
+          s=p.read_text()
+          old='''          node tests/r5-physics-v019.test.js
+          node --check tests/visual-audit-r5-v019.mjs'''
+          new='''          node tests/r5-physics-v019.test.js
+          node tests/r5-physics-extended-v019.test.js
+          node --check tests/visual-audit-r5-v019.mjs
+          node --check tests/visual-audit-r5-occlusion-v019.mjs'''
+          if old in s: s=s.replace(old,new)
+          elif new not in s: raise SystemExit('visual audit source-check anchor missing')
+          old='''      - name: Upload visual audit
+        if: always()'''
+          new='''      - name: R5 canvas containment, drawer and apparatus audit
+        id: r5occlusion
+        if: always()
+        continue-on-error: true
+        run: node tests/visual-audit-r5-occlusion-v019.mjs
+      - name: Upload visual audit
+        if: always()'''
+          if old in s: s=s.replace(old,new)
+          elif 'id: r5occlusion' not in s: raise SystemExit('visual audit focused-step anchor missing')
+          old='''            visual-audit-r5-v019/
+          if-no-files-found: warn'''
+          new='''            visual-audit-r5-v019/
+            visual-audit-r5-occlusion-v019/
+          if-no-files-found: warn'''
+          if old in s: s=s.replace(old,new)
+          elif 'visual-audit-r5-occlusion-v019/' not in s: raise SystemExit('artifact path anchor missing')
+          s=s.replace('R5_OUTCOME: ${{ steps.r5audit.outcome }}','R5_OUTCOME: ${{ steps.r5audit.outcome }}\n          R5_OCCLUSION_OUTCOME: ${{ steps.r5occlusion.outcome }}')
+          s=s.replace('"r5_outcome": "%s"\\n}\\n\' "$RUN_ID" "$RUN_ATTEMPT" "$SOURCE_SHA" "$JOB_STATUS" "$R5_OUTCOME"','"r5_outcome": "%s",\\n  "r5_occlusion_outcome": "%s"\\n}\\n\' "$RUN_ID" "$RUN_ATTEMPT" "$SOURCE_SHA" "$JOB_STATUS" "$R5_OUTCOME" "$R5_OCCLUSION_OUTCOME"')
+          s=s.replace('if: always() && steps.r5audit.outcome != \'success\'','if: always() && (steps.r5audit.outcome != \'success\' || steps.r5occlusion.outcome != \'success\')')
+          p.write_text(s)
+          PY
+          node --check assets/js/r5-workbench-v019.js
+          node --check tests/visual-audit-r5-occlusion-v019.mjs
+          node tests/r5-physics-v019.test.js
+          node tests/r5-physics-extended-v019.test.js
+      - name: Commit directly to main
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          rm .github/workflows/r5-source-refine-v019.yml
+          git add -A
+          git commit -m "Refine R5 apparatus labels and focused acceptance audit"
+          git push
