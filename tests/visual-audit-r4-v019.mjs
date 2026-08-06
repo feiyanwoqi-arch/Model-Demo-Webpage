@@ -97,8 +97,8 @@ for(const [width,height] of viewports){
     if(record.states.tir.residual>1e-10)record.assertions.push(`energy residual ${record.states.tir.residual}`);
     if(!record.states.tir.status.includes('R5'))record.assertions.push('R4/R5 boundary handoff missing');
 
-    await page.locator('[data-r4-slot-select="A"]').first().selectOption('boundary');
-    await page.locator('[data-r4-slot-select="B"]').first().selectOption('apparatus');
+    await page.locator('[data-r4-slot-select="A"]').last().selectOption('boundary');
+    await page.locator('[data-r4-slot-select="B"]').last().selectOption('apparatus');
     await page.locator('[data-r4-close]').click();
     await page.waitForTimeout(300);
     if(await page.locator('[data-r4-slot="A"]').getAttribute('data-module')!=='boundary')record.assertions.push('slot A did not switch to boundary view');
