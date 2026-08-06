@@ -1,0 +1,85 @@
+name: Reconcile R4 with main
+on:
+  push:
+    branches: [agent/r4-fresnel-v019]
+    paths: ['.github/workflows/r4-reconcile-main.yml']
+permissions:
+  contents: write
+jobs:
+  reconcile:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/r4-fresnel-v019
+          fetch-depth: 0
+      - name: Merge latest main and preserve R4 plus R5 audits
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git fetch origin main
+          git merge --no-commit --no-ff origin/main || true
+
+          conflicts="$(git diff --name-only --diff-filter=U || true)"
+          unexpected="$(printf '%s\n' "$conflicts" | grep -v '^\.github/workflows/visual-audit\.yml$' | sed '/^$/d' || true)"
+          if [ -n "$unexpected" ]; then
+            echo "Unexpected merge conflicts:"
+            printf '%s\n' "$unexpected"
+            exit 1
+          fi
+
+          if printf '%s\n' "$conflicts" | grep -qx '.github/workflows/visual-audit.yml'; then
+            git checkout --theirs .github/workflows/visual-audit.yml
+          fi
+
+          python3 - <<'PY'
+          from pathlib import Path
+
+          path = Path('.github/workflows/visual-audit.yml')
+          text = path.read_text()
+
+          setup_anchor = "      - name: Install Playwright\n"
+          r4_setup = """      - name: R4 Fresnel physics regression
+                run: node tests/r4-fresnel-physics-v019.test.js
+              - name: R4 workbench source contract
+                run: node tests/r4-workbench-v019.test.js
+          """.replace('              ', '      ')
+          if 'R4 Fresnel physics regression' not in text:
+              if setup_anchor not in text:
+                  raise SystemExit('Missing Playwright anchor for R4 setup insertion')
+              text = text.replace(setup_anchor, r4_setup + setup_anchor, 1)
+
+          r5_anchor = "      - name: R5 total-internal-reflection task and typography audit\n"
+          r4_browser = """      - name: R4 Fresnel/Brewster pixel-aware task audit
+                if: always()
+                run: node tests/visual-audit-r4-v0191.mjs
+              - name: R4 MathJax rendering audit
+                if: always()
+                run: node tests/visual-audit-r4-math-v0191.mjs
+          """.replace('              ', '      ')
+          if 'R4 Fresnel/Brewster pixel-aware task audit' not in text:
+              if r5_anchor not in text:
+                  raise SystemExit('Missing R5 audit anchor for R4 browser insertion')
+              text = text.replace(r5_anchor, r4_browser + r5_anchor, 1)
+
+          if 'visual-audit-r4-v0191/' not in text:
+              artifact_anchor = "            visual-audit-r3-v017/\n"
+              if artifact_anchor not in text:
+                  raise SystemExit('Missing artifact anchor for R4 paths')
+              text = text.replace(
+                  artifact_anchor,
+                  artifact_anchor + "            visual-audit-r4-v0191/\n            visual-audit-r4-math-v0191/\n",
+                  1,
+              )
+
+          text = text.replace('name: optics-visual-audit-v019-r5', 'name: optics-visual-audit-v0191-r4-r5')
+          path.write_text(text)
+          PY
+
+          rm -f .github/workflows/r4-reconcile-main.yml
+          git add -A
+          git diff --cached --check
+          git commit -m "Merge latest main into R4 v0.19.1 and preserve R5 validation"
+          git push origin HEAD:agent/r4-fresnel-v019
